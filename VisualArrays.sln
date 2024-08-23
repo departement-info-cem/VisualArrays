@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisualArrays", "VisualArrays\VisualArrays.csproj", "{70B984E8-1FD5-4A12-A5F5-39F7D480B699}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppVisualCells", "AppVisualCells\AppVisualCells.csproj", "{8856B508-9D8C-4505-9884-DB8821DFBA3B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{70B984E8-1FD5-4A12-A5F5-39F7D480B699}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70B984E8-1FD5-4A12-A5F5-39F7D480B699}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70B984E8-1FD5-4A12-A5F5-39F7D480B699}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70B984E8-1FD5-4A12-A5F5-39F7D480B699}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8856B508-9D8C-4505-9884-DB8821DFBA3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8856B508-9D8C-4505-9884-DB8821DFBA3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8856B508-9D8C-4505-9884-DB8821DFBA3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8856B508-9D8C-4505-9884-DB8821DFBA3B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
