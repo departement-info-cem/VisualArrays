@@ -3,7 +3,7 @@
 /// <summary>
 /// 
 /// </summary>
-interface ISelectable
+internal interface ISelectable
 {
     //============================================================================================
     /// <summary>

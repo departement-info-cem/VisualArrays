@@ -3509,10 +3509,10 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
 
     #region ÉVÉNEMENTS GÉNÉRÉS
 
-    int va_mouseCurrentIndex;
-    int va_mouseCurrentColumn;
-    int va_mouseCurrentRow;
-    Sprite va_mouseCurrentSprite = null;
+    private int va_mouseCurrentIndex;
+    private int va_mouseCurrentColumn;
+    private int va_mouseCurrentRow;
+    private Sprite va_mouseCurrentSprite = null;
     /// <summary>
     /// 
     /// </summary>
@@ -3730,10 +3730,10 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
         return null;
     }
 
-    int va_lastMouseClickCell;
-    int va_lastMouseClickRow;
-    int va_lastMouseClickColumn;
-    Sprite va_lastMouseClickSprite = null;
+    private int va_lastMouseClickCell;
+    private int va_lastMouseClickRow;
+    private int va_lastMouseClickColumn;
+    private Sprite va_lastMouseClickSprite = null;
     /// <summary>
     /// Se charge d'un double clic sur une cellule de la grille.
     /// </summary>

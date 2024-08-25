@@ -5,7 +5,7 @@ namespace VisualArrays;
 /// <summary>
 /// Définit des fonctionnalités communes pour une grille de cellules
 /// </summary>
-interface IVisualArray<TEventArgs> where TEventArgs:CellMouseEventArgs1D
+internal interface IVisualArray<TEventArgs> where TEventArgs:CellMouseEventArgs1D
 {
     #region ÉVÉNEMENTS avec CellMouseEventArgs
     /// <summary>

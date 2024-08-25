@@ -206,42 +206,42 @@ public abstract partial class BaseVisualContainer<BaseType,VisualType> : Contain
     }
 
     //========================================================================================================
-    void cell_MouseMove(object sender, MouseEventArgs e)
+    private void cell_MouseMove(object sender, MouseEventArgs e)
     {
         CellMouseMove?.Invoke(sender, new CellMouseEventArgs1D(e.Button, e.Clicks, e.X, e.Y, e.Delta, ((VisualValue<BaseType>)sender).Index));
     }
     //========================================================================================================
-    void cell_MouseDoubleClick(object sender, MouseEventArgs e)
+    private void cell_MouseDoubleClick(object sender, MouseEventArgs e)
     {
         CellMouseDoubleClick?.Invoke(sender, new CellMouseEventArgs1D(e.Button, e.Clicks, e.X, e.Y, e.Delta, ((VisualValue<BaseType>)sender).Index));
     }
     //========================================================================================================
-    void cell_MouseClick(object sender, MouseEventArgs e)
+    private void cell_MouseClick(object sender, MouseEventArgs e)
     {
         CellMouseClick?.Invoke(sender, new CellMouseEventArgs1D(e.Button, e.Clicks, e.X, e.Y, e.Delta, ((VisualValue<BaseType>)sender).Index));
     }
     //========================================================================================================
-    void cell_MouseHover(object sender, EventArgs e)
+    private void cell_MouseHover(object sender, EventArgs e)
     {
             
     }
     //========================================================================================================
-    void cell_MouseUp(object sender, MouseEventArgs e)
+    private void cell_MouseUp(object sender, MouseEventArgs e)
     {
         CellMouseUp?.Invoke(sender, new CellMouseEventArgs1D(e.Button, e.Clicks, e.X, e.Y, e.Delta, ((VisualValue<BaseType>)sender).Index));
     }
     //========================================================================================================
-    void cell_MouseLeave(object sender, EventArgs e)
+    private void cell_MouseLeave(object sender, EventArgs e)
     {
         CellMouseLeave?.Invoke(sender, new CellEventArgs(((VisualValue<BaseType>)sender).Index, -1, -1));
     }
     //========================================================================================================
-    void cell_MouseEnter(object sender, EventArgs e)
+    private void cell_MouseEnter(object sender, EventArgs e)
     {
         CellMouseEnter?.Invoke(sender, new CellEventArgs(((VisualValue<BaseType>)sender).Index, -1, -1));
     }
     //========================================================================================================
-    void cell_MouseDown(object sender, MouseEventArgs e)
+    private void cell_MouseDown(object sender, MouseEventArgs e)
     {
         CellMouseDown?.Invoke(sender, new CellMouseEventArgs1D(e.Button, e.Clicks, e.X, e.Y, e.Delta, ((VisualValue<BaseType>)sender).Index));
     }

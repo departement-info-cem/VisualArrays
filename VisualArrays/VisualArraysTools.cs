@@ -50,16 +50,18 @@ public static class VisualArraysTools
             return cpt + 1;
         return cpt;
     }
+    
     //================================================================================================================
     /// <summary>
     /// Permet de déterminer le délai entre deux touches du clavier.
     /// </summary>
-    static DateTime m_currentKeyTime;
-    static bool m_negatif = false;
+    private static DateTime m_currentKeyTime;
+
+    private static bool m_negatif = false;
     /// <summary>
     /// Délai acceptable entre les touches.
     /// </summary>
-    const int DELAI_INTER_TOUCHES = 10000000;
+    private const int DELAI_INTER_TOUCHES = 10000000;
     //================================================================================================================
     internal static bool ReadInt(char pChar, int pCurrentValue, int pMaxValue, out int pNewValue)
     {

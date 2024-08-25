@@ -1107,7 +1107,8 @@ public abstract class Sprite : Component
 }
 
 #region NamedComponentDesigner nécessaire pour le fonctionnement de la propriété Name
-class NamedComponentDesigner : ComponentDesigner
+
+internal class NamedComponentDesigner : ComponentDesigner
 {
 
     private string Name
