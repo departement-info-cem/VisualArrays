@@ -25,13 +25,11 @@ jobs:
           NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
       - name: Display dotnet version
         run: dotnet --version
-      - name: Test
-        run: dotnet nuget list source
-      - name: Authenticate
-        run: dotnet nuget update source github --username PierreOlivierBrillant --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --source "https://nuget.pkg.github.com/PierreOlivierBrillant/index.json"
       - name: Build
         run: dotnet build --configuration Release VisualArrays
       - name: Create the package
         run: dotnet pack --configuration Release VisualArrays
       - name: Publish the package to GPR
-        run: dotnet nuget push VisualArrays\bin\Release\*.nupkg
+        run: dotnet nuget push VisualArrays\bin\Release\*.nupkg --api-key $NUGET_AUTH_TOKEN
+        env:
+          NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
