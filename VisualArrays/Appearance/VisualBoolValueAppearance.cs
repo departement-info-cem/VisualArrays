@@ -129,7 +129,7 @@ namespace VisualArrays.Appearance
             }
         }
         //===========================================================================================
-        private Padding m_border = new Padding(1, 1, 1, 1);
+        private Padding m_border = new(1, 1, 1, 1);
         /// <summary>
         /// Obtient et définit la taille des bordures.
         /// </summary>

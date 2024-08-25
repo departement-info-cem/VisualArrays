@@ -281,7 +281,7 @@ namespace VisualArrays.DragHelper
         /// <returns>The copied data.</returns>
         private STGMEDIUM CopyMedium(ref STGMEDIUM medium)
         {
-            STGMEDIUM sm = new STGMEDIUM();
+            STGMEDIUM sm = new();
             int hr = CopyStgMedium(ref medium, ref sm);
             if (hr != 0)
                 throw Marshal.GetExceptionForHR(hr);
@@ -334,7 +334,7 @@ namespace VisualArrays.DragHelper
             /// <param name="newEnum">When this function returns, contains a new instance of IEnumFORMATETC.</param>
             public void Clone(out IEnumFORMATETC newEnum)
             {
-                EnumFORMATETC ret = new EnumFORMATETC(formats);
+                EnumFORMATETC ret = new(formats);
                 ret.currentIndex = currentIndex;
                 newEnum = ret;
             }

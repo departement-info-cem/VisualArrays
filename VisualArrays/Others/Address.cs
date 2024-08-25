@@ -19,7 +19,7 @@ namespace VisualArrays.Others
         ///     Représente une adresse où la valeur int.MinValue est affectée aux propriétés
         ///     Address.Row et Address.Column. 
         /// </summary>
-        public static readonly Address Empty = new Address(int.MinValue, int.MinValue);
+        public static readonly Address Empty = new(int.MinValue, int.MinValue);
         //// <summary>
         //// Obtient une valeur indiquant si cette adresse est vide.
         //// </summary>

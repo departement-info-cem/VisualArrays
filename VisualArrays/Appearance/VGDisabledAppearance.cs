@@ -76,7 +76,7 @@ namespace VisualArrays.Appearance
         }
 
         //============================================================================================
-        private Font m_font = new Font("Arial", 10);
+        private Font m_font = new("Arial", 10);
         /// <summary>
         /// Obtient ou définit la police utilisée pour afficher la valeur d'une cellule Enabled false.
         /// </summary>

@@ -54,28 +54,28 @@
 
             if (pBorder.Left > 0)
             {
-                Pen leftPen = new Pen(pColor, pBorder.Left);
+                Pen leftPen = new(pColor, pBorder.Left);
                 int posX = pBounds.Left + (pBorder.Left >> 1);
                 pGraphics.DrawLine(leftPen, posX, pBounds.Top, posX, pBorder.Left == 1 ? pBounds.Bottom - 1 : pBounds.Bottom);
             }
 
             if (pBorder.Top > 0)
             {
-                Pen topPen = new Pen(pColor, pBorder.Top);
+                Pen topPen = new(pColor, pBorder.Top);
                 int posY = pBounds.Top + (pBorder.Top >> 1);
                 pGraphics.DrawLine(topPen, pBounds.Left, posY, pBorder.Top == 1 ? pBounds.Right - 1 : pBounds.Right, posY);
             }
 
             if (pBorder.Right > 0)
             {
-                Pen rightPen = new Pen(pColor, pBorder.Right);
+                Pen rightPen = new(pColor, pBorder.Right);
                 int posX = pBounds.Right - pBorder.Right + (pBorder.Right >> 1);
                 pGraphics.DrawLine(rightPen, posX, pBounds.Top, posX, pBorder.Right == 1 ? pBounds.Bottom - 1 : pBounds.Bottom);
             }
 
             if (pBorder.Bottom > 0)
             {
-                Pen bottomPen = new Pen(pColor, pBorder.Bottom);
+                Pen bottomPen = new(pColor, pBorder.Bottom);
                 int posY = pBounds.Bottom - pBorder.Bottom + (pBorder.Bottom >> 1);
                 pGraphics.DrawLine(bottomPen, pBounds.Left, posY, pBorder.Bottom == 1 ? pBounds.Right - 1 : pBounds.Right, posY);
             }
@@ -93,7 +93,7 @@
 
             int posX = contour.Left + va_margin.Left - va_margin.Right;
             int posY = contour.Top + va_margin.Top - va_margin.Bottom;
-            Rectangle contourSelonPenWidth = new Rectangle(posX,posY, contour.Width, contour.Height);
+            Rectangle contourSelonPenWidth = new(posX,posY, contour.Width, contour.Height);
             DrawBorder(pGraphics, contourSelonPenWidth, Border,Color);
         }
     }

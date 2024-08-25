@@ -51,7 +51,7 @@ namespace VisualArrays.Sprites
         /// <summary>
         /// Liste des points qui composent le Sprite, si Count == 0 alors Sprite normal
         /// </summary>
-        internal List<Address> m_tabCells = new List<Address>();
+        internal List<Address> m_tabCells = new();
 
         /// <summary>
         /// Ajoute une cellule au Sprite, nécessaire seulement si le Sprite est déployé sur plusieurs cellules.
@@ -668,7 +668,7 @@ namespace VisualArrays.Sprites
                 }
             }
         }
-        internal static readonly Address defaultDisplayAddress = new Address(0, 0);
+        internal static readonly Address defaultDisplayAddress = new(0, 0);
         private void ResetDisplayAddress()
         {
             DisplayAddress = defaultDisplayAddress;
@@ -928,7 +928,7 @@ namespace VisualArrays.Sprites
             }
         }
         //============================================================================================
-        internal static readonly Size defaultSpriteSize = new Size(25, 25);
+        internal static readonly Size defaultSpriteSize = new(25, 25);
         internal Size m_size = defaultSpriteSize;
         /// <summary>
         /// Obtient et définit la largeur et la hauteur du Sprite en pixels .
@@ -961,7 +961,7 @@ namespace VisualArrays.Sprites
         }
 
         //============================================================================================
-        internal static readonly Point defaultLocation = new Point(0, 0);
+        internal static readonly Point defaultLocation = new(0, 0);
         internal Point m_location = defaultLocation;
         /// <summary>
         /// Obtient et définit la position du Sprite en pixels lorsque son DisplayIndex est -1.

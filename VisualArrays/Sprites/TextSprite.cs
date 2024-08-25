@@ -45,7 +45,7 @@ namespace VisualArrays.Sprites
             }
         }
         //-------------------------------------------------------------------------------------
-        private static readonly Font m_defaultFont = new Font("Arial", 18);
+        private static readonly Font m_defaultFont = new("Arial", 18);
         private Font m_font = m_defaultFont;
         /// <summary>
         /// Obtient ou définit la police utilisée par l'élément. 
@@ -170,7 +170,7 @@ namespace VisualArrays.Sprites
 
         #region Margin
 
-        internal static readonly Padding m_defaultMargin = new Padding(6);
+        internal static readonly Padding m_defaultMargin = new(6);
         //===========================================================================================
         private Padding m_margin = m_defaultMargin;
         /// <summary>
@@ -252,7 +252,7 @@ namespace VisualArrays.Sprites
         public override void DrawAtOrigin(Graphics pGraphics)
         {
             SizeF pt = pGraphics.MeasureString(m_text, m_font);
-            Rectangle contour = new Rectangle(0, 0, m_bounds.Width, m_bounds.Height);
+            Rectangle contour = new(0, 0, m_bounds.Width, m_bounds.Height);
             FillShapeElement.DrawFillShape(m_backgroundShape, pGraphics, contour, m_shapeColor, m_opacity, m_radius);
             int posX = (m_bounds.Width - (int)pt.Width) >> 1;
             int posY = (m_bounds.Height - (int)pt.Height) >> 1;
@@ -272,7 +272,7 @@ namespace VisualArrays.Sprites
             {
                 if (AlignOnGrid)
                 {
-                    Size taille = new Size((int)pt.Width + m_margin.Size.Width, (int)pt.Height + m_margin.Size.Height);
+                    Size taille = new((int)pt.Width + m_margin.Size.Width, (int)pt.Height + m_margin.Size.Height);
                     m_bounds = CellVisualElement.CellVisualElement.BoundsFromAlignment(m_owner.GridBounds, taille, m_alignment);
                 }
                 else
@@ -286,7 +286,7 @@ namespace VisualArrays.Sprites
             }
             else
             {
-                Size taille = new Size((int)pt.Width + m_margin.Size.Width, (int)pt.Height + m_margin.Size.Height);
+                Size taille = new((int)pt.Width + m_margin.Size.Width, (int)pt.Height + m_margin.Size.Height);
                 Rectangle cellBounds = m_owner.GetCellBounds(m_displayIndex);
                 m_bounds = CellVisualElement.CellVisualElement.BoundsFromAlignment(cellBounds, new Size(taille.Width, taille.Height), m_alignment);
             }

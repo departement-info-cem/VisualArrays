@@ -160,7 +160,7 @@ namespace VisualArrays.Sprites
             //    m_destinationBounds = m_owner.GetCellBounds(m_destinationAddress.Row, m_destinationAddress.Column);
             //}
             //else
-            Size taille = new Size(m_bulletSize << 1, m_bulletSize << 1);
+            Size taille = new(m_bulletSize << 1, m_bulletSize << 1);
             if (m_displayIndex == -1)
             {
                 if (AlignOnGrid)
@@ -200,7 +200,7 @@ namespace VisualArrays.Sprites
         /// <returns></returns>
         protected internal override bool Hit(Rectangle pRectangle)
         {
-            GraphicsPath path = new GraphicsPath();
+            GraphicsPath path = new();
             path.AddEllipse(m_sourceBounds.Left, m_sourceBounds.Top, m_bulletSize << 1, m_bulletSize << 1);
 
             //Point[] tabPoint = { new Point(m_sourceBounds.Left - 6, m_sourceBounds.Top - 6), new Point(m_sourceBounds.Left + 6, m_sourceBounds.Top - 6) , 
@@ -209,7 +209,7 @@ namespace VisualArrays.Sprites
             //path.AddPolygon(tabPoint);
 
             path.AddEllipse(m_destinationBounds.Left, m_destinationBounds.Top, m_bulletSize << 1, m_bulletSize << 1);
-            Region objRegion = new Region(path);
+            Region objRegion = new(path);
             objRegion.Intersect(pRectangle);
             return !objRegion.IsEmpty(m_owner.CreateGraphics());
             //{

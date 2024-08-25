@@ -9,7 +9,7 @@ namespace VisualArrays.VisualArrays
     [ToolboxBitmap(typeof(VisualStringArray), "Resources.tbxVisualStringArray")]
     public partial class VisualStringArray : VisualValueArray<string>
     {
-        private Dictionary<string, Image> m_dictionnaire = new Dictionary<string, Image>();
+        private Dictionary<string, Image> m_dictionnaire = new();
 
         #region Champs et Propriétés
         //============================================================================================

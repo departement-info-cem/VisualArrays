@@ -43,7 +43,7 @@ namespace VisualArrays.Appearance
             }
         }
         //============================================================================================
-        private static readonly Font m_defaultFont = new Font("Arial", 10);
+        private static readonly Font m_defaultFont = new("Arial", 10);
         private Font m_barValueFont = m_defaultFont;
         /// <summary>
         /// Obtient ou définit la police utilisée pour la valeur de la barre du graphique

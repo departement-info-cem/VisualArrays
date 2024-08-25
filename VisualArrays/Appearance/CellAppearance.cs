@@ -157,7 +157,7 @@ namespace VisualArrays.Appearance
         }
 
         //===========================================================================================
-        private static readonly Padding m_defaultPadding = new Padding(1, 1, 1, 1);
+        private static readonly Padding m_defaultPadding = new(1, 1, 1, 1);
         private Padding m_border = m_defaultPadding;
         /// <summary>
         /// Obtient et définit la taille des bordures autour des cellules.

@@ -21,7 +21,7 @@ namespace VisualArrays.Appearance
             m_owner = pOwner;
         }
         //============================================================================================
-        private static readonly Font m_defaultFont = new Font("Arial", 10);
+        private static readonly Font m_defaultFont = new("Arial", 10);
         private Font m_font = m_defaultFont;
         /// <summary>
         /// Obtient ou définit la police pour l'en-tête des colonnes.

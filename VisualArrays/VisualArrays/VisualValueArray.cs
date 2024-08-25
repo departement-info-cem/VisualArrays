@@ -565,7 +565,7 @@ namespace VisualArrays.VisualArrays
         /// <returns>Liste des valeurs de la grille</returns>
         public override string ToString()
         {
-            StringBuilder objChaine = new StringBuilder();
+            StringBuilder objChaine = new();
             if (va_addressView == enuAddressView.Mode1D || va_addressView == enuAddressView.None)
             {
                 for (int index = 0; index < Length; index++)

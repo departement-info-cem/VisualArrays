@@ -16,7 +16,7 @@ namespace VisualArrays.VisualContainer
         /// <summary>
         /// Liste des VisualValue contenu dans le conteneur.
         /// </summary>
-        private List<VisualValue<BaseType>> m_colVisualElements = new List<VisualValue<BaseType>>();
+        private List<VisualValue<BaseType>> m_colVisualElements = new();
         #endregion
 
         //#region Sprites
@@ -290,8 +290,8 @@ namespace VisualArrays.VisualContainer
         /// <param name="pe"></param>
         protected override void OnPaint(PaintEventArgs pe)
         {
-            Rectangle rect = new Rectangle(0, 0, Width - 1, Height - 1);
-            using (Pen cr = new Pen(ForeColor))
+            Rectangle rect = new(0, 0, Width - 1, Height - 1);
+            using (Pen cr = new(ForeColor))
                 pe.Graphics.DrawRectangle(cr, rect);
         }
         #endregion

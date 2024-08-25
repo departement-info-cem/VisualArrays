@@ -166,7 +166,7 @@ namespace VisualArrays.VisualCells
             if (pGraphics == null)
                 pGraphics = CreateGraphics();
 
-            Rectangle cellBounds = new Rectangle(Padding.Left, Padding.Top, Width - (Padding.Left + Padding.Right), Height - (Padding.Top + Padding.Bottom));
+            Rectangle cellBounds = new(Padding.Left, Padding.Top, Width - (Padding.Left + Padding.Right), Height - (Padding.Top + Padding.Bottom));
             // Étape 1 : On commence par dessiner le fond de la cellule
             //if (BackgroundImage != null)
             //    pGraphics.DrawImage(BackgroundImage, cellBounds, cellBounds, GraphicsUnit.Pixel);

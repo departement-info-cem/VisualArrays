@@ -26,7 +26,7 @@ namespace VisualArrays.Appearance
         }
 
         //============================================================================================
-        private static readonly Font m_defaultFont = new Font("Arial", 12,FontStyle.Bold);
+        private static readonly Font m_defaultFont = new("Arial", 12,FontStyle.Bold);
         private Font m_font = m_defaultFont;
         /// <summary>
         /// Obtient ou définit la police utilisée pour afficher les valeurs.
@@ -78,7 +78,7 @@ namespace VisualArrays.Appearance
             }
         }
 
-        internal static readonly Padding m_defaultTextPadding = new Padding(0);
+        internal static readonly Padding m_defaultTextPadding = new(0);
         //===========================================================================================
         private Padding m_padding = m_defaultTextPadding;
         /// <summary>
@@ -246,7 +246,7 @@ namespace VisualArrays.Appearance
         }
 
         //===========================================================================================
-        private static readonly Padding m_defaultPadding = new Padding(1, 1, 1, 1);
+        private static readonly Padding m_defaultPadding = new(1, 1, 1, 1);
         private Padding m_border = m_defaultPadding;
         /// <summary>
         /// Obtient et définit la taille des bordures autour des cellules.

@@ -49,7 +49,7 @@ namespace VisualArrays.Appearance
         }
 
         //============================================================================================
-        private Font m_font = new Font("Arial", 10);
+        private Font m_font = new("Arial", 10);
         /// <summary>
         /// Obtient ou définit la police utilisée pour afficher la valeur spéciale.
         /// </summary>
@@ -126,7 +126,7 @@ namespace VisualArrays.Appearance
         }
 
         //===========================================================================================
-        private Padding m_border = new Padding(1, 1, 1, 1);
+        private Padding m_border = new(1, 1, 1, 1);
         /// <summary>
         /// Obtient et définit la taille des bordures pour la valeur spéciale
         /// </summary>

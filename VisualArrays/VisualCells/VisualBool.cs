@@ -102,7 +102,7 @@ namespace VisualArrays.VisualCells
             if (pGraphics == null)
                 pGraphics = CreateGraphics();
 
-            Rectangle cellBounds = new Rectangle(Padding.Left, Padding.Top, Width - (Padding.Left + Padding.Right), Height - (Padding.Top + Padding.Bottom));
+            Rectangle cellBounds = new(Padding.Left, Padding.Top, Width - (Padding.Left + Padding.Right), Height - (Padding.Top + Padding.Bottom));
 
             if (m_value)
             {

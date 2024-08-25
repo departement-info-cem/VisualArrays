@@ -11,7 +11,7 @@ namespace VisualArrays.Appearance
     [TypeConverter(typeof(AppearanceConverter)), Description("Détermine différents aspects de l'apparence de la destination lors d'une opération glisser/déposer")]
     public class DragAppearance
     {
-        internal static readonly Padding m_defaultDragPadding = new Padding(1, 1, 1, 1);
+        internal static readonly Padding m_defaultDragPadding = new(1, 1, 1, 1);
         //===========================================================================================
         private Padding m_padding = m_defaultDragPadding;
         /// <summary>

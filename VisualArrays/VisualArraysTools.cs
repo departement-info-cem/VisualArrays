@@ -182,7 +182,7 @@ namespace VisualArrays
         /// <param name="pBrightness"></param>
         internal static void DrawDisabledImage(Graphics pGraphics, Rectangle pRect, Image pImage, float pBrightness)
         {
-            Bitmap bitmap = new Bitmap(pImage);
+            Bitmap bitmap = new(pImage);
 
             // Create an array of matrix points
             float[][] ptsArray =
@@ -195,11 +195,11 @@ namespace VisualArrays
 
             ptsArray[3][3] = pBrightness;
             // Create a color matrix
-            ColorMatrix clrMatrix = new ColorMatrix(ptsArray);
+            ColorMatrix clrMatrix = new(ptsArray);
             //pGraphics.Clear(BackColor);
 
             // Create image attributes
-            ImageAttributes imgAttributes = new ImageAttributes();
+            ImageAttributes imgAttributes = new();
 
             // Set color matrix
             imgAttributes.SetColorMatrix(clrMatrix,
@@ -258,8 +258,8 @@ namespace VisualArrays
             int positionX = pContentBounds.X;
             int positionY = pContentBounds.Y;
             int hauteurMilieu = cellsHeight / 2;
-            Pen objPenBrillant = new Pen(pColor);
-            Pen objPenSombre = new Pen(CalculerCouleurEteinte(pColor));
+            Pen objPenBrillant = new(pColor);
+            Pen objPenSombre = new(CalculerCouleurEteinte(pColor));
             // Segment # 1 ================================================================
             if ((pValue & 1) > 0)
             {
@@ -411,7 +411,7 @@ namespace VisualArrays
         /// <param name="pAlignement">Alignement du texte.</param>
         internal static void DrawText(Graphics pGraphics, Rectangle pContentBounds, string pTexte, Color pCouleur, Font pPolice, ContentAlignment pAlignement)
         {
-            StringFormat format = new StringFormat();
+            StringFormat format = new();
             format.LineAlignment = StringAlignment.Center;
             format.Alignment = StringAlignment.Center;
 
@@ -725,7 +725,7 @@ namespace VisualArrays
         /// <summary>
         /// Utilisé pour les méthodes des grilles produisants des nombres aléatoires.
         /// </summary>
-        private static readonly Random va_objRandom = new Random((int)DateTime.Now.Ticks);
+        private static readonly Random va_objRandom = new((int)DateTime.Now.Ticks);
         //------------------------------------------------------------------------------------------
         /// <summary>
         /// Génère un nombre aléatoire décimale.

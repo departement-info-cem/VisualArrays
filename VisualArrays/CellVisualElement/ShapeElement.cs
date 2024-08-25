@@ -125,11 +125,11 @@ namespace VisualArrays.CellVisualElement
             //int oldPageUnit = pGraphics.SetSetPageUnit(UnitPixel);
 
             // define the pen
-            Pen pen = new Pen(color, 1);
+            Pen pen = new(color, 1);
             pen.Alignment = PenAlignment.Center;
 
             // get the corner path
-            GraphicsPath path = new GraphicsPath();
+            GraphicsPath path = new();
 
             // get path
             GetRoundRectPath(path, r, dia);
@@ -169,7 +169,7 @@ namespace VisualArrays.CellVisualElement
             if (dia > r.Height) dia = r.Height;
 
             // define a corner 
-            Rectangle Corner = new Rectangle(r.X, r.Y, dia, dia);
+            Rectangle Corner = new(r.X, r.Y, dia, dia);
 
             // begin path
             pPath.Reset();
@@ -341,7 +341,7 @@ namespace VisualArrays.CellVisualElement
             Rectangle contour = BoundsFromAlignment(pBounds, new Size(largeurZoom, hauteurZoom), va_alignment);
             int posX = contour.Left + va_margin.Left - va_margin.Right;
             int posY = contour.Top + va_margin.Top - va_margin.Bottom;
-            Rectangle contourSelonPenWidth = new Rectangle(posX + (PenWidth >> 1), posY + (PenWidth >> 1), contour.Width - PenWidth, contour.Height - PenWidth);
+            Rectangle contourSelonPenWidth = new(posX + (PenWidth >> 1), posY + (PenWidth >> 1), contour.Width - PenWidth, contour.Height - PenWidth);
             DrawShape(Shape, pGraphics, contourSelonPenWidth, new Pen(Color, PenWidth),Radius);
         }
     }

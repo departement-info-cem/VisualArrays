@@ -236,7 +236,7 @@ namespace VisualArrays.VisualCells
         {
             // code pour dessiner la bordure
             if (m_borderSize > 0)
-                using (Pen cr = new Pen(m_borderColor, m_borderSize))
+                using (Pen cr = new(m_borderColor, m_borderSize))
                 {
                     pGraphics.DrawRectangle(cr, m_borderSize >> 1, m_borderSize >> 1, Width - m_borderSize, Height - m_borderSize);
                 }
@@ -245,13 +245,13 @@ namespace VisualArrays.VisualCells
             {
                 if (ContainsFocus)
                     // code pour dessiner le focus
-                    using (Pen cr = new Pen(m_focusColor))
+                    using (Pen cr = new(m_focusColor))
                     {
                         cr.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
                         pGraphics.DrawRectangle(cr, 1, 1, Width - 3, Height - 3);
                     }
                 else if (BorderSize < 2)
-                    using (Pen cr = new Pen(BackColor))
+                    using (Pen cr = new(BackColor))
                     {
                         pGraphics.DrawRectangle(cr, 1, 1, Width - 3, Height - 3);
                     }
@@ -290,7 +290,7 @@ namespace VisualArrays.VisualCells
 
         #region Padding
 
-        internal static readonly Padding m_defaultPadding = new Padding(2);
+        internal static readonly Padding m_defaultPadding = new(2);
         //===========================================================================================
         private Padding m_padding = m_defaultPadding;
         /// <summary>

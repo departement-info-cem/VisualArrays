@@ -87,7 +87,7 @@ namespace VisualArrays.Sprites
                 int largeurZoom = contour.Width; // *va_zoom / 100;
                 int hauteurZoom = contour.Height; // *va_zoom / 100;
                 contour = CellVisualElement.CellVisualElement.BoundsFromAlignment(contour, new Size(largeurZoom, hauteurZoom), m_alignment);
-                Rectangle contourSelonPenWidth = new Rectangle(contour.Left + (va_penWidth >> 1), contour.Top + (va_penWidth >> 1), contour.Width - PenWidth, contour.Height - PenWidth);
+                Rectangle contourSelonPenWidth = new(contour.Left + (va_penWidth >> 1), contour.Top + (va_penWidth >> 1), contour.Width - PenWidth, contour.Height - PenWidth);
                 ShapeElement.DrawShape(va_shape, pGraphics, contourSelonPenWidth, va_pen,10);
             }
         }
@@ -98,8 +98,8 @@ namespace VisualArrays.Sprites
         /// <param name="pGraphics">Destination du dessin</param>
         public override void DrawAtOrigin(Graphics pGraphics)
         {
-            Rectangle contour = new Rectangle(0, 0, m_bounds.Width, m_bounds.Height);
-            Rectangle contourSelonPenWidth = new Rectangle(contour.Left + (va_penWidth >> 1), contour.Top + (va_penWidth >> 1), contour.Width - PenWidth, contour.Height - PenWidth);
+            Rectangle contour = new(0, 0, m_bounds.Width, m_bounds.Height);
+            Rectangle contourSelonPenWidth = new(contour.Left + (va_penWidth >> 1), contour.Top + (va_penWidth >> 1), contour.Width - PenWidth, contour.Height - PenWidth);
             ShapeElement.DrawShape(va_shape, pGraphics, contourSelonPenWidth, va_pen, 10);
         }
     }

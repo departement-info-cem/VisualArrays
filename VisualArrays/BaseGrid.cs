@@ -65,7 +65,7 @@ namespace VisualArrays
         /// <summary>
         /// Utilisé pour les méthodes des grilles produisants des nombres aléatoires.
         /// </summary>
-        protected static readonly Random va_objRandom = new Random();
+        protected static readonly Random va_objRandom = new();
         /// <summary>
         /// Nombre de colonnes maximum dans la grille.
         /// </summary>
@@ -221,7 +221,7 @@ namespace VisualArrays
             }
         }
         //============================================================================================
-        private static readonly Size defaultCellSize = new Size(50, 50);
+        private static readonly Size defaultCellSize = new(50, 50);
         private Size m_cellSize = defaultCellSize;
         /// <summary>
         /// Obtient et définit la largeur et la hauteur des cellules en pixels .
@@ -1113,7 +1113,7 @@ namespace VisualArrays
 
         #region SelectionAppearance
 
-        private SelectionAppearance va_selectionAppearance = new SelectionAppearance();
+        private SelectionAppearance va_selectionAppearance = new();
         /// <summary>
         /// Détermine différents aspects de l'apparence de la sélection
         /// </summary>
@@ -1138,7 +1138,7 @@ namespace VisualArrays
 
         #region DragAppearance
 
-        private DragAppearance va_dragAppearance = new DragAppearance();
+        private DragAppearance va_dragAppearance = new();
         /// <summary>
         /// Détermine différents aspects de l'apparence de la destination dans une opération glisser/déposer
         /// </summary>
@@ -1608,7 +1608,7 @@ namespace VisualArrays
 
         #region Padding
 
-        internal static readonly Padding m_defaultPadding = new Padding(6);
+        internal static readonly Padding m_defaultPadding = new(6);
         //===========================================================================================
         private Padding m_padding = m_defaultPadding;
         /// <summary>
@@ -1796,7 +1796,7 @@ namespace VisualArrays
             int posY = Padding.Top + (va_enteteColHaut - (int)pt.Height) / 2;
             int posX = va_enteteLgnLarg + Padding.Left + pColumn * largeurCellule + va_gridAppearance.LineSize + m_cellMargin;
 
-            Rectangle backRect = new Rectangle(posX, Padding.Top, m_cellSize.Width, va_enteteColHaut - 2);
+            Rectangle backRect = new(posX, Padding.Top, m_cellSize.Width, va_enteteColHaut - 2);
             switch (va_columnHeaderAppearance.Style)
             {
                 case enuHeaderBkgStyle.None:
@@ -1833,7 +1833,7 @@ namespace VisualArrays
             int posY = va_enteteColHaut + Padding.Top + pRow * hauteurCellule + va_gridAppearance.LineSize + m_cellMargin;
             int posX = Padding.Left + (va_enteteLgnLarg - (int)pt.Width) / 2;
 
-            Rectangle backRect = new Rectangle(Padding.Left, posY, va_enteteLgnLarg - 2, m_cellSize.Height);
+            Rectangle backRect = new(Padding.Left, posY, va_enteteLgnLarg - 2, m_cellSize.Height);
             switch (va_rowHeaderAppearance.Style)
             {
                 case enuHeaderBkgStyle.None:
@@ -1932,7 +1932,7 @@ namespace VisualArrays
         /// <param name="pAlignement">Alignement du texte.</param>
         protected void DrawText(Graphics pGraphics, Rectangle pContentBounds, string pTexte, Color pCouleur, Font pPolice, ContentAlignment pAlignement)
         {
-            StringFormat format = new StringFormat();
+            StringFormat format = new();
             format.LineAlignment = StringAlignment.Center;
             format.Alignment = StringAlignment.Center;
             pGraphics.DrawString(pTexte, pPolice,
@@ -2010,7 +2010,7 @@ namespace VisualArrays
             int largeurCellule = m_cellSize.Width + (m_cellMargin << 1) + va_gridAppearance.LineSize;
             int hauteurCellule = m_cellSize.Height + (m_cellMargin << 1) + va_gridAppearance.LineSize;
 
-            Pen objCrayon = new Pen(va_gridAppearance.Color, va_gridAppearance.LineSize);
+            Pen objCrayon = new(va_gridAppearance.Color, va_gridAppearance.LineSize);
 
             positionX = va_enteteLgnLarg + Padding.Left + (va_gridAppearance.LineSize >> 1);
             positionY = va_enteteColHaut + Padding.Top + (va_gridAppearance.LineSize >> 1);
@@ -2138,7 +2138,7 @@ namespace VisualArrays
             int largeurCellule = m_cellSize.Width + (m_cellMargin << 1) + va_gridAppearance.LineSize;
             int hauteurCellule = m_cellSize.Height + (m_cellMargin << 1) + va_gridAppearance.LineSize;
 
-            Rectangle objRectangle = new Rectangle();
+            Rectangle objRectangle = new();
 
 
             //va_selectionVisualElement.Draw(pGraphics, objRectangle);
@@ -2179,7 +2179,7 @@ namespace VisualArrays
             int largeurCellule = m_cellSize.Width + (m_cellMargin << 1) + va_gridAppearance.LineSize;
             int hauteurCellule = m_cellSize.Height + (m_cellMargin << 1) + va_gridAppearance.LineSize;
 
-            Rectangle objRectangle = new Rectangle();
+            Rectangle objRectangle = new();
 
 
             //va_dragVisualElement.Draw(pGraphics, objRectangle);
@@ -2235,7 +2235,7 @@ namespace VisualArrays
         /// <returns>Coordonnées en pixels.</returns>
         protected Point CelluleAPixels(int pRow, int pColumn)
         {
-            Point ptPixels = new Point();
+            Point ptPixels = new();
 
             int largeurCellule = m_cellSize.Width + (m_cellMargin << 1) + va_gridAppearance.LineSize;
             int hauteurCellule = m_cellSize.Height + (m_cellMargin << 1) + va_gridAppearance.LineSize;
@@ -2499,11 +2499,11 @@ namespace VisualArrays
                 case enuStrikeStyle.None:
                     break;
                 case enuStrikeStyle.Diagonal:
-                    Pen diagonalPen = new Pen(pDisabledAppearance.StrikeAppearance.Color, pDisabledAppearance.StrikeAppearance.PenWidth);
+                    Pen diagonalPen = new(pDisabledAppearance.StrikeAppearance.Color, pDisabledAppearance.StrikeAppearance.PenWidth);
                     pGraphics.DrawLine(diagonalPen, pBounds.Right, pBounds.Top, pBounds.Left, pBounds.Bottom);
                     break;
                 case enuStrikeStyle.Cross:
-                    Pen crossPen = new Pen(pDisabledAppearance.StrikeAppearance.Color, pDisabledAppearance.StrikeAppearance.PenWidth);
+                    Pen crossPen = new(pDisabledAppearance.StrikeAppearance.Color, pDisabledAppearance.StrikeAppearance.PenWidth);
                     pGraphics.DrawLine(crossPen, pBounds.Left, pBounds.Top, pBounds.Right, pBounds.Bottom);
                     pGraphics.DrawLine(crossPen, pBounds.Right, pBounds.Top, pBounds.Left, pBounds.Bottom);
                     break;
@@ -2531,9 +2531,9 @@ namespace VisualArrays
         protected virtual void DrawCellDragContent(Graphics pGraphics, Rectangle pContentBounds,int pRow, int pColumn)
         {
             Cell cell = va_tabCells[pRow, pColumn];
-            Rectangle backRect = new Rectangle(0, 0, pContentBounds.Width, pContentBounds.Height);
+            Rectangle backRect = new(0, 0, pContentBounds.Width, pContentBounds.Height);
             Rectangle cellBounds = GetCellBounds(pRow, pColumn);
-            Rectangle borderRect = new Rectangle(0, 0, cellBounds.Width, cellBounds.Height);
+            Rectangle borderRect = new(0, 0, cellBounds.Width, cellBounds.Height);
             cell.Background?.Draw(pGraphics, backRect);
             cell.UserContent?.DrawCellDragContent(pGraphics, backRect, borderRect, cell.Enabled);
         }
@@ -2652,7 +2652,7 @@ namespace VisualArrays
         {
             int largeurCellule = m_cellSize.Width + (m_cellMargin << 1) + va_gridAppearance.LineSize;
             int hauteurCellule = m_cellSize.Height + (m_cellMargin << 1) + va_gridAppearance.LineSize;
-            Rectangle contour = new Rectangle();
+            Rectangle contour = new();
             contour.X = va_enteteLgnLarg + Padding.Left + pColumn * largeurCellule + va_gridAppearance.LineSize;
             contour.Y = va_enteteColHaut + Padding.Top + pRow * hauteurCellule + va_gridAppearance.LineSize;
             contour.Width = m_cellSize.Width + (m_cellMargin << 1);
@@ -2668,7 +2668,7 @@ namespace VisualArrays
         {
             get
             {
-                Rectangle contour = new Rectangle();
+                Rectangle contour = new();
                 contour.X = va_enteteLgnLarg + Padding.Left;
                 contour.Y = va_enteteColHaut + Padding.Top;
                 contour.Width = Bounds.Width - Padding.Right - contour.X;
@@ -2698,7 +2698,7 @@ namespace VisualArrays
         {
             int largeurCellule = m_cellSize.Width + (m_cellMargin << 1) + va_gridAppearance.LineSize;
             int hauteurCellule = m_cellSize.Height + (m_cellMargin << 1) + va_gridAppearance.LineSize;
-            Rectangle contour = new Rectangle();
+            Rectangle contour = new();
             contour.X = va_enteteLgnLarg + Padding.Left + pColumn * largeurCellule + va_gridAppearance.LineSize;
             contour.Y = va_enteteColHaut + Padding.Top + pRow * hauteurCellule + va_gridAppearance.LineSize;
             contour.Width = m_cellSize.Width + (m_cellMargin << 1);
@@ -2716,7 +2716,7 @@ namespace VisualArrays
         {
             int largeurCellule = m_cellSize.Width + (m_cellMargin << 1) + va_gridAppearance.LineSize;
             int hauteurCellule = m_cellSize.Height + (m_cellMargin << 1) + va_gridAppearance.LineSize;
-            Rectangle contour = new Rectangle();
+            Rectangle contour = new();
             contour.X = va_enteteLgnLarg + Padding.Left + pColumn * largeurCellule + va_gridAppearance.LineSize + m_cellMargin;
             contour.Y = va_enteteColHaut + Padding.Top + pRow * hauteurCellule + va_gridAppearance.LineSize + m_cellMargin;
             contour.Width = m_cellSize.Width;
@@ -2735,7 +2735,7 @@ namespace VisualArrays
         {
             int largeurCellule = m_cellSize.Width + (m_cellMargin << 1) + va_gridAppearance.LineSize;
             int hauteurCellule = m_cellSize.Height + (m_cellMargin << 1) + va_gridAppearance.LineSize;
-            Rectangle contour = new Rectangle();
+            Rectangle contour = new();
             contour.X = va_enteteLgnLarg + Padding.Left + pColumn * largeurCellule + va_gridAppearance.LineSize + m_cellMargin + pPadding.Left;
             contour.Y = va_enteteColHaut + Padding.Top + pRow * hauteurCellule + va_gridAppearance.LineSize + m_cellMargin + pPadding.Top;
             contour.Width = m_cellSize.Width - (pPadding.Left + pPadding.Right);
@@ -2972,7 +2972,7 @@ namespace VisualArrays
         /// </summary>
         protected void ResizeColumnHeader()
         {
-            HeaderArray newColumnHeader = new HeaderArray(this, va_columnCount, true);
+            HeaderArray newColumnHeader = new(this, va_columnCount, true);
             if (va_columnHeaderAppearance.ValueStyle == enuDataStyle.User)
                 Array.Copy(va_columnHeaders.va_elements, newColumnHeader.va_elements, Math.Min(va_columnHeaders.Length, newColumnHeader.Length));
             va_columnHeaders = newColumnHeader;
@@ -2982,7 +2982,7 @@ namespace VisualArrays
         /// </summary>
         protected void ResizeRowHeader()
         {
-            HeaderArray newRowHeader = new HeaderArray(this, va_rowCount, false);
+            HeaderArray newRowHeader = new(this, va_rowCount, false);
             if (va_rowHeaderAppearance.ValueStyle == enuDataStyle.User)
                 Array.Copy(va_rowHeader.va_elements, newRowHeader.va_elements, Math.Min(va_rowHeader.Length, newRowHeader.Length));
             va_rowHeader = newRowHeader;
@@ -3205,7 +3205,7 @@ namespace VisualArrays
             va_gridOffScreenGraphic.Clear(BackColor);
             if (BackgroundImage != null)
             {
-                Rectangle srcRect = new Rectangle(new Point(0, 0), BackgroundImage.Size);
+                Rectangle srcRect = new(new Point(0, 0), BackgroundImage.Size);
                 va_gridOffScreenGraphic.DrawImage(BackgroundImage, srcRect, srcRect, GraphicsUnit.Pixel);
             }
 
@@ -3723,7 +3723,7 @@ namespace VisualArrays
         /// <returns></returns>
         private Sprite HitSprite(int pX, int pY)
         {
-            Rectangle rectangle = new Rectangle(pX, pY, 1, 1);
+            Rectangle rectangle = new(pX, pY, 1, 1);
             for (int index = va_sprites.Count - 1; index >= 0; index--)
             {
                 Sprite objSprite = va_sprites[index];
@@ -3797,16 +3797,16 @@ namespace VisualArrays
             m_dragInfos = new DragAndDropInfos(enuTypeElement.Cell, this.Name, pIndex, pIndex / va_columnCount, pIndex % va_columnCount, null);
             // Code pour tester le nouveau D&D
             Rectangle cellContentBounds = GetCellContentBounds(pRow, pColumn);
-            Bitmap bmp = new Bitmap(cellContentBounds.Width, cellContentBounds.Height, PixelFormat.Format32bppArgb);
+            Bitmap bmp = new(cellContentBounds.Width, cellContentBounds.Height, PixelFormat.Format32bppArgb);
             using (Graphics g = Graphics.FromImage(bmp))
             {
                 g.Clear(Color.Magenta);
                 DrawCellDragContent(g,cellContentBounds, pRow, pColumn);
             }
 
-            DataObject data = new DataObject(new DragHelper.DataObject());
+            DataObject data = new(new DragHelper.DataObject());
 
-            ShDragImage shdi = new ShDragImage();
+            ShDragImage shdi = new();
             Win32Size size;
             size.cx = bmp.Width;
             size.cy = bmp.Height;
@@ -3829,7 +3829,7 @@ namespace VisualArrays
             //m_dragInfos = String.Format("{0},{1},{2},{3},{4},{5}", "SPRITE", this.Name, pIndex, pIndex / va_columnCount, pIndex % va_columnCount, va_sprites.IndexOf(pSprite));
             m_dragInfos = new DragAndDropInfos(enuTypeElement.Sprite, this.Name, pIndex, pIndex / va_columnCount, pIndex % va_columnCount, pSprite);
             // Code pour tester le nouveau D&D
-            Bitmap bmp = new Bitmap(pSprite.Bounds.Width, pSprite.Bounds.Height, PixelFormat.Format32bppArgb);
+            Bitmap bmp = new(pSprite.Bounds.Width, pSprite.Bounds.Height, PixelFormat.Format32bppArgb);
             using (Graphics g = Graphics.FromImage(bmp))
             {
                 g.Clear(Color.Magenta);
@@ -3838,9 +3838,9 @@ namespace VisualArrays
                 pSprite.DrawAtOrigin(g);
             }
 
-            DataObject data = new DataObject(new DragHelper.DataObject());
+            DataObject data = new(new DragHelper.DataObject());
 
-            ShDragImage shdi = new ShDragImage();
+            ShDragImage shdi = new();
             Win32Size size;
             size.cx = bmp.Width;
             size.cy = bmp.Height;
@@ -3921,7 +3921,7 @@ namespace VisualArrays
 
                     if (va_allowDrag && objSprite.AllowDrag)
                     {
-                        SpriteDragEventArgs spriteDragInfos = new SpriteDragEventArgs(this.Name,objSprite, false);
+                        SpriteDragEventArgs spriteDragInfos = new(this.Name,objSprite, false);
                         BeforeSpriteDrag?.Invoke(this, spriteDragInfos);
 
                         int index = objSprite.DisplayIndex;
@@ -4021,7 +4021,7 @@ namespace VisualArrays
 
                     if (va_allowDrag && va_allowCellDrag)
                     {
-                        CellDragEventArgs cellDragInfos = new CellDragEventArgs(this.Name, index, new Address(index / va_columnCount, index % va_columnCount), false);
+                        CellDragEventArgs cellDragInfos = new(this.Name, index, new Address(index / va_columnCount, index % va_columnCount), false);
                         BeforeCellDrag?.Invoke(this, cellDragInfos);
 
                         if (!cellDragInfos.Cancel) // l'opération drag est accepté

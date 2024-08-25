@@ -21,7 +21,7 @@ namespace VisualArrays.Appearance
             m_owner = pOwner;
         }
         //============================================================================================
-        private Font m_font = new Font("Arial", 10);
+        private Font m_font = new("Arial", 10);
         /// <summary>
         /// Obtient ou définit la police pour l'en-tête des rangées.
         /// </summary>
