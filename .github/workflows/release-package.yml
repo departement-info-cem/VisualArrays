@@ -30,6 +30,6 @@ jobs:
       - name: Create the package
         run: dotnet pack --configuration Release VisualArrays
       - name: Authenticate
-        run: dotnet nuget add source --username PierreOlivierBrillant --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/PierreOlivierBrillant/index.json"
+        run: dotnet nuget update source --username PierreOlivierBrillant --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/PierreOlivierBrillant/index.json"
       - name: Publish the package to GPR
         run: dotnet nuget push VisualArrays\bin\Release\*.nupkg
