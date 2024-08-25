@@ -1,4 +1,6 @@
 using VisualArrays;
+using VisualArrays.Others;
+using VisualArrays.Sprites;
 
 namespace AppVisualCells;
 

@@ -1,4 +1,4 @@
-﻿namespace VisualArrays
+﻿namespace VisualArrays.VisualContainer
 {
     abstract partial class BaseVisualContainer<BaseType, VisualType>
     {

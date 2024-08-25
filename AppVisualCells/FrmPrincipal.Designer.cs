@@ -1,4 +1,8 @@
 ﻿using VisualArrays;
+using VisualArrays.Others;
+using VisualArrays.Sprites;
+using VisualArrays.VisualArrays;
+using VisualArrays.VisualContainer;
 
 namespace AppVisualCells;
 
@@ -55,20 +59,20 @@ partial class FrmPrincipal
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.btnTestAnimationSprites = new System.Windows.Forms.Button();
-            this.viaTestThread = new VisualArrays.VisualIntArray();
-            this.sprAnim1 = new VisualArrays.FillShapeSprite();
-            this.sprAnim2 = new VisualArrays.FillShapeSprite();
-            this.sprAnim3 = new VisualArrays.FillShapeSprite();
-            this.sprAnim4 = new VisualArrays.FillShapeSprite();
-            this.sprAnim5 = new VisualArrays.FillShapeSprite();
-            this.sprAnim6 = new VisualArrays.FillShapeSprite();
-            this.visualCharArray1 = new VisualArrays.VisualCharArray();
-            this.visualIntArray3 = new VisualArrays.VisualIntArray();
-            this.fillShapeSprite2 = new VisualArrays.FillShapeSprite();
-            this.visualStringArray1 = new VisualArrays.VisualStringArray();
-            this.visualIntArray2 = new VisualArrays.VisualIntArray();
-            this.shapeSprite1 = new VisualArrays.ShapeSprite();
-            this.visualDecimalContainer1 = new VisualArrays.VisualDecimalContainer();
+            this.viaTestThread = new VisualIntArray();
+            this.sprAnim1 = new FillShapeSprite();
+            this.sprAnim2 = new FillShapeSprite();
+            this.sprAnim3 = new FillShapeSprite();
+            this.sprAnim4 = new FillShapeSprite();
+            this.sprAnim5 = new FillShapeSprite();
+            this.sprAnim6 = new FillShapeSprite();
+            this.visualCharArray1 = new VisualCharArray();
+            this.visualIntArray3 = new VisualIntArray();
+            this.fillShapeSprite2 = new FillShapeSprite();
+            this.visualStringArray1 = new VisualStringArray();
+            this.visualIntArray2 = new VisualIntArray();
+            this.shapeSprite1 = new ShapeSprite();
+            this.visualDecimalContainer1 = new VisualDecimalContainer();
             this.visualDecimal7 = new VisualArrays.VisualCells.VisualDecimal();
             this.visualDecimal6 = new VisualArrays.VisualCells.VisualDecimal();
             this.visualDecimal5 = new VisualArrays.VisualCells.VisualDecimal();
@@ -78,7 +82,7 @@ partial class FrmPrincipal
             this.visualDecimal3 = new VisualArrays.VisualCells.VisualDecimal();
             this.visualDecimal2 = new VisualArrays.VisualCells.VisualDecimal();
             this.visualDecimal1 = new VisualArrays.VisualCells.VisualDecimal();
-            this.visualCharContainer1 = new VisualArrays.VisualCharContainer();
+            this.visualCharContainer1 = new VisualCharContainer();
             this.visualChar6 = new VisualArrays.VisualCells.VisualChar();
             this.visualChar5 = new VisualArrays.VisualCells.VisualChar();
             this.label6 = new System.Windows.Forms.Label();
@@ -86,8 +90,8 @@ partial class FrmPrincipal
             this.visualChar3 = new VisualArrays.VisualCells.VisualChar();
             this.visualChar2 = new VisualArrays.VisualCells.VisualChar();
             this.visualChar1 = new VisualArrays.VisualCells.VisualChar();
-            this.visualIntArray1 = new VisualArrays.VisualIntArray();
-            this.vbcMeter = new VisualArrays.VisualBoolContainer();
+            this.visualIntArray1 = new VisualIntArray();
+            this.vbcMeter = new VisualBoolContainer();
             this.visualBool34 = new VisualArrays.VisualCells.VisualBool();
             this.visualBool33 = new VisualArrays.VisualCells.VisualBool();
             this.visualBool32 = new VisualArrays.VisualCells.VisualBool();
@@ -109,7 +113,7 @@ partial class FrmPrincipal
             this.visualBool26 = new VisualArrays.VisualCells.VisualBool();
             this.visualBool27 = new VisualArrays.VisualCells.VisualBool();
             this.vsiMiroir = new VisualArrays.VisualCells.VisualInt();
-            this.visualBoolContainer1 = new VisualArrays.VisualBoolContainer();
+            this.visualBoolContainer1 = new VisualBoolContainer();
             this.visualBool38 = new VisualArrays.VisualCells.VisualBool();
             this.visualBool37 = new VisualArrays.VisualCells.VisualBool();
             this.visualBool36 = new VisualArrays.VisualCells.VisualBool();
@@ -128,7 +132,7 @@ partial class FrmPrincipal
             this.visualBool4 = new VisualArrays.VisualCells.VisualBool();
             this.visualBool3 = new VisualArrays.VisualCells.VisualBool();
             this.visualBool2 = new VisualArrays.VisualCells.VisualBool();
-            this.visualIntContainer1 = new VisualArrays.VisualIntContainer();
+            this.visualIntContainer1 = new VisualIntContainer();
             this.visualInt1 = new VisualArrays.VisualCells.VisualInt();
             this.label4 = new System.Windows.Forms.Label();
             this.visualInt7 = new VisualArrays.VisualCells.VisualInt();
@@ -139,8 +143,8 @@ partial class FrmPrincipal
             this.visualInt2 = new VisualArrays.VisualCells.VisualInt();
             this.vsiNombre = new VisualArrays.VisualCells.VisualInt();
             this.visualBool1 = new VisualArrays.VisualCells.VisualBool();
-            this.fillShapeSprite1 = new VisualArrays.FillShapeSprite();
-            this.shapeSprite2 = new VisualArrays.ShapeSprite();
+            this.fillShapeSprite1 = new FillShapeSprite();
+            this.shapeSprite2 = new ShapeSprite();
             this.btnGo = new System.Windows.Forms.Button();
             this.btnVisible = new System.Windows.Forms.Button();
             this.visualInt8 = new VisualArrays.VisualCells.VisualInt();
@@ -416,7 +420,7 @@ partial class FrmPrincipal
             this.viaTestThread.CellSize = new System.Drawing.Size(58, 48);
             this.viaTestThread.ColumnCount = 10;
             this.viaTestThread.DisabledAppearance.ShowValue = false;
-            this.viaTestThread.DisabledAppearance.Style = VisualArrays.enuBkgStyle.FillShape;
+            this.viaTestThread.DisabledAppearance.Style = enuBkgStyle.FillShape;
             this.viaTestThread.DisabledAppearance.TextColor = System.Drawing.Color.Fuchsia;
             this.viaTestThread.GridAppearance.Color = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.viaTestThread.Location = new System.Drawing.Point(14, 552);
@@ -429,7 +433,7 @@ partial class FrmPrincipal
             this.viaTestThread.SelectionAppearance.PenWidth = 5;
             this.viaTestThread.Size = new System.Drawing.Size(643, 331);
             this.viaTestThread.SpecialValue = 0;
-            this.viaTestThread.Sprites.AddRange(new VisualArrays.Sprite[] {
+            this.viaTestThread.Sprites.AddRange(new Sprite[] {
             this.sprAnim1,
             this.sprAnim2,
             this.sprAnim3,
@@ -438,8 +442,8 @@ partial class FrmPrincipal
             this.sprAnim6});
             this.viaTestThread.TabIndex = 46;
             this.viaTestThread.Text = "visualIntArray4";
-            this.viaTestThread.SpriteMouseDown += new System.EventHandler<VisualArrays.SpriteMouseEventArgs>(this.viaTestThread_SpriteMouseDown);
-            this.viaTestThread.SpriteMouseDoubleClick += new System.EventHandler<VisualArrays.SpriteMouseEventArgs>(this.viaTestThread_SpriteMouseDoubleClick);
+            this.viaTestThread.SpriteMouseDown += new System.EventHandler<SpriteMouseEventArgs>(this.viaTestThread_SpriteMouseDown);
+            this.viaTestThread.SpriteMouseDoubleClick += new System.EventHandler<SpriteMouseEventArgs>(this.viaTestThread_SpriteMouseDoubleClick);
             // 
             // sprAnim1
             // 
@@ -513,7 +517,7 @@ partial class FrmPrincipal
             // 
             // visualCharArray1
             // 
-            this.visualCharArray1.AddressView = VisualArrays.enuAddressView.Mode2D;
+            this.visualCharArray1.AddressView = enuAddressView.Mode2D;
             this.visualCharArray1.BackColor = System.Drawing.Color.Black;
             this.visualCharArray1.CellSize = new System.Drawing.Size(43, 32);
             this.visualCharArray1.Location = new System.Drawing.Point(998, 622);
@@ -524,11 +528,11 @@ partial class FrmPrincipal
             this.visualCharArray1.Size = new System.Drawing.Size(157, 124);
             this.visualCharArray1.TabIndex = 44;
             this.visualCharArray1.Text = "visualCharArray1";
-            this.visualCharArray1.ValueChanged += new System.EventHandler<VisualArrays.ValueChangedEventArgs>(this.visualIntArray3_ValueChanged);
+            this.visualCharArray1.ValueChanged += new System.EventHandler<ValueChangedEventArgs>(this.visualIntArray3_ValueChanged);
             // 
             // visualIntArray3
             // 
-            this.visualIntArray3.AddressView = VisualArrays.enuAddressView.Mode2D;
+            this.visualIntArray3.AddressView = enuAddressView.Mode2D;
             this.visualIntArray3.BackColor = System.Drawing.Color.Black;
             this.visualIntArray3.CellSize = new System.Drawing.Size(43, 32);
             this.visualIntArray3.Location = new System.Drawing.Point(821, 620);
@@ -538,11 +542,11 @@ partial class FrmPrincipal
             this.visualIntArray3.SelectionAppearance.PenWidth = 8;
             this.visualIntArray3.SelectionMode = System.Windows.Forms.SelectionMode.One;
             this.visualIntArray3.Size = new System.Drawing.Size(157, 124);
-            this.visualIntArray3.Sprites.AddRange(new VisualArrays.Sprite[] {
+            this.visualIntArray3.Sprites.AddRange(new Sprite[] {
             this.fillShapeSprite2});
             this.visualIntArray3.TabIndex = 42;
             this.visualIntArray3.Text = "visualIntArray3";
-            this.visualIntArray3.ValueChanged += new System.EventHandler<VisualArrays.ValueChangedEventArgs>(this.visualIntArray3_ValueChanged);
+            this.visualIntArray3.ValueChanged += new System.EventHandler<ValueChangedEventArgs>(this.visualIntArray3_ValueChanged);
             // 
             // fillShapeSprite2
             // 
@@ -571,18 +575,18 @@ partial class FrmPrincipal
             this.visualIntArray2.Name = "visualIntArray2";
             this.visualIntArray2.RowHeader.ForeColor = System.Drawing.Color.White;
             this.visualIntArray2.Size = new System.Drawing.Size(187, 130);
-            this.visualIntArray2.Sprites.AddRange(new VisualArrays.Sprite[] {
+            this.visualIntArray2.Sprites.AddRange(new Sprite[] {
             this.shapeSprite1});
             this.visualIntArray2.TabIndex = 38;
             this.visualIntArray2.Text = "visualIntArray2";
-            this.visualIntArray2.CellMouseEnter += new System.EventHandler<VisualArrays.CellEventArgs>(this.visualIntArray2_CellMouseEnter);
-            this.visualIntArray2.CellMouseLeave += new System.EventHandler<VisualArrays.CellEventArgs>(this.visualIntArray2_CellMouseLeave);
+            this.visualIntArray2.CellMouseEnter += new System.EventHandler<CellEventArgs>(this.visualIntArray2_CellMouseEnter);
+            this.visualIntArray2.CellMouseLeave += new System.EventHandler<CellEventArgs>(this.visualIntArray2_CellMouseLeave);
             // 
             // shapeSprite1
             // 
             this.shapeSprite1.IsMoving = false;
             this.shapeSprite1.Name = "shapeSprite1";
-            this.shapeSprite1.Shape = VisualArrays.enuShape.RoundRect;
+            this.shapeSprite1.Shape = enuShape.RoundRect;
             this.shapeSprite1.Size = new System.Drawing.Size(170, 30);
             // 
             // visualDecimalContainer1
@@ -618,7 +622,7 @@ partial class FrmPrincipal
             0,
             0,
             0});
-            this.visualDecimal7.View = VisualArrays.enuDecimalView.GraphNumber;
+            this.visualDecimal7.View = enuDecimalView.GraphNumber;
             // 
             // visualDecimal6
             // 
@@ -636,7 +640,7 @@ partial class FrmPrincipal
             0,
             0,
             0});
-            this.visualDecimal6.View = VisualArrays.enuDecimalView.GraphNumber;
+            this.visualDecimal6.View = enuDecimalView.GraphNumber;
             // 
             // visualDecimal5
             // 
@@ -654,7 +658,7 @@ partial class FrmPrincipal
             0,
             0,
             0});
-            this.visualDecimal5.View = VisualArrays.enuDecimalView.GraphNumber;
+            this.visualDecimal5.View = enuDecimalView.GraphNumber;
             // 
             // btnVDC
             // 
@@ -691,7 +695,7 @@ partial class FrmPrincipal
             0,
             0,
             0});
-            this.visualDecimal4.View = VisualArrays.enuDecimalView.GraphNumber;
+            this.visualDecimal4.View = enuDecimalView.GraphNumber;
             // 
             // visualDecimal3
             // 
@@ -709,7 +713,7 @@ partial class FrmPrincipal
             0,
             0,
             0});
-            this.visualDecimal3.View = VisualArrays.enuDecimalView.GraphNumber;
+            this.visualDecimal3.View = enuDecimalView.GraphNumber;
             // 
             // visualDecimal2
             // 
@@ -727,7 +731,7 @@ partial class FrmPrincipal
             0,
             0,
             0});
-            this.visualDecimal2.View = VisualArrays.enuDecimalView.GraphNumber;
+            this.visualDecimal2.View = enuDecimalView.GraphNumber;
             // 
             // visualDecimal1
             // 
@@ -745,7 +749,7 @@ partial class FrmPrincipal
             0,
             0,
             0});
-            this.visualDecimal1.View = VisualArrays.enuDecimalView.GraphNumber;
+            this.visualDecimal1.View = enuDecimalView.GraphNumber;
             // 
             // visualCharContainer1
             // 
@@ -844,7 +848,7 @@ partial class FrmPrincipal
             this.visualIntArray1.EnabledAppearance.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.visualIntArray1.EnabledAppearance.Image = ((System.Drawing.Image)(resources.GetObject("resource.Image")));
             this.visualIntArray1.EnabledAppearance.Padding = new System.Windows.Forms.Padding(0, 0, 12, 0);
-            this.visualIntArray1.EnabledAppearance.Style = VisualArrays.enuBkgStyle.Image;
+            this.visualIntArray1.EnabledAppearance.Style = enuBkgStyle.Image;
             this.visualIntArray1.EnabledAppearance.TextColor = System.Drawing.Color.Black;
             this.visualIntArray1.Location = new System.Drawing.Point(984, 12);
             this.visualIntArray1.Minimum = -100;
@@ -1129,7 +1133,7 @@ partial class FrmPrincipal
             this.vsiMiroir.TabIndex = 22;
             this.vsiMiroir.Text = "visualInt8";
             this.vsiMiroir.Value = 25;
-            this.vsiMiroir.View = VisualArrays.enuIntView.GraphNumber;
+            this.vsiMiroir.View = enuIntView.GraphNumber;
             this.vsiMiroir.WaitForEnter = false;
             this.vsiMiroir.ValueChanged += new System.EventHandler(this.vsiMiroir_ValueChanged);
             // 
@@ -1158,7 +1162,7 @@ partial class FrmPrincipal
             this.visualBoolContainer1.Size = new System.Drawing.Size(418, 313);
             this.visualBoolContainer1.TabIndex = 16;
             this.visualBoolContainer1.Text = "visualBoolContainer1";
-            this.visualBoolContainer1.ValueChanged += new System.EventHandler<VisualArrays.CellVCEventArgs>(this.visualBoolContainer1_ValueChanged);
+            this.visualBoolContainer1.ValueChanged += new System.EventHandler<CellVCEventArgs>(this.visualBoolContainer1_ValueChanged);
             // 
             // visualBool38
             // 
@@ -1398,7 +1402,7 @@ partial class FrmPrincipal
             this.visualIntContainer1.Size = new System.Drawing.Size(277, 313);
             this.visualIntContainer1.TabIndex = 10;
             this.visualIntContainer1.Text = "visualIntContainer1";
-            this.visualIntContainer1.ValueChanged += new System.EventHandler<VisualArrays.CellVCEventArgs>(this.visualIntContainer1_ValueChanged);
+            this.visualIntContainer1.ValueChanged += new System.EventHandler<CellVCEventArgs>(this.visualIntContainer1_ValueChanged);
             // 
             // visualInt1
             // 
@@ -1509,7 +1513,7 @@ partial class FrmPrincipal
             this.vsiNombre.TabIndex = 5;
             this.vsiNombre.Text = "visualInt1";
             this.vsiNombre.Value = 25;
-            this.vsiNombre.View = VisualArrays.enuIntView.GraphNumberFraction;
+            this.vsiNombre.View = enuIntView.GraphNumberFraction;
             this.vsiNombre.ValueChanged += new System.EventHandler(this.vsiNombre_ValueChanged);
             // 
             // visualBool1
@@ -1639,7 +1643,7 @@ partial class FrmPrincipal
         private VisualArrays.VisualCells.VisualInt vsiNombre;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.ImageList imlHumains;
-        private VisualArrays.VisualIntContainer visualIntContainer1;
+        private VisualIntContainer visualIntContainer1;
         private VisualArrays.VisualCells.VisualInt visualInt4;
         private VisualArrays.VisualCells.VisualInt visualInt3;
         private VisualArrays.VisualCells.VisualInt visualInt2;
@@ -1648,7 +1652,7 @@ partial class FrmPrincipal
         private VisualArrays.VisualCells.VisualInt visualInt6;
         private VisualArrays.VisualCells.VisualInt visualInt5;
         private System.Windows.Forms.Button btnVICTest2;
-        private VisualArrays.VisualBoolContainer visualBoolContainer1;
+        private VisualBoolContainer visualBoolContainer1;
         private VisualArrays.VisualCells.VisualBool visualBool2;
         private VisualArrays.VisualCells.VisualBool visualBool8;
         private VisualArrays.VisualCells.VisualBool visualBool7;
@@ -1674,7 +1678,7 @@ partial class FrmPrincipal
         private VisualArrays.VisualCells.VisualBool visualBool13;
         private VisualArrays.VisualCells.VisualBool visualBool12;
         private VisualArrays.VisualCells.VisualInt visualInt1;
-        private VisualArrays.VisualBoolContainer vbcMeter;
+        private VisualBoolContainer vbcMeter;
         private System.Windows.Forms.NumericUpDown numPuissance;
         private VisualArrays.VisualCells.VisualBool visualBool34;
         private VisualArrays.VisualCells.VisualBool visualBool33;
@@ -1697,21 +1701,21 @@ partial class FrmPrincipal
         private VisualArrays.VisualCells.VisualBool visualBool26;
         private VisualArrays.VisualCells.VisualBool visualBool27;
         private System.Windows.Forms.Label lblNiveau;
-        private VisualArrays.VisualIntArray visualIntArray1;
+        private VisualIntArray visualIntArray1;
         private VisualArrays.VisualCells.VisualBool visualBool36;
         private VisualArrays.VisualCells.VisualBool visualBool35;
         private VisualArrays.VisualCells.VisualDecimal visualDecimal1;
         private VisualArrays.VisualCells.VisualChar visualChar1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private VisualArrays.VisualCharContainer visualCharContainer1;
+        private VisualCharContainer visualCharContainer1;
         private VisualArrays.VisualCells.VisualChar visualChar6;
         private VisualArrays.VisualCells.VisualChar visualChar5;
         private VisualArrays.VisualCells.VisualChar visualChar4;
         private VisualArrays.VisualCells.VisualChar visualChar3;
         private VisualArrays.VisualCells.VisualChar visualChar2;
         private System.Windows.Forms.Button btnTestVCC;
-        private VisualArrays.VisualDecimalContainer visualDecimalContainer1;
+        private VisualDecimalContainer visualDecimalContainer1;
         private VisualArrays.VisualCells.VisualDecimal visualDecimal4;
         private VisualArrays.VisualCells.VisualDecimal visualDecimal3;
         private VisualArrays.VisualCells.VisualDecimal visualDecimal2;
@@ -1720,27 +1724,27 @@ partial class FrmPrincipal
         private VisualArrays.VisualCells.VisualDecimal visualDecimal7;
         private VisualArrays.VisualCells.VisualDecimal visualDecimal6;
         private VisualArrays.VisualCells.VisualDecimal visualDecimal5;
-        private VisualArrays.FillShapeSprite fillShapeSprite1;
-        private VisualArrays.VisualIntArray visualIntArray2;
-        private VisualArrays.ShapeSprite shapeSprite1;
-        private VisualArrays.ShapeSprite shapeSprite2;
-        private VisualArrays.VisualStringArray visualStringArray1;
-        private VisualArrays.VisualIntArray visualIntArray3;
+        private FillShapeSprite fillShapeSprite1;
+        private VisualIntArray visualIntArray2;
+        private ShapeSprite shapeSprite1;
+        private ShapeSprite shapeSprite2;
+        private VisualStringArray visualStringArray1;
+        private VisualIntArray visualIntArray3;
         private System.Windows.Forms.Button button2;
-        private VisualArrays.VisualCharArray visualCharArray1;
+        private VisualCharArray visualCharArray1;
         private System.Windows.Forms.TextBox textBox1;
-        private VisualArrays.FillShapeSprite fillShapeSprite2;
-        private VisualArrays.VisualIntArray viaTestThread;
+        private FillShapeSprite fillShapeSprite2;
+        private VisualIntArray viaTestThread;
         private System.Windows.Forms.Button button1;
-        private VisualArrays.FillShapeSprite sprAnim1;
-        private VisualArrays.FillShapeSprite sprAnim3;
-        private VisualArrays.FillShapeSprite sprAnim2;
-        private VisualArrays.FillShapeSprite sprAnim4;
+        private FillShapeSprite sprAnim1;
+        private FillShapeSprite sprAnim3;
+        private FillShapeSprite sprAnim2;
+        private FillShapeSprite sprAnim4;
         private System.Windows.Forms.Button btnTestAnimationSprites;
-        private VisualArrays.FillShapeSprite sprAnim5;
+        private FillShapeSprite sprAnim5;
         private System.Windows.Forms.Button btnGo;
         private System.Windows.Forms.Button btnVisible;
-        private VisualArrays.FillShapeSprite sprAnim6;
+        private FillShapeSprite sprAnim6;
         private VisualArrays.VisualCells.VisualBool visualBool38;
         private VisualArrays.VisualCells.VisualBool visualBool37;
         private VisualArrays.VisualCells.VisualInt visualInt8;

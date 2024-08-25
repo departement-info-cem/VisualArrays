@@ -1,4 +1,4 @@
-﻿namespace VisualArrays
+﻿namespace VisualArrays.VisualArrays
 {
     partial class VisualStringArray
     {
