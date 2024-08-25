@@ -16,7 +16,7 @@ public abstract partial class BaseVisualContainer<BaseType,VisualType> : Contain
     /// <summary>
     /// Liste des VisualValue contenu dans le conteneur.
     /// </summary>
-    private List<VisualValue<BaseType>> m_colVisualElements = new();
+    private List<VisualValue<BaseType>> m_colVisualElements = [];
     #endregion
 
     //#region Sprites

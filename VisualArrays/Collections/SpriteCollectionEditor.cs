@@ -46,7 +46,8 @@ public class SpriteCollectionEditor : System.ComponentModel.Design.CollectionEdi
     /// <returns></returns>
     protected override Type[] CreateNewItemTypes()
     {
-        return new Type[] { typeof(FillShapeSprite), typeof(ImageSprite), typeof(ShapeSprite), typeof(TextSprite), typeof(SegmentSprite) };
+        return [typeof(FillShapeSprite), typeof(ImageSprite), typeof(ShapeSprite), typeof(TextSprite), typeof(SegmentSprite)
+        ];
     }
     ///// <summary>
     ///// 

@@ -38,7 +38,7 @@ public class VoidDataConverter : TypeConverter
     {
         if (value is string)
         {
-            string[] v = ((string)value).Split(new char[] { ',' });
+            string[] v = ((string)value).Split([',']);
             return new VoidData(int.Parse(v[0]), int.Parse(v[1]), Color.FromName(v[2]));
         }
         return base.ConvertFrom(context, culture, value);
@@ -72,8 +72,10 @@ public class VoidDataConverter : TypeConverter
     {
         if (destinationType == typeof(InstanceDescriptor))
         {
-            ConstructorInfo ci = typeof(VoidData).GetConstructor(new Type[]{typeof(int),
-                typeof(int), typeof(Color)});
+            ConstructorInfo ci = typeof(VoidData).GetConstructor([
+                typeof(int),
+                typeof(int), typeof(Color)
+            ]);
             VoidData t = (VoidData)value;
             return new InstanceDescriptor(ci, new object[] { t.X, t.Y, t.Color });
         }

@@ -170,7 +170,7 @@ public class AddressConverter : TypeConverter
     {
         if (value is string)
         {
-            string[] v = ((string)value).Split(new char[] { ',' });
+            string[] v = ((string)value).Split([',']);
             return new Address(int.Parse(v[0]), int.Parse(v[1]));
         }
         return base.ConvertFrom(context, culture, value);
@@ -204,7 +204,7 @@ public class AddressConverter : TypeConverter
     {
         if (destinationType == typeof(InstanceDescriptor))
         {
-            ConstructorInfo ci = typeof(Address).GetConstructor(new Type[]{typeof(int),typeof(int)});
+            ConstructorInfo ci = typeof(Address).GetConstructor([typeof(int),typeof(int)]);
             Address t = (Address)value;
             return new InstanceDescriptor(ci, new object[] { t.Row, t.Column});
         }

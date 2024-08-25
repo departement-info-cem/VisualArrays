@@ -59,7 +59,7 @@ public abstract class Sprite : Component
     /// <summary>
     /// Liste des points qui composent le Sprite, si Count == 0 alors Sprite normal
     /// </summary>
-    internal List<Address> m_tabCells = new();
+    internal List<Address> m_tabCells = [];
 
     /// <summary>
     /// Ajoute une cellule au Sprite, nécessaire seulement si le Sprite est déployé sur plusieurs cellules.
@@ -128,7 +128,7 @@ public abstract class Sprite : Component
     {
         get
         {
-            List<Address> liste = new List<Address>();
+            List<Address> liste = [];
             if (m_displayIndex == -1)
             {
                 liste.Add(new Address(-1, -1));
@@ -158,7 +158,7 @@ public abstract class Sprite : Component
     {
         get
         {
-            List<int> liste = new List<int>();
+            List<int> liste = [];
             if (m_displayIndex == -1)
             {
                 liste.Add(-1);
@@ -1224,11 +1224,12 @@ internal class NamedComponentDesigner : ComponentDesigner
     {
         base.PreFilterProperties(properties);
 
-        string[] shadowProps = new string[] {             
+        string[] shadowProps =
+        [
             "Name"
-        };
+        ];
 
-        Attribute[] empty = new Attribute[0];
+        Attribute[] empty = [];
         PropertyDescriptor prop;
         for (int i = 0; i < shadowProps.Length; i++)
         {

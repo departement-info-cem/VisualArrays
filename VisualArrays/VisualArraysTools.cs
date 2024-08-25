@@ -238,12 +238,13 @@ public static class VisualArraysTools
 
         // Create an array of matrix points
         float[][] ptsArray =
-        {
-            new float[] {1, 0, 0, 0, 0},
-            new float[] {0, 1, 0, 0, 0},
-            new float[] {0, 0, 1, 0, 0},
-            new float[] {0, 0, 0, 1, 0},
-            new float[] {0, 0, 0, 0, 1}};
+        [
+            [1, 0, 0, 0, 0],
+            [0, 1, 0, 0, 0],
+            [0, 0, 1, 0, 0],
+            [0, 0, 0, 1, 0],
+            [0, 0, 0, 0, 1]
+        ];
 
         ptsArray[3][3] = pBrightness;
         // Create a color matrix

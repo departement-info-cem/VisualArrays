@@ -8,7 +8,8 @@ namespace VisualArrays.CellVisualElement;
 /// </summary>
 public class ShapeElement : CellVisualElement
 {
-    private static readonly Color[] va_tabCouleurs = { Color.Red, Color.Blue, Color.Green, Color.Orange, Color.Yellow, Color.Magenta, Color.Cyan, Color.DarkViolet, Color.Tomato };
+    private static readonly Color[] va_tabCouleurs = [Color.Red, Color.Blue, Color.Green, Color.Orange, Color.Yellow, Color.Magenta, Color.Cyan, Color.DarkViolet, Color.Tomato
+    ];
     private static int va_indexCouleur = 0;
 
     //-------------------------------------------------------------------------------------
