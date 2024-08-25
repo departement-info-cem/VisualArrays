@@ -1,21 +1,20 @@
 ﻿using VisualArrays.VisualCells;
 
-namespace VisualArrays.VisualContainer
+namespace VisualArrays.VisualContainer;
+
+/// <summary>
+/// Représente un conteneur de VisualInt
+/// </summary>
+public partial class VisualIntContainer : BaseVisualContainer<int,VisualInt>
 {
+    #region Constructeur
+    //========================================================================================================================
     /// <summary>
-    /// Représente un conteneur de VisualInt
+    /// Initialise un VisualIntContainer
     /// </summary>
-    public partial class VisualIntContainer : BaseVisualContainer<int,VisualInt>
+    public VisualIntContainer()
     {
-        #region Constructeur
-        //========================================================================================================================
-        /// <summary>
-        /// Initialise un VisualIntContainer
-        /// </summary>
-        public VisualIntContainer()
-        {
-            InitializeComponent();
-        }
-        #endregion
+        InitializeComponent();
     }
+    #endregion
 }
