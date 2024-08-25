@@ -131,19 +131,21 @@ public static class VisualArraysTools
         pNewValue = Math.Abs(pCurrentValue);
         if (NbDigits(pNewValue, pDecimalPlaces) == NbDigits(pMaxValue, pDecimalPlaces))
             pNewValue = 0;
-        if (pChar is '.' or ',' && !m_fraction)
+        switch (pChar)
         {
-            m_fraction = true;
-            m_digitFraction = 0;
+            case '.' or ',' when !m_fraction:
+                m_fraction = true;
+                m_digitFraction = 0;
+                break;
+            case '-':
+                m_negatif = true;
+                m_currentKeyTime = DateTime.Now;
+                pNewValue = 0;
+                m_fraction = false;
+                m_digitFraction = 0;
+                break;
         }
-        if (pChar == '-')
-        {
-            m_negatif = true;
-            m_currentKeyTime = DateTime.Now;
-            pNewValue = 0;
-            m_fraction = false;
-            m_digitFraction = 0;
-        }
+
         if (DateTime.Now.Ticks - m_currentKeyTime.Ticks > DELAI_INTER_TOUCHES)
         {
             pNewValue = 0;

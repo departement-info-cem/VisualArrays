@@ -269,9 +269,15 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
         {
             if (va_delay == value) return;
             va_delay = value;
-            if (va_delay < DELAI_MIN) va_delay = DELAI_MIN;
-            else if (va_delay > DELAI_MAX)
-                va_delay = DELAI_MAX;
+            switch (va_delay)
+            {
+                case < DELAI_MIN:
+                    va_delay = DELAI_MIN;
+                    break;
+                case > DELAI_MAX:
+                    va_delay = DELAI_MAX;
+                    break;
+            }
         }
     }
     //============================================================================================
@@ -567,89 +573,93 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
 
             #region SelectionMode.One
 
-            if (va_selectionMode == SelectionMode.One) // SÉLECTION UNIQUE
+            switch (va_selectionMode)
             {
-
-                if (va_selectedIndex == -1) // sélectionner rien
+                // SÉLECTION UNIQUE
+                case SelectionMode.One:
                 {
-                    adresse = AddressFromIndex(oldSelectedIndex);
-                    va_tabCells[adresse.Row, adresse.Column].Selected = false;
-                    UpdateCellAndSprites(oldSelectedIndex);
-                    va_dragIndex = -1;
-                    va_dragIndexSource = -1;
-                }
-                else if (oldSelectedIndex == -1) // il n'y avait aucune sélection
-                {
-                    adresse = AddressFromIndex(va_selectedIndex);
-                    cell = va_tabCells[adresse.Row, adresse.Column];
-                    if (IsOkToSelect(cell,adresse.Row, adresse.Column))
+                    if (va_selectedIndex == -1) // sélectionner rien
                     {
-                        cell.Selected = true;
-                        UpdateCellAndSprites(va_selectedIndex);
+                        adresse = AddressFromIndex(oldSelectedIndex);
+                        va_tabCells[adresse.Row, adresse.Column].Selected = false;
+                        UpdateCellAndSprites(oldSelectedIndex);
+                        va_dragIndex = -1;
+                        va_dragIndexSource = -1;
                     }
-                    else
-                        throw new VisualArrayException("Imposible de sélectionner une cellule qui n'est pas visible et active");
-                }
-                else // on passe d'une sélection à une autre
-                {
-                    adresse = AddressFromIndex(oldSelectedIndex);
-                    va_tabCells[adresse.Row, adresse.Column].Selected = false;
-                    UpdateCellAndSprites(oldSelectedIndex);
-                    adresse = AddressFromIndex(va_selectedIndex);
-                    cell = va_tabCells[adresse.Row, adresse.Column];
-                    if (IsOkToSelect(cell, adresse.Row, adresse.Column))
+                    else if (oldSelectedIndex == -1) // il n'y avait aucune sélection
                     {
-                        va_tabCells[adresse.Row, adresse.Column].Selected = true;
-                        UpdateCellAndSprites(va_selectedIndex);
-                    }
-                    else
-                        throw new VisualArrayException("Imposible de sélectionner une cellule qui n'est pas visible et active");
-                }
-
-                SelectedIndexChanged?.Invoke(this, new EventArgs());
-                SelectionChanged?.Invoke(this, new EventArgs());
-            }
-            #endregion
-
-            #region SelectionMode.MultiSimple
-            else if (va_selectionMode == SelectionMode.MultiSimple) // SÉLECTION MULTIPLE SIMPLE
-            {
-                if (va_selectedIndex == -1) // il faut désélectionner toutes les cellules
-                {
-                    for (int row = 0; row < va_rowCount; row++)
-                    for (int col = 0; col < va_columnCount; col++)
-                    {
-                        cell = va_tabCells[row, col];
-                        if (cell.Selected)
+                        adresse = AddressFromIndex(va_selectedIndex);
+                        cell = va_tabCells[adresse.Row, adresse.Column];
+                        if (IsOkToSelect(cell,adresse.Row, adresse.Column))
                         {
-                            cell.Selected = false;
-                            UpdateCellAndSprites(row, col);
+                            cell.Selected = true;
+                            UpdateCellAndSprites(va_selectedIndex);
                         }
+                        else
+                            throw new VisualArrayException("Imposible de sélectionner une cellule qui n'est pas visible et active");
+                    }
+                    else // on passe d'une sélection à une autre
+                    {
+                        adresse = AddressFromIndex(oldSelectedIndex);
+                        va_tabCells[adresse.Row, adresse.Column].Selected = false;
+                        UpdateCellAndSprites(oldSelectedIndex);
+                        adresse = AddressFromIndex(va_selectedIndex);
+                        cell = va_tabCells[adresse.Row, adresse.Column];
+                        if (IsOkToSelect(cell, adresse.Row, adresse.Column))
+                        {
+                            va_tabCells[adresse.Row, adresse.Column].Selected = true;
+                            UpdateCellAndSprites(va_selectedIndex);
+                        }
+                        else
+                            throw new VisualArrayException("Imposible de sélectionner une cellule qui n'est pas visible et active");
                     }
 
                     SelectedIndexChanged?.Invoke(this, new EventArgs());
                     SelectionChanged?.Invoke(this, new EventArgs());
+                    break;
                 }
-                else // il faut sélectionner la cellule
+                // SÉLECTION MULTIPLE SIMPLE
+                case SelectionMode.MultiSimple:
                 {
-                    adresse = AddressFromIndex(va_selectedIndex);
-                    cell = va_tabCells[adresse.Row, adresse.Column];
-                    if (!IsOkToSelect(cell, adresse.Row, adresse.Column))
-                        throw new VisualArrayException("Imposible de sélectionner une cellule qui n'est pas visible et active");
-
-                    if (cell.Selected) return; // cette cellule est déjà sélectionnée, donc rien à faire.
-
-                    cell.Selected = true; // on va sélectionner la cellule
-                    UpdateCellAndSprites(va_selectedIndex);
-
-                    if (va_selectedIndex > oldSelectedIndex && oldSelectedIndex != -1)
-                        va_selectedIndex = oldSelectedIndex; // conserve l'ancien SelectedIndex
-                    else
+                    if (va_selectedIndex == -1) // il faut désélectionner toutes les cellules
                     {
+                        for (int row = 0; row < va_rowCount; row++)
+                        for (int col = 0; col < va_columnCount; col++)
+                        {
+                            cell = va_tabCells[row, col];
+                            if (cell.Selected)
+                            {
+                                cell.Selected = false;
+                                UpdateCellAndSprites(row, col);
+                            }
+                        }
+
                         SelectedIndexChanged?.Invoke(this, new EventArgs());
+                        SelectionChanged?.Invoke(this, new EventArgs());
+                    }
+                    else // il faut sélectionner la cellule
+                    {
+                        adresse = AddressFromIndex(va_selectedIndex);
+                        cell = va_tabCells[adresse.Row, adresse.Column];
+                        if (!IsOkToSelect(cell, adresse.Row, adresse.Column))
+                            throw new VisualArrayException("Imposible de sélectionner une cellule qui n'est pas visible et active");
+
+                        if (cell.Selected) return; // cette cellule est déjà sélectionnée, donc rien à faire.
+
+                        cell.Selected = true; // on va sélectionner la cellule
+                        UpdateCellAndSprites(va_selectedIndex);
+
+                        if (va_selectedIndex > oldSelectedIndex && oldSelectedIndex != -1)
+                            va_selectedIndex = oldSelectedIndex; // conserve l'ancien SelectedIndex
+                        else
+                        {
+                            SelectedIndexChanged?.Invoke(this, new EventArgs());
+                        }
+
+                        SelectionChanged?.Invoke(this, new EventArgs());
                     }
 
-                    SelectionChanged?.Invoke(this, new EventArgs());
+                    break;
                 }
             }
             #endregion
@@ -1368,10 +1378,13 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
         get => va_rowCount;
         set
         {
-            if (value < NB_RANGÉES_MINIMUM)
-                throw new VisualArrayException("Le nombre de rangées doit être supérieur ou égale à 1");
-            if (value > NB_RANGÉES_MAXIMUM)
-                throw new VisualArrayException("Le nombre de rangées ne doit pas dépasser " + NB_RANGÉES_MAXIMUM);
+            switch (value)
+            {
+                case < NB_RANGÉES_MINIMUM:
+                    throw new VisualArrayException("Le nombre de rangées doit être supérieur ou égale à 1");
+                case > NB_RANGÉES_MAXIMUM:
+                    throw new VisualArrayException("Le nombre de rangées ne doit pas dépasser " + NB_RANGÉES_MAXIMUM);
+            }
 
             if (va_rowCount == value) return;
 
@@ -1418,10 +1431,13 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
         get => va_columnCount;
         set
         {
-            if (value < NB_COLONNES_MINIMUM)
-                throw new VisualArrayException("Le nombre de colonnes doit être supérieur ou égale à 1");
-            if (value > NB_COLONNES_MAXIMUM)
-                throw new VisualArrayException("Le nombre de colonnes ne doit pas dépasser " + NB_COLONNES_MAXIMUM);
+            switch (value)
+            {
+                case < NB_COLONNES_MINIMUM:
+                    throw new VisualArrayException("Le nombre de colonnes doit être supérieur ou égale à 1");
+                case > NB_COLONNES_MAXIMUM:
+                    throw new VisualArrayException("Le nombre de colonnes ne doit pas dépasser " + NB_COLONNES_MAXIMUM);
+            }
 
             if (va_columnCount == value) return;
 
@@ -3989,27 +4005,33 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
             {
                 CellMouseDown?.Invoke(this, new CellMouseEventArgs(e.Button, e.Clicks, x % largeurCellule, y % hauteurCellule, e.Delta, index, index / va_columnCount, index % va_columnCount));
 
-                //if (va_allowDrag) Cursor = Cursors.Hand;
-                if (va_selectionMode == SelectionMode.One)
-                    SelectedIndex = index;
-                else if (va_selectionMode == SelectionMode.MultiSimple)
+                switch (va_selectionMode)
                 {
-                    // 2 cas possibles, on ajoute à la sélection ou on supprime de la sélection
-
-                    if (!cell.Selected) // Cas 1 : on va ajouter à la sélection
+                    //if (va_allowDrag) Cursor = Cursors.Hand;
+                    case SelectionMode.One:
                         SelectedIndex = index;
-                    else // Cas 2 : on supprime de la sélection
+                        break;
+                    case SelectionMode.MultiSimple:
                     {
-                        cell.Selected = false;
-                        UpdateCellAndSprites(index);
-                        if (index == va_selectedIndex) // 
-                        { // il faut rechercher une autre cellule qui sera le SelectedIndex
-                            SelectNextCell(); // aucune autre cellule à sélectionner
+                        // 2 cas possibles, on ajoute à la sélection ou on supprime de la sélection
 
-                            SelectedIndexChanged?.Invoke(this, EventArgs.Empty);
+                        if (!cell.Selected) // Cas 1 : on va ajouter à la sélection
+                            SelectedIndex = index;
+                        else // Cas 2 : on supprime de la sélection
+                        {
+                            cell.Selected = false;
+                            UpdateCellAndSprites(index);
+                            if (index == va_selectedIndex) // 
+                            { // il faut rechercher une autre cellule qui sera le SelectedIndex
+                                SelectNextCell(); // aucune autre cellule à sélectionner
+
+                                SelectedIndexChanged?.Invoke(this, EventArgs.Empty);
+                            }
+
+                            SelectionChanged?.Invoke(this, EventArgs.Empty);
                         }
 
-                        SelectionChanged?.Invoke(this, EventArgs.Empty);
+                        break;
                     }
                 }
 
@@ -4397,21 +4419,26 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
             int index = IndexFromAddress(adresse.Row, adresse.Column);
             Cell cell = va_tabCells[adresse.Row, adresse.Column];
             bool dragAccepted = true;
-            // On drag un Sprite -------------------------------------------------------------------------------------
-            if (m_dragInfos.TypeElement == enuTypeElement.Sprite && SpriteDragOver != null)
+            switch (m_dragInfos.TypeElement)
             {
-                SpriteDragOverEventArgs spriteDragOverEventArgs;
-                spriteDragOverEventArgs = new SpriteDragOverEventArgs(m_dragInfos.SourceGridName, m_dragInfos.DragSprite, m_dragInfos.SourceIndex, new Address(m_dragInfos.SourceRow, m_dragInfos.SourceColumn), index, new Address(index / va_columnCount, index % va_columnCount),coordonnee);
-                SpriteDragOver(this, spriteDragOverEventArgs);
-                dragAccepted = spriteDragOverEventArgs.Accepted;
-            }
-            // On drag une Cellule ------------------------------------------------------------------------------------
-            else if (m_dragInfos.TypeElement == enuTypeElement.Cell && CellDragOver != null)
-            {
-                CellDragOverEventArgs cellDragOverEventArgs;
-                cellDragOverEventArgs = new CellDragOverEventArgs(m_dragInfos.SourceGridName, m_dragInfos.SourceIndex, new Address(m_dragInfos.SourceRow, m_dragInfos.SourceColumn), index, new Address(index / va_columnCount, index % va_columnCount));
-                CellDragOver(this, cellDragOverEventArgs);
-                dragAccepted = cellDragOverEventArgs.Accepted;
+                // On drag un Sprite -------------------------------------------------------------------------------------
+                case enuTypeElement.Sprite when SpriteDragOver != null:
+                {
+                    SpriteDragOverEventArgs spriteDragOverEventArgs;
+                    spriteDragOverEventArgs = new SpriteDragOverEventArgs(m_dragInfos.SourceGridName, m_dragInfos.DragSprite, m_dragInfos.SourceIndex, new Address(m_dragInfos.SourceRow, m_dragInfos.SourceColumn), index, new Address(index / va_columnCount, index % va_columnCount),coordonnee);
+                    SpriteDragOver(this, spriteDragOverEventArgs);
+                    dragAccepted = spriteDragOverEventArgs.Accepted;
+                    break;
+                }
+                // On drag une Cellule ------------------------------------------------------------------------------------
+                case enuTypeElement.Cell when CellDragOver != null:
+                {
+                    CellDragOverEventArgs cellDragOverEventArgs;
+                    cellDragOverEventArgs = new CellDragOverEventArgs(m_dragInfos.SourceGridName, m_dragInfos.SourceIndex, new Address(m_dragInfos.SourceRow, m_dragInfos.SourceColumn), index, new Address(index / va_columnCount, index % va_columnCount));
+                    CellDragOver(this, cellDragOverEventArgs);
+                    dragAccepted = cellDragOverEventArgs.Accepted;
+                    break;
+                }
             }
             // On va mettre en évidence la ou les cellules touchées par le Drag ---------------------------------------
             // On va vérifier la cellule peut recevoir le Drop
@@ -4692,18 +4719,19 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
     {
         Address adresse = IndexToAddress(pIndex);
         CellVisualElement.CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].Background;
-        if (objVE is ShapeElement)
+        switch (objVE)
         {
-            ((ShapeElement)objVE).Shape = pShape;
-            UpdateCellAndSprites(pIndex);
+            case ShapeElement element:
+                element.Shape = pShape;
+                UpdateCellAndSprites(pIndex);
+                break;
+            case FillShapeElement element:
+                element.Shape = pShape;
+                UpdateCellAndSprites(pIndex);
+                break;
+            default:
+                throw new VisualArrayException("Impossible de modifier la forme de l'élément avec son style actuel.");
         }
-        else if (objVE is FillShapeElement)
-        {
-            ((FillShapeElement)objVE).Shape = pShape;
-            UpdateCellAndSprites(pIndex);
-        }
-        else
-            throw new VisualArrayException("Impossible de modifier la forme de l'élément avec son style actuel.");
     }
     /// <summary>
     /// Assigne (si possible) une nouvelle couleur de fond à l'élément
@@ -4715,18 +4743,19 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
     {
         Address adresse = AddressFromAddressMode(pRow, pColumn);
         CellVisualElement.CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].Background;
-        if (objVE is ShapeElement)
+        switch (objVE)
         {
-            ((ShapeElement)objVE).Shape = pShape;
-            UpdateCellAndSprites(IndexFromAddress(adresse.Row, adresse.Column));
+            case ShapeElement element:
+                element.Shape = pShape;
+                UpdateCellAndSprites(IndexFromAddress(adresse.Row, adresse.Column));
+                break;
+            case FillShapeElement element:
+                element.Shape = pShape;
+                UpdateCellAndSprites(IndexFromAddress(adresse.Row, adresse.Column));
+                break;
+            default:
+                throw new VisualArrayException("Impossible de modifier la forme de l'élément avec son style actuel.");
         }
-        else if (objVE is FillShapeElement)
-        {
-            ((FillShapeElement)objVE).Shape = pShape;
-            UpdateCellAndSprites(IndexFromAddress(adresse.Row, adresse.Column));
-        }
-        else
-            throw new VisualArrayException("Impossible de modifier la forme de l'élément avec son style actuel.");
     }
     //================
     /// <summary>
@@ -4763,23 +4792,23 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
     {
         Address adresse = IndexToAddress(pIndex);
         CellVisualElement.CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].Background;
-        if (objVE is ShapeElement)
+        switch (objVE)
         {
-            ((ShapeElement)objVE).Color = pColor;
-            UpdateCellAndSprites(pIndex);
+            case ShapeElement element:
+                element.Color = pColor;
+                UpdateCellAndSprites(pIndex);
+                break;
+            case FillShapeElement element:
+                element.Color = pColor;
+                UpdateCellAndSprites(pIndex);
+                break;
+            case BorderElement element:
+                element.Color = pColor;
+                UpdateCellAndSprites(pIndex);
+                break;
+            default:
+                throw new VisualArrayException("Impossible de modifier la couleur de l'élément avec son style actuel.");
         }
-        else if (objVE is FillShapeElement)
-        {
-            ((FillShapeElement)objVE).Color = pColor;
-            UpdateCellAndSprites(pIndex);
-        }
-        else if (objVE is BorderElement)
-        {
-            ((BorderElement)objVE).Color = pColor;
-            UpdateCellAndSprites(pIndex);
-        }
-        else
-            throw new VisualArrayException("Impossible de modifier la couleur de l'élément avec son style actuel.");
     }
     /// <summary>
     /// Assigne (si possible) une nouvelle couleur de fond à l'élément
@@ -4791,24 +4820,26 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
     {
         Address adresse = AddressFromAddressMode(pRow, pColumn);
         CellVisualElement.CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].Background;
-        if (objVE is ShapeElement)
+        switch (objVE)
         {
-            ((ShapeElement)objVE).Color = pColor;
-            UpdateCellAndSprites(IndexFromAddress(adresse.Row, adresse.Column));
+            case ShapeElement element:
+                element.Color = pColor;
+                UpdateCellAndSprites(IndexFromAddress(adresse.Row, adresse.Column));
+                break;
+            case FillShapeElement element:
+                element.Color = pColor;
+                UpdateCellAndSprites(IndexFromAddress(adresse.Row, adresse.Column));
+                break;
+            case BorderElement element:
+            {
+                element.Color = pColor;
+                int index = IndexFromAddress(adresse.Row, adresse.Column);
+                UpdateCellAndSprites(IndexFromAddress(adresse.Row, adresse.Column));
+                break;
+            }
+            default:
+                throw new VisualArrayException("Impossible de modifier la couleur de l'élément avec son style actuel.");
         }
-        else if (objVE is FillShapeElement)
-        {
-            ((FillShapeElement)objVE).Color = pColor;
-            UpdateCellAndSprites(IndexFromAddress(adresse.Row, adresse.Column));
-        }
-        else if (objVE is BorderElement)
-        {
-            ((BorderElement)objVE).Color = pColor;
-            int index = IndexFromAddress(adresse.Row, adresse.Column);
-            UpdateCellAndSprites(IndexFromAddress(adresse.Row, adresse.Column));
-        }
-        else
-            throw new VisualArrayException("Impossible de modifier la couleur de l'élément avec son style actuel.");
     }
 
     /// <summary>
@@ -5021,11 +5052,15 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
     {
         Address adresse = IndexToAddress(pIndex);
         CellVisualElement.CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].Background;
-        if (objVE is ShapeElement)
-            return ((ShapeElement)objVE).Shape;
-        if (objVE is FillShapeElement)
-            return ((FillShapeElement)objVE).Shape;
-        throw new VisualArrayException("Impossible d'obtenir la forme de l'élément avec la valeur actuelle du CellsBkgStyle.");
+        switch (objVE)
+        {
+            case ShapeElement element:
+                return element.Shape;
+            case FillShapeElement element:
+                return element.Shape;
+            default:
+                throw new VisualArrayException("Impossible d'obtenir la forme de l'élément avec la valeur actuelle du CellsBkgStyle.");
+        }
     }
     /// <summary>
     /// Obtient (si possible) la forme de l'élément
@@ -5037,11 +5072,15 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
     {
         Address adresse = AddressFromAddressMode(pRow, pColumn);
         CellVisualElement.CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].Background;
-        if (objVE is ShapeElement)
-            return ((ShapeElement)objVE).Shape;
-        if (objVE is FillShapeElement)
-            return ((FillShapeElement)objVE).Shape;
-        throw new VisualArrayException("Impossible d'obtenir la forme de l'élément avec la valeur actuelle du CellsBkgStyle.");
+        switch (objVE)
+        {
+            case ShapeElement element:
+                return element.Shape;
+            case FillShapeElement element:
+                return element.Shape;
+            default:
+                throw new VisualArrayException("Impossible d'obtenir la forme de l'élément avec la valeur actuelle du CellsBkgStyle.");
+        }
     }
     /// <summary>
     /// Obtient (si possible) la couleur de fond de l'élément
@@ -5052,11 +5091,15 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
     {
         Address adresse = IndexToAddress(pIndex);
         CellVisualElement.CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].Background;
-        if (objVE is ShapeElement)
-            return ((ShapeElement)objVE).Color;
-        if (objVE is FillShapeElement)
-            return ((FillShapeElement)objVE).Color;
-        throw new VisualArrayException("Impossible d'obtenir la couleur de l'élément avec la valeur actuelle du CellsBkgStyle.");
+        switch (objVE)
+        {
+            case ShapeElement element:
+                return element.Color;
+            case FillShapeElement element:
+                return element.Color;
+            default:
+                throw new VisualArrayException("Impossible d'obtenir la couleur de l'élément avec la valeur actuelle du CellsBkgStyle.");
+        }
     }
     /// <summary>
     /// Obtient (si possible) la couleur de fond de l'élément
@@ -5068,11 +5111,15 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
     {
         Address adresse = AddressFromAddressMode(pRow, pColumn);
         CellVisualElement.CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].Background;
-        if (objVE is ShapeElement)
-            return ((ShapeElement)objVE).Color;
-        if (objVE is FillShapeElement)
-            return ((FillShapeElement)objVE).Color;
-        throw new VisualArrayException("Impossible d'obtenir la couleur de l'élément avec la valeur actuelle du CellsBkgStyle.");
+        switch (objVE)
+        {
+            case ShapeElement element:
+                return element.Color;
+            case FillShapeElement element:
+                return element.Color;
+            default:
+                throw new VisualArrayException("Impossible d'obtenir la couleur de l'élément avec la valeur actuelle du CellsBkgStyle.");
+        }
     }
 
     /// <summary>

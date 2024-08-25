@@ -182,10 +182,15 @@ public partial class VisualIntArray : VisualGraphArray<int>
             int delta = (va_maximum - va_minimum) / 10;
             if (delta < 1) delta = 1;
             int valeur = this[SelectedIndex];
-            if (e.Delta > 0)
-                valeur += delta;
-            else if (e.Delta < 0)
-                valeur -= delta;
+            switch (e.Delta)
+            {
+                case > 0:
+                    valeur += delta;
+                    break;
+                case < 0:
+                    valeur -= delta;
+                    break;
+            }
             if (valeur < va_minimum) valeur = va_minimum;
             if (valeur > va_maximum) valeur = va_maximum;
             this[SelectedIndex] = valeur;

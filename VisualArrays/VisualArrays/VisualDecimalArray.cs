@@ -164,10 +164,15 @@ public partial class VisualDecimalArray : VisualGraphArray<decimal>
             if (delta < minDelta)
                 delta = minDelta;
             decimal valeur = this[SelectedIndex];
-            if (e.Delta > 0)
-                valeur += delta;
-            else if (e.Delta < 0)
-                valeur -= delta;
+            switch (e.Delta)
+            {
+                case > 0:
+                    valeur += delta;
+                    break;
+                case < 0:
+                    valeur -= delta;
+                    break;
+            }
             if (valeur < va_minimum) valeur = va_minimum;
             if (valeur > va_maximum) valeur = va_maximum;
             this[SelectedIndex] = valeur;
@@ -272,12 +277,18 @@ public partial class VisualDecimalArray : VisualGraphArray<decimal>
             #region Code pour dessiner la valeur de la cellule
 
             string laChaine;
-            if (va_valueFormat == enuValueFormat.Standard)
-                laChaine = valeurAAfficher.ToString("F" + va_decimalPlaces);
-            else if (va_valueFormat == enuValueFormat.Currency)
-                laChaine = valeurAAfficher.ToString("C" + va_decimalPlaces);
-            else
-                laChaine = (valeurAAfficher * 100).ToString("F" + va_decimalPlaces) + "%";
+            switch (va_valueFormat)
+            {
+                case enuValueFormat.Standard:
+                    laChaine = valeurAAfficher.ToString("F" + va_decimalPlaces);
+                    break;
+                case enuValueFormat.Currency:
+                    laChaine = valeurAAfficher.ToString("C" + va_decimalPlaces);
+                    break;
+                default:
+                    laChaine = (valeurAAfficher * 100).ToString("F" + va_decimalPlaces) + "%";
+                    break;
+            }
 
             Rectangle displayRectangle = GetCellContentBounds(pRow, pColumn, EnabledAppearance.Padding);
             if (!DesignMode || va_addressView == enuAddressView.None)

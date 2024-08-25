@@ -143,20 +143,20 @@ public class VGDisabledAppearance<Type> : DisabledAppearance
         get => m_imageBrightness;
         set
         {
-            if (value < 0)
+            switch (value)
             {
-                throw new ArgumentOutOfRangeException(
-                    "ImageBrightness",
-                    value,
-                    "doit être >= 0");
+                case < 0:
+                    throw new ArgumentOutOfRangeException(
+                        "ImageBrightness",
+                        value,
+                        "doit être >= 0");
+                case > 1:
+                    throw new ArgumentOutOfRangeException(
+                        "ImageBrightness",
+                        value,
+                        "doit être <= 1");
             }
-            if (value > 1)
-            {
-                throw new ArgumentOutOfRangeException(
-                    "ImageBrightness",
-                    value,
-                    "doit être <= 1");
-            }
+
             if (m_imageBrightness != value)
             {
                 m_imageBrightness = value;

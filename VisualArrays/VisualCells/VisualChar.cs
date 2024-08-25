@@ -211,10 +211,15 @@ public partial class VisualChar : VisualValue<char>
         {
             int delta = 1;
             int valeur = m_value;
-            if (e.Delta > 0)
-                valeur += delta;
-            else if (e.Delta < 0)
-                valeur -= delta;
+            switch (e.Delta)
+            {
+                case > 0:
+                    valeur += delta;
+                    break;
+                case < 0:
+                    valeur -= delta;
+                    break;
+            }
             if (valeur < m_minimum) valeur = m_minimum;
             if (valeur > m_maximum) valeur = m_maximum;
             Value = (char)valeur;
@@ -257,17 +262,31 @@ public partial class VisualChar : VisualValue<char>
             {
                 if (e.Y < Height / 2)
                 {
-                    if (e.Button == MouseButtons.Left)
-                        if (m_value < m_maximum) Value++;
-                    if (e.Button == MouseButtons.Right)
-                        Value = m_maximum;
+                    switch (e.Button)
+                    {
+                        case MouseButtons.Left:
+                        {
+                            if (m_value < m_maximum) Value++;
+                            break;
+                        }
+                        case MouseButtons.Right:
+                            Value = m_maximum;
+                            break;
+                    }
                 }
                 else
                 {
-                    if (e.Button == MouseButtons.Left)
-                        if (m_value > m_minimum) Value--;
-                    if (e.Button == MouseButtons.Right)
-                        Value = m_minimum;
+                    switch (e.Button)
+                    {
+                        case MouseButtons.Left:
+                        {
+                            if (m_value > m_minimum) Value--;
+                            break;
+                        }
+                        case MouseButtons.Right:
+                            Value = m_minimum;
+                            break;
+                    }
                 }
             }
             else

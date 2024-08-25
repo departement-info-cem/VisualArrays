@@ -306,10 +306,15 @@ public partial class VisualInt : VisualGraph<int>
             int delta = (m_maximum - m_minimum) / 10;
             if (delta < 1) delta = 1;
             int valeur = m_value;
-            if (e.Delta > 0)
-                valeur += delta;
-            else if (e.Delta < 0)
-                valeur -= delta;
+            switch (e.Delta)
+            {
+                case > 0:
+                    valeur += delta;
+                    break;
+                case < 0:
+                    valeur -= delta;
+                    break;
+            }
             if (valeur < m_minimum) valeur = m_minimum;
             if (valeur > m_maximum) valeur = m_maximum;
             Value = valeur;

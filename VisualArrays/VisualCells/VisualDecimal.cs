@@ -207,12 +207,18 @@ public partial class VisualDecimal : VisualGraph<decimal>
         else
         {// affichage normal de la valeur
             string laChaine;
-            if (m_valueFormat == enuValueFormat.Standard)
-                laChaine = m_value.ToString("F" + m_decimalPlaces);
-            else if (m_valueFormat == enuValueFormat.Currency)
-                laChaine = m_value.ToString("C" + m_decimalPlaces);
-            else
-                laChaine = (m_value * 100).ToString("F" + m_decimalPlaces) + " %";
+            switch (m_valueFormat)
+            {
+                case enuValueFormat.Standard:
+                    laChaine = m_value.ToString("F" + m_decimalPlaces);
+                    break;
+                case enuValueFormat.Currency:
+                    laChaine = m_value.ToString("C" + m_decimalPlaces);
+                    break;
+                default:
+                    laChaine = (m_value * 100).ToString("F" + m_decimalPlaces) + " %";
+                    break;
+            }
 
             pGraphics.SetClip(cellBounds);
             switch (m_view)
@@ -311,10 +317,15 @@ public partial class VisualDecimal : VisualGraph<decimal>
             decimal minDelta = 1 / (decimal)Math.Pow(10, m_decimalPlaces);
             if (delta < minDelta) delta = minDelta;
             decimal valeur = m_value;
-            if (e.Delta > 0)
-                valeur += delta;
-            else if (e.Delta < 0)
-                valeur -= delta;
+            switch (e.Delta)
+            {
+                case > 0:
+                    valeur += delta;
+                    break;
+                case < 0:
+                    valeur -= delta;
+                    break;
+            }
             if (valeur < m_minimum) valeur = m_minimum;
             if (valeur > m_maximum) valeur = m_maximum;
             Value = valeur;

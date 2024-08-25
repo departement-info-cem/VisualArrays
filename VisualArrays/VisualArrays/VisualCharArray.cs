@@ -120,10 +120,15 @@ public partial class VisualCharArray : VisualValueArray<char>
         if (SelectedIndex != -1 && !ReadOnly && va_selectionMode == SelectionMode.One && !va_tabCells[SelectedAddress.Row, SelectedAddress.Column].ReadOnly)
         {
             char valeur = this[SelectedIndex];
-            if (e.Delta > 0)
-                valeur++;
-            else if (e.Delta < 0)
-                valeur--;
+            switch (e.Delta)
+            {
+                case > 0:
+                    valeur++;
+                    break;
+                case < 0:
+                    valeur--;
+                    break;
+            }
             if (valeur < 0) valeur = (char)0;
             if (valeur > 255) valeur = (char)255;
             this[SelectedIndex] = valeur;
