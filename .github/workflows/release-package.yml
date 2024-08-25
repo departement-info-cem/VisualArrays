@@ -20,7 +20,7 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: ${{ matrix.dotnet-version }}
-          source-url: https://nuget.pkg.github.com/PierreOlivierBrillant/index.json
+          source-url: https://nuget.pkg.github.com/pobrillant/index.json
         env:
           NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
       - name: Display dotnet version
