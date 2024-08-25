@@ -518,126 +518,137 @@ public static class VisualArraysTools
     internal static void DrawBar(Graphics pGraphics, Rectangle pBounds, GraphAppearance pGraphApp, decimal pMinimum, decimal pMaximum, decimal pValue,int pDecimalPlaces)
     {
         decimal plageDeValeurs = pMaximum - pMinimum;
-        Orientation orientation = Orientation.Horizontal;
         Rectangle barBounds = pBounds;
-        if (plageDeValeurs > 0)
+        
+        if (plageDeValeurs <= 0)
         {
-            decimal valeurOrigine = pValue - pMinimum;
+            return;
+        }
 
-            #region Selon : BarMargin
-            // on va appliquer les marges sur la taille du graphique
-            barBounds.X += pGraphApp.BarMargin.Left;
-            barBounds.Width -= pGraphApp.BarMargin.Horizontal;
-            barBounds.Y += pGraphApp.BarMargin.Top;
-            barBounds.Height -= pGraphApp.BarMargin.Vertical;
-            #endregion
+        decimal valeurOrigine = pValue - pMinimum;
 
-            #region Orientation selon la taille
+        #region Selon : BarMargin
+        // on va appliquer les marges sur la taille du graphique
+        barBounds.X += pGraphApp.BarMargin.Left;
+        barBounds.Width -= pGraphApp.BarMargin.Horizontal;
+        barBounds.Y += pGraphApp.BarMargin.Top;
+        barBounds.Height -= pGraphApp.BarMargin.Vertical;
+        #endregion
 
-            if (barBounds.Width > barBounds.Height)
-            {
-                orientation = Orientation.Horizontal;
-            }
-            else
-            {
-                orientation = Orientation.Vertical;
-            }
+        #region Orientation selon la taille
 
-            #endregion
+        Orientation orientation = Orientation.Horizontal;
+        if (barBounds.Width > barBounds.Height)
+        {
+            orientation = Orientation.Horizontal;
+        }
+        else
+        {
+            orientation = Orientation.Vertical;
+        }
 
-            #region Selon : BarAlign
-            switch (pGraphApp.BarAlign)
-            {
-                case enuBarAlign.Normal:
-                    if (orientation == Orientation.Horizontal)
-                    {
-                        barBounds.Width = (int)(barBounds.Width * valeurOrigine / plageDeValeurs);
-                    }
-                    else
-                    {
-                        orientation = Orientation.Vertical;
-                        int hauteurBarre = (int)(barBounds.Height * valeurOrigine / plageDeValeurs);
-                        barBounds.Y = barBounds.Y + barBounds.Height - hauteurBarre;
-                    }
-                    break;
-                case enuBarAlign.Reverse:
-                    if (orientation == Orientation.Horizontal)
-                    {
-                        int largeur = (int)(barBounds.Width * valeurOrigine / plageDeValeurs);
-                        barBounds.X += barBounds.Width - largeur;
-                        barBounds.Width = largeur;
-                    }
-                    else
-                    {
-                        barBounds.Height = (int)(barBounds.Height * valeurOrigine / plageDeValeurs);
-                    }
+        #endregion
 
-                    break;
-                case enuBarAlign.Middle:
-                    if (orientation == Orientation.Horizontal)
-                    {
-                        int largeur = (int)(barBounds.Width * valeurOrigine / plageDeValeurs);
-                        barBounds.X += (barBounds.Width - largeur) >> 1;
-                        barBounds.Width = largeur;
-                    }
-                    else
-                    {
-                        int hauteurBarre = (int)(barBounds.Height * valeurOrigine / plageDeValeurs);
-                        barBounds.Y += (barBounds.Height - hauteurBarre) >> 1;
-                        barBounds.Height = hauteurBarre;
-                    }
-                    break;
-            }
-            #endregion
-
-            #region Selon : BarStyle
-            switch (pGraphApp.BarStyle)
-            {
-                case enuGraphBarStyle.Image:
-                    if (pGraphApp.BarImage != null)
-                    {
-                        pGraphics.DrawImage(pGraphApp.BarImage, barBounds);
-                    }
-                    else
-                    {
-                        pGraphics.FillRectangle(new SolidBrush(pGraphApp.BarColor), barBounds);
-                    }
-
-                    break;
-                case enuGraphBarStyle.FillShape:
-                    pGraphics.FillRectangle(new SolidBrush(pGraphApp.BarColor), barBounds);
-                    break;
-                default:
-                    pGraphics.FillRectangle(new SolidBrush(pGraphApp.BarColor), barBounds);
-                    break;
-            }
-            #endregion
-
-            #region Affichage de la valeur de la barre
-            string texte = pValue.ToString("F" + pDecimalPlaces);
-            if (pGraphApp.BarValueStyle != enuGraphValueStyle.None) // affichage de la valeur de la barre du graphique
-            {
-                if (pGraphApp.BarValueStyle == enuGraphValueStyle.Pourcent)
-                {
-                    texte += "%";
-                }
-
-                SizeF taille = pGraphics.MeasureString(texte, pGraphApp.BarValueFont);
-
-                PointF pt;
+        #region Selon : BarAlign
+        switch (pGraphApp.BarAlign)
+        {
+            case enuBarAlign.Normal:
                 if (orientation == Orientation.Horizontal)
                 {
-                    pt = new PointF(barBounds.Right, barBounds.Top + (int)((barBounds.Height - taille.Height) / 2));
+                    barBounds.Width = (int)(barBounds.Width * valeurOrigine / plageDeValeurs);
                 }
-                else // orientation Verticale
+                else
                 {
-                    pt = new PointF(barBounds.Left + (int)((barBounds.Width - taille.Width) / 2), barBounds.Top - taille.Height);
+                    orientation = Orientation.Vertical;
+                    int hauteurBarre = (int)(barBounds.Height * valeurOrigine / plageDeValeurs);
+                    barBounds.Y = barBounds.Y + barBounds.Height - hauteurBarre;
+                }
+                break;
+            case enuBarAlign.Reverse:
+                if (orientation == Orientation.Horizontal)
+                {
+                    int largeur = (int)(barBounds.Width * valeurOrigine / plageDeValeurs);
+                    barBounds.X += barBounds.Width - largeur;
+                    barBounds.Width = largeur;
+                }
+                else
+                {
+                    barBounds.Height = (int)(barBounds.Height * valeurOrigine / plageDeValeurs);
                 }
 
-                pGraphics.DrawString(texte, pGraphApp.BarValueFont, new SolidBrush(pGraphApp.BarValueColor), pt);
-            }
-            #endregion
+                break;
+            case enuBarAlign.Middle:
+                if (orientation == Orientation.Horizontal)
+                {
+                    int largeur = (int)(barBounds.Width * valeurOrigine / plageDeValeurs);
+                    barBounds.X += (barBounds.Width - largeur) >> 1;
+                    barBounds.Width = largeur;
+                }
+                else
+                {
+                    int hauteurBarre = (int)(barBounds.Height * valeurOrigine / plageDeValeurs);
+                    barBounds.Y += (barBounds.Height - hauteurBarre) >> 1;
+                    barBounds.Height = hauteurBarre;
+                }
+                break;
         }
+        #endregion
+
+        #region Selon : BarStyle
+        switch (pGraphApp.BarStyle)
+        {
+            case enuGraphBarStyle.Image:
+                if (pGraphApp.BarImage != null)
+                {
+                    pGraphics.DrawImage(pGraphApp.BarImage, barBounds);
+                }
+                else
+                {
+                    pGraphics.FillRectangle(new SolidBrush(pGraphApp.BarColor), barBounds);
+                }
+
+                break;
+            case enuGraphBarStyle.FillShape:
+                pGraphics.FillRectangle(new SolidBrush(pGraphApp.BarColor), barBounds);
+                break;
+            default:
+                pGraphics.FillRectangle(new SolidBrush(pGraphApp.BarColor), barBounds);
+                break;
+        }
+        #endregion
+
+        #region Affichage de la valeur de la barre
+        
+        string texte = pValue.ToString("F" + pDecimalPlaces);
+        
+        switch (pGraphApp.BarValueStyle)
+        {
+            case enuGraphValueStyle.None:
+                return;
+            // affichage de la valeur de la barre du graphique
+            case enuGraphValueStyle.Pourcent:
+                texte += "%";
+                break;
+            case enuGraphValueStyle.Normal:
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+
+        SizeF taille = pGraphics.MeasureString(texte, pGraphApp.BarValueFont);
+
+        PointF pt;
+        if (orientation == Orientation.Horizontal)
+        {
+            pt = new PointF(barBounds.Right, barBounds.Top + (int)((barBounds.Height - taille.Height) / 2));
+        }
+        else // orientation Verticale
+        {
+            pt = new PointF(barBounds.Left + (int)((barBounds.Width - taille.Width) / 2), barBounds.Top - taille.Height);
+        }
+
+        pGraphics.DrawString(texte, pGraphApp.BarValueFont, new SolidBrush(pGraphApp.BarValueColor), pt);
+        #endregion
     }
     //================================================================================================================
     internal static decimal ValueFromClick(Point pLocation, Rectangle pBounds, GraphAppearance pGraphApp, decimal pMinimum, decimal pMaximum)
@@ -645,35 +656,39 @@ public static class VisualArraysTools
         decimal plageDeValeurs = pMaximum - pMinimum;
         Rectangle barBounds = pBounds;
         decimal clickValue = pMinimum;
-        if (plageDeValeurs > 0)
+        
+        if (plageDeValeurs <= 0)
         {
-            // on va appliquer les marges sur la taille du graphique
-            barBounds.X += pGraphApp.BarMargin.Left;
-            barBounds.Width -= pGraphApp.BarMargin.Horizontal;
-            barBounds.Y += pGraphApp.BarMargin.Top;
-            barBounds.Height -= pGraphApp.BarMargin.Vertical;
+            return clickValue;
+        }
 
-            if (barBounds.Width > barBounds.Height)
-            {
-                clickValue = pMinimum + plageDeValeurs * (pLocation.X - barBounds.X) / barBounds.Width;
-            }
-            else
-            {
-                clickValue = pMaximum - plageDeValeurs * (pLocation.Y - barBounds.Y) / barBounds.Height;
-            }
+        // on va appliquer les marges sur la taille du graphique
+        barBounds.X += pGraphApp.BarMargin.Left;
+        barBounds.Width -= pGraphApp.BarMargin.Horizontal;
+        barBounds.Y += pGraphApp.BarMargin.Top;
+        barBounds.Height -= pGraphApp.BarMargin.Vertical;
 
-            if (clickValue < pMinimum)
-            {
-                clickValue = pMinimum;
-            }
+        if (barBounds.Width > barBounds.Height)
+        {
+            clickValue = pMinimum + plageDeValeurs * (pLocation.X - barBounds.X) / barBounds.Width;
+        }
+        else
+        {
+            clickValue = pMaximum - plageDeValeurs * (pLocation.Y - barBounds.Y) / barBounds.Height;
+        }
 
-            if (clickValue > pMaximum)
-            {
-                clickValue = pMaximum;
-            }
+        if (clickValue < pMinimum)
+        {
+            clickValue = pMinimum;
+        }
+
+        if (clickValue > pMaximum)
+        {
+            clickValue = pMaximum;
         }
         return clickValue;
     }
+    
     //================================================================================================================
     /// <summary>
     /// Dessine une barre pour un graphique
@@ -687,133 +702,143 @@ public static class VisualArraysTools
     internal static void DrawBar(Graphics pGraphics, Rectangle pBounds, GraphAppearance pGraphApp, int pMinimum, int pMaximum, int pValue)
     {
         int plageDeValeurs = pMaximum - pMinimum;
-        Orientation orientation = Orientation.Horizontal;
         Rectangle barBounds = pBounds;
-        if (plageDeValeurs > 0)
+        
+        if (plageDeValeurs <= 0)
         {
-            decimal valeurOrigine = pValue - pMinimum;
+            return;
+        }
 
-            #region Selon : BarMargin
-            barBounds.X += pGraphApp.BarMargin.Left;
-            barBounds.Width -= pGraphApp.BarMargin.Horizontal;
-            barBounds.Y += pGraphApp.BarMargin.Top;
-            barBounds.Height -= pGraphApp.BarMargin.Vertical;
-            #endregion
+        decimal valeurOrigine = pValue - pMinimum;
 
-            #region Orientation selon la taille
+        #region Selon : BarMargin
+        barBounds.X += pGraphApp.BarMargin.Left;
+        barBounds.Width -= pGraphApp.BarMargin.Horizontal;
+        barBounds.Y += pGraphApp.BarMargin.Top;
+        barBounds.Height -= pGraphApp.BarMargin.Vertical;
+        #endregion
 
-            if (barBounds.Width > barBounds.Height)
-            {
-                orientation = Orientation.Horizontal;
-            }
-            else
-            {
-                orientation = Orientation.Vertical;
-            }
+        #region Orientation selon la taille
 
-            #endregion
+        Orientation orientation = Orientation.Horizontal;
+        if (barBounds.Width > barBounds.Height)
+        {
+            orientation = Orientation.Horizontal;
+        }
+        else
+        {
+            orientation = Orientation.Vertical;
+        }
 
-            #region Selon : BarAlign
-            switch (pGraphApp.BarAlign)
-            {
-                case enuBarAlign.Normal:
-                    if (orientation == Orientation.Horizontal)
-                    {
-                        barBounds.Width = (int)(barBounds.Width * valeurOrigine / plageDeValeurs);
-                    }
-                    else
-                    {
-                        orientation = Orientation.Vertical;
-                        int hauteurBarre = (int)(barBounds.Height * valeurOrigine / plageDeValeurs);
-                        barBounds.Y = barBounds.Y + barBounds.Height - hauteurBarre;
-                    }
-                    break;
-                case enuBarAlign.Reverse:
-                    if (orientation == Orientation.Horizontal)
-                    {
-                        int largeur = (int)(barBounds.Width * valeurOrigine / plageDeValeurs);
-                        barBounds.X += barBounds.Width - largeur;
-                        barBounds.Width = largeur;
-                    }
-                    else
-                    {
-                        barBounds.Height = (int)(barBounds.Height * valeurOrigine / plageDeValeurs);
-                    }
+        #endregion
 
-                    break;
-                case enuBarAlign.Middle:
-                    if (orientation == Orientation.Horizontal)
-                    {
-                        int largeur = (int)(barBounds.Width * valeurOrigine / plageDeValeurs);
-                        barBounds.X += (barBounds.Width - largeur) >> 1;
-                        barBounds.Width = largeur;
-                    }
-                    else
-                    {
-                        int hauteurBarre = (int)(barBounds.Height * valeurOrigine / plageDeValeurs);
-                        barBounds.Y += (barBounds.Height - hauteurBarre) >> 1;
-                        barBounds.Height = hauteurBarre;
-                    }
-                    break;
-            }
-            #endregion
-
-            #region Selon : BarStyle
-            switch (pGraphApp.BarStyle)
-            {
-                case enuGraphBarStyle.Image:
-                    if (pGraphApp.BarImage != null)
-                    {
-                        pGraphics.DrawImage(pGraphApp.BarImage, barBounds);
-                    }
-                    else
-                    {
-                        pGraphics.FillRectangle(new SolidBrush(pGraphApp.BarColor), barBounds);
-                    }
-
-                    break;
-                case enuGraphBarStyle.FillShape:
-                    pGraphics.FillRectangle(new SolidBrush(pGraphApp.BarColor), barBounds);
-                    break;
-                default:
-                    pGraphics.FillRectangle(new SolidBrush(pGraphApp.BarColor), barBounds);
-                    break;
-            }
-            #endregion
-
-            #region Affichage de la valeur de la barre
-            string texte = pValue.ToString();
-            if (pGraphApp.BarValueStyle != enuGraphValueStyle.None) // affichage de la valeur de la barre du graphique
-            {
-                if (pGraphApp.BarValueStyle == enuGraphValueStyle.Pourcent)
-                {
-                    texte += "%";
-                }
-
-                SizeF taille = pGraphics.MeasureString(texte, pGraphApp.BarValueFont);
-
-                PointF pt;
+        #region Selon : BarAlign
+        switch (pGraphApp.BarAlign)
+        {
+            case enuBarAlign.Normal:
                 if (orientation == Orientation.Horizontal)
                 {
-                    pt = new PointF(barBounds.Right, barBounds.Top + (int)((barBounds.Height - taille.Height) / 2));
+                    barBounds.Width = (int)(barBounds.Width * valeurOrigine / plageDeValeurs);
                 }
-                else // orientation Verticale
+                else
                 {
-                    pt = new PointF(barBounds.Left + (int)((barBounds.Width - taille.Width) / 2), barBounds.Top - taille.Height);
+                    orientation = Orientation.Vertical;
+                    int hauteurBarre = (int)(barBounds.Height * valeurOrigine / plageDeValeurs);
+                    barBounds.Y = barBounds.Y + barBounds.Height - hauteurBarre;
+                }
+                break;
+            case enuBarAlign.Reverse:
+                if (orientation == Orientation.Horizontal)
+                {
+                    int largeur = (int)(barBounds.Width * valeurOrigine / plageDeValeurs);
+                    barBounds.X += barBounds.Width - largeur;
+                    barBounds.Width = largeur;
+                }
+                else
+                {
+                    barBounds.Height = (int)(barBounds.Height * valeurOrigine / plageDeValeurs);
                 }
 
-                pGraphics.DrawString(texte, pGraphApp.BarValueFont, new SolidBrush(pGraphApp.BarValueColor), pt);
-            }
-            #endregion
+                break;
+            case enuBarAlign.Middle:
+                if (orientation == Orientation.Horizontal)
+                {
+                    int largeur = (int)(barBounds.Width * valeurOrigine / plageDeValeurs);
+                    barBounds.X += (barBounds.Width - largeur) >> 1;
+                    barBounds.Width = largeur;
+                }
+                else
+                {
+                    int hauteurBarre = (int)(barBounds.Height * valeurOrigine / plageDeValeurs);
+                    barBounds.Y += (barBounds.Height - hauteurBarre) >> 1;
+                    barBounds.Height = hauteurBarre;
+                }
+                break;
         }
+        #endregion
+
+        #region Selon : BarStyle
+        switch (pGraphApp.BarStyle)
+        {
+            case enuGraphBarStyle.Image:
+                if (pGraphApp.BarImage != null)
+                {
+                    pGraphics.DrawImage(pGraphApp.BarImage, barBounds);
+                }
+                else
+                {
+                    pGraphics.FillRectangle(new SolidBrush(pGraphApp.BarColor), barBounds);
+                }
+
+                break;
+            case enuGraphBarStyle.FillShape:
+                pGraphics.FillRectangle(new SolidBrush(pGraphApp.BarColor), barBounds);
+                break;
+            default:
+                pGraphics.FillRectangle(new SolidBrush(pGraphApp.BarColor), barBounds);
+                break;
+        }
+        #endregion
+
+        #region Affichage de la valeur de la barre
+        string texte = pValue.ToString();
+        
+        switch (pGraphApp.BarValueStyle)
+        {
+            case enuGraphValueStyle.None:
+                return; // affichage de la valeur de la barre du graphique
+            case enuGraphValueStyle.Pourcent:
+                texte += "%";
+                break;
+            case enuGraphValueStyle.Normal:
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+
+        SizeF taille = pGraphics.MeasureString(texte, pGraphApp.BarValueFont);
+
+        PointF pt;
+        if (orientation == Orientation.Horizontal)
+        {
+            pt = new PointF(barBounds.Right, barBounds.Top + (int)((barBounds.Height - taille.Height) / 2));
+        }
+        else // orientation Verticale
+        {
+            pt = new PointF(barBounds.Left + (int)((barBounds.Width - taille.Width) / 2), barBounds.Top - taille.Height);
+        }
+
+        pGraphics.DrawString(texte, pGraphApp.BarValueFont, new SolidBrush(pGraphApp.BarValueColor), pt);
+        #endregion
     }
     #endregion
 
     #region RandomInt, RandomChar, RandomBool
+    
     /// <summary>
     /// Utilisé pour les méthodes des grilles produisants des nombres aléatoires.
     /// </summary>
-    private static readonly Random va_objRandom = new((int)DateTime.Now.Ticks);
+    private static readonly Random VaObjRandom = new((int)DateTime.Now.Ticks);
     //------------------------------------------------------------------------------------------
     /// <summary>
     /// Génère un nombre aléatoire décimale.
@@ -825,9 +850,10 @@ public static class VisualArraysTools
     {
         double min = (double)pMin;
         double max = (double)pMax;
-        double nombreAleatoire = (max - min) * va_objRandom.NextDouble() + min;
+        double nombreAleatoire = (max - min) * VaObjRandom.NextDouble() + min;
         return (decimal)nombreAleatoire;
     }
+    
     //------------------------------------------------------------------------------------------
     /// <summary>
     /// Génère un nombre aléatoire entier.
@@ -837,8 +863,9 @@ public static class VisualArraysTools
     /// <returns>Un nombre aléatoire entre pMin et pMax - 1.</returns>
     public static int RandomInt(int pMin, int pMax)
     {
-        return va_objRandom.Next(pMin, pMax);
+        return VaObjRandom.Next(pMin, pMax);
     }
+    
     //------------------------------------------------------------------------------------------
     /// <summary>
     /// Génère un caractère aléatoire compris entre pMinChar et pMaxChar.
@@ -848,8 +875,9 @@ public static class VisualArraysTools
     /// <returns>Un caractère aléatoire entre pMin et pMax inclusivement</returns>
     public static char RandomChar(char pMin, char pMax)
     {
-        return (char)va_objRandom.Next(pMin, pMax + 1);
+        return (char)VaObjRandom.Next(pMin, pMax + 1);
     }
+    
     //------------------------------------------------------------------------------------------
     /// <summary>
     /// Génère une valeur booléenne aléatoire.
@@ -857,7 +885,7 @@ public static class VisualArraysTools
     /// <returns>Une valeur booléenne aléatoire</returns>
     public static bool RandomBool()
     {
-        return va_objRandom.NextDouble() < 0.5;
+        return VaObjRandom.NextDouble() < 0.5;
     }
     #endregion
 }
