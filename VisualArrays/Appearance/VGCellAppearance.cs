@@ -158,7 +158,9 @@ public class VGCellAppearance<Type> : IBackgroundAppearance
             {
                 m_shape = value;
                 if (m_style is enuBkgStyle.FillShape or enuBkgStyle.Shape)
+                {
                     m_owner.UpdateCellsBkgVisualElement();
+                }
             }
 
         }
@@ -185,9 +187,13 @@ public class VGCellAppearance<Type> : IBackgroundAppearance
             {
                 m_image = value;
                 if (m_owner.InDesignMode && value != null && m_style != enuBkgStyle.Image)
+                {
                     Style = enuBkgStyle.Image;
+                }
                 else if (m_style == enuBkgStyle.Image)
+                {
                     m_owner.UpdateCellsBkgVisualElement();
+                }
             }
         }
     }
@@ -217,7 +223,9 @@ public class VGCellAppearance<Type> : IBackgroundAppearance
             {
                 m_penWidth = value;
                 if (m_style == enuBkgStyle.Shape)
+                {
                     m_owner.UpdateCellsBkgVisualElement();
+                }
             }
         }
     }
@@ -264,7 +272,9 @@ public class VGCellAppearance<Type> : IBackgroundAppearance
             {
                 m_border = value;
                 if (m_style == enuBkgStyle.Border)
+                {
                     m_owner.UpdateCellsBkgVisualElement();
+                }
             }
         }
     }
@@ -272,7 +282,9 @@ public class VGCellAppearance<Type> : IBackgroundAppearance
     {
         m_border = m_defaultPadding;
         if (m_style == enuBkgStyle.Border)
+        {
             m_owner.UpdateCellsBkgVisualElement();
+        }
     }
     private bool ShouldSerializeBorder()
     {
@@ -297,7 +309,9 @@ public class VGCellAppearance<Type> : IBackgroundAppearance
             {
                 m_backgroundColor = value;
                 if (m_style is enuBkgStyle.Border or enuBkgStyle.FillShape or enuBkgStyle.Shape)
+                {
                     m_owner.UpdateCellsBkgVisualElement();
+                }
             }
         }
     }
@@ -329,7 +343,9 @@ public class VGCellAppearance<Type> : IBackgroundAppearance
             {
                 m_radius = value;
                 if (m_style is enuBkgStyle.FillShape or enuBkgStyle.Shape && m_shape == enuShape.RoundRect)
+                {
                     m_owner.UpdateCellsBkgVisualElement();
+                }
             }
         }
     }

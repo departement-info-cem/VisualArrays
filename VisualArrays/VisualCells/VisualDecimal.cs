@@ -84,9 +84,15 @@ public partial class VisualDecimal : VisualGraph<decimal>
                 m_minimum = value;
 
                 if (m_value < m_minimum)
+                {
                     Value = m_minimum;
+                }
+
                 if (m_minimum > m_maximum)
+                {
                     Maximum = value;
+                }
+
                 //if (!DesignMode)
                 Refresh();
             }
@@ -108,9 +114,15 @@ public partial class VisualDecimal : VisualGraph<decimal>
             {
                 m_maximum = value;
                 if (m_value > m_maximum)
+                {
                     Value = m_maximum;
+                }
+
                 if (m_maximum < m_minimum)
+                {
                     Minimum = value;
+                }
+
                 //if (!DesignMode)
                 Refresh();
             }
@@ -128,21 +140,27 @@ public partial class VisualDecimal : VisualGraph<decimal>
         set
         {
             if (value < m_minimum || value > m_maximum)
+            {
                 throw new ArgumentOutOfRangeException("La valeur '" + value + "' n'est pas valide, elle doit être comprise entre 'Minimum' et 'Maximum'");
+            }
 
             m_value = value;
             Refresh();
             //using (Graphics gr = CreateGraphics())
             //    DrawContent(gr);
             if (ValueChanged != null && !WaitForEnter)
+            {
                 ValueChanged(this, EventArgs.Empty);
+            }
         }
     }
     //=========================================================================================================
     private void SetValueWithoutValueChanged(decimal pValue)
     {
         if (pValue < m_minimum || pValue > m_maximum)
+        {
             throw new ArgumentOutOfRangeException("La valeur '" + pValue + "' n'est pas valide, elle doit être comprise entre 'Minimum' et 'Maximum'");
+        }
 
         m_value = pValue;
         Refresh();
@@ -190,7 +208,9 @@ public partial class VisualDecimal : VisualGraph<decimal>
     protected override void DrawContent(Graphics pGraphics)
     {
         if (pGraphics == null)
+        {
             pGraphics = CreateGraphics();
+        }
 
         Rectangle cellBounds = new(Padding.Left, Padding.Top, Width - (Padding.Left + Padding.Right), Height - (Padding.Top + Padding.Bottom));
         // Étape 1 : On commence par dessiner le fond de la cellule
@@ -263,9 +283,13 @@ public partial class VisualDecimal : VisualGraph<decimal>
         if (ModifierKeys == Keys.Alt)
         {
             if (m_view < enuDecimalView.GraphNumber)
+            {
                 View++;
+            }
             else
+            {
                 View = enuDecimalView.Number;
+            }
         }
         else
         {
@@ -299,7 +323,9 @@ public partial class VisualDecimal : VisualGraph<decimal>
                 }
             }
             else
+            {
                 Focus();
+            }
         }
     }
 
@@ -315,7 +341,11 @@ public partial class VisualDecimal : VisualGraph<decimal>
         {
             decimal delta = (m_maximum - m_minimum) / 10;
             decimal minDelta = 1 / (decimal)Math.Pow(10, m_decimalPlaces);
-            if (delta < minDelta) delta = minDelta;
+            if (delta < minDelta)
+            {
+                delta = minDelta;
+            }
+
             decimal valeur = m_value;
             switch (e.Delta)
             {
@@ -326,8 +356,16 @@ public partial class VisualDecimal : VisualGraph<decimal>
                     valeur -= delta;
                     break;
             }
-            if (valeur < m_minimum) valeur = m_minimum;
-            if (valeur > m_maximum) valeur = m_maximum;
+            if (valeur < m_minimum)
+            {
+                valeur = m_minimum;
+            }
+
+            if (valeur > m_maximum)
+            {
+                valeur = m_maximum;
+            }
+
             Value = valeur;
         }
     }
@@ -339,7 +377,10 @@ public partial class VisualDecimal : VisualGraph<decimal>
     protected override bool IsInputKey(Keys key)
     {
         if (key is Keys.Up or Keys.Down or Keys.Right or Keys.Left)
+        {
             return true;
+        }
+
         return base.IsInputKey(key);
     }
     /// <summary>
@@ -367,12 +408,24 @@ public partial class VisualDecimal : VisualGraph<decimal>
             decimal valeurObtenue;
             if (VisualArraysTools.ReadDecimal(e.KeyChar, m_value, m_maximum,m_decimalPlaces, out valeurObtenue))
             {
-                if (valeurObtenue < m_minimum) valeurObtenue = m_minimum;
-                if (valeurObtenue > m_maximum) valeurObtenue = m_maximum;
+                if (valeurObtenue < m_minimum)
+                {
+                    valeurObtenue = m_minimum;
+                }
+
+                if (valeurObtenue > m_maximum)
+                {
+                    valeurObtenue = m_maximum;
+                }
+
                 if (WaitForEnter)
+                {
                     SetValueWithoutValueChanged(valeurObtenue);
+                }
                 else
+                {
                     Value = valeurObtenue;
+                }
             }
         }
         base.OnKeyPress(e);
@@ -395,9 +448,14 @@ public partial class VisualDecimal : VisualGraph<decimal>
     public void RandomizeValue(int pMinimum, int pMaximum)
     {
         if (pMinimum < Minimum)
+        {
             throw new ArgumentOutOfRangeException("pMinimum ne peut être inférieure à la propriété Minimum");
+        }
+
         if (pMaximum > Maximum)
+        {
             throw new ArgumentOutOfRangeException("pMaximum ne peut être supérieure à la propriété Maximum");
+        }
 
         Value = VisualArraysTools.RandomDecimal(pMinimum, pMaximum);
     }

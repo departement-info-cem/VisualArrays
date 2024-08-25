@@ -100,7 +100,9 @@ public partial class VisualBool : VisualValue<bool>
     protected override void DrawContent(Graphics pGraphics)
     {
         if (pGraphics == null)
+        {
             pGraphics = CreateGraphics();
+        }
 
         Rectangle cellBounds = new(Padding.Left, Padding.Top, Width - (Padding.Left + Padding.Right), Height - (Padding.Top + Padding.Bottom));
 
@@ -137,7 +139,9 @@ public partial class VisualBool : VisualValue<bool>
         if (!ReadOnly)
         {
             if (m_toogle)
+            {
                 Value = !Value;
+            }
         }
     }
     #endregion

@@ -65,7 +65,9 @@ public class StrikeAppearance
             {
                 m_color = value;
                 if (m_style is enuStrikeStyle.Diagonal or enuStrikeStyle.Cross)
+                {
                     m_owner.Refresh();
+                }
             }
         }
     }
@@ -95,7 +97,9 @@ public class StrikeAppearance
             {
                 m_penWidth = value;
                 if (m_style != enuStrikeStyle.None)
+                {
                     m_owner.Refresh();
+                }
             }
         }
     }
@@ -125,7 +129,9 @@ public class StrikeAppearance
             {
                 m_margin = value;
                 if (m_style != enuStrikeStyle.None)
+                {
                     m_owner.Refresh();
+                }
             }
         }
     }

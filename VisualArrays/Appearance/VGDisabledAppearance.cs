@@ -48,7 +48,9 @@ public class VGDisabledAppearance<Type> : DisabledAppearance
                     grille.View = enuIntView.ImageList;
                 }
                 else
+                {
                     m_owner.Refresh();
+                }
             }
         }
     }

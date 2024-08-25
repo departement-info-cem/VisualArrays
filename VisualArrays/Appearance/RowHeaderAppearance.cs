@@ -185,9 +185,14 @@ public class RowHeaderAppearance
             {
                 m_visible = value;
                 if (m_visible)
+                {
                     m_owner.va_enteteLgnLarg = m_width;
+                }
                 else
+                {
                     m_owner.va_enteteLgnLarg = 0;
+                }
+
                 m_owner.ReCalculerTaille();
                 m_owner.Refresh();
             }

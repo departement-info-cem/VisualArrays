@@ -118,7 +118,9 @@ public struct Address
     {
         // Check for null values and compare run-time types.
         if (obj == null || GetType() != obj.GetType())
+        {
             return false;
+        }
 
         Address pAddress = (Address)obj;
         return (m_row == pAddress.Row) && (m_column == pAddress.m_column);

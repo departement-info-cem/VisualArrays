@@ -236,7 +236,9 @@ public class VBASpecialValueAppearance<Type>:IBackgroundAppearance
             {
                 m_radius = value;
                 if (m_style is enuBkgStyle.FillShape or enuBkgStyle.Shape && m_shape == enuShape.RoundRect)
+                {
                     m_owner.UpdateCellsBkgVisualElement();
+                }
             }
         }
     }

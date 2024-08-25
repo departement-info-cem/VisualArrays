@@ -271,12 +271,20 @@ public abstract partial class BaseVisualContainer<BaseType,VisualType> : Contain
     {
         get
         {
-            if (pIndex < 0 || pIndex >= m_colVisualElements.Count) throw new IndexOutOfRangeException("Débordement de la grille : pIndex = " + pIndex + " , doit être compris entre 0 et " + (m_colVisualElements.Count - 1));
+            if (pIndex < 0 || pIndex >= m_colVisualElements.Count)
+            {
+                throw new IndexOutOfRangeException("Débordement de la grille : pIndex = " + pIndex + " , doit être compris entre 0 et " + (m_colVisualElements.Count - 1));
+            }
+
             return m_colVisualElements[pIndex].Value;
         }
         set
         {
-            if (pIndex < 0 || pIndex >= m_colVisualElements.Count) throw new IndexOutOfRangeException("Débordement de la grille : pIndex = " + pIndex + " , doit être compris entre 0 et " + (m_colVisualElements.Count - 1));
+            if (pIndex < 0 || pIndex >= m_colVisualElements.Count)
+            {
+                throw new IndexOutOfRangeException("Débordement de la grille : pIndex = " + pIndex + " , doit être compris entre 0 et " + (m_colVisualElements.Count - 1));
+            }
+
             m_colVisualElements[pIndex].Value = value;
         }
     }

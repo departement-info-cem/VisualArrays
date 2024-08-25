@@ -42,7 +42,10 @@ public abstract partial class VisualValueArray<Type> : BaseGrid
         get
         {
             if (SelectedIndex == -1)
+            {
                 throw new VisualArrayException("Impossible d'obtenir la valeur sélectionnée lorsque SelectedIndex vaut -1");
+            }
+
             return this[SelectedIndex];
         }
 
@@ -66,7 +69,10 @@ public abstract partial class VisualValueArray<Type> : BaseGrid
         for (int ligne = 0; ligne < va_tabValues.GetLength(0); ligne++)
         for (int colonne = 0; colonne < va_tabValues.GetLength(1); colonne++)
             if (va_tabValues[ligne, colonne].Equals(pValue))
+            {
                 return true;
+            }
+
         return false;
     }
     #endregion
@@ -82,7 +88,10 @@ public abstract partial class VisualValueArray<Type> : BaseGrid
     public override bool IsOkToSelect(Cell pCell, int pRow, int pColumn)
     {
         if (va_tabValues[pRow, pColumn] != null && va_tabValues[pRow, pColumn].Equals(m_specialValue) && !va_specialValueAppearance.Enabled)
+        {
             return false;
+        }
+
         return base.IsOkToSelect(pCell, pRow, pColumn);
     }
     #endregion
@@ -160,7 +169,11 @@ public abstract partial class VisualValueArray<Type> : BaseGrid
     /// <param name="pSwapCount">Nombre de permutations à effectuer pour mélanger les cellules de la grille.</param>
     public void MixUp(int pSwapCount)
     {
-        if (Length < 2) return; //  Ne rien faire car seulement une seule cellule
+        if (Length < 2)
+        {
+            return; //  Ne rien faire car seulement une seule cellule
+        }
+
         SelectedIndex = -1; // on va détruire toute sélection avant d'effectuer les permutations
         BeginUpdate();
         Address adresse1,adresse2;
@@ -220,7 +233,9 @@ public abstract partial class VisualValueArray<Type> : BaseGrid
     protected void SendValueChanged(int pIndex,int pRow,int pColumn,Address pAddress)
     {
         if (ValueChanged != null && !va_isUpdating)
+        {
             ValueChanged(this, new ValueChangedEventArgs(pIndex,pRow,pColumn,pAddress));
+        }
     }
     /// <summary>
     /// Se produit lorsque la valeur d'une ou plusieurs cellules changent.
@@ -451,7 +466,11 @@ public abstract partial class VisualValueArray<Type> : BaseGrid
         set
         {
             BeforeValueChangedArgs<Type> beforeValueChangedArgs = AcceptBeforeValueChanged(value);
-            if (!beforeValueChangedArgs.AcceptValueChanged) return;
+            if (!beforeValueChangedArgs.AcceptValueChanged)
+            {
+                return;
+            }
+
             value = beforeValueChangedArgs.NewValue;
 
             Address adresse = IndexToAddress(pIndex);
@@ -480,7 +499,11 @@ public abstract partial class VisualValueArray<Type> : BaseGrid
         set
         {
             BeforeValueChangedArgs<Type> beforeValueChangedArgs = AcceptBeforeValueChanged(value);
-            if (!beforeValueChangedArgs.AcceptValueChanged) return;
+            if (!beforeValueChangedArgs.AcceptValueChanged)
+            {
+                return;
+            }
+
             value = beforeValueChangedArgs.NewValue;
 
             Address adresse = AddressFromAddressMode(pRow, pColumn);

@@ -23,7 +23,9 @@ public partial class VisualIntArray : VisualGraphArray<int>
         set
         {
             if (value < va_minimum || value > va_maximum)
+            {
                 throw new ArgumentOutOfRangeException("DefaultValue", value, "'DefaultValue' doit �tre compris entre 'Minimum' et 'Maximum'");
+            }
 
             if (value != m_defaultValue)
             {
@@ -84,9 +86,15 @@ public partial class VisualIntArray : VisualGraphArray<int>
                 va_minimum = value;
 
                 if (m_defaultValue < va_minimum)
+                {
                     DefaultValue = va_minimum;
+                }
+
                 if (va_minimum > va_maximum)
+                {
                     Maximum = value;
+                }
+
                 //if (!DesignMode)
                 Refresh();
             }
@@ -108,9 +116,15 @@ public partial class VisualIntArray : VisualGraphArray<int>
             {
                 va_maximum = value;
                 if (m_defaultValue > va_maximum)
+                {
                     DefaultValue = va_maximum;
+                }
+
                 if (va_maximum < va_minimum)
+                {
                     Minimum = value;
+                }
+
                 //if (!DesignMode)
                 Refresh();
             }
@@ -156,7 +170,9 @@ public partial class VisualIntArray : VisualGraphArray<int>
     public override void Clear(int pIndex)
     {
         if (va_minimum <= m_defaultValue && va_maximum >= m_defaultValue)
+        {
             this[pIndex] = m_defaultValue;
+        }
     }
     // CLEAR ------------------------------------------------------------------------------
     /// <summary>
@@ -168,7 +184,9 @@ public partial class VisualIntArray : VisualGraphArray<int>
     public override void Clear(int pRow, int pColumn)
     {
         if (va_minimum <= m_defaultValue && va_maximum >= m_defaultValue)
+        {
             this[pRow, pColumn] = m_defaultValue;
+        }
     }
     //============================================================================================
     /// <summary>
@@ -180,7 +198,11 @@ public partial class VisualIntArray : VisualGraphArray<int>
         if (SelectedIndex != -1 && !ReadOnly && va_selectionMode == SelectionMode.One && !va_tabCells[SelectedAddress.Row,SelectedAddress.Column].ReadOnly)
         {
             int delta = (va_maximum - va_minimum) / 10;
-            if (delta < 1) delta = 1;
+            if (delta < 1)
+            {
+                delta = 1;
+            }
+
             int valeur = this[SelectedIndex];
             switch (e.Delta)
             {
@@ -191,8 +213,16 @@ public partial class VisualIntArray : VisualGraphArray<int>
                     valeur -= delta;
                     break;
             }
-            if (valeur < va_minimum) valeur = va_minimum;
-            if (valeur > va_maximum) valeur = va_maximum;
+            if (valeur < va_minimum)
+            {
+                valeur = va_minimum;
+            }
+
+            if (valeur > va_maximum)
+            {
+                valeur = va_maximum;
+            }
+
             this[SelectedIndex] = valeur;
         }
     }
@@ -208,8 +238,16 @@ public partial class VisualIntArray : VisualGraphArray<int>
             int valeur;
             if (VisualArraysTools.ReadInt(e.KeyChar, this[SelectedIndex], va_maximum, out valeur))
             {
-                if (valeur < va_minimum) valeur = va_minimum;
-                if (valeur > va_maximum) valeur = va_maximum;
+                if (valeur < va_minimum)
+                {
+                    valeur = va_minimum;
+                }
+
+                if (valeur > va_maximum)
+                {
+                    valeur = va_maximum;
+                }
+
                 this[SelectedIndex] = valeur;
             }
         }
@@ -250,9 +288,14 @@ public partial class VisualIntArray : VisualGraphArray<int>
         {
             case enuIntView.Number:
                 if (valeurAAfficher != m_specialValue)
+                {
                     DrawText(pGraphics, pContentBounds, laChaine, EnabledAppearance.TextColor, EnabledAppearance.Font, m_cellContentAlign);
+                }
                 else if (SpecialValueAppearance.ShowValue) // c'est la valeur sp�ciale
+                {
                     DrawText(pGraphics, pContentBounds, laChaine, SpecialValueAppearance.TextColor, SpecialValueAppearance.Font, m_cellContentAlign);
+                }
+
                 break;
             case enuIntView.Graph:
             case enuIntView.GraphNumber:
@@ -265,19 +308,28 @@ public partial class VisualIntArray : VisualGraphArray<int>
                     if (cell.Enabled)
                     {
                         if (valeurAAfficher != m_specialValue)
+                        {
                             VisualArraysTools.DrawText(pGraphics, displayRectangle, laChaine, EnabledAppearance.TextColor, EnabledAppearance.Font, m_cellContentAlign);
+                        }
                         else if (SpecialValueAppearance.ShowValue) // c'est la valeur sp�ciale
+                        {
                             VisualArraysTools.DrawText(pGraphics, displayRectangle, laChaine, SpecialValueAppearance.TextColor, SpecialValueAppearance.Font, m_cellContentAlign);
+                        }
                     }
                     else if (va_disabledAppearance.ShowValue)
+                    {
                         VisualArraysTools.DrawText(pGraphics, displayRectangle, laChaine, DisabledAppearance.TextColor, DisabledAppearance.Font, m_cellContentAlign);
+                    }
                 }
                 break;
             case enuIntView.Digit:
                 break;
             case enuIntView.ImageList:
                 // Ne pas dessiner l'image si la valeur � afficher est la valeur sp�ciale
-                if (valeurAAfficher == m_specialValue) break;
+                if (valeurAAfficher == m_specialValue)
+                {
+                    break;
+                }
 
                 ImageList imageList = va_enabledAppearance.ImageList;
 
@@ -288,9 +340,13 @@ public partial class VisualIntArray : VisualGraphArray<int>
                         Image objImage = imageList.Images[valeurAAfficher];
                         Rectangle imageBounds = CellVisualElement.CellVisualElement.BoundsFromAlignment(pContentBounds, objImage.Size, m_cellContentAlign);
                         if (cell.Enabled)
+                        {
                             pGraphics.DrawImage(objImage, new Point(imageBounds.Left, imageBounds.Top));
+                        }
                         else
+                        {
                             VisualArraysTools.DrawDisabledImage(pGraphics, imageBounds, objImage, DisabledAppearance.ImageBrightness);
+                        }
                     }
                     else
                     {
@@ -321,12 +377,19 @@ public partial class VisualIntArray : VisualGraphArray<int>
 
         // �tape 1 : On commence par dessiner le fond de la grille
         if (BackgroundImage != null)
+        {
             pGraphics.DrawImage(BackgroundImage, cellBounds, cellBounds, GraphicsUnit.Pixel);
+        }
         else
+        {
             pGraphics.FillRectangle(new SolidBrush(BackColor), cellBounds);
+        }
 
         // �tape 2 : Si la cellule n'est pas visible, alors on quitte (sans m�me afficher son adresse)
-        if (!cell.Visible) return;
+        if (!cell.Visible)
+        {
+            return;
+        }
 
 
         // �tape 3 : Si l'utilisateur d�sire dessiner lui m�me le contenu de la cellule
@@ -367,6 +430,7 @@ public partial class VisualIntArray : VisualGraphArray<int>
 
             Rectangle displayRectangle = GetCellContentBounds(pRow, pColumn, EnabledAppearance.Padding);
             if (!DesignMode || va_addressView == enuAddressView.None)
+            {
                 switch (va_view)
                 {
                     case enuIntView.Number:
@@ -375,15 +439,21 @@ public partial class VisualIntArray : VisualGraphArray<int>
                             if (valeurAAfficher == m_specialValue) // c'est la valeur sp�ciale
                             {
                                 if (SpecialValueAppearance.ShowValue)
+                                {
                                     VisualArraysTools.DrawText(pGraphics, displayRectangle, laChaine, SpecialValueAppearance.TextColor, SpecialValueAppearance.Font, m_cellContentAlign);
+                                }
                             }
                             else // c'est une valeur normale
+                            {
                                 VisualArraysTools.DrawText(pGraphics, displayRectangle, laChaine, EnabledAppearance.TextColor, EnabledAppearance.Font, m_cellContentAlign);
+                            }
                         }
                         else // une cellule inactive
                         {
                             if (va_disabledAppearance.ShowValue)
+                            {
                                 VisualArraysTools.DrawText(pGraphics, displayRectangle, laChaine, DisabledAppearance.TextColor, DisabledAppearance.Font, m_cellContentAlign);
+                            }
                         }
                         break;
                     case enuIntView.Graph:
@@ -395,12 +465,18 @@ public partial class VisualIntArray : VisualGraphArray<int>
                             if (cell.Enabled)
                             {
                                 if (valeurAAfficher != m_specialValue)
+                                {
                                     VisualArraysTools.DrawText(pGraphics, displayRectangle, laChaine, EnabledAppearance.TextColor, EnabledAppearance.Font, m_cellContentAlign);
+                                }
                                 else if (SpecialValueAppearance.ShowValue) // c'est la valeur sp�ciale
+                                {
                                     VisualArraysTools.DrawText(pGraphics, displayRectangle, laChaine, SpecialValueAppearance.TextColor, SpecialValueAppearance.Font, m_cellContentAlign);
+                                }
                             }
                             else if (va_disabledAppearance.ShowValue)
+                            {
                                 VisualArraysTools.DrawText(pGraphics, displayRectangle, laChaine, DisabledAppearance.TextColor, DisabledAppearance.Font, m_cellContentAlign);
+                            }
                         }
                         break;
                     case enuIntView.Digit:
@@ -409,16 +485,23 @@ public partial class VisualIntArray : VisualGraphArray<int>
                         break;
                     case enuIntView.ImageList:
                         // Ne pas dessiner l'image si la valeur � afficher est la valeur sp�ciale
-                        if (valeurAAfficher == m_specialValue) break;
+                        if (valeurAAfficher == m_specialValue)
+                        {
+                            break;
+                        }
 
                         ImageList imageList;
                         if (cell.Enabled)
+                        {
                             imageList = va_enabledAppearance.ImageList;
+                        }
                         else
                         { // on va utiliser le m�me ImageList que pour les cellules actives
                             imageList = va_disabledAppearance.ImageList;
                             if (imageList == null)
+                            {
                                 imageList = va_enabledAppearance.ImageList;
+                            }
                         }
 
                         if (imageList != null)
@@ -428,9 +511,13 @@ public partial class VisualIntArray : VisualGraphArray<int>
                                 Image objImage = imageList.Images[valeurAAfficher];
                                 Rectangle imageBounds = CellVisualElement.CellVisualElement.BoundsFromAlignment(cellContentBounds, objImage.Size, m_cellContentAlign);
                                 if (cell.Enabled)
+                                {
                                     pGraphics.DrawImage(objImage, new Point(imageBounds.Left, imageBounds.Top));
+                                }
                                 else
+                                {
                                     VisualArraysTools.DrawDisabledImage(pGraphics, imageBounds, objImage, DisabledAppearance.ImageBrightness);
+                                }
                             }
                             else
                             {
@@ -440,11 +527,16 @@ public partial class VisualIntArray : VisualGraphArray<int>
                             }
                         }
                         else // il n'y pas d'imageList d'associ� avec la grille
+                        {
                             VisualArraysTools.DrawText(pGraphics, displayRectangle, "?", EnabledAppearance.TextColor, EnabledAppearance.Font, m_cellContentAlign);
+                        }
+
                         break;
                     default:
                         break;
                 }
+            }
+
             #endregion
 
         }
@@ -460,15 +552,21 @@ public partial class VisualIntArray : VisualGraphArray<int>
 
         // �tape 5 : Si la cellule est inactive et qu'une raillure doit �tre dessin�e
         if (!cell.Enabled && va_disabledAppearance.StrikeAppearance.Style != enuStrikeStyle.None)
+        {
             DrawStrike(pGraphics, cellBounds,va_disabledAppearance);
+        }
 
         // �tape 6 : Si la cellule est s�lectionn�e, alors on doit dessiner la s�lection
         if (cell.Selected)
+        {
             DrawSelection(pGraphics, pRow, pColumn);
+        }
 
         // �tape 7 : Si nous sommes en mode d�sign alors on doit dessiner l'adresse de la cellule
         if (DesignMode)
+        {
             DrawAddress(pGraphics, pRow, pColumn);
+        }
     }
     #endregion
  
@@ -511,11 +609,17 @@ public partial class VisualIntArray : VisualGraphArray<int>
         set
         {
             BeforeValueChangedArgs<int> beforeValueChangedArgs = AcceptBeforeValueChanged(value);
-            if (!beforeValueChangedArgs.AcceptValueChanged) return;
+            if (!beforeValueChangedArgs.AcceptValueChanged)
+            {
+                return;
+            }
+
             value = beforeValueChangedArgs.NewValue;
 
             if (value < va_minimum || value > va_maximum)
+            {
                 throw new VisualArrayException("La valeur '" + value + "' n'est pas valide pour la cellule, elle doit �tre comprise entre 'Minimum' et 'Maximum'");
+            }
 
             Address adresse = IndexToAddress(pIndex);
             va_tabValues[adresse.Row, adresse.Column] = value;
@@ -542,11 +646,18 @@ public partial class VisualIntArray : VisualGraphArray<int>
         set
         {
             BeforeValueChangedArgs<int> beforeValueChangedArgs = AcceptBeforeValueChanged(value);
-            if (!beforeValueChangedArgs.AcceptValueChanged) return;
+            if (!beforeValueChangedArgs.AcceptValueChanged)
+            {
+                return;
+            }
+
             value = beforeValueChangedArgs.NewValue;
 
             if (value < va_minimum || value > va_maximum)
+            {
                 throw new VisualArrayException("La valeur '" + value + "' n'est pas valide pour la cellule, elle doit �tre comprise entre 'Minimum' et 'Maximum'");
+            }
+
             Address adresse = AddressFromAddressMode(pRow, pColumn);
             va_tabValues[adresse.Row, adresse.Column] = value;
             int index = IndexFromAddress(adresse.Row, adresse.Column);
@@ -593,6 +704,8 @@ public partial class VisualIntArray : VisualGraphArray<int>
         //        cellContentBounds.Y = cellContentBounds.Y + cellContentBounds.Height - hauteurBarre;
         //    }
         if (va_allowGraphClick)
+        {
             this[pIndex] = (va_maximum - va_minimum) / 2 + va_minimum;
+        }
     }
 }

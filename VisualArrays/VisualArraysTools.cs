@@ -23,7 +23,11 @@ public static class VisualArraysTools
     /// <param name="pDelai">Le délai à attendre.</param>
     public static void Wait(int pDelai)
     {
-        if (TEST_MODE || pDelai <= 0) return;
+        if (TEST_MODE || pDelai <= 0)
+        {
+            return;
+        }
+
         DateTime maintenantPlusDelai = DateTime.Now.AddMilliseconds(pDelai);
         while (DateTime.Now < maintenantPlusDelai) ;
     }
@@ -39,15 +43,24 @@ public static class VisualArraysTools
     private static int NbDigits(int pValeur)
     {
         int cpt = 0;
-        if (pValeur == 0) cpt = 1;
+        if (pValeur == 0)
+        {
+            cpt = 1;
+        }
         else
+        {
             while (pValeur > 0)
             {
                 cpt++;
                 pValeur /= 10;
             }
+        }
+
         if (pValeur < 0)
+        {
             return cpt + 1;
+        }
+
         return cpt;
     }
     
@@ -66,13 +79,22 @@ public static class VisualArraysTools
     internal static bool ReadInt(char pChar, int pCurrentValue, int pMaxValue, out int pNewValue)
     {
         pNewValue = 0;
-        if (pChar == (char)Keys.Enter) m_currentKeyTime = new DateTime(0);
+        if (pChar == (char)Keys.Enter)
+        {
+            m_currentKeyTime = new DateTime(0);
+        }
+
         if (pChar is not (>= '0' and <= '9' or '-'))
+        {
             return false;
+        }
 
         pNewValue = Math.Abs(pCurrentValue);
         if (NbDigits(pNewValue) == NbDigits(pMaxValue))
+        {
             pNewValue = 0;
+        }
+
         if (pChar == '-')
         {
             m_negatif = true;
@@ -104,15 +126,24 @@ public static class VisualArraysTools
     {
         long nombreEntier = (long)Math.Floor(pValeur);
         int cpt = 0;
-        if (nombreEntier == 0) cpt = 1;
+        if (nombreEntier == 0)
+        {
+            cpt = 1;
+        }
         else
+        {
             while (nombreEntier > 0)
             {
                 cpt++;
                 nombreEntier /= 10;
             }
+        }
+
         if (pDecimalPlaces == 0)
+        {
             return cpt;
+        }
+
         return cpt + pDecimalPlaces + 2;
     }
     
@@ -124,13 +155,22 @@ public static class VisualArraysTools
     internal static bool ReadDecimal(char pChar, decimal pCurrentValue, decimal pMaxValue, int pDecimalPlaces, out decimal pNewValue)
     {
         pNewValue = 0;
-        if (pChar == (char)Keys.Enter) m_currentKeyTime = new DateTime(0);
+        if (pChar == (char)Keys.Enter)
+        {
+            m_currentKeyTime = new DateTime(0);
+        }
+
         if (pChar is not ('.' or ',' or >= '0' and <= '9' or '-'))
+        {
             return false;
+        }
 
         pNewValue = Math.Abs(pCurrentValue);
         if (NbDigits(pNewValue, pDecimalPlaces) == NbDigits(pMaxValue, pDecimalPlaces))
+        {
             pNewValue = 0;
+        }
+
         switch (pChar)
         {
             case '.' or ',' when !m_fraction:
@@ -153,22 +193,31 @@ public static class VisualArraysTools
             m_negatif = false;
             m_digitFraction = 0;
         }
-        if (pChar is >= '0' and <= '9')
-        {
-            if (m_fraction)
-            {
-                m_digitFraction++;
-                if (m_digitFraction > pDecimalPlaces) return false;
-                pNewValue *= (decimal)Math.Pow(10, m_digitFraction);
-                pNewValue += pChar - '0';
-                pNewValue /= (decimal)Math.Pow(10, m_digitFraction);
-            }
-            else
-                pNewValue = pNewValue * 10 + pChar - '0';
 
-            pNewValue = m_negatif ? -pNewValue : pNewValue;
-            m_currentKeyTime = DateTime.Now;
+        if (pChar is < '0' or > '9')
+        {
+            return pCurrentValue != pNewValue;
         }
+
+        if (m_fraction)
+        {
+            m_digitFraction++;
+            if (m_digitFraction > pDecimalPlaces)
+            {
+                return false;
+            }
+
+            pNewValue *= (decimal)Math.Pow(10, m_digitFraction);
+            pNewValue += pChar - '0';
+            pNewValue /= (decimal)Math.Pow(10, m_digitFraction);
+        }
+        else
+        {
+            pNewValue = pNewValue * 10 + pChar - '0';
+        }
+
+        pNewValue = m_negatif ? -pNewValue : pNewValue;
+        m_currentKeyTime = DateTime.Now;
         return pCurrentValue != pNewValue;
     }
 
@@ -496,9 +545,13 @@ public static class VisualArraysTools
             #region Orientation selon la taille
 
             if (barBounds.Width > barBounds.Height)
+            {
                 orientation = Orientation.Horizontal;
+            }
             else
+            {
                 orientation = Orientation.Vertical;
+            }
 
             #endregion
 
@@ -507,7 +560,9 @@ public static class VisualArraysTools
             {
                 case enuBarAlign.Normal:
                     if (orientation == Orientation.Horizontal)
+                    {
                         barBounds.Width = (int)(barBounds.Width * valeurOrigine / plageDeValeurs);
+                    }
                     else
                     {
                         orientation = Orientation.Vertical;
@@ -523,7 +578,10 @@ public static class VisualArraysTools
                         barBounds.Width = largeur;
                     }
                     else
+                    {
                         barBounds.Height = (int)(barBounds.Height * valeurOrigine / plageDeValeurs);
+                    }
+
                     break;
                 case enuBarAlign.Middle:
                     if (orientation == Orientation.Horizontal)
@@ -547,9 +605,14 @@ public static class VisualArraysTools
             {
                 case enuGraphBarStyle.Image:
                     if (pGraphApp.BarImage != null)
+                    {
                         pGraphics.DrawImage(pGraphApp.BarImage, barBounds);
+                    }
                     else
+                    {
                         pGraphics.FillRectangle(new SolidBrush(pGraphApp.BarColor), barBounds);
+                    }
+
                     break;
                 case enuGraphBarStyle.FillShape:
                     pGraphics.FillRectangle(new SolidBrush(pGraphApp.BarColor), barBounds);
@@ -565,15 +628,21 @@ public static class VisualArraysTools
             if (pGraphApp.BarValueStyle != enuGraphValueStyle.None) // affichage de la valeur de la barre du graphique
             {
                 if (pGraphApp.BarValueStyle == enuGraphValueStyle.Pourcent)
+                {
                     texte += "%";
+                }
 
                 SizeF taille = pGraphics.MeasureString(texte, pGraphApp.BarValueFont);
 
                 PointF pt;
                 if (orientation == Orientation.Horizontal)
+                {
                     pt = new PointF(barBounds.Right, barBounds.Top + (int)(((float)barBounds.Height - taille.Height) / 2));
+                }
                 else // orientation Verticale
+                {
                     pt = new PointF(barBounds.Left + (int)(((float)barBounds.Width - taille.Width) / 2), barBounds.Top - taille.Height);
+                }
 
                 pGraphics.DrawString(texte, pGraphApp.BarValueFont, new SolidBrush(pGraphApp.BarValueColor), pt);
             }
@@ -604,9 +673,14 @@ public static class VisualArraysTools
             }
 
             if (clickValue < pMinimum)
+            {
                 clickValue = pMinimum;
+            }
+
             if (clickValue > pMaximum)
+            {
                 clickValue = pMaximum;
+            }
         }
         return clickValue;
     }
@@ -639,9 +713,13 @@ public static class VisualArraysTools
             #region Orientation selon la taille
 
             if (barBounds.Width > barBounds.Height)
+            {
                 orientation = Orientation.Horizontal;
+            }
             else
+            {
                 orientation = Orientation.Vertical;
+            }
 
             #endregion
 
@@ -650,7 +728,9 @@ public static class VisualArraysTools
             {
                 case enuBarAlign.Normal:
                     if (orientation == Orientation.Horizontal)
+                    {
                         barBounds.Width = (int)(barBounds.Width * valeurOrigine / plageDeValeurs);
+                    }
                     else
                     {
                         orientation = Orientation.Vertical;
@@ -666,7 +746,10 @@ public static class VisualArraysTools
                         barBounds.Width = largeur;
                     }
                     else
+                    {
                         barBounds.Height = (int)(barBounds.Height * valeurOrigine / plageDeValeurs);
+                    }
+
                     break;
                 case enuBarAlign.Middle:
                     if (orientation == Orientation.Horizontal)
@@ -690,9 +773,14 @@ public static class VisualArraysTools
             {
                 case enuGraphBarStyle.Image:
                     if (pGraphApp.BarImage != null)
+                    {
                         pGraphics.DrawImage(pGraphApp.BarImage, barBounds);
+                    }
                     else
+                    {
                         pGraphics.FillRectangle(new SolidBrush(pGraphApp.BarColor), barBounds);
+                    }
+
                     break;
                 case enuGraphBarStyle.FillShape:
                     pGraphics.FillRectangle(new SolidBrush(pGraphApp.BarColor), barBounds);
@@ -708,14 +796,21 @@ public static class VisualArraysTools
             if (pGraphApp.BarValueStyle != enuGraphValueStyle.None) // affichage de la valeur de la barre du graphique
             {
                 if (pGraphApp.BarValueStyle == enuGraphValueStyle.Pourcent)
+                {
                     texte += "%";
+                }
+
                 SizeF taille = pGraphics.MeasureString(texte, pGraphApp.BarValueFont);
 
                 PointF pt;
                 if (orientation == Orientation.Horizontal)
+                {
                     pt = new PointF(barBounds.Right, barBounds.Top + (int)(((float)barBounds.Height - taille.Height) / 2));
+                }
                 else // orientation Verticale
+                {
                     pt = new PointF(barBounds.Left + (int)(((float)barBounds.Width - taille.Width) / 2), barBounds.Top - taille.Height);
+                }
 
                 pGraphics.DrawString(texte, pGraphApp.BarValueFont, new SolidBrush(pGraphApp.BarValueColor), pt);
             }

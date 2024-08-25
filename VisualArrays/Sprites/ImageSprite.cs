@@ -33,7 +33,10 @@ public class ImageSprite:Sprite
     /// <param name="pGraphics"></param>
     public override void Draw(Graphics pGraphics)
     {
-        if (!m_visible) return;
+        if (!m_visible)
+        {
+            return;
+        }
 
         base.Draw(pGraphics);
 

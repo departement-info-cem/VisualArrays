@@ -76,8 +76,9 @@ public class ImageElement:CellVisualElement
             }
         }
         else
+        {
             throw new VisualArrayException("Impossible de charger l'image : " + pImageFileName);
-
+        }
     }
     #endregion
     //-------------------------------------------------------------------------------------

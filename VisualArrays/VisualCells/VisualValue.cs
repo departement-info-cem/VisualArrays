@@ -42,7 +42,11 @@ public abstract partial class VisualValue<BaseType> : Control, IComparable<Visua
     /// </summary>
     internal CellVisualElement.CellVisualElement GetNewBkgVisualElement(IBackgroundAppearance pBackgroundAppearance)
     {
-        if (pBackgroundAppearance == null) return null;
+        if (pBackgroundAppearance == null)
+        {
+            return null;
+        }
+
         switch (pBackgroundAppearance.Style)
         {
             case enuBkgStyle.None:
@@ -76,7 +80,11 @@ public abstract partial class VisualValue<BaseType> : Control, IComparable<Visua
         get => m_showIndex;
         set
         {
-            if (value == m_showIndex) return;
+            if (value == m_showIndex)
+            {
+                return;
+            }
+
             m_showIndex = value;
             DrawContent(CreateGraphics());
         }
@@ -93,7 +101,9 @@ public abstract partial class VisualValue<BaseType> : Control, IComparable<Visua
         {
             m_index = value;
             if (m_showIndex) // si nécessaire alors redessiner le contrôle
+            {
                 DrawContent(CreateGraphics());
+            }
         }
     }
     #endregion
@@ -236,25 +246,31 @@ public abstract partial class VisualValue<BaseType> : Control, IComparable<Visua
     {
         // code pour dessiner la bordure
         if (m_borderSize > 0)
+        {
             using (Pen cr = new(m_borderColor, m_borderSize))
             {
                 pGraphics.DrawRectangle(cr, m_borderSize >> 1, m_borderSize >> 1, Width - m_borderSize, Height - m_borderSize);
             }
+        }
 
         if (!m_hideFocusRect)
         {
             if (ContainsFocus)
                 // code pour dessiner le focus
+            {
                 using (Pen cr = new(m_focusColor))
                 {
                     cr.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
                     pGraphics.DrawRectangle(cr, 1, 1, Width - 3, Height - 3);
                 }
+            }
             else if (BorderSize < 2)
+            {
                 using (Pen cr = new(BackColor))
                 {
                     pGraphics.DrawRectangle(cr, 1, 1, Width - 3, Height - 3);
                 }
+            }
         }
     }
     #endregion

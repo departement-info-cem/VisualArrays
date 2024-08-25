@@ -32,16 +32,24 @@ public abstract class Sprite : Component
     {
         bool inBounds = Visible && Rectangle.Intersect(m_bounds, pRectangle) != Rectangle.Empty;
         if (m_tabCells.Count == 0)
+        {
             return inBounds;
+        }
 
-        if (!inBounds) return false;
+        if (!inBounds)
+        {
+            return false;
+        }
+
         // On va déterminer la zone qu'occupe les points dans le Sprite
         int row = (pRectangle.Y - Bounds.Top) / m_cellHeight + m_minRow;
         int col = (pRectangle.X - Bounds.Left) / m_cellWidth + m_minCol;
         foreach (Address adr in m_tabCells)
         {
             if (adr.Row == row && adr.Column == col)
+            {
                 return true;
+            }
         }
         return false;
     }
@@ -71,13 +79,24 @@ public abstract class Sprite : Component
         foreach (Address adr in m_tabCells)
         {
             if (adr.Row < m_minRow)
+            {
                 m_minRow = adr.Row;
+            }
+
             if (adr.Column < m_minCol)
+            {
                 m_minCol = adr.Column;
+            }
+
             if (adr.Row > m_maxRow)
+            {
                 m_maxRow = adr.Row;
+            }
+
             if (adr.Column > m_maxCol)
+            {
                 m_maxCol = adr.Column;
+            }
         }
         m_rowCount = m_maxRow - m_minRow + 1;
         m_colCount = m_maxCol - m_minCol + 1;
@@ -111,14 +130,21 @@ public abstract class Sprite : Component
         {
             List<Address> liste = new List<Address>();
             if (m_displayIndex == -1)
+            {
                 liste.Add(new Address(-1, -1));
+            }
             else if (m_tabCells.Count == 0)
+            {
                 liste.Add(DisplayAddress);
+            }
             else
+            {
                 foreach (Address adr in m_tabCells)
                 {
                     liste.Add(new Address(DisplayAddress.Row + adr.Row, DisplayAddress.Column + adr.Column));
                 }
+            }
+
             return liste;
         }
     }
@@ -134,14 +160,21 @@ public abstract class Sprite : Component
         {
             List<int> liste = new List<int>();
             if (m_displayIndex == -1)
+            {
                 liste.Add(-1);
+            }
             else if (m_tabCells.Count == 0)
+            {
                 liste.Add(DisplayIndex);
+            }
             else
+            {
                 foreach (Address adr in m_tabCells)
                 {
                     liste.Add(m_owner.IndexFromAddress(DisplayAddress.Row + adr.Row, DisplayAddress.Column + adr.Column));
                 }
+            }
+
             return liste;
         }
     }
@@ -175,7 +208,11 @@ public abstract class Sprite : Component
         set
         {
             m_offsetX = value;
-            if (m_owner == null) return;
+            if (m_owner == null)
+            {
+                return;
+            }
+
             RecalcBoundsAndRedraw();
         }
     }
@@ -196,7 +233,11 @@ public abstract class Sprite : Component
         set
         {
             m_offsetY = value;
-            if (m_owner == null) return;
+            if (m_owner == null)
+            {
+                return;
+            }
+
             RecalcBoundsAndRedraw();
         }
     }
@@ -219,7 +260,11 @@ public abstract class Sprite : Component
         set
         {
             m_alignment = value;
-            if (m_owner == null) return;
+            if (m_owner == null)
+            {
+                return;
+            }
+
             RecalcBoundsAndRedraw();
         }
     }
@@ -245,7 +290,11 @@ public abstract class Sprite : Component
         set
         {
             m_alignOnGrid = value;
-            if (m_owner == null) return;
+            if (m_owner == null)
+            {
+                return;
+            }
+
             RecalcBoundsAndRedraw();
         }
     }
@@ -259,9 +308,13 @@ public abstract class Sprite : Component
         if (m_displayIndex == -1)
         {
             if (m_alignOnGrid)
+            {
                 m_bounds = CellVisualElement.CellVisualElement.BoundsFromAlignment(m_owner.GridBounds, Size, m_alignment);
+            }
             else
+            {
                 m_bounds = new Rectangle(m_location, m_size);
+            }
         }
         else
         {
@@ -326,7 +379,9 @@ public abstract class Sprite : Component
         {
             m_allowDrag = value;
             if (m_allowDrag)
+            {
                 AcceptClick = true;
+            }
         }
     }
     #endregion
@@ -477,14 +532,20 @@ public abstract class Sprite : Component
             int startIndex = m_displayIndex;
             int lastIndex = pFuturIndex;
             if (pFuturIndex > startIndex)
+            {
                 for (int index = startIndex; index <= lastIndex; index++)
                     AnimateToIndex(index);
+            }
             else
+            {
                 for (int index = startIndex; index >= lastIndex; index--)
                     AnimateToIndex(index);
+            }
         }
         else
+        {
             AnimateToIndex(pFuturIndex);
+        }
     }
     /// <summary>
     /// Permet de déplacer graduellement le Sprite d'un DisplayIndex à un autre 
@@ -492,7 +553,10 @@ public abstract class Sprite : Component
     /// <param name="pFuturIndex">Index futur à atteindre</param>
     private void AnimateToIndex(int pFuturIndex)
     {
-        if (pFuturIndex == m_displayIndex) return;
+        if (pFuturIndex == m_displayIndex)
+        {
+            return;
+        }
 
         int nbPas = m_duration * m_frameRate / 1000;
         int delai = m_duration / nbPas;
@@ -536,7 +600,9 @@ public abstract class Sprite : Component
             pGrille.Invoke(unDel, pGrille, pSprite, pPos);
         }
         else
+        {
             MoveTo(pPos);
+        }
     } 
 
 
@@ -649,7 +715,9 @@ public abstract class Sprite : Component
         get
         {
             if (m_displayIndex == -1)
+            {
                 return new Address(-1, -1);
+            }
 
             if (m_owner != null)
             {
@@ -663,7 +731,10 @@ public abstract class Sprite : Component
             if (m_owner != null)
             {
                 if (value.Row < 0 || value.Row >= m_owner.RowCount || value.Column < 0 || value.Column >= m_owner.ColumnCount)
+                {
                     throw new VisualArrayException("Cette adresse n'est pas valide : row = " + value.Row + " , column = " + value.Column);
+                }
+
                 DisplayIndex = value.Row * m_owner.ColumnCount + value.Column;
             }
         }
@@ -688,7 +759,10 @@ public abstract class Sprite : Component
     /// </summary>
     public void MoveTo(Point pLocation)
     {
-        if (m_owner == null) return;
+        if (m_owner == null)
+        {
+            return;
+        }
         //DisplayIndex = NO_INDEX; // il faut modifier DisplayIndex pour ne rien faire dans ce cas
         //Address = NO_ADDRESS; // il faut modifier Address pour ne rien faire dans ce cas
         // determiner la zone à mettre a jour
@@ -804,25 +878,33 @@ public abstract class Sprite : Component
         {
             case enuDirection.Left:
                 if (DisplayAddress.Column - 1 < 0)
+                {
                     throw new VisualArrayException("Débordement de la grille : DisplayAddress.Column = " + (DisplayAddress.Column - 1));
+                }
 
                 MoveTo(DisplayAddress.Row, DisplayAddress.Column - 1);
                 break;
             case enuDirection.Top:
                 if (DisplayAddress.Row - 1 < 0)
+                {
                     throw new VisualArrayException("Débordement de la grille : DisplayAddress.Row = " + (DisplayAddress.Row - 1));
+                }
 
                 MoveTo(DisplayAddress.Row - 1, DisplayAddress.Column);
                 break;
             case enuDirection.Right:
                 if (Owner != null && DisplayAddress.Column + 1 >= Owner.ColumnCount)
+                {
                     throw new VisualArrayException("Débordement de la grille : DisplayAddress.Column = " + (DisplayAddress.Column + 1));
+                }
 
                 MoveTo(DisplayAddress.Row, DisplayAddress.Column + 1);
                 break;
             case enuDirection.Bottom:
                 if (Owner != null && DisplayAddress.Row + 1 >= Owner.RowCount)
+                {
                     throw new VisualArrayException("Débordement de la grille : DisplayAddress.Row = " + (DisplayAddress.Row + 1));
+                }
 
                 MoveTo(DisplayAddress.Row + 1, DisplayAddress.Column);
                 break;
@@ -835,7 +917,9 @@ public abstract class Sprite : Component
     {
         m_direction++;
         if (m_direction > enuDirection.Bottom)
+        {
             m_direction = enuDirection.Left;
+        }
     }
     /// <summary>
     /// Change la direction du Sprite pour une direction différente, séquentiellement ou aléatoirement.
@@ -843,7 +927,11 @@ public abstract class Sprite : Component
     /// <param name="pRandomDirection">true, pour que la nouvelle direction soit choisie aléatoirement</param>
     public void ChangeDirection(bool pRandomDirection)
     {
-        if (m_owner == null) return;
+        if (m_owner == null)
+        {
+            return;
+        }
+
         m_direction = m_owner.RandomDirection(m_direction);
     }
     #endregion
@@ -946,7 +1034,11 @@ public abstract class Sprite : Component
             if (value != m_size)
             {
                 m_size = value;
-                if (m_owner == null) return;
+                if (m_owner == null)
+                {
+                    return;
+                }
+
                 RecalcBoundsAndRedraw();
             }
         }
@@ -979,7 +1071,11 @@ public abstract class Sprite : Component
             if (value != m_location)
             {
                 m_location = value;
-                if (m_owner == null) return;
+                if (m_owner == null)
+                {
+                    return;
+                }
+
                 RecalcBoundsAndRedraw();
             }
         }

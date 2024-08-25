@@ -165,8 +165,15 @@ public class ShapeElement : CellVisualElement
     internal static void GetRoundRectPath(GraphicsPath pPath, Rectangle r, int dia)
     {
         // diameter can't exceed width or height
-        if (dia > r.Width) dia = r.Width;
-        if (dia > r.Height) dia = r.Height;
+        if (dia > r.Width)
+        {
+            dia = r.Width;
+        }
+
+        if (dia > r.Height)
+        {
+            dia = r.Height;
+        }
 
         // define a corner 
         Rectangle Corner = r with { Width = dia, Height = dia };

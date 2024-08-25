@@ -154,7 +154,11 @@ public class SpriteCollection : CollectionBase
     public int IndexOf(Sprite pSprite)
     {
         for (int index = 0; index < Count; index++)
-            if (this[index] == pSprite) return index;
+            if (this[index] == pSprite)
+            {
+                return index;
+            }
+
         return -1;
     }
     /// <summary>

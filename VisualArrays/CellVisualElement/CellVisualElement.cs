@@ -36,8 +36,16 @@ public abstract class CellVisualElement
         get => va_zoom;
         set
         {
-            if (value > 100) value = 100;
-            if (value < 5) value = 5;
+            if (value > 100)
+            {
+                value = 100;
+            }
+
+            if (value < 5)
+            {
+                value = 5;
+            }
+
             va_zoom = value;
         }
     }

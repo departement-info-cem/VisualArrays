@@ -110,12 +110,19 @@ public partial class VisualBoolArray : VisualValueArray<bool>
 
         // Étape 1 : On commence par dessiner le fond de la grille
         if (BackgroundImage != null)
+        {
             pGraphics.DrawImage(BackgroundImage, cellBounds, cellBounds, GraphicsUnit.Pixel);
+        }
         else
+        {
             pGraphics.FillRectangle(new SolidBrush(BackColor), cellBounds);
+        }
 
         // Étape 2 : Si la cellule n'est pas visible, alors on quitte (sans même afficher son adresse)
-        if (!cell.Visible) return;
+        if (!cell.Visible)
+        {
+            return;
+        }
 
 
         // Étape 3 : Si l'utilisateur désire dessiner lui même le contenu de la cellule
@@ -161,15 +168,21 @@ public partial class VisualBoolArray : VisualValueArray<bool>
 
         // Étape 5 : Si la cellule est inactive et qu'une raillure doit être dessinée
         if (!cell.Enabled && va_disabledAppearance.StrikeAppearance.Style != enuStrikeStyle.None)
+        {
             DrawStrike(pGraphics, cellBounds, va_disabledAppearance);
+        }
 
         // Étape 6 : Si la cellule est sélectionnée, alors on doit dessiner la sélection
         if (cell.Selected)
+        {
             DrawSelection(pGraphics, pRow, pColumn);
+        }
 
         // Étape 7 : Si nous sommes en mode désign alors on doit dessiner l'adresse de la cellule
         if (DesignMode)
+        {
             DrawAddress(pGraphics, pRow, pColumn);
+        }
     }
 
     #endregion
@@ -184,7 +197,9 @@ public partial class VisualBoolArray : VisualValueArray<bool>
     protected override void OnMouseWheel(MouseEventArgs e)
     {
         if (SelectedIndex != -1 && !ReadOnly && va_selectionMode == SelectionMode.One && !va_tabCells[SelectedAddress.Row,SelectedAddress.Column].ReadOnly)
+        {
             this[SelectedIndex] = !this[SelectedIndex];
+        }
     }
     //============================================================================================
     /// <summary>

@@ -84,9 +84,15 @@ public partial class VisualInt : VisualGraph<int>
                 m_minimum = value;
 
                 if (m_value < m_minimum)
+                {
                     Value = m_minimum;
+                }
+
                 if (m_minimum > m_maximum)
+                {
                     Maximum = value;
+                }
+
                 //if (!DesignMode)
                 Refresh();
             }
@@ -108,9 +114,15 @@ public partial class VisualInt : VisualGraph<int>
             {
                 m_maximum = value;
                 if (m_value > m_maximum)
+                {
                     Value = m_maximum;
+                }
+
                 if (m_maximum < m_minimum)
+                {
                     Minimum = value;
+                }
+
                 //if (!DesignMode)
                 Refresh();
             }
@@ -128,7 +140,9 @@ public partial class VisualInt : VisualGraph<int>
         set
         {
             if (value < m_minimum || value > m_maximum)
+            {
                 throw new ArgumentOutOfRangeException("La valeur '" + value + "' n'est pas valide, elle doit être comprise entre 'Minimum' et 'Maximum'");
+            }
 
             m_value = value;
             Refresh();
@@ -139,7 +153,9 @@ public partial class VisualInt : VisualGraph<int>
     private void SetValueWithoutValueChanged(int pValue)
     {
         if (pValue < m_minimum || pValue > m_maximum)
+        {
             throw new ArgumentOutOfRangeException("La valeur '" + pValue + "' n'est pas valide, elle doit être comprise entre 'Minimum' et 'Maximum'");
+        }
 
         m_value = pValue;
         Refresh();
@@ -155,7 +171,9 @@ public partial class VisualInt : VisualGraph<int>
     protected override void DrawContent(Graphics pGraphics)
     {
         if (pGraphics == null)
+        {
             pGraphics = CreateGraphics();
+        }
 
         Rectangle cellBounds = new(Padding.Left, Padding.Top, Width - (Padding.Left + Padding.Right), Height - (Padding.Top + Padding.Bottom));
         // Étape 1 : On commence par dessiner le fond de la cellule
@@ -188,9 +206,14 @@ public partial class VisualInt : VisualGraph<int>
                     break;
                 case enuIntView.ImageList:
                     if (m_imageList != null && m_value >= m_imageList.Images.Count)
+                    {
                         VisualArraysTools.DrawText(pGraphics, cellBounds, m_value.ToString(), ForeColor, Font, m_valueAlign);
+                    }
                     else
+                    {
                         DrawValueFromImageList(pGraphics, cellBounds);
+                    }
+
                     break;
                 case enuIntView.GraphNumber:
                     VisualArraysTools.DrawBar(pGraphics, cellBounds, GraphAppearance, m_minimum, m_maximum, m_value);
@@ -217,9 +240,13 @@ public partial class VisualInt : VisualGraph<int>
                 Image objImage = m_imageList.Images[m_value];
                 Rectangle imageBounds = CellVisualElement.CellVisualElement.BoundsFromAlignment(pCellBounds, objImage.Size, m_valueAlign);
                 if (Enabled)
+                {
                     pGraphics.DrawImage(objImage, new Point(imageBounds.Left, imageBounds.Top));
+                }
                 else
+                {
                     VisualArraysTools.DrawDisabledImage(pGraphics, imageBounds, objImage, 0.2f);
+                }
             }
             else
             {
@@ -228,7 +255,9 @@ public partial class VisualInt : VisualGraph<int>
             }
         }
         else // il n'y pas d'imageList d'associé avec la grille
+        {
             VisualArraysTools.DrawText(pGraphics, pCellBounds, "?", ForeColor, Font, m_valueAlign);
+        }
     }
     #endregion
 
@@ -252,9 +281,13 @@ public partial class VisualInt : VisualGraph<int>
         if (ModifierKeys == Keys.Alt)
         {
             if (m_view < enuIntView.GraphNumber)
+            {
                 View++;
+            }
             else
+            {
                 View = enuIntView.Number;
+            }
         }
         else
         {
@@ -291,7 +324,9 @@ public partial class VisualInt : VisualGraph<int>
                 }
             }
             else
+            {
                 Focus();
+            }
         }
     }
     //============================================================================================
@@ -304,7 +339,11 @@ public partial class VisualInt : VisualGraph<int>
         if (!ReadOnly)
         {
             int delta = (m_maximum - m_minimum) / 10;
-            if (delta < 1) delta = 1;
+            if (delta < 1)
+            {
+                delta = 1;
+            }
+
             int valeur = m_value;
             switch (e.Delta)
             {
@@ -315,8 +354,16 @@ public partial class VisualInt : VisualGraph<int>
                     valeur -= delta;
                     break;
             }
-            if (valeur < m_minimum) valeur = m_minimum;
-            if (valeur > m_maximum) valeur = m_maximum;
+            if (valeur < m_minimum)
+            {
+                valeur = m_minimum;
+            }
+
+            if (valeur > m_maximum)
+            {
+                valeur = m_maximum;
+            }
+
             Value = valeur;
         }
     }
@@ -346,12 +393,24 @@ public partial class VisualInt : VisualGraph<int>
             int valeurObtenue;
             if (VisualArraysTools.ReadInt(e.KeyChar,m_value,m_maximum,out valeurObtenue))
             {
-                if (valeurObtenue < m_minimum) valeurObtenue = m_minimum;
-                if (valeurObtenue > m_maximum) valeurObtenue = m_maximum;
+                if (valeurObtenue < m_minimum)
+                {
+                    valeurObtenue = m_minimum;
+                }
+
+                if (valeurObtenue > m_maximum)
+                {
+                    valeurObtenue = m_maximum;
+                }
+
                 if (WaitForEnter)
+                {
                     SetValueWithoutValueChanged(valeurObtenue);
+                }
                 else
+                {
                     Value = valeurObtenue;
+                }
             }
         }
         base.OnKeyPress(e);
@@ -374,9 +433,14 @@ public partial class VisualInt : VisualGraph<int>
     public void RandomizeValue(int pMinimum, int pMaximum)
     {
         if (pMinimum < Minimum)
+        {
             throw new ArgumentOutOfRangeException("pMinimum ne peut être inférieure à la propriété Minimum");
+        }
+
         if (pMaximum > Maximum)
+        {
             throw new ArgumentOutOfRangeException("pMaximum ne peut être supérieure à la propriété Maximum");
+        }
 
         Value = VisualArraysTools.RandomInt(pMinimum, pMaximum + 1);
     }

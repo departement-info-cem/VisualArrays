@@ -57,7 +57,9 @@ public class SelectionAppearance
         get => image;
         set {
             if (value != image)
-                image = value; 
+            {
+                image = value;
+            }
         }
     }
     //===========================================================================================
@@ -75,7 +77,9 @@ public class SelectionAppearance
         get => style;
         set { 
             if (value != style)
-                style = value; 
+            {
+                style = value;
+            }
         }
     }
     //============================================================================================
@@ -93,7 +97,9 @@ public class SelectionAppearance
         get => shape;
         set {
             if (value != shape)
-                shape = value; 
+            {
+                shape = value;
+            }
         }
     }
     //============================================================================================
@@ -118,7 +124,9 @@ public class SelectionAppearance
                     value,
                     "doit être >= 1");                }
             if (value != penWidth)
+            {
                 penWidth = value;
+            }
         }
     }
     //============================================================================================
@@ -135,8 +143,10 @@ public class SelectionAppearance
     {
         get => color;
         set {
-            if (value != color) 
-                color = value; 
+            if (value != color)
+            {
+                color = value;
+            }
         }
     }
 
@@ -163,7 +173,9 @@ public class SelectionAppearance
                     "doit être >= 1");
             }
             if (value != radius)
+            {
                 radius = value;
+            }
         }
     }
 }

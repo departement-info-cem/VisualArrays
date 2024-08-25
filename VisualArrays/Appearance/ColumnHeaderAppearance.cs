@@ -187,9 +187,14 @@ public class ColumnHeaderAppearance
             {
                 m_visible = value;
                 if (m_visible)
+                {
                     m_owner.va_enteteColHaut = m_height;
+                }
                 else
+                {
                     m_owner.va_enteteColHaut = 0;
+                }
+
                 m_owner.ReCalculerTaille();
                 m_owner.Refresh();
             }

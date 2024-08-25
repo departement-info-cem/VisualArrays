@@ -51,7 +51,11 @@ public class SegmentSprite : Sprite
             if (value != m_opacity)
             {
                 m_opacity = value;
-                if (m_owner == null) return;
+                if (m_owner == null)
+                {
+                    return;
+                }
+
                 m_owner.UpdateSprites(m_bounds);
             }
         }
@@ -78,7 +82,11 @@ public class SegmentSprite : Sprite
             if (value != m_bulletSize)
             {
                 m_bulletSize = value;
-                if (m_owner == null) return;
+                if (m_owner == null)
+                {
+                    return;
+                }
+
                 RecalcBoundsAndRedraw();
             }
         }
@@ -98,7 +106,9 @@ public class SegmentSprite : Sprite
         {
             m_destinationIndex = value;
             if (m_owner != null)
+            {
                 RecalcBoundsAndRedraw();
+            }
         }
     }
 
@@ -117,7 +127,9 @@ public class SegmentSprite : Sprite
         get
         {
             if (m_destinationIndex == -1)
+            {
                 return new Address(-1, -1);
+            }
 
             if (m_owner != null)
             {
@@ -131,7 +143,10 @@ public class SegmentSprite : Sprite
             if (m_owner != null)
             {
                 if (value.Row < 0 || value.Row >= m_owner.RowCount || value.Column < 0 || value.Column >= m_owner.ColumnCount)
+                {
                     throw new VisualArrayException("Cette adresse n'est pas valide : row = " + value.Row + " , column = " + value.Column);
+                }
+
                 DestinationIndex = value.Row * m_owner.ColumnCount + value.Column;
             }
         }

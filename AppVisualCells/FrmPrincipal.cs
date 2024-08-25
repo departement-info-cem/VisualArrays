@@ -200,17 +200,27 @@ namespace AppVisualCells;
             Address da = e.Sprite.DisplayAddress;
 
             if (e.Sprite.IsMoving)
+            {
                 e.Sprite.Visible = false;
+            }
 
             if (da.Column == 0)
+            {
                 da.Column = viaTestThread.ColumnCount - 1;
+            }
             else
+            {
                 da.Column = 0;
+            }
 
             if (da.Row == 0)
+            {
                 da.Row = viaTestThread.RowCount -1;
+            }
             else
+            {
                 da.Row = 0;
+            }
 
             e.Sprite.DisplayAddress = da;
         }

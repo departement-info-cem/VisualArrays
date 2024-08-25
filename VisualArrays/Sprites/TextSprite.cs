@@ -24,7 +24,11 @@ public class TextSprite : Sprite
         set
         {
             m_text = value;
-            if (m_owner == null) return;
+            if (m_owner == null)
+            {
+                return;
+            }
+
             RecalcBoundsAndRedraw();
         }
     }
@@ -57,7 +61,11 @@ public class TextSprite : Sprite
         set
         {
             m_font = value;
-            if (m_owner == null) return;
+            if (m_owner == null)
+            {
+                return;
+            }
+
             RecalcBoundsAndRedraw();
         }
     }
@@ -134,7 +142,11 @@ public class TextSprite : Sprite
             if (value != m_radius)
             {
                 m_radius = value;
-                if (m_owner == null) return;
+                if (m_owner == null)
+                {
+                    return;
+                }
+
                 m_owner.UpdateSprites(m_bounds);
             }
         }
@@ -160,7 +172,11 @@ public class TextSprite : Sprite
             if (value != m_opacity)
             {
                 m_opacity = value;
-                if (m_owner == null) return;
+                if (m_owner == null)
+                {
+                    return;
+                }
+
                 m_owner.UpdateSprites(m_bounds);
             }
         }
@@ -188,7 +204,11 @@ public class TextSprite : Sprite
             if (value != m_margin)
             {
                 m_margin = value;
-                if (m_owner == null) return;
+                if (m_owner == null)
+                {
+                    return;
+                }
+
                 RecalcBoundsAndRedraw();
             }
         }

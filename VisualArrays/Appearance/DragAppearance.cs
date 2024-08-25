@@ -57,7 +57,9 @@ public class DragAppearance
         get => image;
         set {
             if (value != image)
-                image = value; 
+            {
+                image = value;
+            }
         }
     }
     //============================================================================================
@@ -83,7 +85,9 @@ public class DragAppearance
                     "doit être >= 0 et <= 255");
             }
             if (value != alpha)
+            {
                 alpha = value;
+            }
         }
     }
     //===========================================================================================
@@ -101,7 +105,9 @@ public class DragAppearance
         get => style;
         set { 
             if (value != style)
-                style = value; 
+            {
+                style = value;
+            }
         }
     }
     //============================================================================================
@@ -119,7 +125,9 @@ public class DragAppearance
         get => shape;
         set {
             if (value != shape)
-                shape = value; 
+            {
+                shape = value;
+            }
         }
     }
     //============================================================================================
@@ -144,7 +152,9 @@ public class DragAppearance
                     value,
                     "doit être >= 1");                }
             if (value != penWidth)
+            {
                 penWidth = value;
+            }
         }
     }
     //============================================================================================
@@ -161,8 +171,10 @@ public class DragAppearance
     {
         get => color;
         set {
-            if (value != color) 
-                color = value; 
+            if (value != color)
+            {
+                color = value;
+            }
         }
     }
 
@@ -182,7 +194,9 @@ public class DragAppearance
         set
         {
             if (value != showSource)
+            {
                 showSource = value;
+            }
         }
     }
     //===========================================================================================
@@ -208,7 +222,9 @@ public class DragAppearance
                     "doit être >= 1");
             }
             if (value != radius)
+            {
                 radius = value;
+            }
         }
     }
 }

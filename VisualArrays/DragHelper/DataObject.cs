@@ -170,7 +170,9 @@ public class DataObject : IDataObject, IDisposable
     {
         // We only support GET
         if (DATADIR.DATADIR_GET == direction)
+        {
             return new EnumFORMATETC(storage);
+        }
 
         throw new NotImplementedException("OLE_S_USEREG");
     }
@@ -210,7 +212,9 @@ public class DataObject : IDataObject, IDisposable
     {
         // We only support CONTENT aspect
         if ((DVASPECT.DVASPECT_CONTENT & format.dwAspect) == 0)
+        {
             return DV_E_DVASPECT;
+        }
 
         int ret = DV_E_TYMED;
 
@@ -265,7 +269,9 @@ public class DataObject : IDataObject, IDisposable
         // If not, we'll make a copy of it.
         STGMEDIUM sm = medium;
         if (!release)
+        {
             sm = CopyMedium(ref medium);
+        }
 
         // Add it to the internal storage
         KeyValuePair<FORMATETC, STGMEDIUM> addPair = new KeyValuePair<FORMATETC, STGMEDIUM>(formatIn, sm);
@@ -282,7 +288,9 @@ public class DataObject : IDataObject, IDisposable
         STGMEDIUM sm = new();
         int hr = CopyStgMedium(ref medium, ref sm);
         if (hr != 0)
+        {
             throw Marshal.GetExceptionForHR(hr);
+        }
 
         return sm;
 
@@ -353,7 +361,9 @@ public class DataObject : IDataObject, IDisposable
         {
             // Start with zero fetched, in case we return early
             if (pceltFetched is { Length: > 0 })
+            {
                 pceltFetched[0] = 0;
+            }
 
             // This will count down as we fetch elements
             int cReturn = celt;
@@ -362,17 +372,23 @@ public class DataObject : IDataObject, IDisposable
             // provide room in the return array, or there are not more elements
             // to enumerate.
             if (celt <= 0 || rgelt == null || currentIndex >= formats.Length)
+            {
                 return 1; // S_FALSE
+            }
 
             // If the number of requested elements is not one, then we must
             // be able to tell the caller how many elements were fetched.
             if ((pceltFetched == null || pceltFetched.Length < 1) && celt != 1)
+            {
                 return 1; // S_FALSE
+            }
 
             // If the number of elements in the return array is too small, we
             // throw. This is not a likely scenario, hence the exception.
             if (rgelt.Length < celt)
+            {
                 throw new ArgumentException("The number of elements in the return array is less than the number of elements requested");
+            }
 
             // Fetch the elements.
             for (int i = 0; currentIndex < formats.Length && cReturn > 0; i++, cReturn--, currentIndex++)
@@ -380,7 +396,9 @@ public class DataObject : IDataObject, IDisposable
 
             // Return the number of elements fetched
             if (pceltFetched is { Length: > 0 })
+            {
                 pceltFetched[0] = celt - cReturn;
+            }
 
             // cReturn has the number of elements requested but not fetched.
             // It will be greater than zero, if multiple elements were requested
@@ -406,7 +424,9 @@ public class DataObject : IDataObject, IDisposable
         public int Skip(int celt)
         {
             if (currentIndex + celt > formats.Length)
+            {
                 return 1; // S_FALSE
+            }
 
             currentIndex += celt;
             return 0; // S_OK

@@ -55,7 +55,11 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
     /// <returns></returns>
     public virtual bool IsOkToSelect(Cell pCell,int pRow,int pColumn)
     {
-        if (pCell == null) pCell = va_tabCells[pRow, pColumn];
+        if (pCell == null)
+        {
+            pCell = va_tabCells[pRow, pColumn];
+        }
+
         return pCell.Visible && pCell.Enabled;
     }
     #endregion
@@ -267,7 +271,11 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
         get => va_delay;
         set
         {
-            if (va_delay == value) return;
+            if (va_delay == value)
+            {
+                return;
+            }
+
             va_delay = value;
             switch (va_delay)
             {
@@ -302,7 +310,10 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
         get => va_allowSelfDrop;
         set {
             if (value)
+            {
                 AllowDrop = true;
+            }
+
             va_allowSelfDrop = value; }
     }
     //============================================================================================
@@ -336,7 +347,9 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
         //base.Refresh();
         //if (m_load)
         if (Parent != null)
+        {
             OnPaint(new PaintEventArgs(CreateGraphics(), ClientRectangle));
+        }
         //CreateGraphics().DrawImage(va_offScreenBitMap, ClientRectangle);
     }
     //============================================================================================
@@ -456,8 +469,10 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
                         Address displayAddressSelf = pFuturAddress;
                         displayAddressSelf.Column += adrSelf.Column;
                         displayAddressSelf.Row += adrSelf.Row;
-                        if (displayAddressOther == displayAddressSelf) 
+                        if (displayAddressOther == displayAddressSelf)
+                        {
                             return true;
+                        }
                     }
                 }
             }
@@ -487,7 +502,9 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
         {
             if (pFuturAddress.Row + adr.Row < 0 || pFuturAddress.Row + adr.Row >= RowCount ||
                 pFuturAddress.Column + adr.Column < 0 || pFuturAddress.Column + adr.Column >= ColumnCount)
+            {
                 return false;
+            }
         }
         return true;
     }
@@ -535,14 +552,21 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
         set
         {
             if (va_selectionMode == SelectionMode.None)
+            {
                 throw new VisualArrayException("Impossible de modifier la valeur de SelectedAddress lorsque SelectionMode est None.");
+            }
 
             if (value == Address.Empty) { SelectedIndex = -1; return; } // façon de désélectionner à l'aide de cette propriété
 
             if (value.Column < 0 || value.Column >= va_columnCount || value.Row < 0 || value.Row >= va_rowCount)
+            {
                 throw new VisualArrayException("La valeur : '" + value + "' n'est pas valide pour le SelectedAddress.");
+            }
 
-            if (SelectedAddress == value) return; // pas de changement
+            if (SelectedAddress == value)
+            {
+                return; // pas de changement
+            }
 
             SelectedIndex = value.Row * va_columnCount + value.Column;
         }
@@ -559,12 +583,20 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
         get { return va_selectedIndex; }
         set
         {
-            if (va_selectedIndex == value) return; // pas de changement
+            if (va_selectedIndex == value)
+            {
+                return; // pas de changement
+            }
 
             if (va_selectionMode == SelectionMode.None)
+            {
                 throw new VisualArrayException("Impossible de modifier la valeur de SelectedIndex lorsque SelectionMode est None.");
+            }
+
             if (value < -1 || value >= Length)
+            {
                 throw new VisualArrayException("La valeur : '" + value + "' n'est pas valide pour le SelectedIndex.");
+            }
 
             int oldSelectedIndex = va_selectedIndex;
             Address adresse;
@@ -596,7 +628,9 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
                             UpdateCellAndSprites(va_selectedIndex);
                         }
                         else
+                        {
                             throw new VisualArrayException("Imposible de sélectionner une cellule qui n'est pas visible et active");
+                        }
                     }
                     else // on passe d'une sélection à une autre
                     {
@@ -611,7 +645,9 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
                             UpdateCellAndSprites(va_selectedIndex);
                         }
                         else
+                        {
                             throw new VisualArrayException("Imposible de sélectionner une cellule qui n'est pas visible et active");
+                        }
                     }
 
                     SelectedIndexChanged?.Invoke(this, new EventArgs());
@@ -642,15 +678,22 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
                         adresse = AddressFromIndex(va_selectedIndex);
                         cell = va_tabCells[adresse.Row, adresse.Column];
                         if (!IsOkToSelect(cell, adresse.Row, adresse.Column))
+                        {
                             throw new VisualArrayException("Imposible de sélectionner une cellule qui n'est pas visible et active");
+                        }
 
-                        if (cell.Selected) return; // cette cellule est déjà sélectionnée, donc rien à faire.
+                        if (cell.Selected)
+                        {
+                            return; // cette cellule est déjà sélectionnée, donc rien à faire.
+                        }
 
                         cell.Selected = true; // on va sélectionner la cellule
                         UpdateCellAndSprites(va_selectedIndex);
 
                         if (va_selectedIndex > oldSelectedIndex && oldSelectedIndex != -1)
+                        {
                             va_selectedIndex = oldSelectedIndex; // conserve l'ancien SelectedIndex
+                        }
                         else
                         {
                             SelectedIndexChanged?.Invoke(this, new EventArgs());
@@ -680,7 +723,10 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
             for (int row = 0; row < va_rowCount; row++)
             for (int column = 0; column < va_columnCount; column++)
                 if (va_tabCells[row, column].Selected)
+                {
                     liste.Add(AddressFromAddressMode(row,column));
+                }
+
             return liste;
         }
     }
@@ -697,7 +743,10 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
             for (int row = 0; row < va_rowCount; row++)
             for (int column = 0; column < va_columnCount; column++)
                 if (va_tabCells[row, column].Selected)
+                {
                     liste.Add(IndexFromAddress(row,column));
+                }
+
             return liste;
         }
     }
@@ -1236,7 +1285,11 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
     /// </summary>
     internal void UpdateCellsBkgVisualElement(IBackgroundAppearance pBackgroundAppearance)
     {
-        if (pBackgroundAppearance == null) return;
+        if (pBackgroundAppearance == null)
+        {
+            return;
+        }
+
         switch (pBackgroundAppearance.Style)
         {
             case enuBkgStyle.None:
@@ -1386,10 +1439,15 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
                     throw new VisualArrayException("Le nombre de rangées ne doit pas dépasser " + NB_RANGÉES_MAXIMUM);
             }
 
-            if (va_rowCount == value) return;
+            if (va_rowCount == value)
+            {
+                return;
+            }
 
-            if (SelectedAddress.Row >= value) 
+            if (SelectedAddress.Row >= value)
+            {
                 SelectedIndex = -1; // pour enlever la sélection si la grille est trop petite
+            }
 
             Cell[,] oldTab = va_tabCells;
             va_tabCells = new Cell[value, va_columnCount];
@@ -1439,10 +1497,15 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
                     throw new VisualArrayException("Le nombre de colonnes ne doit pas dépasser " + NB_COLONNES_MAXIMUM);
             }
 
-            if (va_columnCount == value) return;
+            if (va_columnCount == value)
+            {
+                return;
+            }
 
-            if (SelectedAddress.Column >= value) 
+            if (SelectedAddress.Column >= value)
+            {
                 SelectedIndex = -1; // pour enlever la sélection si la grille est trop petite
+            }
 
             Cell[,] oldTab = va_tabCells;
             va_tabCells = new Cell[va_rowCount, value];
@@ -1486,11 +1549,19 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
             int startCol = newCol;
 
             if (newRow >= RowCount)
+            {
                 newRow = RowCount - 1;
+            }
+
             if (newCol >= ColumnCount)
+            {
                 newCol = ColumnCount - 1;
+            }
+
             if (newRow != startRow || newCol != startCol)
+            {
                 sprite.DisplayAddress = new Address(newRow, newCol);
+            }
         }
     }
     ////============================================================================================
@@ -1680,9 +1751,15 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
         enuDirection newDirection = (enuDirection)va_objRandom.Next(0, 4);
         int deplacement = va_objRandom.Next(0, 3) + 1;
         if (newDirection == pCurrentDirection)
+        {
             newDirection += deplacement;
+        }
+
         if (newDirection > enuDirection.Bottom)
+        {
             newDirection = (enuDirection)((int)newDirection % 4);
+        }
+
         return newDirection;
     }
     //------------------------------------------------------------------------------------------
@@ -1720,7 +1797,11 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
     /// </summary>
     public void Wait()
     {
-        if (va_testMode || va_delay == 0) return;
+        if (va_testMode || va_delay == 0)
+        {
+            return;
+        }
+
         DateTime maintenantPlusDelai = DateTime.Now.AddMilliseconds(va_delay);
         while (DateTime.Now < maintenantPlusDelai) ;
     }
@@ -1731,7 +1812,11 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
     /// <param name="pDelai">Le délai à attendre.</param>
     public void Wait(int pDelai)
     {
-        if (va_testMode || pDelai <= 0) return;
+        if (va_testMode || pDelai <= 0)
+        {
+            return;
+        }
+
         DateTime maintenantPlusDelai = DateTime.Now.AddMilliseconds(pDelai);
         while (DateTime.Now < maintenantPlusDelai) ;
     }
@@ -1744,7 +1829,11 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
     public void ClearValues()
     {
         ResetAllValuesToDefault();
-        if (va_isUpdating) return;
+        if (va_isUpdating)
+        {
+            return;
+        }
+
         Refresh();
     }
     /// ---------------------------------------------------------------------------
@@ -1765,10 +1854,17 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
         //  SelectedIndex = -1;
         //==============================================================================
         if (va_selectionMode != SelectionMode.None)
+        {
             SelectedIndex = -1;
+        }
+
         ResetAllValuesToDefault();
         //==============================================================================
-        if (va_isUpdating) return;
+        if (va_isUpdating)
+        {
+            return;
+        }
+
         Refresh();
     }
     #endregion
@@ -1816,9 +1912,14 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
             case enuHeaderBkgStyle.None:
                 //si une image de fond existe, alors on doit la redessiner
                 if (BackgroundImage != null)
+                {
                     pGraphics.DrawImage(BackgroundImage, backRect, backRect, GraphicsUnit.Pixel);
+                }
                 else // sinon on doit redessiner avec la couleur de fond
+                {
                     pGraphics.FillRectangle(new SolidBrush(BackColor), backRect);
+                }
+
                 break;
             case enuHeaderBkgStyle.Fill:
                 pGraphics.FillRectangle(new SolidBrush(va_columnHeaderAppearance.BackgroundColor), backRect);
@@ -1853,9 +1954,14 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
             case enuHeaderBkgStyle.None:
                 //si une image de fond existe, alors on doit la redessiner
                 if (BackgroundImage != null)
+                {
                     pGraphics.DrawImage(BackgroundImage, backRect, backRect, GraphicsUnit.Pixel);
+                }
                 else // dans ce cas il faut redessiner avec la couleur de fond
+                {
                     pGraphics.FillRectangle(new SolidBrush(BackColor), backRect);
+                }
+
                 break;
             case enuHeaderBkgStyle.Fill:
                 pGraphics.FillRectangle(new SolidBrush(va_rowHeaderAppearance.BackgroundColor), backRect);
@@ -1895,9 +2001,14 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
                 case enuDataStyle.User:
                     for (int colonne = 0; colonne < ColumnCount; colonne++)
                         if (va_columnHeaders[colonne] != null)
+                        {
                             DrawColumnsHeaders(pGraphics, colonne, va_columnHeaders[colonne], va_columnHeaderAppearance.ForeColor, va_columnHeaderAppearance.Font);
+                        }
                         else
+                        {
                             DrawColumnsHeaders(pGraphics, colonne, String.Empty, va_columnHeaderAppearance.ForeColor, va_columnHeaderAppearance.Font);
+                        }
+
                     break;
                 default:
                     break;
@@ -1926,9 +2037,14 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
                 case enuDataStyle.User:
                     for (int row = 0; row < RowCount; row++)
                         if (va_rowHeader[row] != null)
+                        {
                             DrawRowsHeaders(pGraphics, row, va_rowHeader[row], va_rowHeaderAppearance.ForeColor, va_rowHeaderAppearance.Font);
+                        }
                         else
+                        {
                             DrawRowsHeaders(pGraphics, row, String.Empty, va_rowHeaderAppearance.ForeColor, va_rowHeaderAppearance.Font);
+                        }
+
                     break;
                 default:
                     break;
@@ -2098,7 +2214,10 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
 
         // pas de zone de dessin si le nombre de sprites est 0
         if (va_sprites.Count > 0)
+        {
             CreateSpritesOffScreen(width, height);
+        }
+
         //---------------------------------------------------------------------------------------------------------
         Width = width;
         Height = height;
@@ -2276,7 +2395,10 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
         int y = pY - startY;
 
         if (x < 0 || y < 0)
+        {
             return new Address(-1, -1);
+        }
+
         return new Address(y / hauteurCellule, x / largeurCellule);
     }
     //===============================================================================
@@ -2332,28 +2454,40 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
                 column = pIndex % ColumnCount;
                 row = pIndex / ColumnCount;
                 if (row % 2 == 1)
+                {
                     column = ColumnCount - column - 1;
+                }
+
                 //ligne = NbLignes - ligne - 1;
                 break;
             case enuAddressMode.StairsTopRight:
                 column = pIndex % ColumnCount;
                 row = pIndex / ColumnCount;
                 if (row % 2 == 0)
+                {
                     column = ColumnCount - column - 1;
+                }
+
                 //ligne = NbLignes - ligne - 1;
                 break;
             case enuAddressMode.StairsBottomLeft:
                 column = pIndex % ColumnCount;
                 row = pIndex / ColumnCount;
                 if (row % 2 == 1)
+                {
                     column = ColumnCount - column - 1;
+                }
+
                 row = RowCount - row - 1;
                 break;
             case enuAddressMode.StairsBottomRight:
                 column = pIndex % ColumnCount;
                 row = pIndex / ColumnCount;
                 if (row % 2 == 0)
+                {
                     column = ColumnCount - column - 1;
+                }
+
                 row = RowCount - row - 1;
                 break;
             default: // mode Normal
@@ -2362,7 +2496,10 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
                 break;
         }
         if (column >= ColumnCount || column < 0 || row >= RowCount || row < 0)
+        {
             throw new VisualArrayException("Débordement de la grille : pIndex = " + pIndex + " , pRow = " + row + " et pColumn = " + column);
+        }
+
         return new Address(row,column);
     }
     //===========================================================================
@@ -2375,7 +2512,9 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
     protected internal Address AddressFromAddressMode(int pRow, int pColumn)
     {
         if (pColumn >= ColumnCount || pColumn < 0 || pRow >= RowCount || pRow < 0)
+        {
             throw new VisualArrayException("Débordement de la grille : pRow = " + pRow + " et pColumn = " + pColumn);
+        }
 
         int index = IndexFromAddress(pRow, pColumn);
         return new Address(index / ColumnCount, index % ColumnCount);
@@ -2416,25 +2555,37 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
             case enuAddressMode.StairsTopLeft:
                 //pRow = NbLignes - pRow - 1;
                 if (pRow % 2 == 1)
+                {
                     pColumn = ColumnCount - pColumn - 1;
+                }
+
                 index = pRow * ColumnCount + pColumn;
                 break;
             case enuAddressMode.StairsTopRight:
                 //pRow = NbLignes - pRow - 1;
                 if (pRow % 2 == 0)
+                {
                     pColumn = ColumnCount - pColumn - 1;
+                }
+
                 index = pRow * ColumnCount + pColumn;
                 break;
             case enuAddressMode.StairsBottomLeft:
                 pRow = RowCount - pRow - 1;
                 if (pRow % 2 == 1)
+                {
                     pColumn = ColumnCount - pColumn - 1;
+                }
+
                 index = pRow * ColumnCount + pColumn;
                 break;
             case enuAddressMode.StairsBottomRight:
                 pRow = RowCount - pRow - 1;
                 if (pRow % 2 == 0)
+                {
                     pColumn = ColumnCount - pColumn - 1;
+                }
+
                 index = pRow * ColumnCount + pColumn;
                 break;
             default: // mode Normal
@@ -2565,12 +2716,19 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
 
         // Étape 1 : On commence par dessiner le fond de la grille
         if (BackgroundImage != null)
+        {
             pGraphics.DrawImage(BackgroundImage, cellBounds, cellBounds, GraphicsUnit.Pixel);
+        }
         else
+        {
             pGraphics.FillRectangle(new SolidBrush(BackColor), cellBounds);
+        }
 
         // Étape 2 : Si la cellule n'est pas visible, alors on quitte (sans même afficher son adresse)
-        if (!cell.Visible) return;
+        if (!cell.Visible)
+        {
+            return;
+        }
 
         // Étape 3 : Si l'utilisateur désire dessiner lui même le contenu de la cellule
         if (cell.UserContent != null)
@@ -2603,14 +2761,21 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
 
         // Étape 5 : Si la cellule est inactive et qu'une raillure doit être dessinée
         if (!cell.Enabled && va_disabledAppearance.StrikeAppearance.Style != enuStrikeStyle.None)
+        {
             DrawStrike(pGraphics, cellBounds,va_disabledAppearance);
+        }
 
         // Étape 6 : Si la cellule est sélectionnée, alors on doit dessiner la sélection
         if (cell.Selected)
+        {
             DrawSelection(pGraphics, pRow, pColumn);
+        }
+
         // Étape 7 : Si nous sommes en mode désign alors on doit dessiner l'adresse de la cellule
         if (DesignMode)
+        {
             DrawAddress(pGraphics, pRow, pColumn);
+        }
     }
     //protected virtual void DrawCellContent(Graphics pGraphics, int pRow, int pColumn)
     //{
@@ -2628,12 +2793,18 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
     protected void DrawCellBackground(Graphics pGraphics, Rectangle pCellContentBounds, Rectangle pCellBounds, Cell pCell)
     {
         if (BackgroundImage != null)
+        {
             pGraphics.DrawImage(BackgroundImage, pCellBounds, pCellBounds, GraphicsUnit.Pixel);
+        }
         else
+        {
             pGraphics.FillRectangle(new SolidBrush(BackColor), pCellBounds);
+        }
 
         if (pCell.UserContent != null)
+        {
             pCell.UserContent.DrawCellContent(pGraphics, pCellContentBounds, pCellBounds,pCell.Enabled);
+        }
         else
         {
             pCell.Background?.Draw(pGraphics, pCellContentBounds);
@@ -2791,7 +2962,11 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
     /// <param name="pColumn">Colonne de la cellule à mettre à jour</param>
     private void UpdateCellAndSprites(int pRow, int pColumn)
     {
-        if (va_isUpdating) return;
+        if (va_isUpdating)
+        {
+            return;
+        }
+
         Rectangle cellBounds = GetCellBounds(pRow, pColumn);
         Cell cell = va_tabCells[pRow, pColumn];
 
@@ -2813,7 +2988,9 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
                 objGraphique.Dispose();
             }
             else // dans ce cas il faut redessiner la cellule ainsi que les sprites qui la touche
+            {
                 UpdateSprites(cellBounds);
+            }
             //-------------------------------------------------------------------------------------------
         }
     }
@@ -2823,7 +3000,11 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
     /// <param name="pIndex">Index de la cellule à mettre à jour</param>
     protected void UpdateCellAndSprites(int pIndex)
     {
-        if (va_isUpdating) return;
+        if (va_isUpdating)
+        {
+            return;
+        }
+
         Address emplacement = IndexToAddress(pIndex);
         Rectangle cellBounds = GetCellBounds(emplacement.Row, emplacement.Column);
         Cell cell = va_tabCells[emplacement.Row, emplacement.Column];
@@ -2846,7 +3027,9 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
                 objGraphique.Dispose();
             }
             else // dans ce cas il faut redessiner la cellule ainsi que les sprites qui la touche
+            {
                 UpdateSprites(cellBounds);
+            }
             //-------------------------------------------------------------------------------------------
         }
     }
@@ -2856,7 +3039,10 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
     /// <param name="pIndex">Index de la cellule à mettre à jour</param>
     protected void UpdateCellAndSpritesDuringDrag(int pIndex)
     {
-        if (va_isUpdating) return;
+        if (va_isUpdating)
+        {
+            return;
+        }
 
         if (va_gridOffScreenGraphic != null && va_gridOffScreenBitMap != null)
         {
@@ -2880,7 +3066,9 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
                 objGraphique.Dispose();
             }
             else // dans ce cas il faut redessiner la cellule ainsi que les sprites qui la touche
+            {
                 UpdateSprites(cellBounds);
+            }
             //-------------------------------------------------------------------------------------------
         }
     }
@@ -2893,7 +3081,10 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
     /// <param name="pShowDrag"></param>
     protected void UpdateCellAndSpritesDuringDragPlus(Sprite pSprite, int pRow, int pColumn, bool pShowDrag)
     {
-        if (va_isUpdating) return;
+        if (va_isUpdating)
+        {
+            return;
+        }
 
         if (va_gridOffScreenGraphic != null && va_gridOffScreenBitMap != null)
         {
@@ -2907,7 +3098,11 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
                     {
                         Rectangle cellBounds = GetCellBounds(row, col);
                         DrawCellContent(va_gridOffScreenGraphic, row, col);
-                        if (pShowDrag) DrawDragDestination(va_gridOffScreenGraphic, row, col);
+                        if (pShowDrag)
+                        {
+                            DrawDragDestination(va_gridOffScreenGraphic, row, col);
+                        }
+
                         UpdateSprites(cellBounds);
                     }
                 }
@@ -2918,7 +3113,11 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
                 {
                     Rectangle cellBounds = GetCellBounds(pRow, pColumn);
                     DrawCellContent(va_gridOffScreenGraphic, pRow, pColumn);
-                    if (pShowDrag) DrawDragDestination(va_gridOffScreenGraphic, pRow, pColumn);
+                    if (pShowDrag)
+                    {
+                        DrawDragDestination(va_gridOffScreenGraphic, pRow, pColumn);
+                    }
+
                     UpdateSprites(cellBounds);
                 }
             }
@@ -2958,7 +3157,9 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
         if (cptUpdateSprites > 0) // au moins 1 sprite touche la zone pBounds
         {
             if (va_spriteOffScreenBitMap == null) // il faut s'assurer que la zone offscreen existe
+            {
                 CreateSpritesOffScreen(Width, Height);
+            }
 
             PlatformInvokeGDI32.BitBlt(va_spriteHMemdc, pBounds.X, pBounds.Y, pBounds.Width, pBounds.Height, va_gridHMemdc, pBounds.X, pBounds.Y,0x00CC0020);
 
@@ -2968,7 +3169,10 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
             PlatformInvokeGDI32.BitBlt(hdc, pBounds.X, pBounds.Y, pBounds.Width, pBounds.Height, va_spriteHMemdc, pBounds.X, pBounds.Y, 0x00CC0020);
         }
         else // aucun sprite ne touche la zone pBounds alors on va dessiner la zone directement à l'écran
+        {
             PlatformInvokeGDI32.BitBlt(hdc, pBounds.X, pBounds.Y, pBounds.Width, pBounds.Height, va_gridHMemdc, pBounds.X, pBounds.Y, 0x00CC0020);
+        }
+
         objGraphique.ReleaseHdc(hdc);
         objGraphique.Dispose();
     }
@@ -2987,7 +3191,10 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
     {
         HeaderArray newColumnHeader = new(this, va_columnCount, true);
         if (va_columnHeaderAppearance.ValueStyle == enuDataStyle.User)
+        {
             Array.Copy(va_columnHeaders.va_elements, newColumnHeader.va_elements, Math.Min(va_columnHeaders.Length, newColumnHeader.Length));
+        }
+
         va_columnHeaders = newColumnHeader;
     }
     /// <summary>
@@ -2997,7 +3204,10 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
     {
         HeaderArray newRowHeader = new(this, va_rowCount, false);
         if (va_rowHeaderAppearance.ValueStyle == enuDataStyle.User)
+        {
             Array.Copy(va_rowHeader.va_elements, newRowHeader.va_elements, Math.Min(va_rowHeader.Length, newRowHeader.Length));
+        }
+
         va_rowHeader = newRowHeader;
     }
     //-----------------------------------------------------------------------------
@@ -3062,7 +3272,9 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
     protected override bool IsInputKey(Keys key)
     {
         if (!Enabled)
+        {
             return base.IsInputKey(key);
+        }
 
         if (va_selectionMode is SelectionMode.None or SelectionMode.MultiSimple)
         {
@@ -3079,9 +3291,14 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
         }
         Address adresse;
         if (va_selectedIndex == -1)
+        {
             adresse = new Address(0, 0);
+        }
         else
+        {
             adresse = IndexToAddress(va_selectedIndex);
+        }
+
         Address saveAddress = adresse;
         bool modifOk = false;
         int cptItération = 0;
@@ -3089,7 +3306,10 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
         {
             case Keys.Delete:
                 if (SelectedIndex != -1 && !va_readOnly)
+                {
                     Clear(SelectedIndex);
+                }
+
                 break;
             case Keys.Escape:
                 SelectedIndex = -1;
@@ -3097,11 +3317,20 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
             case Keys.Enter:
                 va_currentKeyTime = new DateTime(0);
                 if (!va_enterKeyNextIndex)
+                {
                     return base.IsInputKey(key);
+                }
+
                 if (va_selectedIndex != -1 && va_selectedIndex < Length - 1)
+                {
                     IsInputKey(Keys.Right);
+                }
+
                 if (EnterKeyPress != null && va_selectedIndex >= 0)
+                {
                     EnterKeyPress(this, new EventArgs());
+                }
+
                 return true;
             case Keys.Up:
                 if (va_selectedIndex == -1)
@@ -3120,7 +3349,10 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
                     }
                 }
                 if (modifOk)
+                {
                     SelectedIndex = IndexFromAddress(adresse.Row, adresse.Column);
+                }
+
                 return true;
             case Keys.Down:
                 if (va_selectedIndex == -1)
@@ -3139,7 +3371,10 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
                     }
                 }
                 if (modifOk)
+                {
                     SelectedIndex = IndexFromAddress(adresse.Row, adresse.Column);
+                }
+
                 return true;
             case Keys.Right:
                 if (va_selectedIndex == -1)
@@ -3156,7 +3391,9 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
                         adresse.Column = 0;
                         adresse.Row++;
                         if (adresse.Row >= va_rowCount)
+                        {
                             adresse.Row = 0;
+                        }
                     }
                     if (IsOkToSelect(null, adresse.Row, adresse.Column))
                     {
@@ -3165,7 +3402,10 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
                     }
                 } while (adresse != saveAddress && cptItération < Length);
                 if (modifOk)
+                {
                     SelectedIndex = IndexFromAddress(adresse.Row, adresse.Column);
+                }
+
                 return true;
             case Keys.Left:
                 do
@@ -3177,7 +3417,9 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
                         adresse.Column = va_columnCount - 1;
                         adresse.Row--;
                         if (adresse.Row < 0)
+                        {
                             adresse.Row = va_rowCount - 1;
+                        }
                     }
                     if (IsOkToSelect(null, adresse.Row, adresse.Column))
                     {
@@ -3186,7 +3428,10 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
                     }
                 } while (adresse != saveAddress && cptItération < Length);
                 if (modifOk)
+                {
                     SelectedIndex = IndexFromAddress(adresse.Row, adresse.Column);
+                }
+
                 return true;
             case Keys.Home:
                 SelectedIndex = 0;
@@ -3213,7 +3458,10 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
     protected override void OnPaint(PaintEventArgs e)
     {
         //va_realGraphic = e.Graphics; // 27-04-2010
-        if (va_gridOffScreenGraphic == null) ReCalculerTaille();
+        if (va_gridOffScreenGraphic == null)
+        {
+            ReCalculerTaille();
+        }
 
         va_gridOffScreenGraphic.Clear(BackColor);
         if (BackgroundImage != null)
@@ -3232,7 +3480,9 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
             DrawSelection(va_gridOffScreenGraphic, adresse.Row, adresse.Column);
         }
         if (DesignMode && va_addressView != enuAddressView.None)
+        {
             DrawAllAddress(va_gridOffScreenGraphic);
+        }
 
         //----------------------------------------------------------------------------------------------------------------
         IntPtr hdc = e.Graphics.GetHdc();
@@ -3546,16 +3796,25 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
         va_mouseCurrentSprite = null;
 
         if (CellMouseLeave != null && saveMouseCurrentIndex != -1)
+        {
             CellMouseLeave(this, new CellEventArgs(saveMouseCurrentIndex, saveMouseCurrentIndex / va_columnCount, saveMouseCurrentIndex % va_columnCount));
+        }
 
         if (ColumnHeaderMouseLeave != null && saveMouseCurrentColumn != -1)
+        {
             ColumnHeaderMouseLeave(this, new ColumnHeaderEventArgs(saveMouseCurrentColumn));
+        }
 
         if (RowHeaderMouseLeave != null && saveMouseCurrentRow != -1)
+        {
             RowHeaderMouseLeave(this, new RowHeaderEventArgs(saveMouseCurrentRow));
+        }
 
         if (SpriteMouseLeave != null && saveMouseCurrentSprite != null)
+        {
             SpriteMouseLeave(this, new SpriteEventArgs(saveMouseCurrentSprite));
+        }
+
         base.OnMouseLeave(e);
     }
 
@@ -3588,10 +3847,14 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
             va_mouseCurrentRow = -1;
 
             if (ColumnHeaderMouseLeave != null && saveMouseCurrentColumn != -1)
+            {
                 ColumnHeaderMouseLeave(this, new ColumnHeaderEventArgs(saveMouseCurrentColumn));
+            }
 
             if (RowHeaderMouseLeave != null && saveMouseCurrentRow != -1)
+            {
                 RowHeaderMouseLeave(this, new RowHeaderEventArgs(saveMouseCurrentRow));
+            }
 
             //DEBUT 2012/09/18 
 
@@ -3602,7 +3865,9 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
             if (index != va_mouseCurrentIndex) // on se déplace sur une nouvelle cellule
             {
                 if (CellMouseLeave != null && saveMouseCurrentIndex != -1)
+                {
                     CellMouseLeave(this, new CellEventArgs(saveMouseCurrentIndex, saveMouseCurrentIndex / va_columnCount, saveMouseCurrentIndex % va_columnCount));
+                }
 
                 va_mouseCurrentIndex = index;
 
@@ -3614,7 +3879,9 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
             if (objSprite != va_mouseCurrentSprite) // on se déplace sur un nouveau Sprite
             {
                 if (SpriteMouseLeave != null && saveMouseCurrentSprite != null)
+                {
                     SpriteMouseLeave(this, new SpriteEventArgs(saveMouseCurrentSprite));
+                }
 
                 va_mouseCurrentSprite = objSprite;
 
@@ -3631,20 +3898,28 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
             va_mouseCurrentSprite = null;
 
             if (SpriteMouseLeave != null && saveMouseCurrentSprite != null)
+            {
                 SpriteMouseLeave(this, new SpriteEventArgs(saveMouseCurrentSprite));
+            }
 
             // on doit vérfier si on quitte une autre zone
             if (RowHeaderMouseLeave != null && saveMouseCurrentRow != -1)
+            {
                 RowHeaderMouseLeave(this, new RowHeaderEventArgs(saveMouseCurrentRow));
+            }
 
             if (CellMouseLeave != null && saveMouseCurrentIndex != -1)
+            {
                 CellMouseLeave(this, new CellEventArgs(saveMouseCurrentIndex, saveMouseCurrentIndex / va_columnCount, saveMouseCurrentIndex % va_columnCount));
+            }
 
             if (colonne != va_mouseCurrentColumn) // nouvelle cellule en-tête de colonne
             {
                 va_mouseCurrentColumn = colonne;
                 if (ColumnHeaderMouseLeave != null && saveMouseCurrentColumn != -1)
+                {
                     ColumnHeaderMouseLeave(this, new ColumnHeaderEventArgs(saveMouseCurrentColumn));
+                }
 
                 ColumnHeaderMouseEnter?.Invoke(this, new ColumnHeaderEventArgs(colonne));
             }
@@ -3657,20 +3932,28 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
             va_mouseCurrentSprite = null;
 
             if (SpriteMouseLeave != null && saveMouseCurrentSprite != null)
+            {
                 SpriteMouseLeave(this, new SpriteEventArgs(saveMouseCurrentSprite));
+            }
 
             if (ColumnHeaderMouseLeave != null && saveMouseCurrentColumn != -1)
+            {
                 ColumnHeaderMouseLeave(this, new ColumnHeaderEventArgs(saveMouseCurrentColumn));
+            }
 
             if (CellMouseLeave != null && saveMouseCurrentIndex != -1)
+            {
                 CellMouseLeave(this, new CellEventArgs(saveMouseCurrentIndex, saveMouseCurrentIndex / va_columnCount, saveMouseCurrentIndex % va_columnCount));
+            }
 
 
             if (rangee != va_mouseCurrentRow) // nouvelle cellule en-tête de rangée
             {
                 va_mouseCurrentRow = rangee;
                 if (RowHeaderMouseLeave != null && saveMouseCurrentRow != -1)
+                {
                     RowHeaderMouseLeave(this, new RowHeaderEventArgs(saveMouseCurrentRow));
+                }
 
                 RowHeaderMouseEnter?.Invoke(this, new RowHeaderEventArgs(rangee));
             }            
@@ -3684,16 +3967,24 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
             va_mouseCurrentSprite = null;
 
             if (SpriteMouseLeave != null && saveMouseCurrentSprite != null)
+            {
                 SpriteMouseLeave(this, new SpriteEventArgs(saveMouseCurrentSprite));
+            }
 
             if (ColumnHeaderMouseLeave != null && saveMouseCurrentColumn != -1)
+            {
                 ColumnHeaderMouseLeave(this, new ColumnHeaderEventArgs(saveMouseCurrentColumn));
+            }
 
             if (RowHeaderMouseLeave != null && saveMouseCurrentRow != -1)
+            {
                 RowHeaderMouseLeave(this, new RowHeaderEventArgs(saveMouseCurrentRow));
+            }
 
             if (CellMouseLeave != null && saveMouseCurrentIndex != -1)
+            {
                 CellMouseLeave(this, new CellEventArgs(saveMouseCurrentIndex, saveMouseCurrentIndex / va_columnCount, saveMouseCurrentIndex % va_columnCount));
+            }
         }
         else // autrement on passe au dessus d'une cellule
         {
@@ -3702,20 +3993,28 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
             va_mouseCurrentSprite = null;
 
             if (SpriteMouseLeave != null && saveMouseCurrentSprite != null)
+            {
                 SpriteMouseLeave(this, new SpriteEventArgs(saveMouseCurrentSprite));
+            }
 
             if (ColumnHeaderMouseLeave != null && saveMouseCurrentColumn != -1)
+            {
                 ColumnHeaderMouseLeave(this, new ColumnHeaderEventArgs(saveMouseCurrentColumn));
+            }
 
             if (RowHeaderMouseLeave != null && saveMouseCurrentRow != -1)
+            {
                 RowHeaderMouseLeave(this, new RowHeaderEventArgs(saveMouseCurrentRow));
+            }
 
             int index = IndexFromAddress(rangee, colonne);
 
             if (index != va_mouseCurrentIndex) // on se déplace sur une nouvelle cellule
             {
                 if (CellMouseLeave != null && saveMouseCurrentIndex != -1)
+                {
                     CellMouseLeave(this, new CellEventArgs(saveMouseCurrentIndex, saveMouseCurrentIndex / va_columnCount, saveMouseCurrentIndex % va_columnCount));
+                }
 
                 va_mouseCurrentIndex = index;
 
@@ -3741,7 +4040,9 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
         {
             Sprite objSprite = va_sprites[index];
             if (objSprite.Hit(rectangle))
+            {
                 return objSprite;
+            }
         }
         return null;
     }
@@ -3765,7 +4066,10 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
         int colonne = x / largeurCellule;
         int rangee = y / hauteurCellule;
 
-        if (colonne >= ColumnCount || rangee >= RowCount) return;
+        if (colonne >= ColumnCount || rangee >= RowCount)
+        {
+            return;
+        }
 
         Sprite objSprite = HitSprite(e.X, e.Y);
         if (objSprite != null && objSprite == va_lastMouseClickSprite)
@@ -3798,7 +4102,9 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
             {
                 va_lastMouseClickCell = -1;
                 if (CellMouseDoubleClick != null && IsOkToSelect(cell, rangee, colonne))
+                {
                     CellMouseDoubleClick(this, new CellMouseEventArgs(e.Button, e.Clicks, x % largeurCellule, y % hauteurCellule, e.Delta, index, index / va_columnCount, index % va_columnCount));
+                }
             }
         }
         base.OnMouseDoubleClick(e);
@@ -3971,7 +4277,10 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
         else if (x < 0 || y < 0 || colonne >= ColumnCount || rangee >= RowCount)
         {
             if (va_selectionMode != SelectionMode.None)
+            {
                 SelectedIndex = -1;
+            }
+
             base.OnMouseDown(e);
             return;
         }
@@ -4016,7 +4325,9 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
                         // 2 cas possibles, on ajoute à la sélection ou on supprime de la sélection
 
                         if (!cell.Selected) // Cas 1 : on va ajouter à la sélection
+                        {
                             SelectedIndex = index;
+                        }
                         else // Cas 2 : on supprime de la sélection
                         {
                             cell.Selected = false;
@@ -4052,7 +4363,10 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
                             int saveIndex = va_selectedIndex;
                             va_selectedIndex = index;
                             if (va_dragAppearance.ShowSource)
+                            {
                                 UpdateCellAndSpritesDuringDrag(index);
+                            }
+
                             va_selectedIndex = saveIndex;
                         }
                         else if (va_allowSelfDrop)
@@ -4061,7 +4375,9 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
                             va_dragIndex = index;
                             //cell.Selected = true;
                             if (va_dragAppearance.ShowSource)
+                            {
                                 UpdateCellAndSpritesDuringDrag(index);
+                            }
                             //cell.Selected = saveState;
                         }
                         //DoDragDrop(new DataObject(texteComplet), DragDropEffects.All);
@@ -4167,13 +4483,17 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
             int index = IndexFromAddress(rangee, colonne);
             Cell cell = va_tabCells[rangee, colonne];
             if (CellMouseUp != null && IsOkToSelect(cell, rangee, colonne))
+            {
                 CellMouseUp(this, new CellMouseEventArgs(e.Button, e.Clicks, x % largeurCellule, y % hauteurCellule, e.Delta, index, index / va_columnCount, index % va_columnCount));
+            }
 
             if (saveMouseDownCell == index) // nous avons un CellMouseClick
             {
                 va_lastMouseClickCell = index;
                 if (CellMouseClick != null && IsOkToSelect(cell, rangee, colonne))
+                {
                     CellMouseClick(this, new CellMouseEventArgs(e.Button, e.Clicks, x % largeurCellule, y % hauteurCellule, e.Delta, index, index / va_columnCount, index % va_columnCount));
+                }
             }
         }
         base.OnMouseUp(e);
@@ -4254,13 +4574,19 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
         // Obtenir en coordonnées locales
         Point coordonnee = PointToClient(new Point(drgevent.X, drgevent.Y));
         if (m_dragInfos is { TypeElement: enuTypeElement.Sprite } && m_dragInfos.DragSprite.IsMultiCells)
+        {
             coordonnee = m_dragInfos.DragSprite.OriginCenter(coordonnee);
+        }
+
         Address adresse = PixelsToAddress(coordonnee.X, coordonnee.Y);
 
         int index = IndexFromAddress(adresse.Row, adresse.Column);
         bool dragOutside = adresse.Column < 0 || adresse.Column >= ColumnCount || adresse.Row < 0 || adresse.Row >= RowCount;
 
-        if (m_dragInfos == null) return;
+        if (m_dragInfos == null)
+        {
+            return;
+        }
 
         if (dragOutside)
         {
@@ -4283,13 +4609,18 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
             if (m_dragInfos.SourceGridName != Name || (m_dragInfos.SourceGridName == Name && va_allowSelfDrop)) // L'opération est acceptée
             {
                 if (va_selectionMode != SelectionMode.None)
+                {
                     SelectedIndex = index;
+                }
                 else if (va_selectionMode == SelectionMode.None)
                 {
                     //UpdateCellAndSprites(index);
                     UpdateCellAndSpritesDuringDragPlus(m_dragInfos.DragSprite, adresse.Row, adresse.Column, false);
 
-                    if (va_dragIndexSource != -1) UpdateCellAndSprites(va_dragIndexSource);
+                    if (va_dragIndexSource != -1)
+                    {
+                        UpdateCellAndSprites(va_dragIndexSource);
+                    }
                 }
                 // on va s'assurer avant de notifier l'événement que l'index est différent si nous sommes sur la même grille
                 if ((index != m_dragInfos.SourceIndex && m_dragInfos.SourceGridName == Name) || m_dragInfos.SourceGridName != Name)
@@ -4306,7 +4637,11 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
             }
             va_dragIndex = -1;
             va_dragIndexSource = -1;
-            if (m_dragInfos.DragSprite != null) m_dragInfos.DragSprite.Visible = true;
+            if (m_dragInfos.DragSprite != null)
+            {
+                m_dragInfos.DragSprite.Visible = true;
+            }
+
             m_dragInfos = null; // POUR TERMINER OFFICIELLEMENT L'OPÉRATION GLISSER/DÉPOSER
         }
     }
@@ -4326,7 +4661,9 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
         }
 
         if (m_dragInfos.DragSprite != null)
+        {
             m_dragInfos.DragSprite.Visible = false;
+        }
 
         // DEBUT DRAGDROPLIB -----------------------------------------------------------------------------------------------
         drgevent.Effect = DragDropEffects.Move;
@@ -4374,7 +4711,10 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
         // FIN DRAGDROPLIB -----------------------------------------------------------------------------------------------
 
         if (va_dragIndex != -1 && va_dragIndex != va_dragIndexSource)
+        {
             UpdateCellAndSprites(va_dragIndex);
+        }
+
         va_dragIndex = -1;
     }
     //========================================================================================================================
@@ -4397,7 +4737,10 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
         Address adresse;
         // On va vérifier si le Drag implique un Sprite multi cellules
         if (m_dragInfos is { TypeElement: enuTypeElement.Sprite } && m_dragInfos.DragSprite.IsMultiCells)
+        {
             coordonnee = m_dragInfos.DragSprite.OriginCenter(coordonnee);
+        }
+
         adresse = PixelsToAddress(coordonnee.X, coordonnee.Y);
 
         if (m_dragInfos == null) // MDD
@@ -4409,7 +4752,10 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
         if (adresse.Column < 0 || adresse.Column >= ColumnCount || adresse.Row < 0 || adresse.Row >= RowCount || (!va_allowSelfDrop && m_dragInfos.SourceGridName == Name))
         {
             if (va_dragIndex != -1)
+            {
                 UpdateCellAndSpritesDuringDragPlus(m_dragInfos.DragSprite, va_dragIndex / ColumnCount, va_dragIndex % ColumnCount, false);
+            }
+
             va_dragIndex = -1;
             drgevent.Effect = DragDropEffects.None;
         }
@@ -4513,7 +4859,10 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
     public void DisableSelectedCell()
     {
         if (SelectedIndex == -1)
+        {
             throw new VisualArrayException("Impossible de désactiver une cellule lorsque SelectedIndex vaut -1");
+        }
+
         Address adresse = IndexToAddress(SelectedIndex);
         va_tabCells[adresse.Row, adresse.Column].Enabled = false;
         UpdateCellAndSprites(SelectedIndex);
@@ -4528,7 +4877,10 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
         Address adresse = IndexToAddress(pIndex);
         va_tabCells[adresse.Row, adresse.Column].Enabled = false;
         UpdateCellAndSprites(pIndex);
-        if (pIndex == SelectedIndex) SelectedIndex = -1; // désélectionner la cellule si elle est la cellule sélectionnée
+        if (pIndex == SelectedIndex)
+        {
+            SelectedIndex = -1; // désélectionner la cellule si elle est la cellule sélectionnée
+        }
     }
     /// <summary>
     /// Rend inactive la cellule
@@ -4540,7 +4892,10 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
         Address adresse = AddressFromAddressMode(pRow, pColumn);
         va_tabCells[adresse.Row, adresse.Column].Enabled = false;
         UpdateCellAndSprites(IndexFromAddress(adresse.Row, adresse.Column));
-        if (SelectedAddress.Row == pRow && SelectedAddress.Column == pColumn) SelectedIndex = -1; // désélectionner la cellule si elle est la cellule sélectionnée
+        if (SelectedAddress.Row == pRow && SelectedAddress.Column == pColumn)
+        {
+            SelectedIndex = -1; // désélectionner la cellule si elle est la cellule sélectionnée
+        }
     }
     /// <summary>
     /// Rend active la cellule
@@ -4573,7 +4928,10 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
         Address adresse = IndexToAddress(pIndex);
         va_tabCells[adresse.Row, adresse.Column].Enabled = pEnabled;
         UpdateCellAndSprites(pIndex);
-        if (pIndex == SelectedIndex) SelectedIndex = -1; // désélectionner la cellule si elle est la cellule sélectionnée
+        if (pIndex == SelectedIndex)
+        {
+            SelectedIndex = -1; // désélectionner la cellule si elle est la cellule sélectionnée
+        }
     }
     /// <summary>
     /// Assigne un nouvel état à la cellule
@@ -4586,7 +4944,10 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
         Address adresse = AddressFromAddressMode(pRow, pColumn);
         va_tabCells[adresse.Row, adresse.Column].Enabled = pEnabled;
         UpdateCellAndSprites(IndexFromAddress(adresse.Row, adresse.Column));
-        if (SelectedAddress.Row == pRow && SelectedAddress.Column == pColumn) SelectedIndex = -1; // désélectionner la cellule si elle est la cellule sélectionnée
+        if (SelectedAddress.Row == pRow && SelectedAddress.Column == pColumn)
+        {
+            SelectedIndex = -1; // désélectionner la cellule si elle est la cellule sélectionnée
+        }
     }
 
     /// <summary>
@@ -4654,7 +5015,9 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
             UpdateCellAndSprites(pIndex);
         }
         else
+        {
             throw new VisualArrayException("Impossible de modifier l'image de l'élément avec son style actuel.");
+        }
     }
     /// <summary>
     /// Assigne (si possible) une nouvelle image de fond à l'élément
@@ -4672,7 +5035,9 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
             UpdateCellAndSprites(IndexFromAddress(adresse.Row, adresse.Column));
         }
         else
+        {
             throw new VisualArrayException("Impossible de modifier l'image de l'élément avec son style actuel.");
+        }
     }
 
     /// <summary>
@@ -4690,7 +5055,9 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
             UpdateCellAndSprites(pIndex);
         }
         else
+        {
             throw new VisualArrayException("Impossible de modifier la taille du crayon de l'élément avec son style actuel.");
+        }
     }
     /// <summary>
     /// Assigne (si possible) une nouvelle taille de crayon à l'élément
@@ -4708,7 +5075,9 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
             UpdateCellAndSprites(IndexFromAddress(adresse.Row, adresse.Column));
         }
         else
+        {
             throw new VisualArrayException("Impossible de modifier la taille du crayon de l'élément avec son style actuel.");
+        }
     }
     /// <summary>
     /// Assigne (si possible) une nouvelle forme de fond à l'élément
@@ -4768,9 +5137,14 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
         Address adresse = IndexToAddress(pIndex);
         CellVisualElement.CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].Background;
         if (objVE is BorderElement)
+        {
             ((BorderElement)objVE).Border = pBorder;
+        }
         else
+        {
             va_tabCells[adresse.Row, adresse.Column].Background = new BorderElement(pBorder, va_enabledAppearance.BackgroundColor);
+        }
+
         UpdateCellAndSprites(IndexFromAddress(adresse.Row, adresse.Column));
     }
     /// <summary>
@@ -4971,7 +5345,10 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
         Address adresse = IndexToAddress(pIndex);
         CellVisualElement.CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].Background;
         if (objVE is ImageElement)
+        {
             return ((ImageElement)objVE).Image;
+        }
+
         throw new VisualArrayException("Impossible d'obtenir l'image de l'élément avec la valeur actuelle du CellsBkgStyle.");
     }
     /// <summary>
@@ -4985,7 +5362,10 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
         Address adresse = AddressFromAddressMode(pRow, pColumn);
         CellVisualElement.CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].Background;
         if (objVE is ImageElement)
+        {
             return ((ImageElement)objVE).Image;
+        }
+
         throw new VisualArrayException("Impossible d'obtenir l'image de l'élément avec la valeur actuelle du CellsBkgStyle.");
     }
 
@@ -4999,7 +5379,10 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
         Address adresse = IndexToAddress(pIndex);
         CellVisualElement.CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].Background;
         if (objVE is ShapeElement)
+        {
             return ((ShapeElement)objVE).PenWidth;
+        }
+
         throw new VisualArrayException("Impossible d'obtenir la taille du crayon de l'élément avec la valeur actuelle du CellsBkgStyle.");
     }
     /// <summary>
@@ -5013,7 +5396,10 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
         Address adresse = AddressFromAddressMode(pRow, pColumn);
         CellVisualElement.CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].Background;
         if (objVE is ShapeElement)
+        {
             return ((ShapeElement)objVE).PenWidth;
+        }
+
         throw new VisualArrayException("Impossible d'obtenir la taille du crayon de l'élément avec la valeur actuelle du CellsBkgStyle.");
     }
     /// <summary>
@@ -5026,7 +5412,10 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
         Address adresse = IndexToAddress(pIndex);
         CellVisualElement.CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].Background;
         if (objVE is BorderElement)
+        {
             return ((BorderElement)objVE).Border;
+        }
+
         throw new VisualArrayException("Impossible d'obtenir les bordures de l'élément avec la valeur actuelle du CellsBkgStyle.");
     }
     /// <summary>
@@ -5040,7 +5429,10 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
         Address adresse = AddressFromAddressMode(pRow, pColumn);
         CellVisualElement.CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].Background;
         if (objVE is BorderElement)
+        {
             return ((BorderElement)objVE).Border;
+        }
+
         throw new VisualArrayException("Impossible d'obtenir les bordures de l'élément avec la valeur actuelle du CellsBkgStyle.");
     }
     /// <summary>
@@ -5306,7 +5698,9 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
         CellVisualElement.CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].LayerOver;
 
         if (objVE == null)
+        {
             va_tabCells[adresse.Row, adresse.Column].LayerOver = pVisualElement;
+        }
         else
         {
             while (objVE.NextVisualElement != null)
@@ -5327,7 +5721,9 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
         CellVisualElement.CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].LayerOver;
 
         if (objVE == null)
+        {
             va_tabCells[adresse.Row, adresse.Column].LayerOver = pVisualElement;
+        }
         else
         {
             while (objVE.NextVisualElement != null)
@@ -5383,7 +5779,10 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
         CellVisualElement.CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].LayerOver;
 
         if (objVE == null || pLayerIndex < 0)
+        {
             throw new VisualArrayException("Impossible de supprimer le VisualElement à la couche indiquée, pLayerIndex = " + pLayerIndex);
+        }
+
         // Il y a au moins un VisualElement sur la cellule
         if (pLayerIndex == 0) // Il faut supprimer le premier élément
         {
@@ -5405,7 +5804,9 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
                 UpdateCellAndSprites(pIndex);
             }
             else
+            {
                 throw new VisualArrayException("Impossible de supprimer le VisualElement à la couche indiquée, pLayerIndex = " + pLayerIndex);
+            }
         }
     }
     /// <summary>

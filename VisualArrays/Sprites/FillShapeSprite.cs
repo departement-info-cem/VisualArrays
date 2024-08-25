@@ -46,7 +46,11 @@ public class FillShapeSprite:Sprite
             if (value != m_opacity)
             {
                 m_opacity = value;
-                if (m_owner == null) return;
+                if (m_owner == null)
+                {
+                    return;
+                }
+
                 m_owner.UpdateSprites(m_bounds);
             }
         }

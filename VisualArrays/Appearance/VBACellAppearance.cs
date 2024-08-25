@@ -43,7 +43,9 @@ public class VBACellAppearance:IBackgroundAppearance
             {
                 m_shape = value;
                 if (m_style is enuBkgStyle.FillShape or enuBkgStyle.Shape)
+                {
                     m_owner.UpdateCellsBkgVisualElement();
+                }
             }
 
         }
@@ -70,7 +72,9 @@ public class VBACellAppearance:IBackgroundAppearance
             {
                 m_image = value;
                 if (m_style == enuBkgStyle.Image)
+                {
                     m_owner.UpdateCellsBkgVisualElement();
+                }
             }
         }
     }
@@ -100,7 +104,9 @@ public class VBACellAppearance:IBackgroundAppearance
             {
                 m_penWidth = value;
                 if (m_style == enuBkgStyle.Shape)
+                {
                     m_owner.UpdateCellsBkgVisualElement();
+                }
             }
         }
     }
@@ -146,7 +152,9 @@ public class VBACellAppearance:IBackgroundAppearance
             {
                 m_border = value;
                 if (m_style == enuBkgStyle.Border)
+                {
                     m_owner.UpdateCellsBkgVisualElement();
+                }
             }
         }
     }
@@ -154,7 +162,9 @@ public class VBACellAppearance:IBackgroundAppearance
     {
         m_border = new Padding(1, 1, 1, 1);
         if (m_style == enuBkgStyle.Border)
+        {
             m_owner.UpdateCellsBkgVisualElement();
+        }
     }
     private bool ShouldSerializeBorder()
     {
@@ -179,7 +189,9 @@ public class VBACellAppearance:IBackgroundAppearance
             {
                 m_backgroundColor = value;
                 if (m_style is enuBkgStyle.Border or enuBkgStyle.FillShape or enuBkgStyle.Shape)
+                {
                     m_owner.UpdateCellsBkgVisualElement();
+                }
             }
         }
     }
@@ -203,7 +215,9 @@ public class VBACellAppearance:IBackgroundAppearance
             {
                 m_radius = value;
                 if (m_style is enuBkgStyle.FillShape or enuBkgStyle.Shape && m_shape == enuShape.RoundRect)
+                {
                     m_owner.UpdateCellsBkgVisualElement();
+                }
             }
         }
     }

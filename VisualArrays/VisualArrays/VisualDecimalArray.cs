@@ -22,7 +22,9 @@ public partial class VisualDecimalArray : VisualGraphArray<decimal>
         set
         {
             if (value < va_minimum || value > va_maximum)
+            {
                 throw new ArgumentOutOfRangeException("DefaultValue", value, "'DefaultValue' doit être compris entre 'Minimum' et 'Maximum'");
+            }
 
             if (value != m_defaultValue)
             {
@@ -80,7 +82,10 @@ public partial class VisualDecimalArray : VisualGraphArray<decimal>
         {
             va_minimum = value;
             if (va_minimum > va_maximum)
+            {
                 Maximum = value;
+            }
+
             //if (!DesignMode)
             Refresh();
         }
@@ -99,7 +104,10 @@ public partial class VisualDecimalArray : VisualGraphArray<decimal>
         {
             va_maximum = value;
             if (va_maximum < va_minimum)
+            {
                 Minimum = value;
+            }
+
             //if (!DesignMode)
             Refresh();
         }
@@ -162,7 +170,10 @@ public partial class VisualDecimalArray : VisualGraphArray<decimal>
             decimal delta = (va_maximum - va_minimum) / 10;
             decimal minDelta = 1 / (decimal)Math.Pow(10, va_decimalPlaces);
             if (delta < minDelta)
+            {
                 delta = minDelta;
+            }
+
             decimal valeur = this[SelectedIndex];
             switch (e.Delta)
             {
@@ -173,8 +184,16 @@ public partial class VisualDecimalArray : VisualGraphArray<decimal>
                     valeur -= delta;
                     break;
             }
-            if (valeur < va_minimum) valeur = va_minimum;
-            if (valeur > va_maximum) valeur = va_maximum;
+            if (valeur < va_minimum)
+            {
+                valeur = va_minimum;
+            }
+
+            if (valeur > va_maximum)
+            {
+                valeur = va_maximum;
+            }
+
             this[SelectedIndex] = valeur;
         }
     }
@@ -193,8 +212,16 @@ public partial class VisualDecimalArray : VisualGraphArray<decimal>
             decimal valeur;
             if (VisualArraysTools.ReadDecimal(e.KeyChar, this[SelectedIndex], va_maximum, va_decimalPlaces, out valeur))
             {
-                if (valeur < va_minimum) valeur = va_minimum;
-                if (valeur > va_maximum) valeur = va_maximum;
+                if (valeur < va_minimum)
+                {
+                    valeur = va_minimum;
+                }
+
+                if (valeur > va_maximum)
+                {
+                    valeur = va_maximum;
+                }
+
                 this[SelectedIndex] = valeur;
             }
         }
@@ -235,12 +262,19 @@ public partial class VisualDecimalArray : VisualGraphArray<decimal>
 
         // Étape 1 : On commence par dessiner le fond de la grille
         if (BackgroundImage != null)
+        {
             pGraphics.DrawImage(BackgroundImage, cellBounds, cellBounds, GraphicsUnit.Pixel);
+        }
         else
+        {
             pGraphics.FillRectangle(new SolidBrush(BackColor), cellBounds);
+        }
 
         // Étape 2 : Si la cellule n'est pas visible, alors on quitte (sans même afficher son adresse)
-        if (!cell.Visible) return;
+        if (!cell.Visible)
+        {
+            return;
+        }
 
 
         // Étape 3 : Si l'utilisateur désire dessiner lui même le contenu de la cellule
@@ -292,6 +326,7 @@ public partial class VisualDecimalArray : VisualGraphArray<decimal>
 
             Rectangle displayRectangle = GetCellContentBounds(pRow, pColumn, EnabledAppearance.Padding);
             if (!DesignMode || va_addressView == enuAddressView.None)
+            {
                 switch (va_view)
                 {
                     case enuDecimalView.Number:
@@ -300,15 +335,21 @@ public partial class VisualDecimalArray : VisualGraphArray<decimal>
                             if (valeurAAfficher == m_specialValue) // c'est la valeur spéciale
                             {
                                 if (SpecialValueAppearance.ShowValue)
+                                {
                                     VisualArraysTools.DrawText(pGraphics, displayRectangle, laChaine, SpecialValueAppearance.TextColor, SpecialValueAppearance.Font, m_cellContentAlign);
+                                }
                             }
                             else // c'est une valeur normale
+                            {
                                 VisualArraysTools.DrawText(pGraphics, displayRectangle, laChaine, EnabledAppearance.TextColor, EnabledAppearance.Font, m_cellContentAlign);
+                            }
                         }
                         else // une cellule inactive
                         {
                             if (va_disabledAppearance.ShowValue)
+                            {
                                 VisualArraysTools.DrawText(pGraphics, displayRectangle, laChaine, DisabledAppearance.TextColor, DisabledAppearance.Font, m_cellContentAlign);
+                            }
                         }
                         break;
                     case enuDecimalView.Graph:
@@ -321,17 +362,24 @@ public partial class VisualDecimalArray : VisualGraphArray<decimal>
                             if (cell.Enabled)
                             {
                                 if (valeurAAfficher != m_specialValue)
+                                {
                                     VisualArraysTools.DrawText(pGraphics, displayRectangle, laChaine, EnabledAppearance.TextColor, EnabledAppearance.Font, m_cellContentAlign);
+                                }
                                 else if (SpecialValueAppearance.ShowValue) // c'est la valeur spéciale
+                                {
                                     VisualArraysTools.DrawText(pGraphics, displayRectangle, laChaine, SpecialValueAppearance.TextColor, SpecialValueAppearance.Font, m_cellContentAlign);
+                                }
                             }
                             else if (va_disabledAppearance.ShowValue)
+                            {
                                 VisualArraysTools.DrawText(pGraphics, displayRectangle, laChaine, DisabledAppearance.TextColor, DisabledAppearance.Font, m_cellContentAlign);
+                            }
                         }
                         break;
                     default:
                         break;
                 }
+            }
 
             #endregion
         }
@@ -347,15 +395,21 @@ public partial class VisualDecimalArray : VisualGraphArray<decimal>
 
         // Étape 5 : Si la cellule est inactive et qu'une raillure doit être dessinée
         if (!cell.Enabled && va_disabledAppearance.StrikeAppearance.Style != enuStrikeStyle.None)
+        {
             DrawStrike(pGraphics, cellBounds, va_disabledAppearance);
+        }
 
         // Étape 6 : Si la cellule est sélectionnée, alors on doit dessiner la sélection
         if (cell.Selected)
+        {
             DrawSelection(pGraphics, pRow, pColumn);
+        }
 
         // Étape 7 : Si nous sommes en mode désign alors on doit dessiner l'adresse de la cellule
         if (DesignMode)
+        {
             DrawAddress(pGraphics, pRow, pColumn);
+        }
     }
     #endregion
 
@@ -369,7 +423,9 @@ public partial class VisualDecimalArray : VisualGraphArray<decimal>
     public override void Clear(int pIndex)
     {
         if (va_minimum <= m_defaultValue && va_maximum >= m_defaultValue)
+        {
             this[pIndex] = m_defaultValue;
+        }
     }
     // CLEAR ------------------------------------------------------------------------------
     /// <summary>
@@ -381,7 +437,9 @@ public partial class VisualDecimalArray : VisualGraphArray<decimal>
     public override void Clear(int pRow, int pColumn)
     {
         if (va_minimum <= m_defaultValue && va_maximum >= m_defaultValue)
+        {
             this[pRow, pColumn] = m_defaultValue;
+        }
     }
     #endregion
 
@@ -427,11 +485,17 @@ public partial class VisualDecimalArray : VisualGraphArray<decimal>
         set
         {
             BeforeValueChangedArgs<decimal> beforeValueChangedArgs = AcceptBeforeValueChanged(value);
-            if (!beforeValueChangedArgs.AcceptValueChanged) return;
+            if (!beforeValueChangedArgs.AcceptValueChanged)
+            {
+                return;
+            }
+
             value = beforeValueChangedArgs.NewValue;
 
             if (value < va_minimum || value > va_maximum)
+            {
                 throw new VisualArrayException("La valeur '" + value + "' n'est pas valide pour la cellule, elle doit être comprise entre 'Minimum' et 'Maximum'");
+            }
 
             Address adresse = IndexToAddress(pIndex);
             va_tabValues[adresse.Row, adresse.Column] = value;
@@ -458,11 +522,18 @@ public partial class VisualDecimalArray : VisualGraphArray<decimal>
         set
         {
             BeforeValueChangedArgs<decimal> beforeValueChangedArgs = AcceptBeforeValueChanged(value);
-            if (!beforeValueChangedArgs.AcceptValueChanged) return;
+            if (!beforeValueChangedArgs.AcceptValueChanged)
+            {
+                return;
+            }
+
             value = beforeValueChangedArgs.NewValue;
 
             if (value < va_minimum || value > va_maximum)
+            {
                 throw new VisualArrayException("La valeur '" + value + "' n'est pas valide pour la cellule, elle doit être comprise entre 'Minimum' et 'Maximum'");
+            }
+
             Address adresse = AddressFromAddressMode(pRow, pColumn);
             va_tabValues[adresse.Row, adresse.Column] = value;
             int index = IndexFromAddress(adresse.Row, adresse.Column);
@@ -476,6 +547,8 @@ public partial class VisualDecimalArray : VisualGraphArray<decimal>
     internal override void SetValue(int pIndex, int pPixelOffset)
     {
         if (va_allowGraphClick)
+        {
             this[pIndex] = (va_maximum - va_minimum) / 2 + va_minimum;
+        }
     }
 }

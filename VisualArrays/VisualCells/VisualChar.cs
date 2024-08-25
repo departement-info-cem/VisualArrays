@@ -40,7 +40,9 @@ public partial class VisualChar : VisualValue<char>
         set
         {
             if (value != m_caseSensitive)
+            {
                 m_caseSensitive = value;
+            }
         }
     }
     //============================================================================================
@@ -96,9 +98,15 @@ public partial class VisualChar : VisualValue<char>
                 m_minimum = value;
 
                 if (m_value < m_minimum)
+                {
                     Value = m_minimum;
+                }
+
                 if (m_minimum > m_maximum)
+                {
                     Maximum = value;
+                }
+
                 //if (!DesignMode)
                 Refresh();
             }
@@ -120,9 +128,15 @@ public partial class VisualChar : VisualValue<char>
             {
                 m_maximum = value;
                 if (m_value > m_maximum)
+                {
                     Value = m_maximum;
+                }
+
                 if (m_maximum < m_minimum)
+                {
                     Minimum = value;
+                }
+
                 //if (!DesignMode)
                 Refresh();
             }
@@ -141,7 +155,9 @@ public partial class VisualChar : VisualValue<char>
         set
         {
             if (value < m_minimum || value > m_maximum)
+            {
                 throw new ArgumentOutOfRangeException("La valeur '" + value + "' n'est pas valide, elle doit être comprise entre 'Minimum' et 'Maximum'");
+            }
 
             if (m_value != value)
             {
@@ -164,7 +180,9 @@ public partial class VisualChar : VisualValue<char>
     protected override void DrawContent(Graphics pGraphics)
     {
         if (pGraphics == null)
+        {
             pGraphics = CreateGraphics();
+        }
 
         Rectangle cellBounds = new(Padding.Left, Padding.Top, Width - (Padding.Left + Padding.Right), Height - (Padding.Top + Padding.Bottom));
         // Étape 1 : On commence par dessiner le fond de la cellule
@@ -220,8 +238,16 @@ public partial class VisualChar : VisualValue<char>
                     valeur -= delta;
                     break;
             }
-            if (valeur < m_minimum) valeur = m_minimum;
-            if (valeur > m_maximum) valeur = m_maximum;
+            if (valeur < m_minimum)
+            {
+                valeur = m_minimum;
+            }
+
+            if (valeur > m_maximum)
+            {
+                valeur = m_maximum;
+            }
+
             Value = (char)valeur;
         }
     }
@@ -234,9 +260,21 @@ public partial class VisualChar : VisualValue<char>
         if (!m_readOnly)
         {
             char valeur = e.KeyChar;
-            if (!m_caseSensitive) valeur = char.ToUpper(e.KeyChar);
-            if (valeur < m_minimum) valeur = m_minimum;
-            if (valeur > m_maximum) valeur = m_maximum;
+            if (!m_caseSensitive)
+            {
+                valeur = char.ToUpper(e.KeyChar);
+            }
+
+            if (valeur < m_minimum)
+            {
+                valeur = m_minimum;
+            }
+
+            if (valeur > m_maximum)
+            {
+                valeur = m_maximum;
+            }
+
             Value = valeur;
         }
         base.OnKeyPress(e);
@@ -252,9 +290,13 @@ public partial class VisualChar : VisualValue<char>
         if (ModifierKeys == Keys.Alt)
         {
             if (m_view == enuCharView.Char)
+            {
                 View = enuCharView.Code;
+            }
             else
+            {
                 View = enuCharView.Char;
+            }
         }
         else
         {
@@ -266,7 +308,11 @@ public partial class VisualChar : VisualValue<char>
                     {
                         case MouseButtons.Left:
                         {
-                            if (m_value < m_maximum) Value++;
+                            if (m_value < m_maximum)
+                            {
+                                Value++;
+                            }
+
                             break;
                         }
                         case MouseButtons.Right:
@@ -280,7 +326,11 @@ public partial class VisualChar : VisualValue<char>
                     {
                         case MouseButtons.Left:
                         {
-                            if (m_value > m_minimum) Value--;
+                            if (m_value > m_minimum)
+                            {
+                                Value--;
+                            }
+
                             break;
                         }
                         case MouseButtons.Right:
@@ -290,7 +340,9 @@ public partial class VisualChar : VisualValue<char>
                 }
             }
             else
+            {
                 Focus();
+            }
         }
     }
 

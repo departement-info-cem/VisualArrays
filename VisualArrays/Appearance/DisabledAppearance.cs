@@ -103,7 +103,9 @@ public class DisabledAppearance : IBackgroundAppearance
             {
                 m_image = value;
                 if (m_owner.InDesignMode && value != null && m_style != enuBkgStyle.Image)
+                {
                     Style = enuBkgStyle.Image;
+                }
                 else if (m_style == enuBkgStyle.Image)
                 {
                     m_owner.UpdateDisableVisualElement(m_style);
@@ -214,7 +216,9 @@ public class DisabledAppearance : IBackgroundAppearance
             {
                 m_radius = value;
                 if (m_style is enuBkgStyle.FillShape or enuBkgStyle.Shape && m_shape == enuShape.RoundRect)
+                {
                     m_owner.UpdateCellsBkgVisualElement();
+                }
             }
         }
     }

@@ -49,19 +49,29 @@ public class HeaderArray
         get
         {
             if (pIndex >= va_elements.Length || pIndex < 0)
+            {
                 throw new VisualArrayException("Débordement de la grille : pIndex = " + pIndex);
+            }
+
             return va_elements[pIndex];
         }
         set
         {
             if (pIndex >= va_elements.Length || pIndex < 0)
+            {
                 throw new VisualArrayException("Débordement de la grille : pIndex = " + pIndex);
+            }
+
             va_elements[pIndex] = value;
 
             if (va_column)
+            {
                 va_owner.DrawColumnHeader(pIndex, value);
+            }
             else
+            {
                 va_owner.DrawRowHeader(pIndex, value);
+            }
         }
     }
 }

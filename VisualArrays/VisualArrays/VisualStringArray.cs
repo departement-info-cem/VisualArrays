@@ -105,28 +105,42 @@ public partial class VisualStringArray : VisualValueArray<string>
     {
         if (SelectedIndex != -1 && !va_readOnly && va_selectionMode != SelectionMode.None && !va_tabCells[SelectedAddress.Row, SelectedAddress.Column].ReadOnly)
         {
-            if (e.KeyChar == (char)Keys.Enter) return;
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                return;
+            }
+
             string valeurCourante;
             string nouvelleValeur;
             if (DateTime.Now.Ticks - va_currentKeyTime.Ticks > DELAI_INTER_TOUCHES)
+            {
                 valeurCourante = "";
+            }
             else
+            {
                 valeurCourante = this[SelectedIndex];
+            }
 
             va_currentKeyTime = DateTime.Now;
             if (e.KeyChar == (char)Keys.Back)
             {
                 if (valeurCourante.Length > 0)
+                {
                     nouvelleValeur = valeurCourante.Substring(0, valeurCourante.Length - 1);
+                }
                 else
+                {
                     nouvelleValeur = "";
+                }
             }
             else
             {
                 nouvelleValeur = valeurCourante + e.KeyChar;
             }
             if (nouvelleValeur.Length <= va_maxLength && View != enuStringView.ImageFile)
+            {
                 this[SelectedIndex] = nouvelleValeur;
+            }
         }
         base.OnKeyPress(e);
     }
@@ -164,19 +178,30 @@ public partial class VisualStringArray : VisualValueArray<string>
                 pGraphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
                 string laChaine = valeurAAfficher.ToString();
                 if (valeurAAfficher != m_specialValue)
+                {
                     DrawText(pGraphics, pContentBounds, laChaine, EnabledAppearance.TextColor, EnabledAppearance.Font, m_cellContentAlign);
+                }
                 else if (SpecialValueAppearance.ShowValue) // c'est la valeur spéciale
+                {
                     DrawText(pGraphics, pContentBounds, laChaine, SpecialValueAppearance.TextColor, SpecialValueAppearance.Font, m_cellContentAlign);
+                }
+
                 break;
             case enuStringView.ImageFile:
                 // Ne pas afficher la valeur si c'est la valeur spéciale ou si la cellule est inactive et que la propriété Show est false
-                if (valeurAAfficher == m_specialValue || (!cell.Enabled && !DisabledAppearance.ShowValue)) break;
+                if (valeurAAfficher == m_specialValue || (!cell.Enabled && !DisabledAppearance.ShowValue))
+                {
+                    break;
+                }
 
                 Image imageAAfficher;
                 bool imageDejaChargée = m_dictionnaire.TryGetValue(valeurAAfficher, out imageAAfficher);
 
                 if (imageDejaChargée)
+                {
                     pGraphics.DrawImage(imageAAfficher, pContentBounds);
+                }
+
                 break;
             default:
                 break;
@@ -197,12 +222,19 @@ public partial class VisualStringArray : VisualValueArray<string>
 
         // Étape 1 : On commence par dessiner le fond de la grille
         if (BackgroundImage != null)
+        {
             pGraphics.DrawImage(BackgroundImage, cellBounds, cellBounds, GraphicsUnit.Pixel);
+        }
         else
+        {
             pGraphics.FillRectangle(new SolidBrush(BackColor), cellBounds);
+        }
 
         // Étape 2 : Si la cellule n'est pas visible, alors on quitte (sans même afficher son adresse)
-        if (!cell.Visible) return;
+        if (!cell.Visible)
+        {
+            return;
+        }
 
 
         // Étape 3 : Si l'utilisateur désire dessiner lui même le contenu de la cellule
@@ -238,6 +270,7 @@ public partial class VisualStringArray : VisualValueArray<string>
             #region Code pour dessiner la valeur de la cellule
             Rectangle displayRectangle = GetCellContentBounds(pRow, pColumn, EnabledAppearance.Padding);
             if (!DesignMode || va_addressView == enuAddressView.None)
+            {
                 switch (va_view)
                 {
                     case enuStringView.Text:
@@ -246,7 +279,9 @@ public partial class VisualStringArray : VisualValueArray<string>
                             if (valeurAAfficher == m_specialValue) // c'est la valeur spéciale
                             {
                                 if (SpecialValueAppearance.ShowValue)
+                                {
                                     VisualArraysTools.DrawText(pGraphics, displayRectangle, valeurAAfficher, SpecialValueAppearance.TextColor, SpecialValueAppearance.Font, m_cellContentAlign);
+                                }
                             }
                             else // la valeur est normale
                             {
@@ -256,13 +291,18 @@ public partial class VisualStringArray : VisualValueArray<string>
                         else // la cellule est inactive
                         {
                             if (va_disabledAppearance.ShowValue)
+                            {
                                 VisualArraysTools.DrawText(pGraphics, displayRectangle, valeurAAfficher, DisabledAppearance.TextColor, DisabledAppearance.Font, m_cellContentAlign);
+                            }
                         }
                         break;
                     case enuStringView.ImageFile:
 
                         // Ne pas afficher la valeur si c'est la valeur spéciale ou si la cellule est inactive et que la propriété Show est false
-                        if (valeurAAfficher == m_specialValue || (!cell.Enabled && !DisabledAppearance.ShowValue)) break;
+                        if (valeurAAfficher == m_specialValue || (!cell.Enabled && !DisabledAppearance.ShowValue))
+                        {
+                            break;
+                        }
 
                         Image imageAAfficher;
                         bool imageDejaChargée = m_dictionnaire.TryGetValue(valeurAAfficher, out imageAAfficher);
@@ -270,9 +310,13 @@ public partial class VisualStringArray : VisualValueArray<string>
                         if (imageDejaChargée)
                         {
                             if (cell.Enabled)
+                            {
                                 pGraphics.DrawImage(imageAAfficher, cellContentBounds);
+                            }
                             else
+                            {
                                 VisualArraysTools.DrawDisabledImage(pGraphics, cellContentBounds, imageAAfficher, DisabledAppearance.ImageBrightness);
+                            }
                         }
                         else
                         {
@@ -289,15 +333,23 @@ public partial class VisualStringArray : VisualValueArray<string>
                                 }
                             }
                             else
+                            {
                                 throw new VisualArrayException("Impossible de charger l'image : " + valeurAAfficher);
+                            }
 
                             if (cell.Enabled)
+                            {
                                 pGraphics.DrawImage(imageAAfficher, cellContentBounds);
+                            }
                             else
+                            {
                                 VisualArraysTools.DrawDisabledImage(pGraphics, cellContentBounds, imageAAfficher, DisabledAppearance.ImageBrightness);
+                            }
                         }
                         break;
                 }
+            }
+
             #endregion
 
         }
@@ -313,15 +365,21 @@ public partial class VisualStringArray : VisualValueArray<string>
 
         // Étape 5 : Si la cellule est inactive et qu'une raillure doit être dessinée
         if (!cell.Enabled && va_disabledAppearance.StrikeAppearance.Style != enuStrikeStyle.None)
+        {
             DrawStrike(pGraphics, cellBounds, va_disabledAppearance);
+        }
 
         // Étape 6 : Si la cellule est sélectionnée, alors on doit dessiner la sélection
         if (cell.Selected)
+        {
             DrawSelection(pGraphics, pRow, pColumn);
+        }
 
         // Étape 7 : Si nous sommes en mode désign alors on doit dessiner l'adresse de la cellule
         if (DesignMode)
+        {
             DrawAddress(pGraphics, pRow, pColumn);
+        }
     }
     #endregion
 

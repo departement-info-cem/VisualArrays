@@ -203,7 +203,9 @@ public class SpecialValueAppearance<Type>:IBackgroundAppearance
             {
                 m_image = value;
                 if (m_owner.InDesignMode && value != null && m_style != enuBkgStyle.Image)
+                {
                     Style = enuBkgStyle.Image;
+                }
                 else if (m_style == enuBkgStyle.Image)
                 {
                     m_owner.UpdateSpecialValueVisualElement(m_style);
