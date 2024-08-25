@@ -607,10 +607,9 @@ namespace VisualArrays
                         else
                             throw new VisualArrayException("Imposible de sélectionner une cellule qui n'est pas visible et active");
                     }
-                    if (SelectedIndexChanged != null)
-                        SelectedIndexChanged(this, new EventArgs());
-                    if (SelectionChanged != null)
-                        SelectionChanged(this, new EventArgs());
+
+                    SelectedIndexChanged?.Invoke(this, new EventArgs());
+                    SelectionChanged?.Invoke(this, new EventArgs());
                 }
                 #endregion
 
@@ -629,10 +628,9 @@ namespace VisualArrays
                                     UpdateCellAndSprites(row, col);
                                 }
                             }
-                        if (SelectedIndexChanged != null)
-                            SelectedIndexChanged(this, new EventArgs());
-                        if (SelectionChanged != null)
-                            SelectionChanged(this, new EventArgs());
+
+                        SelectedIndexChanged?.Invoke(this, new EventArgs());
+                        SelectionChanged?.Invoke(this, new EventArgs());
                     }
                     else // il faut sélectionner la cellule
                     {
@@ -649,10 +647,11 @@ namespace VisualArrays
                         if (va_selectedIndex > oldSelectedIndex && oldSelectedIndex != -1)
                             va_selectedIndex = oldSelectedIndex; // conserve l'ancien SelectedIndex
                         else
-                            if (SelectedIndexChanged != null) // autrement il change et il faut le dire
-                                SelectedIndexChanged(this, new EventArgs());
-                        if (SelectionChanged != null)
-                            SelectionChanged(this, new EventArgs());
+                        {
+                            SelectedIndexChanged?.Invoke(this, new EventArgs());
+                        }
+
+                        SelectionChanged?.Invoke(this, new EventArgs());
                     }
                 }
                 #endregion
@@ -1403,8 +1402,7 @@ namespace VisualArrays
 
                 UpdateCellsBkgVisualElement();
 
-                if (LengthChanged != null)
-                    LengthChanged(this, EventArgs.Empty);
+                LengthChanged?.Invoke(this, EventArgs.Empty);
                 this.Refresh();
             }
         }
@@ -1455,8 +1453,7 @@ namespace VisualArrays
 
                 UpdateCellsBkgVisualElement();
 
-                if (LengthChanged != null)
-                    LengthChanged(this, EventArgs.Empty);
+                LengthChanged?.Invoke(this, EventArgs.Empty);
                 this.Refresh();
             }
         }
@@ -2537,10 +2534,8 @@ namespace VisualArrays
             Rectangle backRect = new Rectangle(0, 0, pContentBounds.Width, pContentBounds.Height);
             Rectangle cellBounds = GetCellBounds(pRow, pColumn);
             Rectangle borderRect = new Rectangle(0, 0, cellBounds.Width, cellBounds.Height);
-            if (cell.Background != null)
-                cell.Background.Draw(pGraphics, backRect);
-            if (cell.UserContent != null)
-                cell.UserContent.DrawCellDragContent(pGraphics, backRect, borderRect, cell.Enabled);
+            cell.Background?.Draw(pGraphics, backRect);
+            cell.UserContent?.DrawCellDragContent(pGraphics, backRect, borderRect, cell.Enabled);
         }
         //--------------------------------------------------------------------------------------
         /// <summary>
@@ -2576,10 +2571,12 @@ namespace VisualArrays
 
                 if (cell.Enabled)
                 {
-                    if (cell.Background != null) cell.Background.Draw(pGraphics, cellContentBounds);
+                    cell.Background?.Draw(pGraphics, cellContentBounds);
                 }
                 else // dans ce cas la cellule n'est pas active Enabled == false
-                    if (va_disabledVisualElement != null) va_disabledVisualElement.Draw(pGraphics, cellContentBounds);
+                {
+                    va_disabledVisualElement?.Draw(pGraphics, cellContentBounds);
+                }
             }
             // Étape 4 : On va dessiner les couches supplémentaires soit les VisualElement ajoutés
             CellVisualElement.CellVisualElement layerVE = cell.LayerOver;
@@ -2626,7 +2623,7 @@ namespace VisualArrays
                 pCell.UserContent.DrawCellContent(pGraphics, pCellContentBounds, pCellBounds,pCell.Enabled);
             else
             {
-                if (pCell.Background != null) pCell.Background.Draw(pGraphics, pCellContentBounds);
+                pCell.Background?.Draw(pGraphics, pCellContentBounds);
                 CellVisualElement.CellVisualElement layerVE = pCell.LayerOver;
                 while (layerVE != null)
                 {
@@ -3267,8 +3264,7 @@ namespace VisualArrays
                         ResizeValueArray();
                         ResetAllValuesToDefault();
                         UpdateCellsBkgVisualElement();
-                        if (LengthChanged != null)
-                            LengthChanged(this, EventArgs.Empty);
+                        LengthChanged?.Invoke(this, EventArgs.Empty);
                     }
                     break;
                 case enuResizeMode.Row:
@@ -3284,8 +3280,7 @@ namespace VisualArrays
                         ResizeValueArray();
                         ResetAllValuesToDefault();
                         UpdateCellsBkgVisualElement();
-                        if (LengthChanged != null)
-                            LengthChanged(this, EventArgs.Empty);
+                        LengthChanged?.Invoke(this, EventArgs.Empty);
                     }
                     break;
                 case enuResizeMode.Column:
@@ -3301,8 +3296,7 @@ namespace VisualArrays
                         ResizeValueArray();
                         ResetAllValuesToDefault();
                         UpdateCellsBkgVisualElement();
-                        if (LengthChanged != null)
-                            LengthChanged(this, EventArgs.Empty);
+                        LengthChanged?.Invoke(this, EventArgs.Empty);
                     }
                     break;
                 default:
@@ -3599,8 +3593,7 @@ namespace VisualArrays
 
                     va_mouseCurrentIndex = index;
 
-                    if (CellMouseEnter != null)
-                        CellMouseEnter(this, new CellEventArgs(index, rangee, colonne));
+                    CellMouseEnter?.Invoke(this, new CellEventArgs(index, rangee, colonne));
                 }
 
                 //FIN 2012/09/18 
@@ -3612,12 +3605,10 @@ namespace VisualArrays
 
                     va_mouseCurrentSprite = objSprite;
 
-                    if (SpriteMouseEnter != null)
-                        SpriteMouseEnter(this, new SpriteEventArgs(objSprite));
+                    SpriteMouseEnter?.Invoke(this, new SpriteEventArgs(objSprite));
                 }
 
-                if (SpriteMouseMove != null)
-                    SpriteMouseMove(this, new SpriteMouseEventArgs(e.Button, e.Clicks, x % largeurCellule, y % hauteurCellule, e.Delta, objSprite));
+                SpriteMouseMove?.Invoke(this, new SpriteMouseEventArgs(e.Button, e.Clicks, x % largeurCellule, y % hauteurCellule, e.Delta, objSprite));
             }
             // Si on passe sur une cellule de l'en-tête des colonnes
             else if (y < 0 && e.Y >= Padding.Top && x >= 0 && colonne < ColumnCount)
@@ -3642,8 +3633,7 @@ namespace VisualArrays
                     if (ColumnHeaderMouseLeave != null && saveMouseCurrentColumn != -1)
                         ColumnHeaderMouseLeave(this, new ColumnHeaderEventArgs(saveMouseCurrentColumn));
 
-                    if (ColumnHeaderMouseEnter != null)
-                        ColumnHeaderMouseEnter(this, new ColumnHeaderEventArgs(colonne));
+                    ColumnHeaderMouseEnter?.Invoke(this, new ColumnHeaderEventArgs(colonne));
                 }
             }
             // Si on passe sur une cellule de l'en-tête des rangées
@@ -3669,8 +3659,7 @@ namespace VisualArrays
                     if (RowHeaderMouseLeave != null && saveMouseCurrentRow != -1)
                         RowHeaderMouseLeave(this, new RowHeaderEventArgs(saveMouseCurrentRow));
 
-                    if (RowHeaderMouseEnter != null)
-                        RowHeaderMouseEnter(this, new RowHeaderEventArgs(rangee));
+                    RowHeaderMouseEnter?.Invoke(this, new RowHeaderEventArgs(rangee));
                 }            
             }
             // Si on passe au dessus d'aucune cellule ou en-tête
@@ -3717,12 +3706,10 @@ namespace VisualArrays
 
                     va_mouseCurrentIndex = index;
 
-                    if (CellMouseEnter != null)
-                        CellMouseEnter(this, new CellEventArgs(index, rangee, colonne));
+                    CellMouseEnter?.Invoke(this, new CellEventArgs(index, rangee, colonne));
                 }
 
-                if (CellMouseMove != null)
-                    CellMouseMove(this, new CellMouseEventArgs(e.Button, e.Clicks, x % largeurCellule, y % hauteurCellule, e.Delta, index, index / va_columnCount, index % va_columnCount));
+                CellMouseMove?.Invoke(this, new CellMouseEventArgs(e.Button, e.Clicks, x % largeurCellule, y % hauteurCellule, e.Delta, index, index / va_columnCount, index % va_columnCount));
 
             }
             base.OnMouseMove(e); 
@@ -3771,16 +3758,14 @@ namespace VisualArrays
             if (objSprite != null && objSprite == va_lastMouseClickSprite)
             {
                 va_lastMouseClickSprite = null;
-                if (SpriteMouseDoubleClick != null)
-                    SpriteMouseDoubleClick(this, new SpriteMouseEventArgs(e.Button, e.Clicks, x % largeurCellule, y % hauteurCellule, e.Delta, objSprite));
+                SpriteMouseDoubleClick?.Invoke(this, new SpriteMouseEventArgs(e.Button, e.Clicks, x % largeurCellule, y % hauteurCellule, e.Delta, objSprite));
             }
             else if (y < 0 && e.Y >= Padding.Top && x >= 0 && colonne < ColumnCount) // Si on clique sur une cellule de l'en-tête des rangées
             {
                 if (colonne == va_lastMouseClickColumn)
                 {
                     va_lastMouseClickColumn = -1;
-                    if (ColumnHeaderDoubleClick != null)
-                        ColumnHeaderDoubleClick(this, new ColumnHeaderEventArgs(colonne));
+                    ColumnHeaderDoubleClick?.Invoke(this, new ColumnHeaderEventArgs(colonne));
                 }
             }
             // Si on clique sur une cellule de l'en-tête des rangées
@@ -3789,8 +3774,7 @@ namespace VisualArrays
                 if (rangee == va_lastMouseClickRow)
                 {
                     va_lastMouseClickRow = -1;
-                    if (RowHeaderDoubleClick != null)
-                        RowHeaderDoubleClick(this, new RowHeaderEventArgs(rangee));
+                    RowHeaderDoubleClick?.Invoke(this, new RowHeaderEventArgs(rangee));
                 }
             }
             else
@@ -3933,14 +3917,12 @@ namespace VisualArrays
             if (objSprite != null && objSprite.AcceptClick)
             {
                     va_mouseDownSprite = objSprite;
-                    if (SpriteMouseDown != null)
-                        SpriteMouseDown(this, new SpriteMouseEventArgs(e.Button, e.Clicks, x % largeurCellule, y % hauteurCellule, e.Delta,objSprite));
+                    SpriteMouseDown?.Invoke(this, new SpriteMouseEventArgs(e.Button, e.Clicks, x % largeurCellule, y % hauteurCellule, e.Delta,objSprite));
 
                     if (va_allowDrag && objSprite.AllowDrag)
                     {
                         SpriteDragEventArgs spriteDragInfos = new SpriteDragEventArgs(this.Name,objSprite, false);
-                        if (BeforeSpriteDrag != null)
-                            BeforeSpriteDrag(this, spriteDragInfos);
+                        BeforeSpriteDrag?.Invoke(this, spriteDragInfos);
 
                         int index = objSprite.DisplayIndex;
                         if (!spriteDragInfos.Cancel)
@@ -3964,15 +3946,13 @@ namespace VisualArrays
             else if (y < 0 && e.Y >= Padding.Top && x >= 0 && colonne < ColumnCount)
             {
                 va_mouseDownColumn = colonne;
-                if (ColumnHeaderMouseDown != null)
-                    ColumnHeaderMouseDown(this, new ColumnHeaderEventArgs(colonne));
+                ColumnHeaderMouseDown?.Invoke(this, new ColumnHeaderEventArgs(colonne));
             }
             // Si on clique sur une cellule de l'en-tête des rangées
             else if (x < 0 && e.X >= Padding.Left && y >= 0 && rangee < RowCount)
             {
                 va_mouseDownRow = rangee;
-                if (RowHeaderMouseDown != null)
-                    RowHeaderMouseDown(this, new RowHeaderEventArgs(rangee));
+                RowHeaderMouseDown?.Invoke(this, new RowHeaderEventArgs(rangee));
             }
             // Si on clique l'extérieur des cellules alors on quitte
             else if (x < 0 || y < 0 || colonne >= ColumnCount || rangee >= RowCount)
@@ -4010,8 +3990,7 @@ namespace VisualArrays
                 Cell cell = va_tabCells[adresse.Row, adresse.Column];
                 if (IsOkToSelect(cell, adresse.Row, adresse.Column))
                 {
-                    if (CellMouseDown != null)
-                        CellMouseDown(this, new CellMouseEventArgs(e.Button, e.Clicks, x % largeurCellule, y % hauteurCellule, e.Delta, index, index / va_columnCount, index % va_columnCount));
+                    CellMouseDown?.Invoke(this, new CellMouseEventArgs(e.Button, e.Clicks, x % largeurCellule, y % hauteurCellule, e.Delta, index, index / va_columnCount, index % va_columnCount));
 
                     //if (va_allowDrag) Cursor = Cursors.Hand;
                     if (va_selectionMode == SelectionMode.One)
@@ -4030,11 +4009,10 @@ namespace VisualArrays
                             { // il faut rechercher une autre cellule qui sera le SelectedIndex
                                 SelectNextCell(); // aucune autre cellule à sélectionner
 
-                                if (SelectedIndexChanged != null)
-                                    SelectedIndexChanged(this, EventArgs.Empty);
+                                SelectedIndexChanged?.Invoke(this, EventArgs.Empty);
                             }
-                            if (SelectionChanged != null)
-                                SelectionChanged(this, EventArgs.Empty);
+
+                            SelectionChanged?.Invoke(this, EventArgs.Empty);
                         }
                     }
 
@@ -4044,8 +4022,7 @@ namespace VisualArrays
                     if (va_allowDrag && va_allowCellDrag)
                     {
                         CellDragEventArgs cellDragInfos = new CellDragEventArgs(this.Name, index, new Address(index / va_columnCount, index % va_columnCount), false);
-                        if (BeforeCellDrag != null)
-                            BeforeCellDrag(this, cellDragInfos);
+                        BeforeCellDrag?.Invoke(this, cellDragInfos);
 
                         if (!cellDragInfos.Cancel) // l'opération drag est accepté
                         {
@@ -4131,39 +4108,33 @@ namespace VisualArrays
             Sprite objSprite = HitSprite(e.X, e.Y);
             if (objSprite != null && objSprite.AcceptClick) // le premier niveau de click est le Sprite
             {
-                if (SpriteMouseUp != null)
-                    SpriteMouseUp(this, new SpriteMouseEventArgs(e.Button, e.Clicks, x % largeurCellule, y % hauteurCellule, e.Delta, objSprite));
+                SpriteMouseUp?.Invoke(this, new SpriteMouseEventArgs(e.Button, e.Clicks, x % largeurCellule, y % hauteurCellule, e.Delta, objSprite));
 
                 if (saveMouseDownSprite == objSprite) // nous avons un SpriteMouseClick
                 {
                     va_lastMouseClickSprite = objSprite;
-                    if (SpriteMouseClick != null)
-                        SpriteMouseClick(this, new SpriteMouseEventArgs(e.Button, e.Clicks, x % largeurCellule, y % hauteurCellule, e.Delta, objSprite));
+                    SpriteMouseClick?.Invoke(this, new SpriteMouseEventArgs(e.Button, e.Clicks, x % largeurCellule, y % hauteurCellule, e.Delta, objSprite));
                 }
             }
             else if (y < 0 && e.Y >= Padding.Top && x >= 0 && colonne < ColumnCount) // Si on relâche la souris sur l'en-tête des colonnes
             {
-                if (ColumnHeaderMouseUp != null)
-                    ColumnHeaderMouseUp(this, new ColumnHeaderEventArgs(colonne));
+                ColumnHeaderMouseUp?.Invoke(this, new ColumnHeaderEventArgs(colonne));
 
                 if (saveMouseDownColumn == colonne)
                 {
                     va_lastMouseClickColumn = colonne;
-                    if (ColumnHeaderClick != null)
-                        ColumnHeaderClick(this, new ColumnHeaderEventArgs(colonne));
+                    ColumnHeaderClick?.Invoke(this, new ColumnHeaderEventArgs(colonne));
                 }
             }
             // Si on relâche la souris sur l'en-tête des rangées
             else if (x < 0 && e.X >= Padding.Left && y >= 0 && rangee < RowCount)
             {
-                if (RowHeaderMouseUp != null)
-                    RowHeaderMouseUp(this, new RowHeaderEventArgs(rangee));
+                RowHeaderMouseUp?.Invoke(this, new RowHeaderEventArgs(rangee));
 
                 if (saveMouseDownRow == rangee)
                 {
                     va_lastMouseClickRow = rangee;
-                    if (RowHeaderClick != null)
-                        RowHeaderClick(this, new RowHeaderEventArgs(rangee));
+                    RowHeaderClick?.Invoke(this, new RowHeaderEventArgs(rangee));
                 }
             }
             // Si on relâche à l'extérieur des cellules alors on quitte
@@ -4276,9 +4247,8 @@ namespace VisualArrays
             {
                 if (m_dragInfos.DragSprite != null && m_dragInfos.DragSprite.AllowOutsideDrop && m_dragInfos.SourceGridName == this.Name && va_allowSelfDrop)
                 {
-                    m_dragInfos.DragSprite.Visible = true; 
-                    if (SpriteOutsideDrop != null)
-                        SpriteOutsideDrop(this, new SpriteOutsideDropEventArgs(m_dragInfos.SourceGridName, m_dragInfos.DragSprite, m_dragInfos.SourceIndex, new Address(m_dragInfos.SourceRow, m_dragInfos.SourceColumn),coordonnee));
+                    m_dragInfos.DragSprite.Visible = true;
+                    SpriteOutsideDrop?.Invoke(this, new SpriteOutsideDropEventArgs(m_dragInfos.SourceGridName, m_dragInfos.DragSprite, m_dragInfos.SourceIndex, new Address(m_dragInfos.SourceRow, m_dragInfos.SourceColumn),coordonnee));
 
                 }
                 va_dragIndex = -1;

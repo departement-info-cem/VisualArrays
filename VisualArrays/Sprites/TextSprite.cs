@@ -41,8 +41,7 @@ namespace VisualArrays.Sprites
             set
             {
                 m_textColor = value;
-                if (m_owner == null) return;
-                m_owner.UpdateSprites(m_bounds);
+                m_owner?.UpdateSprites(m_bounds);
             }
         }
         //-------------------------------------------------------------------------------------
@@ -85,8 +84,7 @@ namespace VisualArrays.Sprites
             set
             {
                 m_shapeColor = value;
-                if (m_owner == null) return;
-                m_owner.UpdateSprites(m_bounds);
+                m_owner?.UpdateSprites(m_bounds);
             }
         }
         //===========================================================================================
@@ -104,8 +102,7 @@ namespace VisualArrays.Sprites
             set
             {
                 m_backgroundStyle = value;
-                if (m_owner == null) return;
-                m_owner.UpdateSprites(m_bounds);
+                m_owner?.UpdateSprites(m_bounds);
             }
         }
         //-------------------------------------------------------------------------------------
@@ -120,8 +117,7 @@ namespace VisualArrays.Sprites
             set
             {
                 m_backgroundShape = value;
-                if (m_owner == null) return;
-                m_owner.UpdateSprites(m_bounds);
+                m_owner?.UpdateSprites(m_bounds);
             }
         }
         //===========================================================================================

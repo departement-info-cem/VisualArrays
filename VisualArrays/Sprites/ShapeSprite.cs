@@ -22,8 +22,7 @@ namespace VisualArrays.Sprites
             {
                 va_color = value;
                 va_pen = new Pen(va_color, va_penWidth);
-                if (m_owner == null) return;
-                m_owner.UpdateSprites(m_bounds);
+                m_owner?.UpdateSprites(m_bounds);
             }
         }
         //-------------------------------------------------------------------------------------
@@ -39,8 +38,7 @@ namespace VisualArrays.Sprites
             set
             {
                 va_shape = value;
-                if (m_owner == null) return;
-                m_owner.UpdateSprites(m_bounds);
+                m_owner?.UpdateSprites(m_bounds);
             }
         }
 
@@ -58,8 +56,7 @@ namespace VisualArrays.Sprites
             {
                 va_penWidth = value;
                 va_pen = new Pen(va_color, va_penWidth);
-                if (m_owner == null) return;
-                m_owner.UpdateSprites(m_bounds);
+                m_owner?.UpdateSprites(m_bounds);
             }
         }
         /// <summary>

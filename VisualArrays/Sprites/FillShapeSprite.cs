@@ -22,8 +22,7 @@ namespace VisualArrays.Sprites
             set
             {
                 m_color = value;
-                if (m_owner == null) return;
-                m_owner.UpdateSprites(m_bounds);
+                m_owner?.UpdateSprites(m_bounds);
             }
         }
         //-------------------------------------------------------------------------------------
@@ -65,8 +64,7 @@ namespace VisualArrays.Sprites
             set
             {
                 m_shape = value;
-                if (m_owner == null) return;
-                m_owner.UpdateSprites(m_bounds);
+                m_owner?.UpdateSprites(m_bounds);
             }
         }
         /// <summary>

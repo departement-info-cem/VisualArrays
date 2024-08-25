@@ -341,8 +341,9 @@ namespace VisualArrays.VisualCells
             if (!m_readOnly)
             {
                 if (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Return)
-                    if (ValueChanged != null)
-                        ValueChanged(this, EventArgs.Empty);
+                {
+                    ValueChanged?.Invoke(this, EventArgs.Empty);
+                }
             }
         }
         /// <summary>

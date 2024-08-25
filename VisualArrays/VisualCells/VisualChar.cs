@@ -149,8 +149,7 @@ namespace VisualArrays.VisualCells
                     Refresh();
                     //using (Graphics gr = CreateGraphics())
                     //    DrawContent(gr);
-                    if (ValueChanged != null)
-                        ValueChanged(this, EventArgs.Empty);
+                    ValueChanged?.Invoke(this, EventArgs.Empty);
                 }
             }
         }

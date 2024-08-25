@@ -30,8 +30,7 @@ namespace VisualArrays.Sprites
             set
             {
                 m_imageList = value;
-                if (m_owner == null) return;
-                m_owner.UpdateSprites(m_bounds);
+                m_owner?.UpdateSprites(m_bounds);
             }
         }
 
@@ -50,8 +49,7 @@ namespace VisualArrays.Sprites
             set
             {
                 m_imageIndex = value;
-                if (m_owner == null) return;
-                m_owner.UpdateSprites(m_bounds);
+                m_owner?.UpdateSprites(m_bounds);
             }
         }
         #endregion
@@ -75,8 +73,7 @@ namespace VisualArrays.Sprites
                 m_image = value;
                 if (m_image != null)
                     Size = new System.Drawing.Size(m_image.Width, m_image.Height);
-                if (m_owner != null)
-                    m_owner.UpdateSprites(m_bounds);
+                m_owner?.UpdateSprites(m_bounds);
             }
         }
         /// <summary>

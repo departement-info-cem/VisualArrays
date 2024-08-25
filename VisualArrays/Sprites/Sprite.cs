@@ -924,8 +924,7 @@ namespace VisualArrays.Sprites
             set
             {
                 m_visible = value;
-                if (m_owner == null) return;
-                m_owner.UpdateSprites(m_bounds);
+                m_owner?.UpdateSprites(m_bounds);
             }
         }
         //============================================================================================
@@ -1012,8 +1011,7 @@ namespace VisualArrays.Sprites
         /// </summary>
         public void Refresh()
         {
-            if (m_owner == null) return;
-            m_owner.UpdateSprites(m_bounds);
+            m_owner?.UpdateSprites(m_bounds);
         }
         /// <summary>
         /// Dessine ce 'Sprite'.
@@ -1042,16 +1040,14 @@ namespace VisualArrays.Sprites
         /// </summary>
         public void BringToFront()
         {
-            if (m_owner != null)
-                m_owner.Sprites.BringToFront(this);
+            m_owner?.Sprites.BringToFront(this);
         }
         /// <summary>
         /// Place le 'Sprite' au dernier plan derrière tous les autres Sprites
         /// </summary>
         public void SendToBack()
         {
-            if (m_owner != null)
-                m_owner.Sprites.SendToBack(this);
+            m_owner?.Sprites.SendToBack(this);
         }
         #endregion
 

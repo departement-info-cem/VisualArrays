@@ -186,11 +186,12 @@ namespace VisualArrays.VisualArrays
             // Dessiner le fond de la cellule si nécessaire
             if (valeurAAfficher == m_specialValue)
             {
-                if (va_specialValueVisualElement != null) // autrement pas de fond pour la specialValue
-                    va_specialValueVisualElement.Draw(pGraphics, pContentBounds);
+                va_specialValueVisualElement?.Draw(pGraphics, pContentBounds);
             }
             else
-                if (cell.Background != null) cell.Background.Draw(pGraphics, pContentBounds);
+            {
+                cell.Background?.Draw(pGraphics, pContentBounds);
+            }
 
             switch (va_view)
             {
@@ -268,26 +269,22 @@ namespace VisualArrays.VisualArrays
 
                 char valeurAAfficher = va_tabValues[pRow, pColumn];
 
-                if (cell.LayerUnder != null)
-                    cell.LayerUnder.Draw(pGraphics, cellContentBounds);
+                cell.LayerUnder?.Draw(pGraphics, cellContentBounds);
 
                 if (cell.Enabled) //  la cellule est active
                 {
                     if (valeurAAfficher == m_specialValue) // la valeur est spéciale
                     {
-                        if (va_specialValueVisualElement != null) // autrement pas de fond pour la specialValue
-                            va_specialValueVisualElement.Draw(pGraphics, cellContentBounds);
+                        va_specialValueVisualElement?.Draw(pGraphics, cellContentBounds);
                     }
                     else // la valeur est normale
                     {
-                        if (cell.Background != null) 
-                            cell.Background.Draw(pGraphics, cellContentBounds);
+                        cell.Background?.Draw(pGraphics, cellContentBounds);
                     }
                 }
                 else // la cellule est inactive
                 {
-                    if (va_disabledVisualElement != null) 
-                        va_disabledVisualElement.Draw(pGraphics, cellContentBounds);
+                    va_disabledVisualElement?.Draw(pGraphics, cellContentBounds);
                 }
 
                 #region Code pour dessiner la valeur de la cellule

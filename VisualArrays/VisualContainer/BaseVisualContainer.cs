@@ -163,8 +163,7 @@ namespace VisualArrays.VisualContainer
         //========================================================================================================================
         private void cell_ValueChanged(object sender, EventArgs e)
         {
-            if (ValueChanged != null)
-                ValueChanged(this, new CellVCEventArgs(((VisualValue<BaseType>)sender).Index));
+            ValueChanged?.Invoke(this, new CellVCEventArgs(((VisualValue<BaseType>)sender).Index));
         }
         //========================================================================================================================
         /// <summary>
@@ -209,20 +208,17 @@ namespace VisualArrays.VisualContainer
         //========================================================================================================
         void cell_MouseMove(object sender, MouseEventArgs e)
         {
-            if (CellMouseMove != null)
-                CellMouseMove(sender, new CellMouseEventArgs1D(e.Button, e.Clicks, e.X, e.Y, e.Delta, ((VisualValue<BaseType>)sender).Index));
+            CellMouseMove?.Invoke(sender, new CellMouseEventArgs1D(e.Button, e.Clicks, e.X, e.Y, e.Delta, ((VisualValue<BaseType>)sender).Index));
         }
         //========================================================================================================
         void cell_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            if (CellMouseDoubleClick != null)
-                CellMouseDoubleClick(sender, new CellMouseEventArgs1D(e.Button, e.Clicks, e.X, e.Y, e.Delta, ((VisualValue<BaseType>)sender).Index));
+            CellMouseDoubleClick?.Invoke(sender, new CellMouseEventArgs1D(e.Button, e.Clicks, e.X, e.Y, e.Delta, ((VisualValue<BaseType>)sender).Index));
         }
         //========================================================================================================
         void cell_MouseClick(object sender, MouseEventArgs e)
         {
-            if (CellMouseClick != null)
-                CellMouseClick(sender, new CellMouseEventArgs1D(e.Button, e.Clicks, e.X, e.Y, e.Delta, ((VisualValue<BaseType>)sender).Index));
+            CellMouseClick?.Invoke(sender, new CellMouseEventArgs1D(e.Button, e.Clicks, e.X, e.Y, e.Delta, ((VisualValue<BaseType>)sender).Index));
         }
         //========================================================================================================
         void cell_MouseHover(object sender, EventArgs e)
@@ -232,26 +228,22 @@ namespace VisualArrays.VisualContainer
         //========================================================================================================
         void cell_MouseUp(object sender, MouseEventArgs e)
         {
-            if (CellMouseUp != null)
-                CellMouseUp(sender, new CellMouseEventArgs1D(e.Button, e.Clicks, e.X, e.Y, e.Delta, ((VisualValue<BaseType>)sender).Index));
+            CellMouseUp?.Invoke(sender, new CellMouseEventArgs1D(e.Button, e.Clicks, e.X, e.Y, e.Delta, ((VisualValue<BaseType>)sender).Index));
         }
         //========================================================================================================
         void cell_MouseLeave(object sender, EventArgs e)
         {
-            if (CellMouseLeave != null)
-                CellMouseLeave(sender, new CellEventArgs(((VisualValue<BaseType>)sender).Index, -1, -1));
+            CellMouseLeave?.Invoke(sender, new CellEventArgs(((VisualValue<BaseType>)sender).Index, -1, -1));
         }
         //========================================================================================================
         void cell_MouseEnter(object sender, EventArgs e)
         {
-            if (CellMouseEnter != null)
-                CellMouseEnter(sender, new CellEventArgs(((VisualValue<BaseType>)sender).Index, -1, -1));
+            CellMouseEnter?.Invoke(sender, new CellEventArgs(((VisualValue<BaseType>)sender).Index, -1, -1));
         }
         //========================================================================================================
         void cell_MouseDown(object sender, MouseEventArgs e)
         {
-            if (CellMouseDown != null)
-                CellMouseDown(sender, new CellMouseEventArgs1D(e.Button, e.Clicks, e.X, e.Y, e.Delta, ((VisualValue<BaseType>)sender).Index));
+            CellMouseDown?.Invoke(sender, new CellMouseEventArgs1D(e.Button, e.Clicks, e.X, e.Y, e.Delta, ((VisualValue<BaseType>)sender).Index));
         }
         #endregion
 

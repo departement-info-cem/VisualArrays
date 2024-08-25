@@ -85,8 +85,7 @@ namespace VisualArrays.VisualCells
                     m_value = value;
                     using (Graphics gr = CreateGraphics())
                         DrawContent(gr);
-                    if (ValueChanged != null)
-                        ValueChanged(this, EventArgs.Empty);
+                    ValueChanged?.Invoke(this, EventArgs.Empty);
                 }
             }
         }
@@ -107,15 +106,13 @@ namespace VisualArrays.VisualCells
 
             if (m_value)
             {
-                if (m_foreGroundVE != null)
-                    m_foreGroundVE.Draw(pGraphics, cellBounds);
+                m_foreGroundVE?.Draw(pGraphics, cellBounds);
                 //using (Brush pinceau = new SolidBrush(va_valueAppearance.True.BackgroundColor))
                   //  pGraphics.FillRectangle(pinceau, cellBounds);
             }
             else
             {
-                if (m_backgroundVE != null)
-                    m_backgroundVE.Draw(pGraphics, cellBounds);
+                m_backgroundVE?.Draw(pGraphics, cellBounds);
                 //using (Brush pinceau = new SolidBrush(va_valueAppearance.False.BackgroundColor))
                   //  pGraphics.FillRectangle(pinceau, cellBounds);
             }

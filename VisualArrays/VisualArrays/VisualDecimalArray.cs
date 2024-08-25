@@ -250,27 +250,23 @@ namespace VisualArrays.VisualArrays
 
                 decimal valeurAAfficher = va_tabValues[pRow, pColumn];
 
-                if (cell.LayerUnder != null)
-                    cell.LayerUnder.Draw(pGraphics, cellContentBounds);
+                cell.LayerUnder?.Draw(pGraphics, cellContentBounds);
 
                 // 2013-02-28 ------------------------------------------------------------------------------------------
                 if (cell.Enabled) // la cellule est active.
                 {
                     if (valeurAAfficher == m_specialValue) // la valeur est spéciale
                     {
-                        if (va_specialValueVisualElement != null) // autrement pas de fond pour la specialValue
-                            va_specialValueVisualElement.Draw(pGraphics, cellContentBounds);
+                        va_specialValueVisualElement?.Draw(pGraphics, cellContentBounds);
                     }
                     else // une valeur normale
                     {
-                        if (cell.Background != null)
-                            cell.Background.Draw(pGraphics, cellContentBounds);
+                        cell.Background?.Draw(pGraphics, cellContentBounds);
                     }
                 }
                 else // il s'agit d'une cellule inactive, quelle soit spéciale ou pas
                 {
-                    if (va_disabledVisualElement != null)
-                        va_disabledVisualElement.Draw(pGraphics, cellContentBounds);
+                    va_disabledVisualElement?.Draw(pGraphics, cellContentBounds);
                 }
 
                 #region Code pour dessiner la valeur de la cellule
