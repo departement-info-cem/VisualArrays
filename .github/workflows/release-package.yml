@@ -29,4 +29,6 @@ jobs:
       - name: Create the package
         run: dotnet pack --configuration Release VisualArrays
       - name: Publish the package to GPR
-        run: dotnet nuget push VisualArrays\bin\Release\*.nupkg --api-key ${{secrets.GITHUB_TOKEN}}
+        run: dotnet nuget push VisualArrays\bin\Release\*.nupkg
+        env:
+          NUGET_AUTH_TOKEN: ${{secrets.GPR_NUGET_REGISTRY}}
