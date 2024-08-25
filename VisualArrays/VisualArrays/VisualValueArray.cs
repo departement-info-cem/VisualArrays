@@ -245,7 +245,7 @@ namespace VisualArrays.VisualArrays
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         public new VGDisabledAppearance<Type> DisabledAppearance
         {
-            get { return va_disabledAppearance; }
+            get => va_disabledAppearance;
             set
             {
                 va_disabledAppearance = value;
@@ -292,7 +292,7 @@ namespace VisualArrays.VisualArrays
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         public new VGCellAppearance<Type> EnabledAppearance
         {
-            get { return va_enabledAppearance; }
+            get => va_enabledAppearance;
             set
             {
                 va_enabledAppearance = value;
@@ -322,7 +322,7 @@ namespace VisualArrays.VisualArrays
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         public SpecialValueAppearance<Type> SpecialValueAppearance
         {
-            get { return va_specialValueAppearance; }
+            get => va_specialValueAppearance;
             set
             {
                 if (value != va_specialValueAppearance)
@@ -500,8 +500,8 @@ namespace VisualArrays.VisualArrays
         /// <returns>valeur contenue dans la cellule</returns>
         public Type this[Address pAddress]
         {
-            get { return this[pAddress.Row, pAddress.Column]; }
-            set { this[pAddress.Row, pAddress.Column] = value; }
+            get => this[pAddress.Row, pAddress.Column];
+            set => this[pAddress.Row, pAddress.Column] = value;
         }
         #endregion
 

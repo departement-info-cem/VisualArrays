@@ -55,8 +55,8 @@ namespace VisualArrays.Others
         [DefaultValue(typeof(int), "0"), Description("Rangée")]
         public int Row
         {
-            get { return m_row; }
-            set { m_row = value; }
+            get => m_row;
+            set => m_row = value;
         }        
         //----------------------------------------------------------------
         private int m_column;
@@ -66,8 +66,8 @@ namespace VisualArrays.Others
         [DefaultValue(typeof(int), "0"), Description("Colonne")]
         public int Column
         {
-            get { return m_column; }
-            set { m_column = value; }
+            get => m_column;
+            set => m_column = value;
         }
         //----------------------------------------------------------------
         private void ResetAddress()

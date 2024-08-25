@@ -33,7 +33,7 @@
         /// </summary>
         public int Zoom
         {
-            get { return va_zoom; }
+            get => va_zoom;
             set
             {
                 if (value > 100) value = 100;
@@ -52,8 +52,8 @@
         /// </summary>
         public Padding Margin
         {
-            get { return va_margin; }
-            set { va_margin = value; }
+            get => va_margin;
+            set => va_margin = value;
         }
         //-------------------------------------------------------------------------------------
         /// <summary>
@@ -65,11 +65,8 @@
         /// </summary>
         public ContentAlignment Alignment
         {
-            get { return va_alignment; }
-            set
-            {
-                va_alignment = value;
-            }
+            get => va_alignment;
+            set => va_alignment = value;
         }
         #endregion
 

@@ -49,7 +49,7 @@ namespace VisualArrays.VisualCells
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         public VisualBoolAppearance ValueAppearance
         {
-            get { return va_valueAppearance; }
+            get => va_valueAppearance;
             set
             {
                 va_valueAppearance = value;
@@ -66,8 +66,8 @@ namespace VisualArrays.VisualCells
         [Category("VisualBool"), DefaultValue(true), Browsable(true), Description("Détermine si un click sur le contrôle provoque une inversion de son état")]
         public bool Toggle
         {
-            get { return m_toogle; }
-            set { m_toogle = value; }
+            get => m_toogle;
+            set => m_toogle = value;
         }
         //=========================================================================================================
         private bool m_value = false;
@@ -77,7 +77,7 @@ namespace VisualArrays.VisualCells
         [Category("VisualBool"),DefaultValue(false), Browsable(true), Description("La valeur actuelle du contrôle VisualBool")]
         public override bool Value
         {
-            get { return m_value; }
+            get => m_value;
             set
             {
                 if (m_value != value)

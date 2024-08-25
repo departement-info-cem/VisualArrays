@@ -14,8 +14,8 @@
         /// </summary>
         public string Text
         {
-            get { return va_text; }
-            set { va_text = value; }
+            get => va_text;
+            set => va_text = value;
         }
         //-------------------------------------------------------------------------------------
         private Color va_color;
@@ -24,11 +24,8 @@
         /// </summary>
         public Color Color
         {
-            get { return va_color; }
-            set
-            {
-                va_color = value;
-            }
+            get => va_color;
+            set => va_color = value;
         }
         //-------------------------------------------------------------------------------------
         private Font va_font;
@@ -37,11 +34,8 @@
         /// </summary>
         public Font Font
         {
-            get { return va_font; }
-            set
-            {
-                va_font = value;
-            }
+            get => va_font;
+            set => va_font = value;
         }
         #endregion
 

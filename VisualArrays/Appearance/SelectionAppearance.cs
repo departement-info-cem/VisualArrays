@@ -23,7 +23,7 @@ namespace VisualArrays.Appearance
          Description("Espacement entre le contour de la cellule et la sélection")]
         public Padding Padding
         {
-            get { return m_padding; }
+            get => m_padding;
             set
             {
                 if (value != m_padding)
@@ -54,7 +54,7 @@ namespace VisualArrays.Appearance
         Description("Image utilisée pour la sélection")] 
         public Image Image
         {
-            get { return image; }
+            get => image;
             set {
                 if (value != image)
                 image = value; 
@@ -72,7 +72,7 @@ namespace VisualArrays.Appearance
         Description("Style utilisé pour la sélection")]  
        public enuSelectionStyle Style
         {
-            get { return style; }
+            get => style;
             set { 
                 if (value != style)
                 style = value; 
@@ -90,7 +90,7 @@ namespace VisualArrays.Appearance
         Description("Forme utilisée pour la sélection")]  
         public enuShape Shape
         {
-            get { return shape; }
+            get => shape;
             set {
                 if (value != shape)
                 shape = value; 
@@ -108,7 +108,7 @@ namespace VisualArrays.Appearance
         Description("Taille du crayon utilisée pour dessiner la sélection")]  
         public int PenWidth
         {
-            get { return penWidth; }
+            get => penWidth;
             set
             {
                 if (value < 1) 
@@ -133,7 +133,7 @@ namespace VisualArrays.Appearance
         Description("Couleur de la sélection")]        
         public Color Color
         {
-            get { return color; }
+            get => color;
             set {
                 if (value != color) 
                 color = value; 
@@ -152,10 +152,7 @@ namespace VisualArrays.Appearance
         Description("Radius utilisé lorsque enuShape est RoundRect")]
         public int Radius
         {
-            get
-            {
-                return radius;
-            }
+            get => radius;
             set
             {
                 if (value < 1)

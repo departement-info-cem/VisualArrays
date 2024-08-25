@@ -40,7 +40,7 @@ namespace VisualArrays.Appearance
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         public VisualBoolValueAppearance True
         {
-            get { return va_trueAppearance; }
+            get => va_trueAppearance;
             set
             {
                 va_trueAppearance = value;
@@ -63,7 +63,7 @@ namespace VisualArrays.Appearance
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         public VisualBoolValueAppearance False
         {
-            get { return va_falseAppearance; }
+            get => va_falseAppearance;
             set
             {
                 va_falseAppearance = value;

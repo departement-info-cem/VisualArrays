@@ -19,7 +19,7 @@ namespace VisualArrays.VisualArrays
         [DefaultValue(0), Category("VisualArrays"), Browsable(true), Description("Valeur par d�faut de toutes les cellules")]
         public int DefaultValue
         {
-            get { return m_defaultValue; }
+            get => m_defaultValue;
             set
             {
                 if (value < va_minimum || value > va_maximum)
@@ -42,7 +42,7 @@ namespace VisualArrays.VisualArrays
         [DefaultValue(-1), Category("VisualArrays"), Browsable(true), Description("Valeur sp�ciale � afficher diff�remment des autres valeurs, voir SpecialValueAppearance")]
         public int SpecialValue
         {
-            get { return m_specialValue; }
+            get => m_specialValue;
             set
             {
                 if (value != m_specialValue)
@@ -60,7 +60,7 @@ namespace VisualArrays.VisualArrays
         [DefaultValue(typeof(Color), "Red"), Category("VisualArrays"), Browsable(true), Description("Couleur des segments allum�s.")]
         public Color DigitColor
         {
-            get { return va_digitColor; }
+            get => va_digitColor;
             set
             {
                 va_digitColor = value;
@@ -76,10 +76,7 @@ namespace VisualArrays.VisualArrays
         [RefreshProperties(RefreshProperties.All)]
         public int Minimum
         {
-            get
-            {
-                return va_minimum;
-            }
+            get => va_minimum;
             set
             {
                 if (value != va_minimum)
@@ -104,10 +101,7 @@ namespace VisualArrays.VisualArrays
         [RefreshProperties(RefreshProperties.All)]
         public int Maximum
         {
-            get
-            {
-                return va_maximum;
-            }
+            get => va_maximum;
             set
             {
                 if (value != va_maximum)
@@ -130,7 +124,7 @@ namespace VisualArrays.VisualArrays
         [DefaultValue(enuIntView.Number), Category("CellAppearance"), Browsable(true), Description("Obtient et d�finit le style de visualisation pour les valeurs de la grille.")]
         public enuIntView View
         {
-            get { return va_view; }
+            get => va_view;
             set
             {
                 va_view = value;

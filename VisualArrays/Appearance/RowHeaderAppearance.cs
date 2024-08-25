@@ -31,7 +31,7 @@ namespace VisualArrays.Appearance
        Description("Police du texte de l'en-tête des rangées")]
         public Font Font
         {
-            get { return m_font; }
+            get => m_font;
             set
             {
                 if (m_font != value)
@@ -61,7 +61,7 @@ namespace VisualArrays.Appearance
         Description("Couleur du texte pour l'en-tête des rangées")]
         public Color ForeColor
         {
-            get { return m_foreColor; }
+            get => m_foreColor;
             set
             {
                 if (value != m_foreColor)
@@ -83,7 +83,7 @@ namespace VisualArrays.Appearance
         Description("Couleur de fond des cellules d'en-tête de rangées")]
         public Color BackgroundColor
         {
-            get { return m_backgroundColor; }
+            get => m_backgroundColor;
             set
             {
                 if (value != m_backgroundColor)
@@ -106,7 +106,7 @@ namespace VisualArrays.Appearance
        Description("Style de fond des cellules d'en-tête de rangées")]
         public enuHeaderBkgStyle Style
         {
-            get { return m_style; }
+            get => m_style;
             set
             {
                 if (value != m_style)
@@ -128,7 +128,7 @@ namespace VisualArrays.Appearance
          Description("Largeur de l'en-tête des rangées")]
         public int Width
         {
-            get { return m_width; }
+            get => m_width;
             set
             {
                 if (value != Width)
@@ -156,7 +156,7 @@ namespace VisualArrays.Appearance
          Description("Style des valeurs de l'en-tête des rangées")]
         public enuDataStyle ValueStyle
         {
-            get { return m_valueStyle; }
+            get => m_valueStyle;
             set
             {
                 if (value != m_valueStyle)
@@ -178,7 +178,7 @@ namespace VisualArrays.Appearance
         Description("Indique si l'en-tête est visible ou non")]
         public bool Visible
         {
-            get { return m_visible; }
+            get => m_visible;
             set
             {
                 if (value != m_visible)

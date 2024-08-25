@@ -12,10 +12,8 @@
         /// <summary>
         /// Obtient le nombre d'éléments de la collection.
         /// </summary>
-        public int Count
-        {
-            get { return va_colIndices.Count; }
-        }
+        public int Count => va_colIndices.Count;
+
         //========================================================================================
         /// <summary>
         /// Initialise une collection d'index.

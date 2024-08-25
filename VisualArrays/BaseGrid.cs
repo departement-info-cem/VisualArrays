@@ -114,10 +114,8 @@ namespace VisualArrays
         /// Tableau à 1 dimension des en-têtes de colonnes.
         /// </summary>
         [Browsable(false)]
-        public HeaderArray ColumnHeaderArray
-        {
-            get { return va_columnHeaders; }
-        }
+        public HeaderArray ColumnHeaderArray => va_columnHeaders;
+
         //-----------------------------------------------------------------------------
         /// <summary>
         /// Tableau à 1 dimension des en-têtes des rangées.
@@ -128,10 +126,8 @@ namespace VisualArrays
         /// Tableau à 1 dimension des en-têtes des rangées.
         /// </summary>
         [Browsable(false)]
-        public HeaderArray RowHeaderArray
-        {
-            get { return va_rowHeader; }
-        }
+        public HeaderArray RowHeaderArray => va_rowHeader;
+
         //============================================================================================
         /// <summary>
         /// Obtient ou définit la hauteur réele de l'en-tête des colonnes.
@@ -165,10 +161,8 @@ namespace VisualArrays
         /// <summary>
         /// Fournit l'état du contrôle
         /// </summary>
-        internal bool InDesignMode
-        {
-            get { return DesignMode; }
-        }
+        internal bool InDesignMode => DesignMode;
+
         //============================================================================================
         /// <summary>
         /// Obtient et définit la bordure autour de chaque cellule.
@@ -180,7 +174,7 @@ namespace VisualArrays
         [DefaultValue(2), Browsable(true), Category("CellAppearance"), Description("Espacement autour de chaque cellule")]
         public int CellMargin
         {
-            get { return m_cellMargin; }
+            get => m_cellMargin;
             set
             {
 
@@ -216,7 +210,7 @@ namespace VisualArrays
         [DefaultValue(ContentAlignment.MiddleCenter),Browsable(true),Category("CellAppearance"), Description("Alignement du contenu principal pour toutes les cellules")]
         public ContentAlignment CellContentAlign
         {
-            get { return m_cellContentAlign; }
+            get => m_cellContentAlign;
             set
             {
                 if (value != m_cellContentAlign)
@@ -235,7 +229,7 @@ namespace VisualArrays
         [Browsable(true), Category("CellAppearance"), Description("Largeur et hauteur des cellules en pixels")]
         public Size CellSize
         {
-            get { return m_cellSize; }
+            get => m_cellSize;
             set
             {
                 if (value != m_cellSize)
@@ -270,7 +264,7 @@ namespace VisualArrays
         [DefaultValue(DELAI_DEFAUT), Browsable(true), Category("VisualArrays"), Description("Délai en millisecondes utilisé par la méthode Attendre.")]
         public int Delay
         {
-            get { return va_delay; }
+            get => va_delay;
             set
             {
                 if (va_delay == value) return;
@@ -288,11 +282,8 @@ namespace VisualArrays
         [DefaultValue(false), Category("VisualArrays"), Browsable(true), Description("Indique si le contrôle permet d'utiliser l'opération glisser.")]
         public bool AllowDrag
         {
-            get
-            {
-                return va_allowDrag;
-            }
-            set { va_allowDrag = value; }
+            get => va_allowDrag;
+            set => va_allowDrag = value;
         }
         //============================================================================================
         private bool va_allowSelfDrop;
@@ -302,7 +293,7 @@ namespace VisualArrays
         [DefaultValue(false), Category("VisualArrays"), Browsable(true), Description("Indique si le contrôle permet d'utiliser l'opération glisser-déposer sur lui-même.")]
         public bool AllowSelfDrop
         {
-            get { return va_allowSelfDrop; }
+            get => va_allowSelfDrop;
             set {
                 if (value)
                     AllowDrop = true;
@@ -316,8 +307,8 @@ namespace VisualArrays
         [DefaultValue(true), Category("VisualArrays"), Browsable(true), Description("Indique si le contrôle permet d'utiliser l'opération glisser-déposer du contenu d'une cellule.")]
         public bool AllowCellDrag
         {
-            get { return va_allowCellDrag; }
-            set { va_allowCellDrag = value; }
+            get => va_allowCellDrag;
+            set => va_allowCellDrag = value;
         }
         //============================================================================================
         private bool va_testMode = false;
@@ -327,8 +318,8 @@ namespace VisualArrays
         [DefaultValue(false),Browsable(false)]
         public bool TestMode
         {
-            get { return va_testMode; }
-            set { va_testMode = value; }
+            get => va_testMode;
+            set => va_testMode = value;
         }
         //============================================================================================
         /// <summary>
@@ -353,8 +344,8 @@ namespace VisualArrays
         [DefaultValue(false), Category("VisualArrays"), Browsable(true), Description("Indique si la touche Enter provoque un déplacement automatique du SelectedIndex.")]
         public bool EnterKeyNextIndex
         {
-            get { return va_enterKeyNextIndex; }
-            set { va_enterKeyNextIndex = value; }
+            get => va_enterKeyNextIndex;
+            set => va_enterKeyNextIndex = value;
         }
         //============================================================================================
         /// <summary>
@@ -385,10 +376,8 @@ namespace VisualArrays
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         [Category("VisualArrays")]
         [EditorAttribute(typeof(SpriteCollectionEditor), typeof(System.Drawing.Design.UITypeEditor))]
-        public SpriteCollection Sprites
-        {
-            get { return va_sprites; }
-        }
+        public SpriteCollection Sprites => va_sprites;
+
         //============================================================================================
         /// <summary>
         /// Obtient ou définit si les cellules de la grille sont en lecture seule.
@@ -400,8 +389,8 @@ namespace VisualArrays
         [DefaultValue(false), Category("VisualArrays"), Browsable(true), Description("Indique si les cellules de la grille sont en lecture seule.")]
         public bool ReadOnly
         {
-            get { return va_readOnly; }
-            set { va_readOnly = value; }
+            get => va_readOnly;
+            set => va_readOnly = value;
         }
         #endregion
 
@@ -512,7 +501,7 @@ namespace VisualArrays
         [DefaultValue(SelectionMode.None), Category("VisualArrays"), Browsable(true), Description("Mode de sélection des cellules de la grille")]
         public SelectionMode SelectionMode
         {
-            get { return va_selectionMode; }
+            get => va_selectionMode;
             set {
 
                 if (value == System.Windows.Forms.SelectionMode.MultiExtended)
@@ -538,7 +527,7 @@ namespace VisualArrays
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Address SelectedAddress
         {
-            get { return new Address(va_selectedIndex / va_columnCount, va_selectedIndex % va_columnCount); }
+            get => new(va_selectedIndex / va_columnCount, va_selectedIndex % va_columnCount);
             set
             {
                 if (va_selectionMode == SelectionMode.None)
@@ -735,7 +724,7 @@ namespace VisualArrays
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         public ColumnHeaderAppearance ColumnHeader
         {
-            get { return va_columnHeaderAppearance; }
+            get => va_columnHeaderAppearance;
             set
             {
                 if (va_columnHeaderAppearance != value)
@@ -889,7 +878,7 @@ namespace VisualArrays
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         public RowHeaderAppearance RowHeader
         {
-            get { return va_rowHeaderAppearance; }
+            get => va_rowHeaderAppearance;
             set
             {
                 if (value != va_rowHeaderAppearance)
@@ -1044,7 +1033,7 @@ namespace VisualArrays
         [DefaultValue(enuAddressMode.Normal), Category("VisualArrays"), Browsable(true), Description("Mode d'adressage des cellules")]
         public enuAddressMode AddressMode
         {
-            get { return va_addressMode; }
+            get => va_addressMode;
             set
             {
                 va_addressMode = value;
@@ -1069,7 +1058,7 @@ namespace VisualArrays
         [DefaultValue(enuAddressView.None), Category("VisualArrays"), Browsable(true), Description("Détermine comment s'affichent les adresses en mode conception")]
         public enuAddressView AddressView
         {
-            get { return va_addressView; }
+            get => va_addressView;
             set
             {
                 va_addressView = value;
@@ -1092,7 +1081,7 @@ namespace VisualArrays
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         public CellAppearance EnabledAppearance
         {
-            get { return va_enabledAppearance; }
+            get => va_enabledAppearance;
             set
             {
                 va_enabledAppearance = value;
@@ -1113,7 +1102,7 @@ namespace VisualArrays
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         public DisabledAppearance DisabledAppearance
         {
-            get { return va_disabledAppearance; }
+            get => va_disabledAppearance;
             set
             {
                 va_disabledAppearance = value;
@@ -1135,7 +1124,7 @@ namespace VisualArrays
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         public SelectionAppearance SelectionAppearance
         {
-            get { return va_selectionAppearance; }
+            get => va_selectionAppearance;
             set
             {
                 if (value != va_selectionAppearance)
@@ -1160,7 +1149,7 @@ namespace VisualArrays
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         public DragAppearance DragAppearance
         {
-            get { return va_dragAppearance; }
+            get => va_dragAppearance;
             set
             {
                 if (value != va_dragAppearance)
@@ -1302,7 +1291,7 @@ namespace VisualArrays
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         public GridAppearance GridAppearance
         {
-            get { return va_gridAppearance; }
+            get => va_gridAppearance;
             set
             {
                 if (value != va_gridAppearance)
@@ -1351,14 +1340,8 @@ namespace VisualArrays
         [Browsable(false)]
         public override ImageLayout BackgroundImageLayout
         {
-            get
-            {
-                return base.BackgroundImageLayout;
-            }
-            set
-            {
-                base.BackgroundImageLayout = value;
-            }
+            get => base.BackgroundImageLayout;
+            set => base.BackgroundImageLayout = value;
         }
         //============================================================================================
         /// <summary>
@@ -1371,8 +1354,8 @@ namespace VisualArrays
         [DefaultValue(enuResizeMode.Normal), Category("VisualArrays"), Browsable(true), Description("Mode de redimentionnement de la grille")]
         public enuResizeMode ResizeMode
         {
-            get { return va_resizeMode; }
-            set { va_resizeMode = value; }
+            get => va_resizeMode;
+            set => va_resizeMode = value;
         }
         //============================================================================================
         /// <summary>
@@ -1385,7 +1368,7 @@ namespace VisualArrays
         [DefaultValue(3), Category("VisualArrays"), Browsable(true), Description("Nombre de rangées de la grille")]
         public virtual int RowCount
         {
-            get { return va_rowCount; }
+            get => va_rowCount;
             set
             {
                 if (value < NB_RANGÉES_MINIMUM)
@@ -1436,7 +1419,7 @@ namespace VisualArrays
         [DefaultValue(3), Category("VisualArrays"), Browsable(true), Description("Nombre de colonnes de la grille")]
         public virtual int ColumnCount
         {
-            get { return va_columnCount; }
+            get => va_columnCount;
             set
             {
                 if (value < NB_COLONNES_MINIMUM)
@@ -1572,10 +1555,8 @@ namespace VisualArrays
         /// Obtient le nombre de cellules dans la grille.
         /// </summary>
         [Browsable(false)]
-        public int Length
-        {
-            get { return va_columnCount * va_rowCount; }
-        }
+        public int Length => va_columnCount * va_rowCount;
+
         #endregion
 
         #region CONSTRUCTEUR
@@ -1642,7 +1623,7 @@ namespace VisualArrays
          Description("Espacement interne entre le contrôle et la zone contenant les cellules")]
         public new Padding Padding
         {
-            get { return m_padding; }
+            get => m_padding;
             set
             {
                 if (value != m_padding)

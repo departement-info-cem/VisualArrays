@@ -73,7 +73,7 @@ namespace VisualArrays.VisualCells
         /// </summary>
         internal bool ShowIndex
         {
-            get { return m_showIndex; }
+            get => m_showIndex;
             set
             {
                 if (value == m_showIndex) return;
@@ -88,7 +88,7 @@ namespace VisualArrays.VisualCells
         /// </summary>
         protected internal int Index
         {
-            get { return m_index; }
+            get => m_index;
             set
             {
                 m_index = value;
@@ -110,7 +110,7 @@ namespace VisualArrays.VisualCells
         [DefaultValue(ContentAlignment.MiddleCenter), Browsable(true), Description("Alignement de la valeur dans la zone d'édition")]
         public ContentAlignment ValueAlign
         {
-            get { return m_valueAlign; }
+            get => m_valueAlign;
             set
             {
                 if (value != m_valueAlign)
@@ -136,7 +136,7 @@ namespace VisualArrays.VisualCells
         [Browsable(true), Description("Couleur de la bordure")]
         public Color BorderColor
         {
-            get { return m_borderColor; }
+            get => m_borderColor;
             set
             {
                 if (value != m_borderColor)
@@ -165,7 +165,7 @@ namespace VisualArrays.VisualCells
         [DefaultValue(1), Browsable(true), Description("Taille de la bordure")]
         public int BorderSize
         {
-            get { return m_borderSize; }
+            get => m_borderSize;
             set
             {
                 if (value != m_borderSize)
@@ -183,7 +183,7 @@ namespace VisualArrays.VisualCells
         [DefaultValue(false), Browsable(true), Description("Indique si le rectangle du focus doit être masqué")]
         public bool HideFocusRect
         {
-            get { return m_hideFocusRect; }
+            get => m_hideFocusRect;
             set
             {
                 if (value != m_hideFocusRect)
@@ -206,7 +206,7 @@ namespace VisualArrays.VisualCells
         [Browsable(true), Description("Couleur du focus")]
         public Color FocusColor
         {
-            get { return m_focusColor; }
+            get => m_focusColor;
             set
             {
                 if (value != m_focusColor)
@@ -271,8 +271,8 @@ namespace VisualArrays.VisualCells
         [DefaultValue(false), Browsable(true), Description("Indique si le contrôle est en lecture seule.")]
         public bool ReadOnly
         {
-            get { return m_readOnly; }
-            set { m_readOnly = value; }
+            get => m_readOnly;
+            set => m_readOnly = value;
         }
         #endregion
 
@@ -283,14 +283,8 @@ namespace VisualArrays.VisualCells
         [Browsable(false)]
         public override string Text
         {
-            get
-            {
-                return base.Text;
-            }
-            set
-            {
-                base.Text = value;
-            }
+            get => base.Text;
+            set => base.Text = value;
         }
         #endregion
 
@@ -308,7 +302,7 @@ namespace VisualArrays.VisualCells
          Description("Spécifie l'espacement interne du contrôle")]
         public new Padding Padding
         {
-            get { return m_padding; }
+            get => m_padding;
             set
             {
                 if (value != m_padding)

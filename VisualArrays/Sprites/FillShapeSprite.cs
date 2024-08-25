@@ -18,7 +18,7 @@ namespace VisualArrays.Sprites
         [Localizable(true), Category("Layout")]
         public Color Color
         {
-            get { return m_color; }
+            get => m_color;
             set
             {
                 m_color = value;
@@ -34,10 +34,7 @@ namespace VisualArrays.Sprites
         [DefaultValue(192), Description("Niveau d'opacity du Sprite")]
         public int Opacity
         {
-            get
-            {
-                return m_opacity;
-            }
+            get => m_opacity;
             set
             {
                 if (value < 0 || value > 255)
@@ -64,7 +61,7 @@ namespace VisualArrays.Sprites
         [Localizable(true), Category("Layout")]
         public enuShape Shape
         {
-            get { return m_shape; }
+            get => m_shape;
             set
             {
                 m_shape = value;

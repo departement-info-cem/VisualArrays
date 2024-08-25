@@ -40,7 +40,7 @@ namespace VisualArrays.Appearance
         Description("ImageList utilisée pour dessiner la cellule en mode View ImageList")]
         public ImageList ImageList
         {
-            get { return m_imageList; }
+            get => m_imageList;
             set
             {
                 if (value != m_imageList)
@@ -62,7 +62,7 @@ namespace VisualArrays.Appearance
         Description("Forme utilisée pour dessiner le fond des cellules")]
         public enuShape Shape
         {
-            get { return m_shape; }
+            get => m_shape;
             set
             {
                 if (value != m_shape)
@@ -89,7 +89,7 @@ namespace VisualArrays.Appearance
         Description("Image utilisée pour le fond des cellules")]
         public Image Image
         {
-            get { return m_image; }
+            get => m_image;
             set
             {
                 if (value != m_image)
@@ -114,7 +114,7 @@ namespace VisualArrays.Appearance
         Description("Taille du crayon pour dessiner une forme contour dans le fond des cellules")]
         public int PenWidth
         {
-            get { return m_penWidth; }
+            get => m_penWidth;
             set
             {
                 if (value < 1)
@@ -145,7 +145,7 @@ namespace VisualArrays.Appearance
          Description("Style de fond des cellules")]
         public enuBkgStyle Style
         {
-            get { return m_style; }
+            get => m_style;
             set
             {
                 if (m_style != value)
@@ -168,7 +168,7 @@ namespace VisualArrays.Appearance
          Description("Taille de chacune des bordures autour des cellules")]
         public Padding Border
         {
-            get { return m_border; }
+            get => m_border;
             set
             {
                 if (value != m_border)
@@ -201,7 +201,7 @@ namespace VisualArrays.Appearance
          Description("Couleur de fond des cellules")]
         public Color BackgroundColor
         {
-            get { return m_backgroundColor; }
+            get => m_backgroundColor;
             set
             {
                 if (value != m_backgroundColor)
@@ -233,10 +233,7 @@ namespace VisualArrays.Appearance
         Description("Radius utilisé lorsque enuShape est RoundRect")]
         public int Radius
         {
-            get
-            {
-                return m_radius;
-            }
+            get => m_radius;
             set
             {
                 if (value != m_radius)

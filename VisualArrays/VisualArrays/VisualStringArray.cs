@@ -20,7 +20,7 @@ namespace VisualArrays.VisualArrays
         [DefaultValue("text"), Category("VisualArrays"), Browsable(true), Description("Valeur par défaut de toutes les cellules")]
         public string DefaultValue
         {
-            get { return m_defaultValue; }
+            get => m_defaultValue;
             set
             {
                 if (value != m_defaultValue)
@@ -40,7 +40,7 @@ namespace VisualArrays.VisualArrays
         [DefaultValue(""), Category("VisualArrays"), Browsable(true), Description("Valeur spéciale à afficher différemment des autres valeurs, voir SpecialValueAppearance")]
         public string SpecialValue
         {
-            get { return m_specialValue; }
+            get => m_specialValue;
             set
             {
                 if (value != m_specialValue)
@@ -58,7 +58,7 @@ namespace VisualArrays.VisualArrays
         [DefaultValue(10), Category("VisualArrays"), Browsable(true), Description("Nombre maximum de caractères que l'on peut saisir dans une cellule.")]
         public int MaxLength
         {
-            get { return va_maxLength; }
+            get => va_maxLength;
             set
             {
                 va_maxLength = value;
@@ -73,7 +73,7 @@ namespace VisualArrays.VisualArrays
         [DefaultValue(enuStringView.Text), Category("CellAppearance"), Browsable(true), Description("Obtient et définit le style de visualisation pour les valeurs de la grille.")]
         public enuStringView View
         {
-            get { return va_view; }
+            get => va_view;
             set
             {
                 va_view = value;

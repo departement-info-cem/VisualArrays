@@ -20,7 +20,7 @@ namespace VisualArrays.Sprites
         [Localizable(true)]
         public string Text
         {
-            get { return m_text; }
+            get => m_text;
             set
             {
                 m_text = value;
@@ -37,7 +37,7 @@ namespace VisualArrays.Sprites
         [Localizable(true)]
         public Color TextColor
         {
-            get { return m_textColor; }
+            get => m_textColor;
             set
             {
                 m_textColor = value;
@@ -54,7 +54,7 @@ namespace VisualArrays.Sprites
         [Description("Police utilisée pour afficher le texte du Sprite")]
         public Font Font
         {
-            get { return m_font; }
+            get => m_font;
             set
             {
                 m_font = value;
@@ -81,7 +81,7 @@ namespace VisualArrays.Sprites
         [DefaultValue(typeof(Color), "Blue"), Description("Couleur de fond du 'Sprite'")]
         public Color ShapeColor
         {
-            get { return m_shapeColor; }
+            get => m_shapeColor;
             set
             {
                 m_shapeColor = value;
@@ -100,7 +100,7 @@ namespace VisualArrays.Sprites
         [DefaultValue(enuBkgStyle.FillShape), Description("Style de fond du 'Sprite'")]
         public enuBkgStyle BackgroundStyle
         {
-            get { return m_backgroundStyle; }
+            get => m_backgroundStyle;
             set
             {
                 m_backgroundStyle = value;
@@ -116,7 +116,7 @@ namespace VisualArrays.Sprites
         [DefaultValue(enuShape.Ellipse), Description("Forme utilisée pour dessiner le fond du 'Sprite'")]
         public enuShape BackgroundShape
         {
-            get { return m_backgroundShape; }
+            get => m_backgroundShape;
             set
             {
                 m_backgroundShape = value;
@@ -132,10 +132,7 @@ namespace VisualArrays.Sprites
         [DefaultValue(10), Description("Radius utilisé lorsque BkgShape est RoundRect")]
         public int Radius
         {
-            get
-            {
-                return m_radius;
-            }
+            get => m_radius;
             set
             {
                 if (value != m_radius)
@@ -154,10 +151,7 @@ namespace VisualArrays.Sprites
         [DefaultValue(192), Description("Niveau d'opacity du Sprite")]
         public int Opacity
         {
-            get
-            {
-                return m_opacity;
-            }
+            get => m_opacity;
             set
             {
                 if (value < 0 || value > 255)
@@ -192,7 +186,7 @@ namespace VisualArrays.Sprites
          Description("Espacement externe entre le texte et le fond"), Category("Layout")]
         public Padding Margin
         {
-            get { return m_margin; }
+            get => m_margin;
             set
             {
                 if (value != m_margin)

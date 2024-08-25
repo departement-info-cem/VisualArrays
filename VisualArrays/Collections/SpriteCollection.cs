@@ -59,7 +59,7 @@ namespace VisualArrays.Collections
         /// <returns></returns>
         public Sprite this[int pIndex]
         {
-            get { return (Sprite)this.InnerList[pIndex]; }
+            get => (Sprite)this.InnerList[pIndex];
             set
             {
                 Sprite newSprite = value;

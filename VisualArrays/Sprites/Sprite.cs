@@ -88,10 +88,8 @@ namespace VisualArrays.Sprites
         /// Indique si le Sprite se déploie sur plusieurs cellules
         /// </summary>
         [Browsable(false)]
-        public bool IsMultiCells
-        {
-            get { return m_tabCells.Count > 1; }
-        }
+        public bool IsMultiCells => m_tabCells.Count > 1;
+
         /// <summary>
         /// Fournit la coordonnée du centre du point 0,0 de la zone du Sprite
         /// </summary>
@@ -160,10 +158,8 @@ namespace VisualArrays.Sprites
         /// Spécifie l'emplacement et la taille du Sprite dans la VisualArray en pixels
         /// </summary>
         [Browsable(false)]
-        public Rectangle Bounds
-        {
-            get { return m_bounds; }
-        }
+        public Rectangle Bounds => m_bounds;
+
         /// <summary>
         /// Spécifie le déplacement horizontale en pixels à appliquer sur l'emplacement du Sprite
         /// </summary>
@@ -175,7 +171,7 @@ namespace VisualArrays.Sprites
         [DefaultValue(typeof(int), "0"), Description("Déplacement horizontale en pixels à appliquer sur l'emplacement du Sprite")]
         public int OffsetX
         {
-            get { return m_offsetX; }
+            get => m_offsetX;
             set
             {
                 m_offsetX = value;
@@ -196,7 +192,7 @@ namespace VisualArrays.Sprites
         [Description("Déplacement verticale en pixels à appliquer sur l'emplacement du Sprite")]
         public int OffsetY
         {
-            get { return m_offsetY; }
+            get => m_offsetY;
             set
             {
                 m_offsetY = value;
@@ -219,7 +215,7 @@ namespace VisualArrays.Sprites
         [NotifyParentProperty(true)]
         public ContentAlignment Alignment
         {
-            get { return m_alignment; }
+            get => m_alignment;
             set
             {
                 m_alignment = value;
@@ -245,7 +241,7 @@ namespace VisualArrays.Sprites
         [Description("Détermine si l'élément doit être aligné sur l'ensemble des cellules de la grille")]
         public bool AlignOnGrid
         {
-            get { return m_alignOnGrid; }
+            get => m_alignOnGrid;
             set
             {
                 m_alignOnGrid = value;
@@ -325,7 +321,7 @@ namespace VisualArrays.Sprites
         [Localizable(true), Category("Layout")]
         public bool AllowDrag
         {
-            get { return m_allowDrag; }
+            get => m_allowDrag;
             set
             {
                 m_allowDrag = value;
@@ -348,11 +344,8 @@ namespace VisualArrays.Sprites
         [Browsable(false)]
         public bool IsMoving
         {
-            get { return m_isMoving; }
-            set
-            {
-                m_isMoving = value;
-            }
+            get => m_isMoving;
+            set => m_isMoving = value;
         }
 
 
@@ -371,11 +364,8 @@ namespace VisualArrays.Sprites
         [Localizable(true), Category("Animation")]
         public bool Assync
         {
-            get { return m_assync; }
-            set
-            {
-                m_assync = value;
-            }
+            get => m_assync;
+            set => m_assync = value;
         }
 
         //-------------------------------------------------------------------------------------
@@ -393,11 +383,8 @@ namespace VisualArrays.Sprites
         [Localizable(true), Category("Animation")]
         public bool Animated
         {
-            get { return m_animated; }
-            set
-            {
-                m_animated = value;
-            }
+            get => m_animated;
+            set => m_animated = value;
         }
 
         //-------------------------------------------------------------------------------------
@@ -415,11 +402,8 @@ namespace VisualArrays.Sprites
         [Localizable(true), Category("Animation")]
         public bool FollowGrid
         {
-            get { return m_followGrid; }
-            set
-            {
-                m_followGrid = value;
-            }
+            get => m_followGrid;
+            set => m_followGrid = value;
         }
 
         //-------------------------------------------------------------------------------------
@@ -436,7 +420,7 @@ namespace VisualArrays.Sprites
         [Localizable(true), Category("Animation")]
         public int Duration
         {
-            get { return m_duration; }
+            get => m_duration;
             set
             {
                 if (m_duration != value)
@@ -466,7 +450,7 @@ namespace VisualArrays.Sprites
         [Localizable(true), Category("Animation")]
         public int FrameRate
         {
-            get { return m_frameRate; }
+            get => m_frameRate;
             set
             {
                 if (m_frameRate != value)
@@ -581,7 +565,7 @@ namespace VisualArrays.Sprites
         [Localizable(true), Category("Layout")]
         public int DisplayIndex
         {
-            get { return m_displayIndex; }
+            get => m_displayIndex;
             set
             {
                 // clause de garde
@@ -783,13 +767,10 @@ namespace VisualArrays.Sprites
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public enuDirection Direction
         {
-            get { return m_direction; }
-            set
-            {
-                m_direction = value;
-                //if (va_owner == null) return;
-                //va_owner.UpdateSprites(va_bounds);
-            }
+            get => m_direction;
+            set => m_direction = value;
+            //if (va_owner == null) return;
+            //va_owner.UpdateSprites(va_bounds);
         }
         /// <summary>
         /// Fournit l'adresse future du Sprite si on le déplace d'un pas dans la direction courante avec MoveOneStep()
@@ -878,7 +859,7 @@ namespace VisualArrays.Sprites
         [Browsable(false)]
         protected internal BaseGrid Owner
         {
-            get { return m_owner; }
+            get => m_owner;
             set
             {
                 m_owner = value;
@@ -901,8 +882,8 @@ namespace VisualArrays.Sprites
         [Description("Détermine si l'élément accepte les clicks")]
         public bool AcceptClick
         {
-            get { return m_acceptClick; }
-            set { m_acceptClick = value; }
+            get => m_acceptClick;
+            set => m_acceptClick = value;
         }
         //-------------------------------------------------------------------------------------
         /// <summary>
@@ -920,8 +901,8 @@ namespace VisualArrays.Sprites
         [Description("Détermine si le Sprite accepte d'être déposé à l'extérieur d'une cellule")]
         public bool AllowOutsideDrop
         {
-            get { return m_allowOutsideDrop; }
-            set { m_allowOutsideDrop = value; }
+            get => m_allowOutsideDrop;
+            set => m_allowOutsideDrop = value;
         }
         //-------------------------------------------------------------------------------------
         /// <summary>
@@ -939,7 +920,7 @@ namespace VisualArrays.Sprites
         [Description("Détermine l'élément est visible ou masqué")]
         public bool Visible
         {
-            get { return m_visible; }
+            get => m_visible;
             set
             {
                 m_visible = value;
@@ -960,7 +941,7 @@ namespace VisualArrays.Sprites
         [Description("Largeur et hauteur du Sprite en pixels")]
         public Size Size
         {
-            get { return m_size; }
+            get => m_size;
             set
             {
                 if (value != m_size)
@@ -993,7 +974,7 @@ namespace VisualArrays.Sprites
         [Description("Position du Sprite en pixels lorsque son DisplayIndex est -1")]
         public Point Location
         {
-            get { return m_location; }
+            get => m_location;
             set
             {
                 if (value != m_location)
@@ -1097,14 +1078,8 @@ namespace VisualArrays.Sprites
         [Browsable(false)]
         public string Name
         {
-            get
-            {
-                return name;
-            }
-            set
-            {
-                name = value;
-            }
+            get => name;
+            set => name = value;
         }
 
 
@@ -1141,10 +1116,7 @@ namespace VisualArrays.Sprites
 
         private string Name
         {
-            get
-            {
-                return Component.Site.Name;
-            }
+            get => Component.Site.Name;
             set
             {
                 // don't do anything here during loading, if a refactor changed it we don't want to do anything

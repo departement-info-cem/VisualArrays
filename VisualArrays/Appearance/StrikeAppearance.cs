@@ -36,7 +36,7 @@ namespace VisualArrays.Appearance
      Description("Style du trait du Strike")]
         public enuStrikeStyle Style
         {
-            get { return m_style; }
+            get => m_style;
             set
             {
                 if (value != m_style)
@@ -58,7 +58,7 @@ namespace VisualArrays.Appearance
        Description("Couleur du trait du Strike")]
         public virtual Color Color
         {
-            get { return m_color; }
+            get => m_color;
             set
             {
                 if (value != m_color)
@@ -81,7 +81,7 @@ namespace VisualArrays.Appearance
      Description("Taille du crayon utilisé pour dessiner le trait du Strike")]
         public int PenWidth
         {
-            get { return m_penWidth; }
+            get => m_penWidth;
             set
             {
                 if (value < 1)
@@ -111,7 +111,7 @@ namespace VisualArrays.Appearance
      Description("Marge appliquée au trait")]
         public int Margin
         {
-            get { return m_margin; }
+            get => m_margin;
             set
             {
                 if (value < 0)
@@ -141,7 +141,7 @@ namespace VisualArrays.Appearance
      Description("Image du trait lorsque le Style du Strike est Image")]
         public Image Image
         {
-            get { return m_image; }
+            get => m_image;
             set
             {
                 if (value != m_image)
@@ -162,7 +162,7 @@ namespace VisualArrays.Appearance
         [DefaultValue(ContentAlignment.MiddleCenter), Browsable(true), Description("Alignement de l'image du Strike")]
         public ContentAlignment Align
         {
-            get { return m_align; }
+            get => m_align;
             set
             {
                 if (value != m_align)

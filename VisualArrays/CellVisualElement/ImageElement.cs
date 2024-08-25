@@ -16,12 +16,9 @@ namespace VisualArrays.CellVisualElement
         /// </summary>
         public Image Image
         {
-            get { return va_image; }
-            set
-            {
-                va_image = value;
-                //va_owner.RedessinerCelluleEtSprites(Index);
-            }
+            get => va_image;
+            set => va_image = value;
+            //va_owner.RedessinerCelluleEtSprites(Index);
         }
         #endregion
 

@@ -44,7 +44,7 @@ namespace VisualArrays.VisualContainer
         [DefaultValue(true), Category("VisualArrays"), Description("Détermine si les VisualInt doivent afficher leur Index en mode conception")]
         public bool ShowIndices
         {
-            get { return m_showIndices; }
+            get => m_showIndices;
             set
             {
                 m_showIndices = value;
@@ -55,10 +55,8 @@ namespace VisualArrays.VisualContainer
         /// <summary>
         /// Nombre de VisualValue dans le conteneur.
         /// </summary>
-        public int Length
-        {
-            get { return m_colVisualElements.Count; }
-        }
+        public int Length => m_colVisualElements.Count;
+
         #endregion
 
         #region Constructeur

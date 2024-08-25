@@ -36,7 +36,7 @@ namespace VisualArrays.Appearance
          Description("Taille de chacune des bordures autour d'une cellule Enabled false")]
         public Padding Border
         {
-            get { return m_border; }
+            get => m_border;
             set
             {
                 if (value != m_border)
@@ -70,7 +70,7 @@ namespace VisualArrays.Appearance
        Description("Couleur de la forme ou de la bordure d'une cellule Enabled false")]
         public virtual Color BackgroundColor
         {
-            get { return m_backgroundColor; }
+            get => m_backgroundColor;
             set
             {
                 if (value != m_backgroundColor)
@@ -96,7 +96,7 @@ namespace VisualArrays.Appearance
       Description("Image affichée derrière une cellule Enabled false")]
         public Image Image
         {
-            get { return m_image; }
+            get => m_image;
             set
             {
                 if (value != m_image)
@@ -124,7 +124,7 @@ namespace VisualArrays.Appearance
      Description("Forme dessinée derrière une cellule Enabled false")]
         public enuShape Shape
         {
-            get { return m_shape; }
+            get => m_shape;
             set
             {
                 if (value != m_shape)
@@ -150,7 +150,7 @@ namespace VisualArrays.Appearance
      Description("Taille du crayon utilisé  pour dessiner la forme derrière une cellule Enabled false")]
         public int PenWidth
         {
-            get { return m_penWidth; }
+            get => m_penWidth;
             set
             {
                 if (value < 1)
@@ -183,7 +183,7 @@ namespace VisualArrays.Appearance
      Description("Style du fond pour une cellule Enabled false")]
         public enuBkgStyle Style
         {
-            get { return m_style; }
+            get => m_style;
             set
             {
                 if (value != m_style)
@@ -207,10 +207,7 @@ namespace VisualArrays.Appearance
         Description("Radius utilisé lorsque enuShape est RoundRect")]
         public int Radius
         {
-            get
-            {
-                return m_radius;
-            }
+            get => m_radius;
             set
             {
                 if (value != m_radius)
@@ -233,7 +230,7 @@ namespace VisualArrays.Appearance
      Description("Détermine différents aspects de l'apparence du Strike")]
         public StrikeAppearance StrikeAppearance
         {
-            get { return m_strikeAppearance; }
+            get => m_strikeAppearance;
             set
             {
                 if (value != m_strikeAppearance)

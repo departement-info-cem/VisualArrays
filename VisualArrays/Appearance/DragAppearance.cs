@@ -23,7 +23,7 @@ namespace VisualArrays.Appearance
          Description("Espacement entre le contour de la cellule et la sélection")]
         public Padding Padding
         {
-            get { return m_padding; }
+            get => m_padding;
             set
             {
                 if (value != m_padding)
@@ -54,7 +54,7 @@ namespace VisualArrays.Appearance
         Description("Image utilisée pour représenter la destination de l'opération glisser/déposer")] 
         public Image Image
         {
-            get { return image; }
+            get => image;
             set {
                 if (value != image)
                 image = value; 
@@ -72,7 +72,7 @@ namespace VisualArrays.Appearance
         Description("Transparence appliquée à la destination (0 à 255)")]
         public int Alpha
         {
-            get { return alpha; }
+            get => alpha;
             set
             {
                 if (value < 0 || value > 255)
@@ -98,7 +98,7 @@ namespace VisualArrays.Appearance
         Description("Style utilisé pour représenter la destination")]
         public enuDragStyle Style
         {
-            get { return style; }
+            get => style;
             set { 
                 if (value != style)
                 style = value; 
@@ -116,7 +116,7 @@ namespace VisualArrays.Appearance
         Description("Forme utilisée pour représenter la destination")]  
         public enuShape Shape
         {
-            get { return shape; }
+            get => shape;
             set {
                 if (value != shape)
                 shape = value; 
@@ -134,7 +134,7 @@ namespace VisualArrays.Appearance
         Description("Taille du crayon utilisée pour dessiner la forme")]  
         public int PenWidth
         {
-            get { return penWidth; }
+            get => penWidth;
             set
             {
                 if (value < 1) 
@@ -159,7 +159,7 @@ namespace VisualArrays.Appearance
         Description("Couleur de la destination")]        
         public Color Color
         {
-            get { return color; }
+            get => color;
             set {
                 if (value != color) 
                 color = value; 
@@ -178,7 +178,7 @@ namespace VisualArrays.Appearance
         Description("Indique si on doit mettre en évidence la cellule source de l'opération glisser/déposer")]
         public bool ShowSource
         {
-            get { return showSource; }
+            get => showSource;
             set
             {
                 if (value != showSource)
@@ -197,10 +197,7 @@ namespace VisualArrays.Appearance
         Description("Radius utilisé lorsque enuShape est RoundRect")]
         public int Radius
         {
-            get
-            {
-                return radius;
-            }
+            get => radius;
             set
             {
                 if (value < 1)

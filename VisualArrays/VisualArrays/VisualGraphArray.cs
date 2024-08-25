@@ -21,8 +21,8 @@ namespace VisualArrays.VisualArrays
         [DefaultValue(true), Category("VisualArrays"), Browsable(true), Description("Indique si le contrôle permet d'utiliser l'opération glisser.")]
         public bool AllowGraphClick
         {
-            get { return va_allowGraphClick; }
-            set { va_allowGraphClick = value; }
+            get => va_allowGraphClick;
+            set => va_allowGraphClick = value;
         }
         //============================================================================================
         /// <summary>
@@ -46,7 +46,7 @@ namespace VisualArrays.VisualArrays
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         public GraphAppearance GraphAppearance
         {
-            get { return m_graphAppearance; }
+            get => m_graphAppearance;
             set
             {
                 if (value != m_graphAppearance)

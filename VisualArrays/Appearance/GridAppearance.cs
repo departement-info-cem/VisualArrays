@@ -32,7 +32,7 @@ namespace VisualArrays.Appearance
         Description("Couleur du quadrillage de la grille")]
         public Color Color
         {
-            get { return m_color; }
+            get => m_color;
             set
             {
                 if (value != m_color)
@@ -54,7 +54,7 @@ namespace VisualArrays.Appearance
        Description("Épaisseur des lignes du quadrillage de la grille")]
         public int LineSize
         {
-            get { return m_lineSize; }
+            get => m_lineSize;
             set
             {
                 if (value < 0)

@@ -26,7 +26,7 @@ namespace VisualArrays.Sprites
         [Localizable(true), Category("Layout")]
         public ImageList ImageList
         {
-            get { return m_imageList; }
+            get => m_imageList;
             set
             {
                 m_imageList = value;
@@ -46,7 +46,7 @@ namespace VisualArrays.Sprites
         [Localizable(true), Category("Layout")]
         public int ImageIndex
         {
-            get { return m_imageIndex; }
+            get => m_imageIndex;
             set
             {
                 m_imageIndex = value;
@@ -69,7 +69,7 @@ namespace VisualArrays.Sprites
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public Image Image
         {
-            get { return m_image; }
+            get => m_image;
             set
             {
                 m_image = value;

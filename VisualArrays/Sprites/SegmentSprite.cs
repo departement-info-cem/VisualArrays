@@ -22,7 +22,7 @@ namespace VisualArrays.Sprites
         [Localizable(true), Category("Layout")]
         public Color Color
         {
-            get { return m_color; }
+            get => m_color;
             set
             {
                 m_color = value;
@@ -39,10 +39,7 @@ namespace VisualArrays.Sprites
         [DefaultValue(255), Description("Niveau d'opacity du Sprite")]
         public int Opacity
         {
-            get
-            {
-                return m_opacity;
-            }
+            get => m_opacity;
             set
             {
                 if (value < 0 || value > 255)
@@ -69,10 +66,7 @@ namespace VisualArrays.Sprites
         [DefaultValue(6), Description("Taille des ronds au bout du segment")]
         public int BulletSize
         {
-            get
-            {
-                return m_bulletSize;
-            }
+            get => m_bulletSize;
             set
             {
                 if (value < 0 || value > 255)
@@ -100,7 +94,7 @@ namespace VisualArrays.Sprites
         [DefaultValue(0), Category("Layout")]
         public int DestinationIndex
         {
-            get { return m_destinationIndex; }
+            get => m_destinationIndex;
             set
             {
                 m_destinationIndex = value;

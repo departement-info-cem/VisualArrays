@@ -13,10 +13,8 @@ namespace VisualArrays.Collections
         /// <summary>
         /// Fournit la taille du tableau des en-têtes.
         /// </summary>
-        public int Length
-        {
-            get { return va_elements.Length; }
-        }
+        public int Length => va_elements.Length;
+
         //========================================================================================
         /// <summary>
         /// Supporte une simple itération sur le tableau en-têtes.

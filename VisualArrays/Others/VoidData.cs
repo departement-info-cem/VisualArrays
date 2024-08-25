@@ -29,8 +29,8 @@ namespace VisualArrays.Others
         [DefaultValue(typeof(int), "0"), Description("Position X")]
         public int X
         {
-            get { return va_x; }
-            set { va_x = value; }
+            get => va_x;
+            set => va_x = value;
         }
         private int va_y;
         /// <summary>
@@ -39,8 +39,8 @@ namespace VisualArrays.Others
         [DefaultValue(typeof(int), "0"), Description("Position Y")]
         public int Y
         {
-            get { return va_y; }
-            set { va_y = value; }
+            get => va_y;
+            set => va_y = value;
         }
         private Color va_color;
         /// <summary>
@@ -49,8 +49,8 @@ namespace VisualArrays.Others
         [DefaultValue(typeof(Color), "Red"), Description("Couleur de la sélection")]
         public Color Color
         {
-            get { return va_color; }
-            set { va_color = value; }
+            get => va_color;
+            set => va_color = value;
         }
         /// <summary>
         /// 

@@ -19,7 +19,7 @@ namespace VisualArrays.VisualArrays
         [DefaultValue('A'), Category("VisualArrays"), Browsable(true), Description("Valeur par défaut de toutes les cellules")]
         public char DefaultValue
         {
-            get { return m_defaultValue; }
+            get => m_defaultValue;
             set
             {
                 if (value != m_defaultValue)
@@ -39,7 +39,7 @@ namespace VisualArrays.VisualArrays
         [DefaultValue('?'), Category("VisualArrays"), Browsable(true), Description("Valeur spéciale à afficher différemment des autres valeurs, voir SpecialValueAppearance")]
         public char SpecialValue
         {
-            get { return m_specialValue; }
+            get => m_specialValue;
             set
             {
                 if (value != m_specialValue)
@@ -57,7 +57,7 @@ namespace VisualArrays.VisualArrays
         [DefaultValue(enuCharView.Char), Category("CellAppearance"), Browsable(true), Description("Obtient et définit le style de visualisation pour les valeurs de la grille.")]
         public enuCharView View
         {
-            get { return va_view; }
+            get => va_view;
             set
             {
                 va_view = value;
@@ -72,7 +72,7 @@ namespace VisualArrays.VisualArrays
         [DefaultValue('A'), Category("VisualArrays"), Browsable(true), Description("Caractère de base pour l'indéxation des images en mode View ImageList")]
         public char ImlBaseChar
         {
-            get { return va_imlBaseChar; }
+            get => va_imlBaseChar;
             set
             {
                 va_imlBaseChar = value;
@@ -87,7 +87,7 @@ namespace VisualArrays.VisualArrays
         [DefaultValue(false), Category("VisualArrays"), Browsable(true), Description("Indique si la saisie d'un caractère nous augmente la SelectedIndex.")]
         public bool AutoNextIndex
         {
-            get { return va_autoNextIndex; }
+            get => va_autoNextIndex;
             set
             {
                 va_autoNextIndex = value;

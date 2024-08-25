@@ -17,12 +17,9 @@ namespace VisualArrays.CellVisualElement
         /// </summary>
         public Color Color
         {
-            get { return va_color; }
-            set
-            {
-                va_color = value;
-                //va_owner.RedessinerCelluleEtSprites(Index);
-            }
+            get => va_color;
+            set => va_color = value;
+            //va_owner.RedessinerCelluleEtSprites(Index);
         }
         //-------------------------------------------------------------------------------------
         private enuShape va_shape;
@@ -31,12 +28,9 @@ namespace VisualArrays.CellVisualElement
         /// </summary>
         public enuShape Shape
         {
-            get { return va_shape; }
-            set
-            {
-                va_shape = value;
-                //va_owner.RedessinerCelluleEtSprites(Index);
-            }
+            get => va_shape;
+            set => va_shape = value;
+            //va_owner.RedessinerCelluleEtSprites(Index);
         }
         //-------------------------------------------------------------------------------------
         /// <summary>
@@ -48,8 +42,8 @@ namespace VisualArrays.CellVisualElement
         /// </summary>
         public int Radius
         {
-            get { return va_radius; }
-            set { va_radius = value; }
+            get => va_radius;
+            set => va_radius = value;
         }
 
         //-------------------------------------------------------------------------------------

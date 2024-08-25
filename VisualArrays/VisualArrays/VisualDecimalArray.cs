@@ -18,7 +18,7 @@ namespace VisualArrays.VisualArrays
         [DefaultValue(typeof(decimal), "0"), Category("VisualArrays"), Browsable(true), Description("Valeur par défaut de toutes les cellules")]
         public decimal DefaultValue
         {
-            get { return m_defaultValue; }
+            get => m_defaultValue;
             set
             {
                 if (value < va_minimum || value > va_maximum)
@@ -41,7 +41,7 @@ namespace VisualArrays.VisualArrays
         [DefaultValue(typeof(decimal), "-1"), Category("VisualArrays"), Browsable(true), Description("Valeur spéciale à afficher différemment des autres valeurs, voir SpecialValueAppearance")]
         public decimal SpecialValue
         {
-            get { return m_specialValue; }
+            get => m_specialValue;
             set
             {
                 if (value != m_specialValue)
@@ -59,7 +59,7 @@ namespace VisualArrays.VisualArrays
         [DefaultValue(enuDecimalView.Number), Category("CellAppearance"), Browsable(true), Description("Obtient et définit le style de visualisation pour les valeurs de la grille.")]
         public enuDecimalView View
         {
-            get { return va_view; }
+            get => va_view;
             set
             {
                 va_view = value;
@@ -75,10 +75,7 @@ namespace VisualArrays.VisualArrays
         [RefreshProperties(RefreshProperties.All)]
         public decimal Minimum
         {
-            get
-            {
-                return va_minimum;
-            }
+            get => va_minimum;
             set
             {
                 va_minimum = value;
@@ -97,10 +94,7 @@ namespace VisualArrays.VisualArrays
         [RefreshProperties(RefreshProperties.All)]
         public decimal Maximum
         {
-            get
-            {
-                return va_maximum;
-            }
+            get => va_maximum;
             set
             {
                 va_maximum = value;
@@ -118,7 +112,7 @@ namespace VisualArrays.VisualArrays
         [DefaultValue(enuValueFormat.Standard), Category("VisualArrays"), Browsable(true), Description("Obtient et définit le format d'affichage des valeurs dans la grille.")]
         public enuValueFormat ValueFormat
         {
-            get { return va_valueFormat; }
+            get => va_valueFormat;
             set
             {
                 va_valueFormat = value;
@@ -133,7 +127,7 @@ namespace VisualArrays.VisualArrays
         [DefaultValue(1), Category("VisualArrays"), Browsable(true), Description("Indique le nombre de décimales à afficher.")]
         public int DecimalPlaces
         {
-            get { return va_decimalPlaces; }
+            get => va_decimalPlaces;
             set
             {
                 va_decimalPlaces = value;

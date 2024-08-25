@@ -39,7 +39,7 @@ namespace VisualArrays.VisualCells
         [Category("VisualDecimal"), Browsable(true), DefaultValue(null), Description("ImageList utilisée pour dessiner la valeur en mode View ImageList")]
         public ImageList ImageList
         {
-            get { return m_imageList; }
+            get => m_imageList;
             set
             {
                 if (value != m_imageList)
@@ -57,7 +57,7 @@ namespace VisualArrays.VisualCells
         [Category("VisualDecimal"), DefaultValue(enuDecimalView.Number), Browsable(true), Description("Obtient et définit le style de visualisation pour la valeur du contrôle.")]
         public enuDecimalView View
         {
-            get { return m_view; }
+            get => m_view;
             set
             {
                 if (m_view != value)
@@ -76,10 +76,7 @@ namespace VisualArrays.VisualCells
         [RefreshProperties(RefreshProperties.All)]
         public decimal Minimum
         {
-            get
-            {
-                return m_minimum;
-            }
+            get => m_minimum;
             set
             {
                 if (value != m_minimum)
@@ -104,10 +101,7 @@ namespace VisualArrays.VisualCells
         [RefreshProperties(RefreshProperties.All)]
         public decimal Maximum
         {
-            get
-            {
-                return m_maximum;
-            }
+            get => m_maximum;
             set
             {
                 if (value != m_maximum)
@@ -130,7 +124,7 @@ namespace VisualArrays.VisualCells
         [Category("VisualDecimal"), DefaultValue(typeof(decimal), "0"), Browsable(true), Description("La valeur actuelle du contrôle VisualInt")]
         public override decimal Value
         {
-            get { return m_value; }
+            get => m_value;
             set
             {
                 if (value < m_minimum || value > m_maximum)
@@ -162,7 +156,7 @@ namespace VisualArrays.VisualCells
         [Category("VisualDecimal"), DefaultValue(typeof(decimal), "1"), Browsable(true), Description("Indique le nombre de décimales à afficher.")]
         public int DecimalPlaces
         {
-            get { return m_decimalPlaces; }
+            get => m_decimalPlaces;
             set
             {
                 m_decimalPlaces = value;
@@ -178,7 +172,7 @@ namespace VisualArrays.VisualCells
         [Category("VisualDecimal"), DefaultValue(enuValueFormat.Standard), Browsable(true), Description("Obtient et définit le format d'affichage des valeurs dans la grille.")]
         public enuValueFormat ValueFormat
         {
-            get { return m_valueFormat; }
+            get => m_valueFormat;
             set
             {
                 m_valueFormat = value;

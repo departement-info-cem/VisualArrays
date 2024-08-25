@@ -36,7 +36,7 @@ namespace VisualArrays.Appearance
         Description("ImageList utilisée pour dessiner la cellule en mode View ImageList")]
         public ImageList ImageList
         {
-            get { return m_imageList; }
+            get => m_imageList;
             set
             {
                 if (value != m_imageList)
@@ -64,7 +64,7 @@ namespace VisualArrays.Appearance
          Description("Couleur du texte de la valeur d'une cellule Enabled false")]
         public Color TextColor
         {
-            get { return m_textColor; }
+            get => m_textColor;
             set
             {
                 if (m_textColor != value)
@@ -86,7 +86,7 @@ namespace VisualArrays.Appearance
        Description("Police utilisée pour afficher la valeur d'une cellule Enabled false")]
         public Font Font
         {
-            get { return m_font; }
+            get => m_font;
             set
             {
                 if (m_font != value)
@@ -117,7 +117,7 @@ namespace VisualArrays.Appearance
         Description("Indique si la valeur doit être affichée lorsque la cellule est Enabled false")]
         public bool ShowValue
         {
-            get { return m_showValue; }
+            get => m_showValue;
             set
             {
                 if (value != m_showValue)
@@ -140,7 +140,7 @@ namespace VisualArrays.Appearance
          Description("Une valeur entre 0 et 1 controlant la brillance")]
         public float ImageBrightness
         {
-            get { return m_imageBrightness; }
+            get => m_imageBrightness;
             set
             {
                 if (value < 0)

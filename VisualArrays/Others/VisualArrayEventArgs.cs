@@ -143,10 +143,8 @@ namespace VisualArrays.Others
         /// <summary>
         /// Sprite sur lequel l'événement s'est produit.
         /// </summary>
-        public Sprite Sprite
-        {
-            get { return m_sprite; }
-        }
+        public Sprite Sprite => m_sprite;
+
         /// <summary>
         ///  Initialise une nouvelle instance de la classe SpriteMouseEventArgs.
         /// <param name="pButton">Une des valeurs System.Windows.Forms.MouseButtons indiquant le bouton de la souris sur lequel l'utilisateur a appuyé.</param>
@@ -529,10 +527,8 @@ namespace VisualArrays.Others
         /// <summary>
         /// Index du contrôle dont la valeur a changée
         /// </summary>
-        public int Index
-        {
-            get { return m_index; }
-        }
+        public int Index => m_index;
+
         //------------------------------------------------------------------------------------
         /// <summary>
         /// Fournit les données des événements sur une cellule.

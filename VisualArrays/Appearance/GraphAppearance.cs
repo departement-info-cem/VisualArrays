@@ -32,7 +32,7 @@ namespace VisualArrays.Appearance
         Description("Couleur de la valeur de la barre du graphique")]
         public Color BarValueColor
         {
-            get { return m_barValueColor; }
+            get => m_barValueColor;
             set
             {
                 if (value != m_barValueColor)
@@ -54,7 +54,7 @@ namespace VisualArrays.Appearance
         Description("Police utilisée pour la valeur de la barre du graphique")]
         public Font BarValueFont
         {
-            get { return m_barValueFont; }
+            get => m_barValueFont;
             set
             {
                 if (value != m_barValueFont)
@@ -84,7 +84,7 @@ namespace VisualArrays.Appearance
         Description("Style de la valeur de la barre du graphique")]
         public enuGraphValueStyle BarValueStyle
         {
-            get { return m_barValueStyle; }
+            get => m_barValueStyle;
             set
             {
                 if (m_barValueStyle != value)
@@ -105,7 +105,7 @@ namespace VisualArrays.Appearance
         Description("Marge autour de la barre du graphique")]
         public Padding BarMargin
         {
-            get { return m_barMargin; }
+            get => m_barMargin;
             set
             {
                 if (m_barMargin != value)
@@ -136,7 +136,7 @@ namespace VisualArrays.Appearance
         Description("Style de la barre du graphique")]
         public enuGraphBarStyle BarStyle
         {
-            get { return m_barStyle; }
+            get => m_barStyle;
             set
             {
                 if (value != m_barStyle)
@@ -158,7 +158,7 @@ namespace VisualArrays.Appearance
         Description("Couleur de la barre du graphique")]
         public Color BarColor
         {
-            get { return m_barColor; }
+            get => m_barColor;
             set
             {
                 if (value != m_barColor)
@@ -180,7 +180,7 @@ namespace VisualArrays.Appearance
         Description("Image utilisée pour la barre du graphique")]
         public Image BarImage
         {
-            get { return m_barImage; }
+            get => m_barImage;
             set
             {
                 if (value != m_barImage)
@@ -202,7 +202,7 @@ namespace VisualArrays.Appearance
         Description("Alignement de la barre du graphique")]
         public enuBarAlign BarAlign
         {
-            get { return m_barBarAlign; }
+            get => m_barBarAlign;
             set
             {
                 if (m_barBarAlign != value)

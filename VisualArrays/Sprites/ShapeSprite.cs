@@ -17,7 +17,7 @@ namespace VisualArrays.Sprites
         [Localizable(true), Category("Layout")]
         public Color Color
         {
-            get { return va_color; }
+            get => va_color;
             set
             {
                 va_color = value;
@@ -35,7 +35,7 @@ namespace VisualArrays.Sprites
         [Localizable(true), Category("Layout")]
         public enuShape Shape
         {
-            get { return va_shape; }
+            get => va_shape;
             set
             {
                 va_shape = value;
@@ -53,7 +53,7 @@ namespace VisualArrays.Sprites
         [DefaultValue(typeof(int), "3"), Description("Taille du crayon utilisé pour dessiner la forme du 'Sprite'")]
         public int PenWidth
         {
-            get { return va_penWidth; }
+            get => va_penWidth;
             set
             {
                 va_penWidth = value;

@@ -21,8 +21,8 @@ namespace VisualArrays.VisualCells
         [DefaultValue(true), Category("VisualArrays"), Browsable(true), Description("Indique si le contrôle permet la saisie d'une valeur directement en cliquant dans la zone")]
         public bool AllowGraphClick
         {
-            get { return va_allowGraphClick; }
-            set { va_allowGraphClick = value; }
+            get => va_allowGraphClick;
+            set => va_allowGraphClick = value;
         }
         #endregion
 
@@ -39,7 +39,7 @@ namespace VisualArrays.VisualCells
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         public GraphAppearance GraphAppearance
         {
-            get { return m_graphAppearance; }
+            get => m_graphAppearance;
             set
             {
                 if (value != m_graphAppearance)
@@ -60,8 +60,8 @@ namespace VisualArrays.VisualCells
         [Category("VisualBool"), DefaultValue(true), Browsable(true), Description("Détermine si le contrôle attend la touche Enter avant de lancer un événement ValueChanged")]
         public bool WaitForEnter
         {
-            get { return m_waitForEnter; }
-            set { m_waitForEnter = value; }
+            get => m_waitForEnter;
+            set => m_waitForEnter = value;
         }
         #endregion
 

@@ -19,7 +19,7 @@ namespace VisualArrays.VisualArrays
         [DefaultValue(false), Category("VisualArrays"), Browsable(true), Description("Valeur par défaut de toutes les cellules")]
         public bool DefaultValue
         {
-            get { return m_defaultValue; }
+            get => m_defaultValue;
             set
             {
                 if (value != m_defaultValue)
@@ -39,7 +39,7 @@ namespace VisualArrays.VisualArrays
         [DefaultValue(true), Category("VisualArrays"), Browsable(true), Description("Valeur spéciale à afficher différemment des autres valeurs, voir SpecialValueAppearance")]
         public bool SpecialValue
         {
-            get { return m_specialValue; }
+            get => m_specialValue;
             set
             {
                 if (value != m_specialValue)
@@ -239,7 +239,7 @@ namespace VisualArrays.VisualArrays
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         public new VBASpecialValueAppearance<bool> SpecialValueAppearance
         {
-            get { return va_specialValueAppearance; }
+            get => va_specialValueAppearance;
             set
             {
                 if (value != va_specialValueAppearance)
@@ -266,7 +266,7 @@ namespace VisualArrays.VisualArrays
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         public new VBACellAppearance EnabledAppearance
         {
-            get { return va_enabledAppearance; }
+            get => va_enabledAppearance;
             set
             {
                 va_enabledAppearance = value;
@@ -317,7 +317,7 @@ namespace VisualArrays.VisualArrays
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         public new DisabledAppearance DisabledAppearance
         {
-            get { return va_disabledAppearance; }
+            get => va_disabledAppearance;
             set
             {
                 va_disabledAppearance = value;

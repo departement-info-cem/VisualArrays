@@ -36,7 +36,7 @@ namespace VisualArrays.VisualCells
         [DefaultValue(false), Browsable(true), Description("Détermine si la saisir est sensible à la case")]
         public bool CaseSensitive
         {
-            get { return m_caseSensitive; }
+            get => m_caseSensitive;
             set
             {
                 if (value != m_caseSensitive)
@@ -51,7 +51,7 @@ namespace VisualArrays.VisualCells
         [Browsable(true), DefaultValue(null), Description("ImageList utilisée pour dessiner la valeur en mode View ImageList")]
         public ImageList ImageList
         {
-            get { return m_imageList; }
+            get => m_imageList;
             set
             {
                 if (value != m_imageList)
@@ -69,7 +69,7 @@ namespace VisualArrays.VisualCells
         [DefaultValue(enuCharView.Char), Browsable(true), Description("Obtient et définit le style de visualisation pour la valeur du contrôle.")]
         public enuCharView View
         {
-            get { return m_view; }
+            get => m_view;
             set
             {
                 if (m_view != value)
@@ -88,10 +88,7 @@ namespace VisualArrays.VisualCells
         [RefreshProperties(RefreshProperties.All)]
         public char Minimum
         {
-            get
-            {
-                return m_minimum;
-            }
+            get => m_minimum;
             set
             {
                 if (value != m_minimum)
@@ -116,10 +113,7 @@ namespace VisualArrays.VisualCells
         [RefreshProperties(RefreshProperties.All)]
         public char Maximum
         {
-            get
-            {
-                return m_maximum;
-            }
+            get => m_maximum;
             set
             {
                 if (value != m_maximum)
@@ -143,7 +137,7 @@ namespace VisualArrays.VisualCells
         [DefaultValue(typeof(char), "A"), Browsable(true), Description("La valeur actuelle du contrôle VisualChar")]
         public override char Value
         {
-            get { return m_value; }
+            get => m_value;
             set
             {
                 if (value < m_minimum || value > m_maximum)
