@@ -159,9 +159,9 @@ public static class VisualArraysTools
             {
                 m_digitFraction++;
                 if (m_digitFraction > pDecimalPlaces) return false;
-                pNewValue = pNewValue * (decimal)Math.Pow(10, m_digitFraction);
+                pNewValue *= (decimal)Math.Pow(10, m_digitFraction);
                 pNewValue += pChar - '0';
-                pNewValue = pNewValue / (decimal)Math.Pow(10, m_digitFraction);
+                pNewValue /= (decimal)Math.Pow(10, m_digitFraction);
             }
             else
                 pNewValue = pNewValue * 10 + pChar - '0';
@@ -281,7 +281,7 @@ public static class VisualArraysTools
             pGraphics.DrawLine(objPenSombre, positionX + 4, positionY + 5, positionX + 4, positionY + hauteurMilieu - 4);
         }
         // Segment # 2 ================================================================
-        positionY = positionY + hauteurMilieu;
+        positionY += hauteurMilieu;
         if ((pValue & 2) > 0)
         {
             pGraphics.DrawLine(objPenBrillant, positionX, positionY + 2, positionX, positionY + hauteurMilieu - 1);
@@ -299,7 +299,7 @@ public static class VisualArraysTools
             pGraphics.DrawLine(objPenSombre, positionX + 4, positionY + 5, positionX + 4, positionY + hauteurMilieu - 4);
         }
         //  Segment # 3 ================================================================
-        positionY = positionY - hauteurMilieu;
+        positionY -= hauteurMilieu;
         if ((pValue & 4) > 0)
         {
             pGraphics.DrawLine(objPenBrillant, positionX + 4, positionY, positionX + cellsWidth - 5, positionY);
@@ -368,7 +368,7 @@ public static class VisualArraysTools
             pGraphics.DrawLine(objPenSombre, positionX + cellsWidth - 5, positionY + 5, positionX + cellsWidth - 5, positionY + hauteurMilieu - 4);
         }
         // Segment # 7 ================================================================
-        positionY = positionY + hauteurMilieu;
+        positionY += hauteurMilieu;
         if ((pValue & 64) > 0)
         {
             pGraphics.DrawLine(objPenBrillant, positionX + cellsWidth - 1, positionY + 2, positionX + cellsWidth - 1, positionY + hauteurMilieu - 1);
@@ -386,8 +386,8 @@ public static class VisualArraysTools
             pGraphics.DrawLine(objPenSombre, positionX + cellsWidth - 5, positionY + 5, positionX + cellsWidth - 5, positionY + hauteurMilieu - 4);
         }
         // Segment # 8 ' Pour faire un point
-        positionY = positionY - hauteurMilieu;
-        positionX = positionX + cellsWidth;
+        positionY -= hauteurMilieu;
+        positionX += cellsWidth;
         if ((pValue & 128) > 0)
         {
             objPenBrillant.Width = 6;

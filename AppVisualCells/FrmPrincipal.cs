@@ -168,8 +168,8 @@ namespace AppVisualCells;
 
         private void button2_Click(object sender, EventArgs e)
         {
-            visualIntArray3.RowCount = visualIntArray3.RowCount - 1;
-            visualIntArray3.ColumnCount = visualIntArray3.ColumnCount - 1;
+            visualIntArray3.RowCount -= 1;
+            visualIntArray3.ColumnCount -= 1;
         }
 
         private void visualIntArray3_ValueChanged(object sender, ValueChangedEventArgs e)
