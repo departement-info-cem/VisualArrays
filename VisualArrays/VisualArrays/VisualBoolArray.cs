@@ -82,7 +82,7 @@ namespace VisualArrays.VisualArrays
         protected override void DrawCellDragContent(Graphics pGraphics, Rectangle pContentBounds, int pRow, int pColumn)
         {
             Cell cell = va_tabCells[pRow, pColumn];
-            pContentBounds = new Rectangle(0, 0, pContentBounds.Width, pContentBounds.Height);
+            pContentBounds = pContentBounds with { X = 0, Y = 0 };
 
             bool valeurAAfficher = va_tabValues[pRow, pColumn];
 

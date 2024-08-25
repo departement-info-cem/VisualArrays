@@ -169,7 +169,7 @@ namespace VisualArrays.CellVisualElement
             if (dia > r.Height) dia = r.Height;
 
             // define a corner 
-            Rectangle Corner = new(r.X, r.Y, dia, dia);
+            Rectangle Corner = r with { Width = dia, Height = dia };
 
             // begin path
             pPath.Reset();

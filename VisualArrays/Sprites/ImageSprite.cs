@@ -54,7 +54,7 @@
         /// <param name="pGraphics">Destination du dessin</param>
         public override void DrawAtOrigin(Graphics pGraphics)
         {
-            Rectangle contour = new(0, 0, m_bounds.Width, m_bounds.Height);
+            Rectangle contour = m_bounds with { X = 0, Y = 0 };
             if (m_image != null)
             {
                 pGraphics.DrawImage(m_image, contour);

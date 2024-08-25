@@ -2531,9 +2531,9 @@ namespace VisualArrays
         protected virtual void DrawCellDragContent(Graphics pGraphics, Rectangle pContentBounds,int pRow, int pColumn)
         {
             Cell cell = va_tabCells[pRow, pColumn];
-            Rectangle backRect = new(0, 0, pContentBounds.Width, pContentBounds.Height);
+            Rectangle backRect = pContentBounds with { X = 0, Y = 0 };
             Rectangle cellBounds = GetCellBounds(pRow, pColumn);
-            Rectangle borderRect = new(0, 0, cellBounds.Width, cellBounds.Height);
+            Rectangle borderRect = cellBounds with { X = 0, Y = 0 };
             cell.Background?.Draw(pGraphics, backRect);
             cell.UserContent?.DrawCellDragContent(pGraphics, backRect, borderRect, cell.Enabled);
         }

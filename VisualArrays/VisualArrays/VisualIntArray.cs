@@ -225,7 +225,7 @@ namespace VisualArrays.VisualArrays
         protected override void DrawCellDragContent(Graphics pGraphics, Rectangle pContentBounds, int pRow, int pColumn)
         {
             Cell cell = va_tabCells[pRow, pColumn];
-            pContentBounds = new Rectangle(0, 0, pContentBounds.Width, pContentBounds.Height);
+            pContentBounds = pContentBounds with { X = 0, Y = 0 };
 
             int valeurAAfficher = va_tabValues[pRow, pColumn];
             // Dessiner le fond de la cellule si n�cessaire

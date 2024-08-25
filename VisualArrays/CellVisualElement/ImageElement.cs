@@ -96,7 +96,7 @@ namespace VisualArrays.CellVisualElement
                 Rectangle contour = BoundsFromAlignment(pBounds, va_image.Size, va_alignment);
                 int posX = contour.Left + va_margin.Left - va_margin.Right;
                 int posY = contour.Top + va_margin.Top - va_margin.Bottom;
-                Rectangle contourWithMargin = new(posX, posY, contour.Width, contour.Height);
+                Rectangle contourWithMargin = contour with { X = posX, Y = posY };
                 pGraphics.DrawImage(va_image, contourWithMargin);
             }
         }

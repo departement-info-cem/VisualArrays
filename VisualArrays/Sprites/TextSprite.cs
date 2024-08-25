@@ -252,7 +252,7 @@ namespace VisualArrays.Sprites
         public override void DrawAtOrigin(Graphics pGraphics)
         {
             SizeF pt = pGraphics.MeasureString(m_text, m_font);
-            Rectangle contour = new(0, 0, m_bounds.Width, m_bounds.Height);
+            Rectangle contour = m_bounds with { X = 0, Y = 0 };
             FillShapeElement.DrawFillShape(m_backgroundShape, pGraphics, contour, m_shapeColor, m_opacity, m_radius);
             int posX = (m_bounds.Width - (int)pt.Width) >> 1;
             int posY = (m_bounds.Height - (int)pt.Height) >> 1;

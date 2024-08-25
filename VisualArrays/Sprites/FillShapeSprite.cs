@@ -104,7 +104,7 @@ namespace VisualArrays.Sprites
         /// <param name="pGraphics">Destination du dessin</param>
         public override void DrawAtOrigin(Graphics pGraphics)
         {
-            Rectangle contour = new(0, 0, m_bounds.Width, m_bounds.Height);
+            Rectangle contour = m_bounds with { X = 0, Y = 0 };
             FillShapeElement.DrawFillShape(m_shape, pGraphics, contour, m_color, m_opacity, 10);
         }
     }

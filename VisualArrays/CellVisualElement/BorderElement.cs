@@ -93,7 +93,7 @@
 
             int posX = contour.Left + va_margin.Left - va_margin.Right;
             int posY = contour.Top + va_margin.Top - va_margin.Bottom;
-            Rectangle contourSelonPenWidth = new(posX,posY, contour.Width, contour.Height);
+            Rectangle contourSelonPenWidth = contour with { X = posX, Y = posY };
             DrawBorder(pGraphics, contourSelonPenWidth, Border,Color);
         }
     }

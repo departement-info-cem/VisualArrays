@@ -283,7 +283,7 @@ namespace VisualArrays.CellVisualElement
             Rectangle contour = BoundsFromAlignment(pBounds, new Size(largeurZoom, hauteurZoom),va_alignment);
             int posX = contour.Left + va_margin.Left - va_margin.Right;
             int posY = contour.Top + va_margin.Top - va_margin.Bottom;
-            Rectangle contourWithMargin = new(posX, posY, contour.Width, contour.Height);
+            Rectangle contourWithMargin = contour with { X = posX, Y = posY };
             DrawFillShape(va_shape, pGraphics, contourWithMargin, va_color,255,va_radius);
         }
     }
