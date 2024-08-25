@@ -100,7 +100,7 @@ public static class VisualArraysTools
     /// <param name="pValeur"></param>
     /// <param name="pDecimalPlaces"></param>
     /// <returns></returns>
-    internal static int NbDigits(decimal pValeur, int pDecimalPlaces)
+    private static int NbDigits(decimal pValeur, int pDecimalPlaces)
     {
         long nombreEntier = (long)Math.Floor(pValeur);
         int cpt = 0;
@@ -115,10 +115,12 @@ public static class VisualArraysTools
             return cpt;
         return cpt + pDecimalPlaces + 2;
     }
+    
     //================================================================================================================
     private static bool m_fraction = false;
     private static int m_digitFraction = 0;
     //================================================================================================================
+    
     internal static bool ReadDecimal(char pChar, decimal pCurrentValue, decimal pMaxValue, int pDecimalPlaces, out decimal pNewValue)
     {
         pNewValue = 0;
@@ -127,7 +129,7 @@ public static class VisualArraysTools
             return false;
 
         pNewValue = Math.Abs(pCurrentValue);
-        if (VisualArraysTools.NbDigits(pNewValue, pDecimalPlaces) == VisualArraysTools.NbDigits(pMaxValue, pDecimalPlaces))
+        if (NbDigits(pNewValue, pDecimalPlaces) == NbDigits(pMaxValue, pDecimalPlaces))
             pNewValue = 0;
         if (pChar is '.' or ',' && !m_fraction)
         {

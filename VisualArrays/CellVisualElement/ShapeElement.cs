@@ -212,14 +212,14 @@ public class ShapeElement : CellVisualElement
     {
         Point[] pts; int centreX, centreY, unQuart;
         //pPen.Alignment = System.Drawing.Drawing2D.PenAlignment.Inset;
-        pGraphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+        pGraphics.SmoothingMode = SmoothingMode.HighQuality;
         switch (pShape)
         {
             case enuShape.RoundRect:
                 DrawRoundRect(pGraphics, pBounds, pPen.Color, pRadius, (int)pPen.Width);
                 break;
             case enuShape.Rectangle:
-                pGraphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
+                pGraphics.SmoothingMode = SmoothingMode.None;
                 pGraphics.DrawRectangle(pPen, pBounds);
                 break;
             case enuShape.Ellipse:
@@ -327,7 +327,7 @@ public class ShapeElement : CellVisualElement
             default:
                 break;
         }
-        pGraphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
+        pGraphics.SmoothingMode = SmoothingMode.None;
     }
     /// <summary>
     /// Dessine l'élément visuel selon la forme courante.

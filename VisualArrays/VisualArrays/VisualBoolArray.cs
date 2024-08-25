@@ -26,7 +26,7 @@ public partial class VisualBoolArray : VisualValueArray<bool>
             {
                 m_defaultValue = value;
                 ResetAllValuesToDefault();
-                this.Refresh();
+                Refresh();
             }
         }
     }
@@ -45,7 +45,7 @@ public partial class VisualBoolArray : VisualValueArray<bool>
             if (value != m_specialValue)
             {
                 m_specialValue = value;
-                this.Refresh();
+                Refresh();
             }
         }
     }
@@ -243,7 +243,7 @@ public partial class VisualBoolArray : VisualValueArray<bool>
             {
                 va_specialValueAppearance = value;
                 UpdateSpecialValueVisualElement(va_specialValueAppearance.Style);
-                this.Refresh();
+                Refresh();
             }
         }
     }
@@ -319,7 +319,7 @@ public partial class VisualBoolArray : VisualValueArray<bool>
         {
             va_disabledAppearance = value;
             UpdateDisableVisualElement(value.Style);
-            this.Refresh();
+            Refresh();
         }
     }
 

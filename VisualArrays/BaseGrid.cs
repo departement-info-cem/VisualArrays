@@ -329,7 +329,7 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
     {
         //base.Refresh();
         //if (m_load)
-        if (this.Parent != null)
+        if (Parent != null)
             OnPaint(new PaintEventArgs(CreateGraphics(), ClientRectangle));
         //CreateGraphics().DrawImage(va_offScreenBitMap, ClientRectangle);
     }
@@ -502,7 +502,7 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
         get => va_selectionMode;
         set {
 
-            if (value == System.Windows.Forms.SelectionMode.MultiExtended)
+            if (value == SelectionMode.MultiExtended)
             {
                 throw new ArgumentOutOfRangeException(
                     "SelectionMode",
@@ -1035,7 +1035,7 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
         {
             va_addressMode = value;
             RefreshSpritesBounds();
-            this.Refresh();
+            Refresh();
         }
     }
     //============================================================================================
@@ -1059,7 +1059,7 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
         set
         {
             va_addressView = value;
-            this.Refresh();
+            Refresh();
         }
     }
     #endregion
@@ -1104,7 +1104,7 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
         {
             va_disabledAppearance = value;
             UpdateDisableVisualElement(value.Style);
-            this.Refresh();
+            Refresh();
         }
     }
     #endregion
@@ -1257,7 +1257,7 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
             default:
                 break;
         }
-        this.Refresh();
+        Refresh();
     }
     //============================================================================================
     private void UpdateSelectionVisualElement()
@@ -1401,7 +1401,7 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
             UpdateCellsBkgVisualElement();
 
             LengthChanged?.Invoke(this, EventArgs.Empty);
-            this.Refresh();
+            Refresh();
         }
     }
     //============================================================================================
@@ -1452,7 +1452,7 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
             UpdateCellsBkgVisualElement();
 
             LengthChanged?.Invoke(this, EventArgs.Empty);
-            this.Refresh();
+            Refresh();
         }
     }
     ///============================================================================================
@@ -1748,7 +1748,7 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
         //if (va_selectionMode != System.Windows.Forms.SelectionMode.None)
         //  SelectedIndex = -1;
         //==============================================================================
-        if (va_selectionMode != System.Windows.Forms.SelectionMode.None)
+        if (va_selectionMode != SelectionMode.None)
             SelectedIndex = -1;
         ResetAllValuesToDefault();
         //==============================================================================
@@ -1765,7 +1765,7 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
     /// <param name="pText">Texte à redessiner.</param>
     internal void DrawColumnHeader(int pColumn, string pText)
     {
-        DrawColumnsHeaders(this.CreateGraphics(), pColumn, pText, va_columnHeaderAppearance.ForeColor, va_columnHeaderAppearance.Font);
+        DrawColumnsHeaders(CreateGraphics(), pColumn, pText, va_columnHeaderAppearance.ForeColor, va_columnHeaderAppearance.Font);
     }
     /// <summary>
     /// Dessiner l'en-tête d'une rangée.
@@ -1774,7 +1774,7 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
     /// <param name="pText">Texte à redessiner.</param>
     internal void DrawRowHeader(int pRow, string pText)
     {
-        DrawRowsHeaders(this.CreateGraphics(), pRow, pText, va_rowHeaderAppearance.ForeColor, va_rowHeaderAppearance.Font);
+        DrawRowsHeaders(CreateGraphics(), pRow, pText, va_rowHeaderAppearance.ForeColor, va_rowHeaderAppearance.Font);
     }        /// <summary>
     /// Dessine l'en-tête des colonnes.
     /// </summary>
@@ -2061,7 +2061,7 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
             va_gridOffScreenBitMap.Dispose();
         }
         // On va créer le offscreen bitmap avec la taille actuelle de la grille
-        va_gridOffScreenBitMap = new Bitmap(width, height, System.Drawing.Imaging.PixelFormat.Format16bppRgb555);
+        va_gridOffScreenBitMap = new Bitmap(width, height, PixelFormat.Format16bppRgb555);
         // On va créer un objet Graphics pour dessiner
         Graphics clientDC = CreateGraphics();
         // On va obtenir le handle vers le DC de l'objet Graphics
@@ -2103,7 +2103,7 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
             va_spriteOffScreenBitMap.Dispose();
         }
         // On va créer le offscreen bitmap avec la taille actuelle de la grille
-        va_spriteOffScreenBitMap = new Bitmap(pWidth, pHeight, System.Drawing.Imaging.PixelFormat.Format16bppRgb555);
+        va_spriteOffScreenBitMap = new Bitmap(pWidth, pHeight, PixelFormat.Format16bppRgb555);
         // On va créer un objet Graphics pour dessiner
         Graphics clientDC = CreateGraphics();
         // On va obtenir le handle vers le DC de l'objet Graphics
@@ -2222,7 +2222,7 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
     /// </summary>
     protected void DrawAllCells()
     {
-        DrawAllCells(this.CreateGraphics());
+        DrawAllCells(CreateGraphics());
     }
     //===============================================================================
     /// <summary>
@@ -3791,7 +3791,7 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
     private void DoDragCell(MouseEventArgs e,int pIndex,int pRow,int pColumn)
     {
         //m_dragInfos = String.Format("{0},{1},{2},{3},{4}", "CELL", this.Name, pIndex, pRow, pColumn);
-        m_dragInfos = new DragAndDropInfos(enuTypeElement.Cell, this.Name, pIndex, pIndex / va_columnCount, pIndex % va_columnCount, null);
+        m_dragInfos = new DragAndDropInfos(enuTypeElement.Cell, Name, pIndex, pIndex / va_columnCount, pIndex % va_columnCount, null);
         // Code pour tester le nouveau D&D
         Rectangle cellContentBounds = GetCellContentBounds(pRow, pColumn);
         Bitmap bmp = new(cellContentBounds.Width, cellContentBounds.Height, PixelFormat.Format32bppArgb);
@@ -3824,7 +3824,7 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
     private void DoDragSprite(MouseEventArgs e, Sprite pSprite, int pIndex)
     {
         //m_dragInfos = String.Format("{0},{1},{2},{3},{4},{5}", "SPRITE", this.Name, pIndex, pIndex / va_columnCount, pIndex % va_columnCount, va_sprites.IndexOf(pSprite));
-        m_dragInfos = new DragAndDropInfos(enuTypeElement.Sprite, this.Name, pIndex, pIndex / va_columnCount, pIndex % va_columnCount, pSprite);
+        m_dragInfos = new DragAndDropInfos(enuTypeElement.Sprite, Name, pIndex, pIndex / va_columnCount, pIndex % va_columnCount, pSprite);
         // Code pour tester le nouveau D&D
         Bitmap bmp = new(pSprite.Bounds.Width, pSprite.Bounds.Height, PixelFormat.Format32bppArgb);
         using (Graphics g = Graphics.FromImage(bmp))
@@ -3918,7 +3918,7 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
 
             if (va_allowDrag && objSprite.AllowDrag)
             {
-                SpriteDragEventArgs spriteDragInfos = new(this.Name,objSprite, false);
+                SpriteDragEventArgs spriteDragInfos = new(Name,objSprite, false);
                 BeforeSpriteDrag?.Invoke(this, spriteDragInfos);
 
                 int index = objSprite.DisplayIndex;
@@ -4018,7 +4018,7 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
 
                 if (va_allowDrag && va_allowCellDrag)
                 {
-                    CellDragEventArgs cellDragInfos = new(this.Name, index, new Address(index / va_columnCount, index % va_columnCount), false);
+                    CellDragEventArgs cellDragInfos = new(Name, index, new Address(index / va_columnCount, index % va_columnCount), false);
                     BeforeCellDrag?.Invoke(this, cellDragInfos);
 
                     if (!cellDragInfos.Cancel) // l'opération drag est accepté
@@ -4242,7 +4242,7 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
 
         if (dragOutside)
         {
-            if (m_dragInfos.DragSprite is { AllowOutsideDrop: true } && m_dragInfos.SourceGridName == this.Name && va_allowSelfDrop)
+            if (m_dragInfos.DragSprite is { AllowOutsideDrop: true } && m_dragInfos.SourceGridName == Name && va_allowSelfDrop)
             {
                 m_dragInfos.DragSprite.Visible = true;
                 SpriteOutsideDrop?.Invoke(this, new SpriteOutsideDropEventArgs(m_dragInfos.SourceGridName, m_dragInfos.DragSprite, m_dragInfos.SourceIndex, new Address(m_dragInfos.SourceRow, m_dragInfos.SourceColumn),coordonnee));
@@ -4258,11 +4258,11 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
         if (IsOkToSelect(cell, adresse.Row, adresse.Column)) // l'opération est acceptée seulement sur une cellule visible et active
         {
             //-----------------------------------------------------------------------------------------------
-            if (m_dragInfos.SourceGridName != this.Name || (m_dragInfos.SourceGridName == this.Name && va_allowSelfDrop)) // L'opération est acceptée
+            if (m_dragInfos.SourceGridName != Name || (m_dragInfos.SourceGridName == Name && va_allowSelfDrop)) // L'opération est acceptée
             {
-                if (va_selectionMode != System.Windows.Forms.SelectionMode.None)
+                if (va_selectionMode != SelectionMode.None)
                     SelectedIndex = index;
-                else if (va_selectionMode == System.Windows.Forms.SelectionMode.None)
+                else if (va_selectionMode == SelectionMode.None)
                 {
                     //UpdateCellAndSprites(index);
                     UpdateCellAndSpritesDuringDragPlus(m_dragInfos.DragSprite, adresse.Row, adresse.Column, false);
@@ -4270,7 +4270,7 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
                     if (va_dragIndexSource != -1) UpdateCellAndSprites(va_dragIndexSource);
                 }
                 // on va s'assurer avant de notifier l'événement que l'index est différent si nous sommes sur la même grille
-                if ((index != m_dragInfos.SourceIndex && m_dragInfos.SourceGridName == this.Name) || m_dragInfos.SourceGridName != this.Name)
+                if ((index != m_dragInfos.SourceIndex && m_dragInfos.SourceGridName == Name) || m_dragInfos.SourceGridName != Name)
                 {
                     if (CellDragDrop != null && m_dragInfos.TypeElement == enuTypeElement.Cell)
                     {
@@ -4384,7 +4384,7 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
             return;
         }
 
-        if (adresse.Column < 0 || adresse.Column >= ColumnCount || adresse.Row < 0 || adresse.Row >= RowCount || (!va_allowSelfDrop && m_dragInfos.SourceGridName == this.Name))
+        if (adresse.Column < 0 || adresse.Column >= ColumnCount || adresse.Row < 0 || adresse.Row >= RowCount || (!va_allowSelfDrop && m_dragInfos.SourceGridName == Name))
         {
             if (va_dragIndex != -1)
                 UpdateCellAndSpritesDuringDragPlus(m_dragInfos.DragSprite, va_dragIndex / ColumnCount, va_dragIndex % ColumnCount, false);
@@ -5461,7 +5461,7 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
 }
 
 #region Classe interne GrilleDeBaseDesigner
-internal class GrilleDeBaseDesigner : System.Windows.Forms.Design.ControlDesigner
+internal class GrilleDeBaseDesigner : ControlDesigner
 {
     public GrilleDeBaseDesigner()
         : base()

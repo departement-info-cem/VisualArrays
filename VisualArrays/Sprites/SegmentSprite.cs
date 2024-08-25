@@ -258,13 +258,13 @@ public class SegmentSprite : Sprite
             Brush brush = new SolidBrush(couleurSegment);
             Rectangle contour = m_bounds;
 
-            pGraphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+            pGraphics.SmoothingMode = SmoothingMode.HighQuality;
 
             pGraphics.DrawLine(new Pen(couleurSegment, m_bulletSize), m_sourceBounds.Left + m_bulletSize, m_sourceBounds.Top + m_bulletSize, m_destinationBounds.Left + m_bulletSize, m_destinationBounds.Top + m_bulletSize);
             pGraphics.FillEllipse(brush, m_sourceBounds.Left, m_sourceBounds.Top, m_bulletSize << 1, m_bulletSize << 1);
             pGraphics.FillEllipse(brush, m_destinationBounds.Left, m_destinationBounds.Top, m_bulletSize << 1, m_bulletSize << 1);
 
-            pGraphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
+            pGraphics.SmoothingMode = SmoothingMode.None;
         }
     }
     //===========================================================================
@@ -281,7 +281,7 @@ public class SegmentSprite : Sprite
         Rectangle destinationBounds = m_destinationBounds;
         destinationBounds.Offset(-m_bounds.Left, -m_bounds.Top);
 
-        pGraphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+        pGraphics.SmoothingMode = SmoothingMode.HighQuality;
 
         Color couleurSegment = Color.FromArgb(m_opacity, m_color);
         Brush brush = new SolidBrush(couleurSegment);
@@ -290,7 +290,7 @@ public class SegmentSprite : Sprite
         pGraphics.FillEllipse(brush, sourceBounds.Left, sourceBounds.Top, m_bulletSize << 1, m_bulletSize << 1);
         pGraphics.FillEllipse(brush, destinationBounds.Left, destinationBounds.Top, m_bulletSize << 1, m_bulletSize << 1);
 
-        pGraphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
+        pGraphics.SmoothingMode = SmoothingMode.None;
 
         //throw new NotImplementedException();
     }

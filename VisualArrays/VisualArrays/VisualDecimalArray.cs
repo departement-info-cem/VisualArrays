@@ -28,7 +28,7 @@ public partial class VisualDecimalArray : VisualGraphArray<decimal>
             {
                 m_defaultValue = value;
                 ResetAllValuesToDefault();
-                this.Refresh();
+                Refresh();
             }
         }
     }
@@ -47,7 +47,7 @@ public partial class VisualDecimalArray : VisualGraphArray<decimal>
             if (value != m_specialValue)
             {
                 m_specialValue = value;
-                this.Refresh();
+                Refresh();
             }
         }
     }
@@ -131,7 +131,7 @@ public partial class VisualDecimalArray : VisualGraphArray<decimal>
         set
         {
             va_decimalPlaces = value;
-            this.Refresh();
+            Refresh();
         }
     }
     #endregion

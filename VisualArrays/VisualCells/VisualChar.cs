@@ -257,16 +257,16 @@ public partial class VisualChar : VisualValue<char>
             {
                 if (e.Y < Height / 2)
                 {
-                    if (e.Button == System.Windows.Forms.MouseButtons.Left)
+                    if (e.Button == MouseButtons.Left)
                         if (m_value < m_maximum) Value++;
-                    if (e.Button == System.Windows.Forms.MouseButtons.Right)
+                    if (e.Button == MouseButtons.Right)
                         Value = m_maximum;
                 }
                 else
                 {
-                    if (e.Button == System.Windows.Forms.MouseButtons.Left)
+                    if (e.Button == MouseButtons.Left)
                         if (m_value > m_minimum) Value--;
-                    if (e.Button == System.Windows.Forms.MouseButtons.Right)
+                    if (e.Button == MouseButtons.Right)
                         Value = m_minimum;
                 }
             }

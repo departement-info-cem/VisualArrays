@@ -155,10 +155,10 @@ internal class CaptureScreen
     {
 
         //Variable to keep the handle of the btimap.
-        IntPtr va_HBitmap = System.IntPtr.Zero;
+        IntPtr va_HBitmap = IntPtr.Zero;
 
         //Variable to keep the refrence to the desktop bitmap.
-        System.Drawing.Bitmap bmp = null;
+        Bitmap bmp = null;
 
         //In size variable we shall keep the size of the screen.
         SIZE size;
@@ -197,7 +197,7 @@ internal class CaptureScreen
             PlatformInvokeUSER32.ReleaseDC(PlatformInvokeUSER32.GetDesktopWindow(), hDC);
 
             //Image is created by Image bitmap handle and assigned to Bitmap variable.
-            bmp = System.Drawing.Image.FromHbitmap(va_HBitmap);
+            bmp = Image.FromHbitmap(va_HBitmap);
 
             //Delete the compatible bitmap object.
             PlatformInvokeGDI32.DeleteObject(va_HBitmap);

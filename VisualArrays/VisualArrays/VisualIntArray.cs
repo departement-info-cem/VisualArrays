@@ -29,7 +29,7 @@ public partial class VisualIntArray : VisualGraphArray<int>
             {
                 m_defaultValue = value;
                 ResetAllValuesToDefault();
-                this.Refresh();
+                Refresh();
             }
         }
     }
@@ -48,7 +48,7 @@ public partial class VisualIntArray : VisualGraphArray<int>
             if (value != m_specialValue)
             {
                 m_specialValue = value;
-                this.Refresh();
+                Refresh();
             }
         }
     }

@@ -152,7 +152,7 @@ public class FillShapeElement : CellVisualElement
     public static void DrawFillShape(enuShape pShape, Graphics pGraphics, Rectangle pBounds, Color pColor,int pAlpha, int pRadius)
     {
         Point[] pts; int centreX, centreY, unQuart;
-        pGraphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+        pGraphics.SmoothingMode = SmoothingMode.HighQuality;
         Brush brush = new SolidBrush(Color.FromArgb(pAlpha, pColor));
         switch (pShape)
         {
@@ -160,7 +160,7 @@ public class FillShapeElement : CellVisualElement
                 FillRoundRect(pGraphics, brush, pBounds, Color.FromArgb(pAlpha, pColor), pRadius);
                 break;
             case enuShape.Rectangle:
-                pGraphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
+                pGraphics.SmoothingMode = SmoothingMode.None;
                 pGraphics.FillRectangle(brush, pBounds);
                 break;
             case enuShape.Ellipse:
@@ -269,7 +269,7 @@ public class FillShapeElement : CellVisualElement
                 break;
         }
         brush.Dispose();
-        pGraphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
+        pGraphics.SmoothingMode = SmoothingMode.None;
     }
     /// <summary>
     /// Dessine une forme pleine

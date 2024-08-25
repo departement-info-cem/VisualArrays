@@ -160,7 +160,7 @@ public partial class VisualDecimal : VisualGraph<decimal>
         set
         {
             m_decimalPlaces = value;
-            this.Refresh();
+            Refresh();
         }
     }
 

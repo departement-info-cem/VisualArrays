@@ -27,7 +27,7 @@ public partial class VisualStringArray : VisualValueArray<string>
             {
                 m_defaultValue = value;
                 ResetAllValuesToDefault();
-                this.Refresh();
+                Refresh();
             }
         }
     }
@@ -46,7 +46,7 @@ public partial class VisualStringArray : VisualValueArray<string>
             if (value != m_specialValue)
             {
                 m_specialValue = value;
-                this.Refresh();
+                Refresh();
             }
         }
     }
@@ -62,7 +62,7 @@ public partial class VisualStringArray : VisualValueArray<string>
         set
         {
             va_maxLength = value;
-            this.Refresh();
+            Refresh();
         }
     }
     //============================================================================================

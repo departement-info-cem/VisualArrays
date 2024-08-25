@@ -29,7 +29,7 @@ public class SpriteCollection : CollectionBase
     public Sprite Add(Sprite pSprite)
     {
         pSprite.Owner = va_owner;
-        this.InnerList.Add(pSprite);
+        InnerList.Add(pSprite);
         pSprite.RecalcBoundsAndRedraw();
         //va_owner.UpdateSprites(pSprite.Bounds);
         return pSprite;
@@ -40,7 +40,7 @@ public class SpriteCollection : CollectionBase
     /// <param name="pSprite"></param>
     public void Remove(Sprite pSprite)
     {
-        this.InnerList.Remove(pSprite);
+        InnerList.Remove(pSprite);
         va_owner.UpdateSprites(pSprite.Bounds);
     }
     /// <summary>
@@ -50,7 +50,7 @@ public class SpriteCollection : CollectionBase
     /// <returns></returns>
     public bool Contains(Sprite pSprite)
     {
-        return this.InnerList.Contains(pSprite);
+        return InnerList.Contains(pSprite);
     }
     /// <summary>
     /// 
@@ -59,11 +59,11 @@ public class SpriteCollection : CollectionBase
     /// <returns></returns>
     public Sprite this[int pIndex]
     {
-        get => (Sprite)this.InnerList[pIndex];
+        get => (Sprite)InnerList[pIndex];
         set
         {
             value.Owner = va_owner;
-            this.InnerList[pIndex] = value;
+            InnerList[pIndex] = value;
             va_owner.UpdateSprites(value.Bounds);
         }
     }
@@ -75,7 +75,7 @@ public class SpriteCollection : CollectionBase
     {
         foreach (Sprite objSprite in pSprites)
             objSprite.Owner = va_owner;
-        this.InnerList.AddRange(pSprites);
+        InnerList.AddRange(pSprites);
     }
     /// <summary>
     /// 
@@ -83,8 +83,8 @@ public class SpriteCollection : CollectionBase
     /// <returns></returns>
     public Sprite[] GetValues()
     {
-        Sprite[] sprites = new Sprite[this.InnerList.Count];
-        this.InnerList.CopyTo(0, sprites, 0, this.InnerList.Count);
+        Sprite[] sprites = new Sprite[InnerList.Count];
+        InnerList.CopyTo(0, sprites, 0, InnerList.Count);
         return sprites;
     }
     /// <summary>
@@ -127,8 +127,8 @@ public class SpriteCollection : CollectionBase
     /// <param name="pSprite">Sprite à déplacer à l'avant plan</param>
     protected internal void BringToFront(Sprite pSprite)
     {
-        this.InnerList.Remove(pSprite);
-        this.InnerList.Add(pSprite);
+        InnerList.Remove(pSprite);
+        InnerList.Add(pSprite);
         va_owner.UpdateSprites(((Sprite)pSprite).Bounds);
     }
     //-------------------------------------------------------------------------
@@ -138,8 +138,8 @@ public class SpriteCollection : CollectionBase
     /// <param name="pSprite">Sprite à déplacer à l'arrière plan</param>
     protected internal void SendToBack(Sprite pSprite)
     {
-        this.InnerList.Remove(pSprite);
-        this.InnerList.Insert(0, pSprite);
+        InnerList.Remove(pSprite);
+        InnerList.Insert(0, pSprite);
         va_owner.UpdateSprites(pSprite.Bounds);
     }
     //-------------------------------------------------------------------------
@@ -153,7 +153,7 @@ public class SpriteCollection : CollectionBase
     ///</returns>
     public int IndexOf(Sprite pSprite)
     {
-        for (int index = 0; index < this.Count; index++)
+        for (int index = 0; index < Count; index++)
             if (this[index] == pSprite) return index;
         return -1;
     }

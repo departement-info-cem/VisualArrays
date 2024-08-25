@@ -250,7 +250,7 @@ public abstract partial class VisualValueArray<Type> : BaseGrid
         {
             va_disabledAppearance = value;
             UpdateDisableVisualElement(value.Style);
-            this.Refresh();
+            Refresh();
         }
     }
 
@@ -329,7 +329,7 @@ public abstract partial class VisualValueArray<Type> : BaseGrid
             {
                 va_specialValueAppearance = value;
                 UpdateSpecialValueVisualElement(va_specialValueAppearance.Style);
-                this.Refresh();
+                Refresh();
             }
         }
     }

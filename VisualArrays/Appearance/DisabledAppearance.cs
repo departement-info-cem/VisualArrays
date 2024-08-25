@@ -21,7 +21,7 @@ public class DisabledAppearance : IBackgroundAppearance
     /// <param name="pOwner">VisualArray propriétaire</param>
     public DisabledAppearance(BaseGrid pOwner)
     {
-        m_strikeAppearance = new global::VisualArrays.Appearance.StrikeAppearance(pOwner);
+        m_strikeAppearance = new StrikeAppearance(pOwner);
         m_owner = pOwner;
     }
 

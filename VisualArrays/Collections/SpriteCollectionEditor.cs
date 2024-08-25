@@ -61,8 +61,8 @@ public class SpriteCollectionEditor : System.ComponentModel.Design.CollectionEdi
     protected override object CreateInstance(Type itemType)
     {
         Sprite objSprite = (Sprite)base.CreateInstance(itemType);
-        objSprite.Owner = ((BaseGrid)(this.Context.Instance));
-        this.CreateCollectionForm();
+        objSprite.Owner = ((BaseGrid)(Context.Instance));
+        CreateCollectionForm();
         return objSprite;
     }
     /// <summary>

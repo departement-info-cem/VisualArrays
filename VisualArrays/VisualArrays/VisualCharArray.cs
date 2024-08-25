@@ -26,7 +26,7 @@ public partial class VisualCharArray : VisualValueArray<char>
             {
                 m_defaultValue = value;
                 ResetAllValuesToDefault();
-                this.Refresh();
+                Refresh();
             }
         }
     }
@@ -45,7 +45,7 @@ public partial class VisualCharArray : VisualValueArray<char>
             if (value != m_specialValue)
             {
                 m_specialValue = value;
-                this.Refresh();
+                Refresh();
             }
         }
     }
@@ -76,7 +76,7 @@ public partial class VisualCharArray : VisualValueArray<char>
         set
         {
             va_imlBaseChar = value;
-            this.Refresh();
+            Refresh();
         }
     }
     //============================================================================================
@@ -91,7 +91,7 @@ public partial class VisualCharArray : VisualValueArray<char>
         set
         {
             va_autoNextIndex = value;
-            this.Refresh();
+            Refresh();
         }
     }
     #endregion
