@@ -17,22 +17,12 @@ jobs:
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: ${{ matrix.dotnet-version }}
+          source-url: https://nuget.pkg.github.com/PierreOlivierBrillant/index.json
       - name: Display dotnet version
         run: dotnet --version
-
-#  publish-gpr:
-#    needs: build
-#    runs-on: ubuntu-latest
-#    permissions:
-#      packages: write
-#      contents: read
-#    steps:
-#      - uses: actions/checkout@v4
-#      - uses: actions/setup-node@v4
-#        with:
-#          node-version: 16
-#          registry-url: https://npm.pkg.github.com/
-#      - run: npm ci
-#      - run: npm publish
-#        env:
-#          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      - name: Build
+        run: dotnet build --configuration Release VisualArrays
+      - name: Create the package
+        run: dotnet pack --configuration Release VisualArrays
+      - name: Publish the package to GPR
+        run: dotnet nuget push VisualArrays/bin/Release/*.nupkg
