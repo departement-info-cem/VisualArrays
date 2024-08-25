@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.ComTypes;
 using IDataObject = System.Runtime.InteropServices.ComTypes.IDataObject;
 
-namespace DragDropLib
+namespace VisualArrays.DragHelper
 {
     /// <summary>
     /// Implements the COM version of IDataObject including SetData.

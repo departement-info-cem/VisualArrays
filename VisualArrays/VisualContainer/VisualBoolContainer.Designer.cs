@@ -1,4 +1,4 @@
-﻿namespace VisualArrays
+﻿namespace VisualArrays.VisualContainer
 {
     partial class VisualBoolContainer
     {

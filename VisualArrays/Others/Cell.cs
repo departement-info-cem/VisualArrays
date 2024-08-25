@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Drawing;
-
-namespace VisualArrays
+﻿namespace VisualArrays.Others
 {
     #region Interface ICellDraw
     /// <summary>
@@ -41,15 +36,15 @@ namespace VisualArrays
         /// <summary>
         /// Obtient ou définit un VisualElement sur la cellule en dessous de la valeur
         /// </summary>
-        public CellVisualElement LayerUnder = null;
+        public CellVisualElement.CellVisualElement LayerUnder = null;
         /// <summary>
         /// Obtient ou définit le premier élément visuel sur la cellule au dessus de la valeur
         /// </summary>
-        public CellVisualElement LayerOver = null;
+        public CellVisualElement.CellVisualElement LayerOver = null;
         /// <summary>
         /// Obtient ou définit le VisualElement utilisé pour dessiner le fond de la cellule
         /// </summary>
-        public CellVisualElement Background = null;
+        public CellVisualElement.CellVisualElement Background = null;
         /// <summary>
         /// Obtient ou définit si la valeur de la cellule peut être modifiée ou non 
         /// </summary>

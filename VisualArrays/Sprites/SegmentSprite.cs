@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.ComponentModel;
-using System.Drawing;
+﻿using System.ComponentModel;
 using System.Drawing.Drawing2D;
+using VisualArrays.Others;
+using VisualArrays.VisualArrays;
 
-namespace VisualArrays
+namespace VisualArrays.Sprites
 {
     /// <summary>
     /// Représente un 'Sprite' ayant la forme d'un segment partant d'une cellule vers une autre
@@ -174,15 +172,15 @@ namespace VisualArrays
             {
                 if (AlignOnGrid)
                 {
-                    m_bounds = CellVisualElement.BoundsFromAlignment(m_owner.GridBounds, Size, m_alignment);
-                    m_sourceBounds = CellVisualElement.BoundsFromAlignment(m_sourceBounds, taille, m_alignment);
-                    m_destinationBounds = CellVisualElement.BoundsFromAlignment(m_destinationBounds, taille, m_alignment);
+                    m_bounds = CellVisualElement.CellVisualElement.BoundsFromAlignment(m_owner.GridBounds, Size, m_alignment);
+                    m_sourceBounds = CellVisualElement.CellVisualElement.BoundsFromAlignment(m_sourceBounds, taille, m_alignment);
+                    m_destinationBounds = CellVisualElement.CellVisualElement.BoundsFromAlignment(m_destinationBounds, taille, m_alignment);
                 }
                 else
                 {
                     m_bounds = new Rectangle(m_location, m_size);
-                    m_sourceBounds = CellVisualElement.BoundsFromAlignment(m_bounds, taille, ContentAlignment.MiddleLeft);
-                    m_destinationBounds = CellVisualElement.BoundsFromAlignment(m_bounds, taille, ContentAlignment.MiddleRight);
+                    m_sourceBounds = CellVisualElement.CellVisualElement.BoundsFromAlignment(m_bounds, taille, ContentAlignment.MiddleLeft);
+                    m_destinationBounds = CellVisualElement.CellVisualElement.BoundsFromAlignment(m_bounds, taille, ContentAlignment.MiddleRight);
                 }
             }
             else
@@ -191,8 +189,8 @@ namespace VisualArrays
                 Address adrDestination = m_owner.IndexToAddress(m_destinationIndex);
                 m_sourceBounds = m_owner.GetCellBounds(adrSource.Row, adrSource.Column);
                 m_destinationBounds = m_owner.GetCellBounds(adrDestination.Row, adrDestination.Column);
-                m_sourceBounds = CellVisualElement.BoundsFromAlignment(m_sourceBounds, taille, m_alignment);
-                m_destinationBounds = CellVisualElement.BoundsFromAlignment(m_destinationBounds, taille, m_alignment);
+                m_sourceBounds = CellVisualElement.CellVisualElement.BoundsFromAlignment(m_sourceBounds, taille, m_alignment);
+                m_destinationBounds = CellVisualElement.CellVisualElement.BoundsFromAlignment(m_destinationBounds, taille, m_alignment);
             }
 
             m_bounds = Rectangle.Union(m_sourceBounds, m_destinationBounds);

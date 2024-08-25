@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Drawing;
-using System.IO;
+﻿using VisualArrays.VisualArrays;
 
-namespace VisualArrays
+namespace VisualArrays.CellVisualElement
 {
     /// <summary>
     /// Représente un élément visuel affichant une image.

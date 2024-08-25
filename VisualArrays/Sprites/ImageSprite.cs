@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.ComponentModel;
-using System.Drawing;
-using System.Windows.Forms;
+﻿using System.ComponentModel;
 
-namespace VisualArrays
+namespace VisualArrays.Sprites
 {
     /// <summary>
     /// Représente un 'Sprite' utilisant une image pour se dessiner

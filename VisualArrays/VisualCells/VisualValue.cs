@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
+﻿using System.ComponentModel;
+using VisualArrays.Appearance;
+using VisualArrays.CellVisualElement;
+using VisualArrays.Others;
 
 namespace VisualArrays.VisualCells
 {
@@ -38,13 +34,13 @@ namespace VisualArrays.VisualCells
         /// <summary>
         /// VisualElement utilisé pour dessiner le fond de la cellule
         /// </summary>
-        internal CellVisualElement m_backgroundVE = null;
+        internal CellVisualElement.CellVisualElement m_backgroundVE = null;
 
         //============================================================================================
         /// <summary>
         /// Change le CellVisualElement pour le fond de la cellule
         /// </summary>
-        internal CellVisualElement GetNewBkgVisualElement(IBackgroundAppearance pBackgroundAppearance)
+        internal CellVisualElement.CellVisualElement GetNewBkgVisualElement(IBackgroundAppearance pBackgroundAppearance)
         {
             if (pBackgroundAppearance == null) return null;
             switch (pBackgroundAppearance.Style)

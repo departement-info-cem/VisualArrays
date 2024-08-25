@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
+﻿using System.ComponentModel;
+using VisualArrays.Others;
 
 // À AJOUTER :
 //      - StrikeAppearance pour Enabled == false ???
@@ -228,7 +222,7 @@ namespace VisualArrays.VisualCells
                 if (m_value >= 0 && m_value < m_imageList.Images.Count)
                 {
                     Image objImage = m_imageList.Images[m_value];
-                    Rectangle imageBounds = CellVisualElement.BoundsFromAlignment(pCellBounds, objImage.Size, m_valueAlign);
+                    Rectangle imageBounds = CellVisualElement.CellVisualElement.BoundsFromAlignment(pCellBounds, objImage.Size, m_valueAlign);
                     if (Enabled)
                         pGraphics.DrawImage(objImage, new Point(imageBounds.Left, imageBounds.Top));
                     else

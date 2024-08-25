@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Data;
-using System.Text;
-using System.Windows.Forms;
+﻿using System.ComponentModel;
 using System.Windows.Forms.Design;
-using System.IO;
-using System.Collections;
-using System.Globalization;
-using DragDropLib;
 using ComIDataObject = System.Runtime.InteropServices.ComTypes.IDataObject;
 using DataObject = System.Windows.Forms.DataObject;
 using System.Drawing.Imaging;
+using VisualArrays.Appearance;
+using VisualArrays.CellVisualElement;
+using VisualArrays.Collections;
+using VisualArrays.DragHelper;
+using VisualArrays.Others;
+using VisualArrays.Sprites;
+using VisualArrays.VisualArrays;
 
 namespace VisualArrays
 {
@@ -1181,13 +1177,13 @@ namespace VisualArrays
         /// <summary>
         /// Élément visuel affiché dans le fond des cellules dont l'état Enabled est false.
         /// </summary>
-        protected CellVisualElement va_disabledVisualElement;
+        protected CellVisualElement.CellVisualElement va_disabledVisualElement;
 
         //----------------------------------------------------------------------------------------
         /// <summary>
         /// Élément visuel affiché lorsqu'une cellule est sélectionnée.
         /// </summary>
-        protected CellVisualElement va_selectionVisualElement;
+        protected CellVisualElement.CellVisualElement va_selectionVisualElement;
 
         //============================================================================================
         internal virtual void UpdateDisableVisualElement(enuBkgStyle pStyle)
@@ -1213,7 +1209,7 @@ namespace VisualArrays
             //}
         }
         //==========================================================================================================================================
-        internal CellVisualElement UpdateBackgroundVisualElement(IBackgroundAppearance pBackgroundAppearance)
+        internal CellVisualElement.CellVisualElement UpdateBackgroundVisualElement(IBackgroundAppearance pBackgroundAppearance)
         {
             switch (pBackgroundAppearance.Style)
             {
@@ -2236,7 +2232,7 @@ namespace VisualArrays
                         objRectangle.Width = m_cellSize.Width + (m_cellMargin << 1) - va_dragAppearance.Padding.Left - va_dragAppearance.Padding.Right;
                         objRectangle.Height = m_cellSize.Height + (m_cellMargin << 1) - va_dragAppearance.Padding.Top - va_dragAppearance.Padding.Bottom;
 
-                        objRectangle = CellVisualElement.BoundsFromAlignment(objRectangle, va_dragAppearance.Image.Size, ContentAlignment.MiddleCenter);
+                        objRectangle = CellVisualElement.CellVisualElement.BoundsFromAlignment(objRectangle, va_dragAppearance.Image.Size, ContentAlignment.MiddleCenter);
                         pGraphics.DrawImage(va_dragAppearance.Image, objRectangle);
                     }
                     break;
@@ -2536,7 +2532,7 @@ namespace VisualArrays
                 case enuStrikeStyle.Image:
                     if (pDisabledAppearance.StrikeAppearance.Image != null)
                     {
-                        Rectangle leRect = CellVisualElement.BoundsFromAlignment(pBounds, pDisabledAppearance.StrikeAppearance.Image.Size, pDisabledAppearance.StrikeAppearance.Align);
+                        Rectangle leRect = CellVisualElement.CellVisualElement.BoundsFromAlignment(pBounds, pDisabledAppearance.StrikeAppearance.Image.Size, pDisabledAppearance.StrikeAppearance.Align);
                         pGraphics.DrawImage(pDisabledAppearance.StrikeAppearance.Image, leRect);
                     }
                     break;
@@ -2605,7 +2601,7 @@ namespace VisualArrays
                     if (va_disabledVisualElement != null) va_disabledVisualElement.Draw(pGraphics, cellContentBounds);
             }
             // Étape 4 : On va dessiner les couches supplémentaires soit les VisualElement ajoutés
-            CellVisualElement layerVE = cell.LayerOver;
+            CellVisualElement.CellVisualElement layerVE = cell.LayerOver;
             while (layerVE != null)
             {
                 layerVE.Draw(pGraphics, cellContentBounds);
@@ -2650,7 +2646,7 @@ namespace VisualArrays
             else
             {
                 if (pCell.Background != null) pCell.Background.Draw(pGraphics, pCellContentBounds);
-                CellVisualElement layerVE = pCell.LayerOver;
+                CellVisualElement.CellVisualElement layerVE = pCell.LayerOver;
                 while (layerVE != null)
                 {
                     layerVE.Draw(pGraphics, pCellContentBounds);
@@ -3843,7 +3839,7 @@ namespace VisualArrays
                 DrawCellDragContent(g,cellContentBounds, pRow, pColumn);
             }
 
-            DataObject data = new DataObject(new DragDropLib.DataObject());
+            DataObject data = new DataObject(new DragHelper.DataObject());
 
             ShDragImage shdi = new ShDragImage();
             Win32Size size;
@@ -3877,7 +3873,7 @@ namespace VisualArrays
                 pSprite.DrawAtOrigin(g);
             }
 
-            DataObject data = new DataObject(new DragDropLib.DataObject());
+            DataObject data = new DataObject(new DragHelper.DataObject());
 
             ShDragImage shdi = new ShDragImage();
             Win32Size size;
@@ -4650,7 +4646,7 @@ namespace VisualArrays
         public void SetCellBackgroundZoom(int pIndex, int pZoom)
         {
             Address adresse = IndexToAddress(pIndex);
-            CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].Background;
+            CellVisualElement.CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].Background;
             objVE.Zoom = pZoom;
             UpdateCellAndSprites(pIndex);
         }
@@ -4663,7 +4659,7 @@ namespace VisualArrays
         public void SetCellBackgroundZoom(int pRow, int pColumn, int pZoom)
         {
             Address adresse = AddressFromAddressMode(pRow, pColumn);
-            CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].Background;
+            CellVisualElement.CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].Background;
             objVE.Zoom = pZoom;
             UpdateCellAndSprites(IndexFromAddress(adresse.Row, adresse.Column));
         }
@@ -4676,7 +4672,7 @@ namespace VisualArrays
         public void SetCellBackgroundImage(int pIndex, Image pImage)
         {
             Address adresse = IndexToAddress(pIndex);
-            CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].Background;
+            CellVisualElement.CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].Background;
             if (objVE is ImageElement)
             {
                 ((ImageElement)objVE).Image = pImage;
@@ -4694,7 +4690,7 @@ namespace VisualArrays
         public void SetCellBackgroundImage(int pRow, int pColumn, Image pImage)
         {
             Address adresse = AddressFromAddressMode(pRow, pColumn);
-            CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].Background;
+            CellVisualElement.CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].Background;
             if (objVE is ImageElement)
             {
                 ((ImageElement)objVE).Image = pImage;
@@ -4712,7 +4708,7 @@ namespace VisualArrays
         public void SetCellBackgroundPenWidth(int pIndex, int pPenWidth)
         {
             Address adresse = IndexToAddress(pIndex);
-            CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].Background;
+            CellVisualElement.CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].Background;
             if (objVE is ShapeElement)
             {
                 ((ShapeElement)objVE).PenWidth = pPenWidth;
@@ -4730,7 +4726,7 @@ namespace VisualArrays
         public void SetCellBackgroundPenWidth(int pRow, int pColumn, int pPenWidth)
         {
             Address adresse = AddressFromAddressMode(pRow, pColumn);
-            CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].Background;
+            CellVisualElement.CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].Background;
             if (objVE is ShapeElement)
             {
                 ((ShapeElement)objVE).PenWidth = pPenWidth;
@@ -4747,7 +4743,7 @@ namespace VisualArrays
         public void SetCellBackgroundShape(int pIndex, enuShape pShape)
         {
             Address adresse = IndexToAddress(pIndex);
-            CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].Background;
+            CellVisualElement.CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].Background;
             if (objVE is ShapeElement)
             {
                 ((ShapeElement)objVE).Shape = pShape;
@@ -4770,7 +4766,7 @@ namespace VisualArrays
         public void SetCellBackgroundShape(int pRow, int pColumn, enuShape pShape)
         {
             Address adresse = AddressFromAddressMode(pRow, pColumn);
-            CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].Background;
+            CellVisualElement.CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].Background;
             if (objVE is ShapeElement)
             {
                 ((ShapeElement)objVE).Shape = pShape;
@@ -4793,7 +4789,7 @@ namespace VisualArrays
         public void SetCellBackgroundBorder(int pIndex, Padding pBorder)
         {
             Address adresse = IndexToAddress(pIndex);
-            CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].Background;
+            CellVisualElement.CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].Background;
             if (objVE is BorderElement)
                 ((BorderElement)objVE).Border = pBorder;
             else
@@ -4818,7 +4814,7 @@ namespace VisualArrays
         public void SetCellBackgroundColor(int pIndex, Color pColor)
         {
             Address adresse = IndexToAddress(pIndex);
-            CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].Background;
+            CellVisualElement.CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].Background;
             if (objVE is ShapeElement)
             {
                 ((ShapeElement)objVE).Color = pColor;
@@ -4846,7 +4842,7 @@ namespace VisualArrays
         public void SetCellBackgroundColor(int pRow, int pColumn, Color pColor)
         {
             Address adresse = AddressFromAddressMode(pRow, pColumn);
-            CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].Background;
+            CellVisualElement.CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].Background;
             if (objVE is ShapeElement)
             {
                 ((ShapeElement)objVE).Color = pColor;
@@ -4872,7 +4868,7 @@ namespace VisualArrays
         /// </summary>
         /// <param name="pIndex">Index spécifié en tenant compte du mode d'adressage</param>
         /// <param name="pVisualElement">VisualElement à assigner</param>
-        public void SetCellBackgroundVisualElement(int pIndex, CellVisualElement pVisualElement)
+        public void SetCellBackgroundVisualElement(int pIndex, CellVisualElement.CellVisualElement pVisualElement)
         {
             Address adresse = IndexToAddress(pIndex);
             va_tabCells[adresse.Row, adresse.Column].Background = pVisualElement;
@@ -4884,7 +4880,7 @@ namespace VisualArrays
         /// <param name="pRow">Rangée de la cellule.</param>
         /// <param name="pColumn">Colonne de la cellule.</param>
         /// <param name="pVisualElement">VisualElement à assigner</param>
-        public void SetCellBackgroundVisualElement(int pRow, int pColumn, CellVisualElement pVisualElement)
+        public void SetCellBackgroundVisualElement(int pRow, int pColumn, CellVisualElement.CellVisualElement pVisualElement)
         {
             Address adresse = AddressFromAddressMode(pRow, pColumn);
             va_tabCells[adresse.Row, adresse.Column].Background = pVisualElement;
@@ -4898,7 +4894,7 @@ namespace VisualArrays
         /// </summary>
         /// <param name="pIndex">Index spécifié en tenant compte du mode d'adressage</param>
         /// <param name="pVisualElement">VisualElement à assigner</param>
-        public void SetCellUnderValueVisualElement(int pIndex, CellVisualElement pVisualElement)
+        public void SetCellUnderValueVisualElement(int pIndex, CellVisualElement.CellVisualElement pVisualElement)
         {
             Address adresse = IndexToAddress(pIndex);
             va_tabCells[adresse.Row, adresse.Column].LayerUnder = pVisualElement;
@@ -4910,7 +4906,7 @@ namespace VisualArrays
         /// <param name="pRow">Rangée de la cellule.</param>
         /// <param name="pColumn">Colonne de la cellule.</param>
         /// <param name="pVisualElement">VisualElement à assigner</param>
-        public void SetCellUnderValueVisualElement(int pRow, int pColumn, CellVisualElement pVisualElement)
+        public void SetCellUnderValueVisualElement(int pRow, int pColumn, CellVisualElement.CellVisualElement pVisualElement)
         {
             Address adresse = AddressFromAddressMode(pRow, pColumn);
             va_tabCells[adresse.Row, adresse.Column].LayerUnder = pVisualElement;
@@ -4994,7 +4990,7 @@ namespace VisualArrays
         public Image GetCellBackgroundImage(int pIndex)
         {
             Address adresse = IndexToAddress(pIndex);
-            CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].Background;
+            CellVisualElement.CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].Background;
             if (objVE is ImageElement)
                 return ((ImageElement)objVE).Image;
             else
@@ -5009,7 +5005,7 @@ namespace VisualArrays
         public Image GetCellBackgroundImage(int pRow, int pColumn)
         {
             Address adresse = AddressFromAddressMode(pRow, pColumn);
-            CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].Background;
+            CellVisualElement.CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].Background;
             if (objVE is ImageElement)
                 return ((ImageElement)objVE).Image;
             else
@@ -5024,7 +5020,7 @@ namespace VisualArrays
         public int GetCellBackgroundPenWidth(int pIndex)
         {
             Address adresse = IndexToAddress(pIndex);
-            CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].Background;
+            CellVisualElement.CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].Background;
             if (objVE is ShapeElement)
                 return ((ShapeElement)objVE).PenWidth;
             else
@@ -5039,7 +5035,7 @@ namespace VisualArrays
         public int GetCellBackgroundPenWidth(int pRow, int pColumn)
         {
             Address adresse = AddressFromAddressMode(pRow, pColumn);
-            CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].Background;
+            CellVisualElement.CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].Background;
             if (objVE is ShapeElement)
                 return ((ShapeElement)objVE).PenWidth;
             else
@@ -5053,7 +5049,7 @@ namespace VisualArrays
         public Padding GetCellBackgroundBorder(int pIndex)
         {
             Address adresse = IndexToAddress(pIndex);
-            CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].Background;
+            CellVisualElement.CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].Background;
             if (objVE is BorderElement)
                 return ((BorderElement)objVE).Border;
             else
@@ -5068,7 +5064,7 @@ namespace VisualArrays
         public Padding GetCellBackgroundBorder(int pRow, int pColumn)
         {
             Address adresse = AddressFromAddressMode(pRow, pColumn);
-            CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].Background;
+            CellVisualElement.CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].Background;
             if (objVE is BorderElement)
                 return ((BorderElement)objVE).Border;
             else
@@ -5082,7 +5078,7 @@ namespace VisualArrays
         public enuShape GetCellBackgroundShape(int pIndex)
         {
             Address adresse = IndexToAddress(pIndex);
-            CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].Background;
+            CellVisualElement.CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].Background;
             if (objVE is ShapeElement)
                 return ((ShapeElement)objVE).Shape;
             else if (objVE is FillShapeElement)
@@ -5099,7 +5095,7 @@ namespace VisualArrays
         public enuShape GetCellBackgroundShape(int pRow, int pColumn)
         {
             Address adresse = AddressFromAddressMode(pRow, pColumn);
-            CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].Background;
+            CellVisualElement.CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].Background;
             if (objVE is ShapeElement)
                 return ((ShapeElement)objVE).Shape;
             else if (objVE is FillShapeElement)
@@ -5115,7 +5111,7 @@ namespace VisualArrays
         public Color GetCellBackgroundColor(int pIndex)
         {
             Address adresse = IndexToAddress(pIndex);
-            CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].Background;
+            CellVisualElement.CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].Background;
             if (objVE is ShapeElement)
                 return ((ShapeElement)objVE).Color;
             else if (objVE is FillShapeElement)
@@ -5132,7 +5128,7 @@ namespace VisualArrays
         public Color GetCellBackgroundColor(int pRow, int pColumn)
         {
             Address adresse = AddressFromAddressMode(pRow, pColumn);
-            CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].Background;
+            CellVisualElement.CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].Background;
             if (objVE is ShapeElement)
                 return ((ShapeElement)objVE).Color;
             else if (objVE is FillShapeElement)
@@ -5146,7 +5142,7 @@ namespace VisualArrays
         /// </summary>
         /// <param name="pIndex">Index spécifié en tenant compte du mode d'adressage</param>
         /// <returns>VisualElement utilisé pour dessiner le fond de la cellule</returns>
-        public CellVisualElement GetCellBackgroundVisualElement(int pIndex)
+        public CellVisualElement.CellVisualElement GetCellBackgroundVisualElement(int pIndex)
         {
             Address adresse = IndexToAddress(pIndex);
             return va_tabCells[adresse.Row, adresse.Column].Background;
@@ -5157,7 +5153,7 @@ namespace VisualArrays
         /// <param name="pRow">Rangée de la cellule.</param>
         /// <param name="pColumn">Colonne de la cellule.</param>
         /// <returns>VisualElement utilisé pour dessiner le fond de la cellule</returns>
-        public CellVisualElement GetCellBackgroundVisualElement(int pRow, int pColumn)
+        public CellVisualElement.CellVisualElement GetCellBackgroundVisualElement(int pRow, int pColumn)
         {
             Address adresse = AddressFromAddressMode(pRow, pColumn);
             return va_tabCells[adresse.Row, adresse.Column].Background;
@@ -5319,10 +5315,10 @@ namespace VisualArrays
         /// </summary>
         /// <param name="pIndex">Index spécifié en tenant compte du mode d'adressage</param>
         /// <param name="pVisualElement">VisualElement à ajouter</param>
-        public void AddCellVisualElement(int pIndex, CellVisualElement pVisualElement)
+        public void AddCellVisualElement(int pIndex, CellVisualElement.CellVisualElement pVisualElement)
         {
             Address adresse = IndexToAddress(pIndex);
-            CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].LayerOver;
+            CellVisualElement.CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].LayerOver;
 
             if (objVE == null)
                 va_tabCells[adresse.Row, adresse.Column].LayerOver = pVisualElement;
@@ -5340,10 +5336,10 @@ namespace VisualArrays
         /// <param name="pRow">Rangée de la cellule.</param>
         /// <param name="pColumn">Colonne de la cellule.</param>
         /// <param name="pVisualElement">VisualElement à ajouter</param>
-        public void AddCellVisualElement(int pRow, int pColumn, CellVisualElement pVisualElement)
+        public void AddCellVisualElement(int pRow, int pColumn, CellVisualElement.CellVisualElement pVisualElement)
         {
             Address adresse = AddressFromAddressMode(pRow, pColumn);
-            CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].LayerOver;
+            CellVisualElement.CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].LayerOver;
 
             if (objVE == null)
                 va_tabCells[adresse.Row, adresse.Column].LayerOver = pVisualElement;
@@ -5361,11 +5357,11 @@ namespace VisualArrays
         /// </summary>
         /// <param name="pIndex">Index spécifié en tenant compte du mode d'adressage</param>
         /// <returns>Liste des éléments visuels attachés à cette cellule</returns>
-        public List<CellVisualElement> GetCellVisualElements(int pIndex)
+        public List<CellVisualElement.CellVisualElement> GetCellVisualElements(int pIndex)
         {
-            List<CellVisualElement> liste = new List<CellVisualElement>();
+            List<CellVisualElement.CellVisualElement> liste = new List<CellVisualElement.CellVisualElement>();
             Address adresse = IndexToAddress(pIndex);
-            CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].LayerOver;
+            CellVisualElement.CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].LayerOver;
             while (objVE != null)
             {
                 liste.Add(objVE);
@@ -5379,11 +5375,11 @@ namespace VisualArrays
         /// <param name="pRow">Rangée de la cellule.</param>
         /// <param name="pColumn">Colonne de la cellule.</param>
         /// <returns>Liste des éléments visuels attachés à cette cellule</returns>
-        public List<CellVisualElement> GetCellVisualElements(int pRow, int pColumn)
+        public List<CellVisualElement.CellVisualElement> GetCellVisualElements(int pRow, int pColumn)
         {
-            List<CellVisualElement> liste = new List<CellVisualElement>();
+            List<CellVisualElement.CellVisualElement> liste = new List<CellVisualElement.CellVisualElement>();
             Address adresse = AddressFromAddressMode(pRow, pColumn);
-            CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].LayerOver;
+            CellVisualElement.CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].LayerOver;
             while (objVE != null)
             {
                 liste.Add(objVE);
@@ -5399,7 +5395,7 @@ namespace VisualArrays
         public void RemoveCellVisualElement(int pIndex, int pLayerIndex)
         {
             Address adresse = IndexToAddress(pIndex);
-            CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].LayerOver;
+            CellVisualElement.CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].LayerOver;
 
             if (objVE == null || pLayerIndex < 0)
                 throw new VisualArrayException("Impossible de supprimer le VisualElement à la couche indiquée, pLayerIndex = " + pLayerIndex);
@@ -5412,7 +5408,7 @@ namespace VisualArrays
                 }
                 else // ce n'est pas le premier à supprimer
                 {
-                    CellVisualElement objPrecedent = null;
+                    CellVisualElement.CellVisualElement objPrecedent = null;
                     while (objVE.NextVisualElement != null && pLayerIndex > 0)
                     {
                         objPrecedent = objVE;

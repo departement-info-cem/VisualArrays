@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.ComponentModel;
-using System.Globalization;
+﻿using System.ComponentModel;
 using System.ComponentModel.Design.Serialization;
+using System.Globalization;
 using System.Reflection;
-using System.Drawing;
 
-namespace VisualArrays
+namespace VisualArrays.Others
 {
     /// <summary>
     /// 

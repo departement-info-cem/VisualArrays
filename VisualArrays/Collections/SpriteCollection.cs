@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Collections;
-using System.Drawing;
+﻿using System.Collections;
+using VisualArrays.Sprites;
 
-namespace VisualArrays
+namespace VisualArrays.Collections
 {
     /// <summary>
     /// Représente une collection d'objets 'Sprite' qui s'affichent sur une grille.

@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
-using System.IO;
-using System.Drawing.Imaging;
+﻿using System.ComponentModel;
+using VisualArrays.Others;
 
-namespace VisualArrays
+namespace VisualArrays.VisualArrays
 {
     /// <summary>
     /// Représente une grille dont les cellules sont chaînes de caractères.  
@@ -312,7 +305,7 @@ namespace VisualArrays
 
             }
             // Étape 4 : On va dessiner les couches supplémentaires soit les VisualElement ajoutés
-            CellVisualElement layerVE = cell.LayerOver;
+            CellVisualElement.CellVisualElement layerVE = cell.LayerOver;
             while (layerVE != null)
             {
                 layerVE.Draw(pGraphics, cellContentBounds);

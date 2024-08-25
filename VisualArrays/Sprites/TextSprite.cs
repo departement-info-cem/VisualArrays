@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.ComponentModel;
-using System.Drawing;
-using System.Windows.Forms;
+﻿using System.ComponentModel;
+using VisualArrays.CellVisualElement;
+using VisualArrays.Others;
 
-namespace VisualArrays
+namespace VisualArrays.Sprites
 {
     /// <summary>
     /// Un 'Sprite' utilisant une chaîne pour s'afficher
@@ -286,7 +283,7 @@ namespace VisualArrays
                 if (AlignOnGrid)
                 {
                     Size taille = new Size((int)pt.Width + m_margin.Size.Width, (int)pt.Height + m_margin.Size.Height);
-                    m_bounds = CellVisualElement.BoundsFromAlignment(m_owner.GridBounds, taille, m_alignment);
+                    m_bounds = CellVisualElement.CellVisualElement.BoundsFromAlignment(m_owner.GridBounds, taille, m_alignment);
                 }
                 else
                 {
@@ -301,7 +298,7 @@ namespace VisualArrays
             {
                 Size taille = new Size((int)pt.Width + m_margin.Size.Width, (int)pt.Height + m_margin.Size.Height);
                 Rectangle cellBounds = m_owner.GetCellBounds(m_displayIndex);
-                m_bounds = CellVisualElement.BoundsFromAlignment(cellBounds, new Size(taille.Width, taille.Height), m_alignment);
+                m_bounds = CellVisualElement.CellVisualElement.BoundsFromAlignment(cellBounds, new Size(taille.Width, taille.Height), m_alignment);
             }
             m_bounds.Offset(m_offsetX, m_offsetY);
         }

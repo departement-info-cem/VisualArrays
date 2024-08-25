@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
+﻿using System.ComponentModel;
+using VisualArrays.Appearance;
 
 namespace VisualArrays.VisualCells
 {
@@ -41,7 +35,7 @@ namespace VisualArrays.VisualCells
         /// <summary>
         /// VisualElement utilisé pour dessiner le fond de la cellule
         /// </summary>
-        internal CellVisualElement m_foreGroundVE = null;
+        internal CellVisualElement.CellVisualElement m_foreGroundVE = null;
 
         /// <summary>
         /// Détermine différents aspects de l'apparence selon la valeur de la propriété Value

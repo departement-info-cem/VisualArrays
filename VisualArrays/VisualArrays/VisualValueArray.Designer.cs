@@ -1,4 +1,4 @@
-﻿namespace VisualArrays
+﻿namespace VisualArrays.VisualArrays
 {
     abstract partial class VisualValueArray<Type>
     {

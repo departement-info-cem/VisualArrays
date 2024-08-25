@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace VisualArrays
+﻿namespace VisualArrays.VisualArrays
 {
     /// <summary>
     /// Définit une exception pour les débordements d'index de ligne ou de colonne.

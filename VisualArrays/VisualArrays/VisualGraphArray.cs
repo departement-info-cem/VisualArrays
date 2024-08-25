@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
+﻿using System.ComponentModel;
+using VisualArrays.Appearance;
 
-namespace VisualArrays
+namespace VisualArrays.VisualArrays
 {
     /// <summary>
     /// Cette classe représente les propriétés nécessaire pour afficher des graphiques

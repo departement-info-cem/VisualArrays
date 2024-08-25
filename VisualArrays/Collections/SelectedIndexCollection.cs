@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections;
-using System.Text;
-using System.Windows.Forms;
-
-namespace VisualArrays
+﻿namespace VisualArrays.Collections
 {
     /// <summary>
     /// Représente une collection d'index d'éléments sélectionnés dans une grille.

@@ -1,9 +1,7 @@
-﻿using System;
-using System.Runtime.InteropServices;
-using System.Runtime.InteropServices.ComTypes;
+﻿using System.Runtime.InteropServices;
 using IDataObject = System.Runtime.InteropServices.ComTypes.IDataObject;
 
-namespace DragDropLib
+namespace VisualArrays.DragHelper
 {
     /// <summary>
     /// 

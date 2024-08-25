@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.ComponentModel;
-using System.Drawing;
-using System.Runtime.InteropServices;
-using System.Windows.Forms;
+﻿using System.ComponentModel;
 using System.ComponentModel.Design;
-using System.Threading;
+using VisualArrays.Others;
+using VisualArrays.VisualArrays;
 
-
-namespace VisualArrays
+namespace VisualArrays.Sprites
 {
     /// <summary>
     /// Représente un objet visuel qui se déplace sur une grille
@@ -269,14 +263,14 @@ namespace VisualArrays
             if (m_displayIndex == -1)
             {
                 if (m_alignOnGrid)
-                    m_bounds = CellVisualElement.BoundsFromAlignment(m_owner.GridBounds, Size, m_alignment);
+                    m_bounds = CellVisualElement.CellVisualElement.BoundsFromAlignment(m_owner.GridBounds, Size, m_alignment);
                 else
                     m_bounds = new Rectangle(m_location, m_size);
             }
             else
             {
                 Rectangle cellBounds = m_owner.GetCellBounds(m_displayIndex);
-                m_bounds = CellVisualElement.BoundsFromAlignment(cellBounds, m_size, m_alignment);
+                m_bounds = CellVisualElement.CellVisualElement.BoundsFromAlignment(cellBounds, m_size, m_alignment);
                 m_bounds.Offset(m_offsetX, m_offsetY);
             }
         }
@@ -522,7 +516,7 @@ namespace VisualArrays
 
             Address emplacement = m_owner.IndexToAddress(pFuturIndex);
             Rectangle cellBounds = m_owner.GetCellBounds(emplacement.Row, emplacement.Column);
-            Rectangle futurBounds = CellVisualElement.BoundsFromAlignment(cellBounds, m_size, m_alignment);
+            Rectangle futurBounds = CellVisualElement.CellVisualElement.BoundsFromAlignment(cellBounds, m_size, m_alignment);
             futurBounds.Offset(m_offsetX, m_offsetY);
 
             int distanceTotalX = futurBounds.Left - startBounds.Left;

@@ -1,35 +1,29 @@
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
-using VisualArrays;
+using VisualArrays.Others;
 
-namespace VisualArrays
+namespace VisualArrays.VisualArrays
 {
     /// <summary>
-    /// Représente une grille permettant l'affichage par segments de chiffres ou de symboles.  
+    /// Reprï¿½sente une grille permettant l'affichage par segments de chiffres ou de symboles.  
     /// </summary>
     [ToolboxBitmap(typeof(VisualIntArray), "Resources.tbxVisualIntArray")]
     public partial class VisualIntArray : VisualGraphArray<int>
     {
 
-        #region Champs et Propriétés
+        #region Champs et Propriï¿½tï¿½s
         //============================================================================================
         //private int m_defaultValue = 0;
         /// <summary>
-        /// Obtient ou définit la valeur par défaut de toutes les cellules.
+        /// Obtient ou dï¿½finit la valeur par dï¿½faut de toutes les cellules.
         /// </summary>
-        [DefaultValue(0), Category("VisualArrays"), Browsable(true), Description("Valeur par défaut de toutes les cellules")]
+        [DefaultValue(0), Category("VisualArrays"), Browsable(true), Description("Valeur par dï¿½faut de toutes les cellules")]
         public int DefaultValue
         {
             get { return m_defaultValue; }
             set
             {
                 if (value < va_minimum || value > va_maximum)
-                    throw new ArgumentOutOfRangeException("DefaultValue", value, "'DefaultValue' doit être compris entre 'Minimum' et 'Maximum'");
+                    throw new ArgumentOutOfRangeException("DefaultValue", value, "'DefaultValue' doit ï¿½tre compris entre 'Minimum' et 'Maximum'");
 
                 if (value != m_defaultValue)
                 {
@@ -43,9 +37,9 @@ namespace VisualArrays
         //============================================================================================
         //private int m_specialValue = -1;
         /// <summary>
-        /// Obtient ou définit la valeur spéciale à afficher différement des autres valeurs.
+        /// Obtient ou dï¿½finit la valeur spï¿½ciale ï¿½ afficher diffï¿½rement des autres valeurs.
         /// </summary>
-        [DefaultValue(-1), Category("VisualArrays"), Browsable(true), Description("Valeur spéciale à afficher différemment des autres valeurs, voir SpecialValueAppearance")]
+        [DefaultValue(-1), Category("VisualArrays"), Browsable(true), Description("Valeur spï¿½ciale ï¿½ afficher diffï¿½remment des autres valeurs, voir SpecialValueAppearance")]
         public int SpecialValue
         {
             get { return m_specialValue; }
@@ -61,9 +55,9 @@ namespace VisualArrays
         //============================================================================================
         private Color va_digitColor = Color.Red;
         /// <summary>
-        /// Obtient et définit la couleur des segments allumés.
+        /// Obtient et dï¿½finit la couleur des segments allumï¿½s.
         /// </summary>
-        [DefaultValue(typeof(Color), "Red"), Category("VisualArrays"), Browsable(true), Description("Couleur des segments allumés.")]
+        [DefaultValue(typeof(Color), "Red"), Category("VisualArrays"), Browsable(true), Description("Couleur des segments allumï¿½s.")]
         public Color DigitColor
         {
             get { return va_digitColor; }
@@ -74,11 +68,11 @@ namespace VisualArrays
             }
         }
         //============================================================================================
-        private int va_minimum = -1; // autrement il n'est pas possible de mettre DefaultValue à -1
+        private int va_minimum = -1; // autrement il n'est pas possible de mettre DefaultValue ï¿½ -1
         /// <summary>
-        /// Obtient et définit la valeur minimale pour toutes les cellules de la grille
+        /// Obtient et dï¿½finit la valeur minimale pour toutes les cellules de la grille
         /// </summary>
-        [DefaultValue(typeof(int), "-1"), Category("VisualArrays"), Browsable(true), Description("Obtient et définit la valeur minimale pour toutes les cellules de la grille.")]
+        [DefaultValue(typeof(int), "-1"), Category("VisualArrays"), Browsable(true), Description("Obtient et dï¿½finit la valeur minimale pour toutes les cellules de la grille.")]
         [RefreshProperties(RefreshProperties.All)]
         public int Minimum
         {
@@ -104,9 +98,9 @@ namespace VisualArrays
         //============================================================================================
         private int va_maximum = 100;
         /// <summary>
-        /// Obtient ou définit la valeur maximale pour toutes les cellules de la grille
+        /// Obtient ou dï¿½finit la valeur maximale pour toutes les cellules de la grille
         /// </summary>
-        [DefaultValue(typeof(int), "100"), Category("VisualArrays"), Browsable(true), Description("Obtient et définit la valeur maximale pour toutes les cellules de la grille.")]
+        [DefaultValue(typeof(int), "100"), Category("VisualArrays"), Browsable(true), Description("Obtient et dï¿½finit la valeur maximale pour toutes les cellules de la grille.")]
         [RefreshProperties(RefreshProperties.All)]
         public int Maximum
         {
@@ -131,9 +125,9 @@ namespace VisualArrays
         //============================================================================================
         private enuIntView va_view = enuIntView.Number;
         /// <summary>
-        /// Obtient et définit le style de visualisation pour les valeurs de la grille
+        /// Obtient et dï¿½finit le style de visualisation pour les valeurs de la grille
         /// </summary>
-        [DefaultValue(enuIntView.Number), Category("CellAppearance"), Browsable(true), Description("Obtient et définit le style de visualisation pour les valeurs de la grille.")]
+        [DefaultValue(enuIntView.Number), Category("CellAppearance"), Browsable(true), Description("Obtient et dï¿½finit le style de visualisation pour les valeurs de la grille.")]
         public enuIntView View
         {
             get { return va_view; }
@@ -148,7 +142,7 @@ namespace VisualArrays
         #region Constructeur
         //===============================================================================
         /// <summary>
-        /// Initialise une nouvelle instance de la grille avec les valeurs par défaut.
+        /// Initialise une nouvelle instance de la grille avec les valeurs par dï¿½faut.
         /// </summary>
         public VisualIntArray()
         {
@@ -158,12 +152,12 @@ namespace VisualArrays
         }
         #endregion
 
-        #region Méthodes
+        #region Mï¿½thodes
         // CLEAR ------------------------------------------------------------------------------
         /// <summary>
-        /// Vide le contenu de la cellule dont l'index est fournit en paramètre.
+        /// Vide le contenu de la cellule dont l'index est fournit en paramï¿½tre.
         /// </summary>
-        /// <param name="pIndex">index de la cellule à vider</param>
+        /// <param name="pIndex">index de la cellule ï¿½ vider</param>
         /// ----------------------------------------------------------------------------------
         public override void Clear(int pIndex)
         {
@@ -172,10 +166,10 @@ namespace VisualArrays
         }
         // CLEAR ------------------------------------------------------------------------------
         /// <summary>
-        /// Vide le contenu de la cellule dont la rangée et la colonne sont spécifiées.
+        /// Vide le contenu de la cellule dont la rangï¿½e et la colonne sont spï¿½cifiï¿½es.
         /// </summary>
-        /// <param name="pRow">rangée de la cellule à vider</param>
-        /// <param name="pColumn">colonne de la cellule à vider</param>
+        /// <param name="pRow">rangï¿½e de la cellule ï¿½ vider</param>
+        /// <param name="pColumn">colonne de la cellule ï¿½ vider</param>
         /// ----------------------------------------------------------------------------------
         public override void Clear(int pRow, int pColumn)
         {
@@ -205,9 +199,9 @@ namespace VisualArrays
         }
         //============================================================================================
         /// <summary>
-        /// Accepte les touches 0 à 9 pour la saisie de nombres.
+        /// Accepte les touches 0 ï¿½ 9 pour la saisie de nombres.
         /// </summary>
-        /// <param name="e">infos sur la touche pressée</param>
+        /// <param name="e">infos sur la touche pressï¿½e</param>
         protected override void OnKeyPress(KeyPressEventArgs e)
         {
             if (SelectedIndex != -1 && !va_readOnly && va_selectionMode != SelectionMode.None && !va_tabCells[SelectedAddress.Row, SelectedAddress.Column].ReadOnly)
@@ -228,11 +222,11 @@ namespace VisualArrays
         //--------------------------------------------------------------------------------------
         /// <summary>
         /// Dessiner le contenu d'une cellule dans une zone de la taille de la cellule, 
-        /// servant à l'opération glisser/déposer.
+        /// servant ï¿½ l'opï¿½ration glisser/dï¿½poser.
         /// </summary>
         /// <param name="pGraphics"></param>
         /// <param name="pContentBounds">Contour du contenu de la cellule</param>
-        /// <param name="pRow">Rangée</param>
+        /// <param name="pRow">Rangï¿½e</param>
         /// <param name="pColumn">Colonne</param>
         protected override void DrawCellDragContent(Graphics pGraphics, Rectangle pContentBounds, int pRow, int pColumn)
         {
@@ -240,7 +234,7 @@ namespace VisualArrays
             pContentBounds = new Rectangle(0, 0, pContentBounds.Width, pContentBounds.Height);
 
             int valeurAAfficher = va_tabValues[pRow, pColumn];
-            // Dessiner le fond de la cellule si nécessaire
+            // Dessiner le fond de la cellule si nï¿½cessaire
             if (valeurAAfficher == m_specialValue)
             {
                 if (va_specialValueVisualElement != null) // autrement pas de fond pour la specialValue
@@ -259,7 +253,7 @@ namespace VisualArrays
                 case enuIntView.Number:
                     if (valeurAAfficher != m_specialValue)
                         DrawText(pGraphics, pContentBounds, laChaine, EnabledAppearance.TextColor, EnabledAppearance.Font, m_cellContentAlign);
-                    else if (SpecialValueAppearance.ShowValue) // c'est la valeur spéciale
+                    else if (SpecialValueAppearance.ShowValue) // c'est la valeur spï¿½ciale
                         DrawText(pGraphics, pContentBounds, laChaine, SpecialValueAppearance.TextColor, SpecialValueAppearance.Font, m_cellContentAlign);
                     break;
                 case enuIntView.Graph:
@@ -269,12 +263,12 @@ namespace VisualArrays
                     VisualArraysTools.DrawBar(pGraphics, pContentBounds, GraphAppearance, va_minimum, va_maximum, valeurAAfficher);
                     if (va_view == enuIntView.GraphNumber)
                     {
-                        // Affichage de la valeur principale de la cellule : soit une valeur normale ou une valeur spéciale
+                        // Affichage de la valeur principale de la cellule : soit une valeur normale ou une valeur spï¿½ciale
                         if (cell.Enabled)
                         {
                             if (valeurAAfficher != m_specialValue)
                                 VisualArraysTools.DrawText(pGraphics, displayRectangle, laChaine, EnabledAppearance.TextColor, EnabledAppearance.Font, m_cellContentAlign);
-                            else if (SpecialValueAppearance.ShowValue) // c'est la valeur spéciale
+                            else if (SpecialValueAppearance.ShowValue) // c'est la valeur spï¿½ciale
                                 VisualArraysTools.DrawText(pGraphics, displayRectangle, laChaine, SpecialValueAppearance.TextColor, SpecialValueAppearance.Font, m_cellContentAlign);
                         }
                         else if (va_disabledAppearance.ShowValue)
@@ -284,7 +278,7 @@ namespace VisualArrays
                 case enuIntView.Digit:
                     break;
                 case enuIntView.ImageList:
-                    // Ne pas dessiner l'image si la valeur à afficher est la valeur spéciale
+                    // Ne pas dessiner l'image si la valeur ï¿½ afficher est la valeur spï¿½ciale
                     if (valeurAAfficher == m_specialValue) break;
 
                     ImageList imageList = va_enabledAppearance.ImageList;
@@ -294,7 +288,7 @@ namespace VisualArrays
                         if (valeurAAfficher >= 0 && valeurAAfficher < imageList.Images.Count)
                         {
                             Image objImage = imageList.Images[valeurAAfficher];
-                            Rectangle imageBounds = CellVisualElement.BoundsFromAlignment(pContentBounds, objImage.Size, m_cellContentAlign);
+                            Rectangle imageBounds = CellVisualElement.CellVisualElement.BoundsFromAlignment(pContentBounds, objImage.Size, m_cellContentAlign);
                             if (cell.Enabled)
                                 pGraphics.DrawImage(objImage, new Point(imageBounds.Left, imageBounds.Top));
                             else
@@ -303,11 +297,11 @@ namespace VisualArrays
                         else
                         {
                             pGraphics.FillRectangle(new SolidBrush(BackColor), pContentBounds);
-                            //pGraphics.SetClip(cellContentBounds); // Pour ne pas dessiner l'extérieur des cellules
+                            //pGraphics.SetClip(cellContentBounds); // Pour ne pas dessiner l'extï¿½rieur des cellules
                             //DrawText(pGraphics, pRow, pColumn, "?", CellAppearance.TextColor, CellAppearance.Font, m_cellContentAlign);
                         }
                     }
-                    //else // il n'y pas d'imageList d'associé avec la grille
+                    //else // il n'y pas d'imageList d'associï¿½ avec la grille
                     //  DrawText(pGraphics, pRow, pColumn, "?", CellAppearance.TextColor, CellAppearance.Font, m_cellContentAlign);
                     break;
                 default:
@@ -316,10 +310,10 @@ namespace VisualArrays
         }
         //============================================================================================
         /// <summary>
-        /// Dessine la cellule à l'adresse pRow et pColumn.
+        /// Dessine la cellule ï¿½ l'adresse pRow et pColumn.
         /// </summary>
-        /// <param name="pGraphics">Objet graphique où dessiner.</param>
-        /// <param name="pRow">Rangée.</param>
+        /// <param name="pGraphics">Objet graphique oï¿½ dessiner.</param>
+        /// <param name="pRow">Rangï¿½e.</param>
         /// <param name="pColumn">Colonne.</param>
         protected override void DrawCellContent(Graphics pGraphics, int pRow, int pColumn)
         {
@@ -327,25 +321,25 @@ namespace VisualArrays
             Rectangle cellBounds = GetCellBounds(pRow, pColumn);
             Cell cell = va_tabCells[pRow, pColumn];
 
-            // Étape 1 : On commence par dessiner le fond de la grille
+            // ï¿½tape 1 : On commence par dessiner le fond de la grille
             if (BackgroundImage != null)
                 pGraphics.DrawImage(BackgroundImage, cellBounds, cellBounds, GraphicsUnit.Pixel);
             else
                 pGraphics.FillRectangle(new SolidBrush(BackColor), cellBounds);
 
-            // Étape 2 : Si la cellule n'est pas visible, alors on quitte (sans même afficher son adresse)
+            // ï¿½tape 2 : Si la cellule n'est pas visible, alors on quitte (sans mï¿½me afficher son adresse)
             if (!cell.Visible) return;
 
 
-            // Étape 3 : Si l'utilisateur désire dessiner lui même le contenu de la cellule
+            // ï¿½tape 3 : Si l'utilisateur dï¿½sire dessiner lui mï¿½me le contenu de la cellule
             if (cell.UserContent != null)
             {
-                pGraphics.SetClip(cellBounds); // Pour ne pas dessiner l'extérieur des cellules
+                pGraphics.SetClip(cellBounds); // Pour ne pas dessiner l'extï¿½rieur des cellules
                 cell.UserContent.DrawCellContent(pGraphics, cellContentBounds, cellBounds, cell.Enabled);
             }
             else
-            {   // Étape 3B : Selon l'état de la cellule Enabled == true
-                pGraphics.SetClip(cellContentBounds); // Pour ne pas dessiner l'extérieur des cellules
+            {   // ï¿½tape 3B : Selon l'ï¿½tat de la cellule Enabled == true
+                pGraphics.SetClip(cellContentBounds); // Pour ne pas dessiner l'extï¿½rieur des cellules
 
                 int valeurAAfficher = va_tabValues[pRow, pColumn];
 
@@ -355,7 +349,7 @@ namespace VisualArrays
                 // 2013-02-28 ------------------------------------------------------------------------------------------
                 if (cell.Enabled) // la cellule est active.
                 {
-                    if (valeurAAfficher == m_specialValue) // la valeur est spéciale
+                    if (valeurAAfficher == m_specialValue) // la valeur est spï¿½ciale
                     {
                         if (va_specialValueVisualElement != null) // autrement pas de fond pour la specialValue
                             va_specialValueVisualElement.Draw(pGraphics, cellContentBounds);
@@ -384,7 +378,7 @@ namespace VisualArrays
                         case enuIntView.Number:
                             if (cell.Enabled) // la cellule est active
                             {
-                                if (valeurAAfficher == m_specialValue) // c'est la valeur spéciale
+                                if (valeurAAfficher == m_specialValue) // c'est la valeur spï¿½ciale
                                 {
                                     if (SpecialValueAppearance.ShowValue)
                                         VisualArraysTools.DrawText(pGraphics, displayRectangle, laChaine, SpecialValueAppearance.TextColor, SpecialValueAppearance.Font, m_cellContentAlign);
@@ -403,12 +397,12 @@ namespace VisualArrays
                             VisualArraysTools.DrawBar(pGraphics, cellContentBounds, GraphAppearance, va_minimum, va_maximum, valeurAAfficher);
                             if (va_view == enuIntView.GraphNumber)
                             {
-                                // Affichage de la valeur principale de la cellule : soit une valeur normale ou une valeur spéciale
+                                // Affichage de la valeur principale de la cellule : soit une valeur normale ou une valeur spï¿½ciale
                                 if (cell.Enabled)
                                 {
                                     if (valeurAAfficher != m_specialValue)
                                         VisualArraysTools.DrawText(pGraphics, displayRectangle, laChaine, EnabledAppearance.TextColor, EnabledAppearance.Font, m_cellContentAlign);
-                                    else if (SpecialValueAppearance.ShowValue) // c'est la valeur spéciale
+                                    else if (SpecialValueAppearance.ShowValue) // c'est la valeur spï¿½ciale
                                         VisualArraysTools.DrawText(pGraphics, displayRectangle, laChaine, SpecialValueAppearance.TextColor, SpecialValueAppearance.Font, m_cellContentAlign);
                                 }
                                 else if (va_disabledAppearance.ShowValue)
@@ -420,14 +414,14 @@ namespace VisualArrays
                             VisualArraysTools.DessinerSegments(pGraphics, cellContentBounds, valeurAAfficher, va_digitColor);
                             break;
                         case enuIntView.ImageList:
-                            // Ne pas dessiner l'image si la valeur à afficher est la valeur spéciale
+                            // Ne pas dessiner l'image si la valeur ï¿½ afficher est la valeur spï¿½ciale
                             if (valeurAAfficher == m_specialValue) break;
 
                             ImageList imageList;
                             if (cell.Enabled)
                                 imageList = va_enabledAppearance.ImageList;
                             else
-                            { // on va utiliser le même ImageList que pour les cellules actives
+                            { // on va utiliser le mï¿½me ImageList que pour les cellules actives
                                 imageList = va_disabledAppearance.ImageList;
                                 if (imageList == null)
                                     imageList = va_enabledAppearance.ImageList;
@@ -438,7 +432,7 @@ namespace VisualArrays
                                 if (valeurAAfficher >= 0 && valeurAAfficher < imageList.Images.Count)
                                 {
                                     Image objImage = imageList.Images[valeurAAfficher];
-                                    Rectangle imageBounds = CellVisualElement.BoundsFromAlignment(cellContentBounds, objImage.Size, m_cellContentAlign);
+                                    Rectangle imageBounds = CellVisualElement.CellVisualElement.BoundsFromAlignment(cellContentBounds, objImage.Size, m_cellContentAlign);
                                     if (cell.Enabled)
                                         pGraphics.DrawImage(objImage, new Point(imageBounds.Left, imageBounds.Top));
                                     else
@@ -447,11 +441,11 @@ namespace VisualArrays
                                 else
                                 {
                                     pGraphics.FillRectangle(new SolidBrush(BackColor), cellContentBounds);
-                                    //pGraphics.SetClip(cellContentBounds); // Pour ne pas dessiner l'extérieur des cellules
+                                    //pGraphics.SetClip(cellContentBounds); // Pour ne pas dessiner l'extï¿½rieur des cellules
                                     VisualArraysTools.DrawText(pGraphics, displayRectangle, "?", EnabledAppearance.TextColor, EnabledAppearance.Font, m_cellContentAlign);
                                 }
                             }
-                            else // il n'y pas d'imageList d'associé avec la grille
+                            else // il n'y pas d'imageList d'associï¿½ avec la grille
                                 VisualArraysTools.DrawText(pGraphics, displayRectangle, "?", EnabledAppearance.TextColor, EnabledAppearance.Font, m_cellContentAlign);
                             break;
                         default:
@@ -460,8 +454,8 @@ namespace VisualArrays
                 #endregion
 
             }
-            // Étape 4 : On va dessiner les couches supplémentaires soit les VisualElement ajoutés
-            CellVisualElement layerVE = cell.LayerOver;
+            // ï¿½tape 4 : On va dessiner les couches supplï¿½mentaires soit les VisualElement ajoutï¿½s
+            CellVisualElement.CellVisualElement layerVE = cell.LayerOver;
             while (layerVE != null)
             {
                 layerVE.Draw(pGraphics, cellContentBounds);
@@ -470,15 +464,15 @@ namespace VisualArrays
 
             pGraphics.ResetClip();
 
-            // Étape 5 : Si la cellule est inactive et qu'une raillure doit être dessinée
+            // ï¿½tape 5 : Si la cellule est inactive et qu'une raillure doit ï¿½tre dessinï¿½e
             if (!cell.Enabled && va_disabledAppearance.StrikeAppearance.Style != enuStrikeStyle.None)
                 DrawStrike(pGraphics, cellBounds,va_disabledAppearance);
 
-            // Étape 6 : Si la cellule est sélectionnée, alors on doit dessiner la sélection
+            // ï¿½tape 6 : Si la cellule est sï¿½lectionnï¿½e, alors on doit dessiner la sï¿½lection
             if (cell.Selected)
                 DrawSelection(pGraphics, pRow, pColumn);
 
-            // Étape 7 : Si nous sommes en mode désign alors on doit dessiner l'adresse de la cellule
+            // ï¿½tape 7 : Si nous sommes en mode dï¿½sign alors on doit dessiner l'adresse de la cellule
             if (DesignMode)
                 DrawAddress(pGraphics, pRow, pColumn);
         }
@@ -486,20 +480,20 @@ namespace VisualArrays
  
         #region RandomValue
         /// <summary>
-        /// Génère un nombre aléatoire entier, choisi entre les valeurs des propriétés 'Minimum' et 'Maximum' 
+        /// Gï¿½nï¿½re un nombre alï¿½atoire entier, choisi entre les valeurs des propriï¿½tï¿½s 'Minimum' et 'Maximum' 
         /// inclusivement.
         /// </summary>
-        /// <returns>Un nombre aléatoire entier entre 'Minimum' et 'Maximum' inclusivement</returns>
+        /// <returns>Un nombre alï¿½atoire entier entre 'Minimum' et 'Maximum' inclusivement</returns>
         public int RandomValue()
         {
             return va_objRandom.Next(va_minimum, va_maximum + 1);
         }
         /// <summary>
-        /// Génère un nombre entier aléatoire.
+        /// Gï¿½nï¿½re un nombre entier alï¿½atoire.
         /// </summary>
-        /// <param name="pMin">Borne inférieure inclue dans l'intervalle</param>
-        /// <param name="pMax">Borne supérieure inclue dans l'intervalle</param>
-        /// <returns>Un nombre aléatoire entier entre pMin et pMax</returns>
+        /// <param name="pMin">Borne infï¿½rieure inclue dans l'intervalle</param>
+        /// <param name="pMax">Borne supï¿½rieure inclue dans l'intervalle</param>
+        /// <returns>Un nombre alï¿½atoire entier entre pMin et pMax</returns>
         public int RandomValue(int pMin, int pMax)
         {
             return va_objRandom.Next(pMin, pMax+1);
@@ -509,7 +503,7 @@ namespace VisualArrays
         #region Indexeur
         //===========================================================================================================
         /// <summary>
-        /// Obtient ou définit le digit à l'index spécifié en tenant compte du ModeAdressage.
+        /// Obtient ou dï¿½finit le digit ï¿½ l'index spï¿½cifiï¿½ en tenant compte du ModeAdressage.
         /// </summary>
         /// <param name="pIndex">index du digit</param>
         /// <returns></returns>
@@ -527,7 +521,7 @@ namespace VisualArrays
                 value = beforeValueChangedArgs.NewValue;
 
                 if (value < va_minimum || value > va_maximum)
-                    throw new VisualArrayException("La valeur '" + value + "' n'est pas valide pour la cellule, elle doit être comprise entre 'Minimum' et 'Maximum'");
+                    throw new VisualArrayException("La valeur '" + value + "' n'est pas valide pour la cellule, elle doit ï¿½tre comprise entre 'Minimum' et 'Maximum'");
 
                 Address adresse = IndexToAddress(pIndex);
                 va_tabValues[adresse.Row, adresse.Column] = value;
@@ -538,12 +532,12 @@ namespace VisualArrays
             }
         }
         /// <summary>
-        /// Obtient ou définit le nombre à la cellule dont la ligne et la colonne 
-        /// sont spécifiées en tenant compte du mode d'adressage.
+        /// Obtient ou dï¿½finit le nombre ï¿½ la cellule dont la ligne et la colonne 
+        /// sont spï¿½cifiï¿½es en tenant compte du mode d'adressage.
         /// </summary>
-        /// <param name="pRow">rangée de la cellule à traiter</param>
-        /// <param name="pColumn">colonne de la cellule à traiter</param>
-        /// <returns>nombre à la coordonnée spécifié</returns>
+        /// <param name="pRow">rangï¿½e de la cellule ï¿½ traiter</param>
+        /// <param name="pColumn">colonne de la cellule ï¿½ traiter</param>
+        /// <returns>nombre ï¿½ la coordonnï¿½e spï¿½cifiï¿½</returns>
         public override int this[int pRow, int pColumn]
         {
             get
@@ -558,7 +552,7 @@ namespace VisualArrays
                 value = beforeValueChangedArgs.NewValue;
 
                 if (value < va_minimum || value > va_maximum)
-                    throw new VisualArrayException("La valeur '" + value + "' n'est pas valide pour la cellule, elle doit être comprise entre 'Minimum' et 'Maximum'");
+                    throw new VisualArrayException("La valeur '" + value + "' n'est pas valide pour la cellule, elle doit ï¿½tre comprise entre 'Minimum' et 'Maximum'");
                 Address adresse = AddressFromAddressMode(pRow, pColumn);
                 va_tabValues[adresse.Row, adresse.Column] = value;
                 int index = IndexFromAddress(adresse.Row, adresse.Column);
@@ -568,9 +562,9 @@ namespace VisualArrays
             }
         }
         ///// <summary>
-        ///// Obtient ou définit la valeur pour la cellule à une adresse donnée
+        ///// Obtient ou dï¿½finit la valeur pour la cellule ï¿½ une adresse donnï¿½e
         ///// </summary>
-        ///// <param name="pAddress">Adressse de la cellule à manipuler</param>
+        ///// <param name="pAddress">Adressse de la cellule ï¿½ manipuler</param>
         ///// <returns>valeur contenue dans la cellule</returns>
         //public int this[Address pAddress]
         //{
@@ -592,7 +586,7 @@ namespace VisualArrays
             //    cellContentBounds.Height -= GraphAppearance.BarMargin.Vertical;
 
             //    decimal valeurOrigine = pPixelOffset - va_minimum;
-            //    // On va définir l'orientation des barres
+            //    // On va dï¿½finir l'orientation des barres
             //    if (cellContentBounds.Width > cellContentBounds.Height)
             //    {
             //        orientation = Orientation.Horizontal;

@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections;
-using System.Text;
+﻿using VisualArrays.VisualArrays;
 
-namespace VisualArrays
+namespace VisualArrays.Collections
 {
     /// <summary>
     /// Représente un tableau de chaînes affichant les en-têtes d'une grille.

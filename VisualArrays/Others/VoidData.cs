@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.ComponentModel;
-using System.Drawing;
+﻿using System.ComponentModel;
 using System.Runtime.InteropServices;
 
-namespace VisualArrays
+namespace VisualArrays.Others
 {
     /// <summary>
     /// 

@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+﻿using System.ComponentModel;
 using System.Text;
-using System.Windows.Forms;
-using System.Drawing.Imaging;
+using VisualArrays.Appearance;
+using VisualArrays.CellVisualElement;
+using VisualArrays.Others;
 
-namespace VisualArrays
+namespace VisualArrays.VisualArrays
 {
     /// <summary>
     /// Cette classe représente les propriétés nécessaire pour afficher des graphiques
     /// </summary>
-    public abstract partial class VisualValueArray<Type> : VisualArrays.BaseGrid
+    public abstract partial class VisualValueArray<Type> : BaseGrid
     {
         #region Tableau de cellules
         //-----------------------------------------------------------------------------
@@ -363,7 +360,7 @@ namespace VisualArrays
         /// <summary>
         /// Élément visuel affiché dans le fond des cellules lorsqu'il s'agit de la valeur spéciale.
         /// </summary>
-        protected internal CellVisualElement va_specialValueVisualElement;
+        protected internal CellVisualElement.CellVisualElement va_specialValueVisualElement;
         #endregion
 
         #region Redéfinir la propriété BackColor héritée de Control

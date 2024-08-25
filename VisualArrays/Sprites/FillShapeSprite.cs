@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.ComponentModel;
-using System.Drawing;
-using System.Drawing.Drawing2D;
+﻿using System.ComponentModel;
+using VisualArrays.CellVisualElement;
+using VisualArrays.Others;
 
-namespace VisualArrays
+namespace VisualArrays.Sprites
 {
     /// <summary>
     /// Représente un 'Sprite' utilisant une forme pleine
@@ -100,7 +97,7 @@ namespace VisualArrays
                 contour.Height -= 2;
                 int largeurZoom = contour.Width; // *va_zoom / 100;
                 int hauteurZoom = contour.Height; // *va_zoom / 100;
-                contour = CellVisualElement.BoundsFromAlignment(contour, new Size(largeurZoom, hauteurZoom), m_alignment);
+                contour = CellVisualElement.CellVisualElement.BoundsFromAlignment(contour, new Size(largeurZoom, hauteurZoom), m_alignment);
                 //va_bounds = contour;
                 FillShapeElement.DrawFillShape(m_shape, pGraphics, contour, m_color,m_opacity,10);
             }

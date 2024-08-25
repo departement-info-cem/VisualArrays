@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.ComponentModel;
-using System.Globalization;
-using System.Drawing;
-using System.Windows.Forms;
+﻿using System.ComponentModel;
+using VisualArrays.Others;
 
-namespace VisualArrays
+namespace VisualArrays.Appearance
 {
     #region DragAppearance
 

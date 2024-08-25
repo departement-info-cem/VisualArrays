@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Runtime.InteropServices;
-using System.Drawing;
+﻿using System.Runtime.InteropServices;
 
-namespace VisualArrays
+namespace VisualArrays.Others
 {
     /// <summary>
     /// This class shall keep the GDI32 APIs used in our program.

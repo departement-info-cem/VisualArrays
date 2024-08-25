@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.ComponentModel;
-using System.Drawing;
+﻿using System.ComponentModel;
+using VisualArrays.CellVisualElement;
+using VisualArrays.Others;
 
-namespace VisualArrays
+namespace VisualArrays.Sprites
 {
     /// <summary>
     /// 
@@ -91,7 +89,7 @@ namespace VisualArrays
                 //contour.Height -= 2;
                 int largeurZoom = contour.Width; // *va_zoom / 100;
                 int hauteurZoom = contour.Height; // *va_zoom / 100;
-                contour = CellVisualElement.BoundsFromAlignment(contour, new Size(largeurZoom, hauteurZoom), m_alignment);
+                contour = CellVisualElement.CellVisualElement.BoundsFromAlignment(contour, new Size(largeurZoom, hauteurZoom), m_alignment);
                 Rectangle contourSelonPenWidth = new Rectangle(contour.Left + (va_penWidth >> 1), contour.Top + (va_penWidth >> 1), contour.Width - PenWidth, contour.Height - PenWidth);
                 ShapeElement.DrawShape(va_shape, pGraphics, contourSelonPenWidth, va_pen,10);
             }

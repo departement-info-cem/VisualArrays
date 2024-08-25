@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.ComponentModel;
-using System.Globalization;
-using System.Drawing;
-using System.Windows.Forms;
+﻿using System.ComponentModel;
+using VisualArrays.Others;
 
-namespace VisualArrays
+namespace VisualArrays.Appearance
 {
     #region DisabledAppearance
 
@@ -26,7 +21,7 @@ namespace VisualArrays
         /// <param name="pOwner">VisualArray propriétaire</param>
         public DisabledAppearance(BaseGrid pOwner)
         {
-            m_strikeAppearance = new VisualArrays.StrikeAppearance(pOwner);
+            m_strikeAppearance = new global::VisualArrays.Appearance.StrikeAppearance(pOwner);
             m_owner = pOwner;
         }
 

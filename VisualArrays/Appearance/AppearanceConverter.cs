@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Globalization;
 
-namespace VisualArrays
+namespace VisualArrays.Appearance
 {
     #region AppearanceConverter
     /// <summary>
