@@ -64,7 +64,7 @@ public class StrikeAppearance
             if (value != m_color)
             {
                 m_color = value;
-                if (m_style == enuStrikeStyle.Diagonal || m_style == enuStrikeStyle.Cross)
+                if (m_style is enuStrikeStyle.Diagonal or enuStrikeStyle.Cross)
                     m_owner.Refresh();
             }
         }

@@ -588,7 +588,7 @@ public abstract class Sprite : Component
             {
                 if (m_assync) // l'animation s'effectue de façon assynchrone avec un Thread
                 {
-                    if (m_thread != null && m_thread.IsAlive)
+                    if (m_thread is { IsAlive: true })
                     { // si l'animation est en cours ne rien faire
 
                     }
@@ -1118,7 +1118,7 @@ internal class NamedComponentDesigner : ComponentDesigner
         {
             // don't do anything here during loading, if a refactor changed it we don't want to do anything
             IDesignerHost host = GetService(typeof(IDesignerHost)) as IDesignerHost;
-            if (host == null || (host != null && !host.Loading))
+            if (host is null or { Loading: false })
             {
                 Component.Site.Name = value;
             }

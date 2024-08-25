@@ -327,7 +327,7 @@ public partial class VisualDecimal : VisualGraph<decimal>
     /// ----------------------------------------------------------------------------------------
     protected override bool IsInputKey(Keys key)
     {
-        if (Keys.Up == key || Keys.Down == key || Keys.Right == key || Keys.Left == key)
+        if (key is Keys.Up or Keys.Down or Keys.Right or Keys.Left)
             return true;
         return base.IsInputKey(key);
     }
@@ -339,7 +339,7 @@ public partial class VisualDecimal : VisualGraph<decimal>
     {
         if (!m_readOnly)
         {
-            if (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Return)
+            if (e.KeyCode is Keys.Enter or Keys.Return)
             {
                 ValueChanged?.Invoke(this, EventArgs.Empty);
             }

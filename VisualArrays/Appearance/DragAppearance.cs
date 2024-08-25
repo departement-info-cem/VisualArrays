@@ -75,7 +75,7 @@ public class DragAppearance
         get => alpha;
         set
         {
-            if (value < 0 || value > 255)
+            if (value is < 0 or > 255)
             {
                 throw new ArgumentOutOfRangeException(
                     "Alpha",

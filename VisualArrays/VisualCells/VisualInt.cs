@@ -324,7 +324,7 @@ public partial class VisualInt : VisualGraph<int>
     {
         if (!m_readOnly)
         {
-            if (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Return)
+            if (e.KeyCode is Keys.Enter or Keys.Return)
             {
                 ValueChanged?.Invoke(this, EventArgs.Empty);
             }

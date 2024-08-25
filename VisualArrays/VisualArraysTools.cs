@@ -67,7 +67,7 @@ public static class VisualArraysTools
     {
         pNewValue = 0;
         if (pChar == (char)Keys.Enter) m_currentKeyTime = new DateTime(0);
-        if (!((pChar >= '0' && pChar <= '9') || pChar == '-'))
+        if (pChar is not (>= '0' and <= '9' or '-'))
             return false;
 
         pNewValue = Math.Abs(pCurrentValue);
@@ -84,7 +84,7 @@ public static class VisualArraysTools
             pNewValue = 0;
             m_negatif = false;
         }
-        if (pChar >= '0' && pChar <= '9')
+        if (pChar is >= '0' and <= '9')
         {
             pNewValue = pNewValue * 10 + pChar - '0';
             pNewValue = m_negatif ? -pNewValue : pNewValue;
@@ -123,13 +123,13 @@ public static class VisualArraysTools
     {
         pNewValue = 0;
         if (pChar == (char)Keys.Enter) m_currentKeyTime = new DateTime(0);
-        if (!(pChar == '.' || pChar == ',' || (pChar >= '0' && pChar <= '9') || pChar == '-'))
+        if (pChar is not ('.' or ',' or >= '0' and <= '9' or '-'))
             return false;
 
         pNewValue = Math.Abs(pCurrentValue);
         if (VisualArraysTools.NbDigits(pNewValue, pDecimalPlaces) == VisualArraysTools.NbDigits(pMaxValue, pDecimalPlaces))
             pNewValue = 0;
-        if ((pChar == '.' || pChar == ',') && !m_fraction)
+        if (pChar is '.' or ',' && !m_fraction)
         {
             m_fraction = true;
             m_digitFraction = 0;
@@ -149,7 +149,7 @@ public static class VisualArraysTools
             m_negatif = false;
             m_digitFraction = 0;
         }
-        if (pChar >= '0' && pChar <= '9')
+        if (pChar is >= '0' and <= '9')
         {
             if (m_fraction)
             {

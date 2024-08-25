@@ -76,7 +76,7 @@ public class DisabledAppearance : IBackgroundAppearance
             if (value != m_backgroundColor)
             {
                 m_backgroundColor = value;
-                if (m_style == enuBkgStyle.FillShape || m_style == enuBkgStyle.Shape || m_style == enuBkgStyle.Border)
+                if (m_style is enuBkgStyle.FillShape or enuBkgStyle.Shape or enuBkgStyle.Border)
                 {
                     m_owner.UpdateDisableVisualElement(m_style);
                     m_owner.Refresh();
@@ -130,7 +130,7 @@ public class DisabledAppearance : IBackgroundAppearance
             if (value != m_shape)
             {
                 m_shape = value;
-                if (m_style == enuBkgStyle.FillShape || m_style == enuBkgStyle.Shape)
+                if (m_style is enuBkgStyle.FillShape or enuBkgStyle.Shape)
                 {
                     m_owner.UpdateDisableVisualElement(m_style);
                     m_owner.Refresh();
@@ -213,7 +213,7 @@ public class DisabledAppearance : IBackgroundAppearance
             if (value != m_radius)
             {
                 m_radius = value;
-                if ((m_style == enuBkgStyle.FillShape || m_style == enuBkgStyle.Shape) && m_shape == enuShape.RoundRect)
+                if (m_style is enuBkgStyle.FillShape or enuBkgStyle.Shape && m_shape == enuShape.RoundRect)
                     m_owner.UpdateCellsBkgVisualElement();
             }
         }

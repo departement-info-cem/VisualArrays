@@ -41,7 +41,7 @@ public class SegmentSprite : Sprite
         get => m_opacity;
         set
         {
-            if (value < 0 || value > 255)
+            if (value is < 0 or > 255)
             {
                 throw new ArgumentOutOfRangeException(
                     "Opacity",
@@ -68,7 +68,7 @@ public class SegmentSprite : Sprite
         get => m_bulletSize;
         set
         {
-            if (value < 0 || value > 255)
+            if (value is < 0 or > 255)
             {
                 throw new ArgumentOutOfRangeException(
                     "BulletSize",

@@ -474,7 +474,7 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
     {
         if (pSprite.m_tabCells.Count == 0)
         {
-            return pFuturAddress.Column >= 0 && pFuturAddress.Row >= 0 && pFuturAddress.Column < ColumnCount && pFuturAddress.Row < RowCount;
+            return pFuturAddress is { Column: >= 0, Row: >= 0 } && pFuturAddress.Column < ColumnCount && pFuturAddress.Row < RowCount;
         }
 
         foreach (Address adr in pSprite.m_tabCells)
@@ -3048,7 +3048,7 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
         if (!Enabled)
             return base.IsInputKey(key);
 
-        if (va_selectionMode == SelectionMode.None || va_selectionMode == SelectionMode.MultiSimple)
+        if (va_selectionMode is SelectionMode.None or SelectionMode.MultiSimple)
         {
             switch (key)
             {
@@ -3911,7 +3911,7 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
 
         // le premier niveau de click est le Sprite
         Sprite objSprite = HitSprite(e.X, e.Y);
-        if (objSprite != null && objSprite.AcceptClick)
+        if (objSprite is { AcceptClick: true })
         {
             va_mouseDownSprite = objSprite;
             SpriteMouseDown?.Invoke(this, new SpriteMouseEventArgs(e.Button, e.Clicks, x % largeurCellule, y % hauteurCellule, e.Delta,objSprite));
@@ -4103,7 +4103,7 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
         int rangee = y / hauteurCellule;
 
         Sprite objSprite = HitSprite(e.X, e.Y);
-        if (objSprite != null && objSprite.AcceptClick) // le premier niveau de click est le Sprite
+        if (objSprite is { AcceptClick: true }) // le premier niveau de click est le Sprite
         {
             SpriteMouseUp?.Invoke(this, new SpriteMouseEventArgs(e.Button, e.Clicks, x % largeurCellule, y % hauteurCellule, e.Delta, objSprite));
 
@@ -4231,7 +4231,7 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
 
         // Obtenir en coordonnées locales
         Point coordonnee = PointToClient(new Point(drgevent.X, drgevent.Y));
-        if (m_dragInfos != null && m_dragInfos.TypeElement == enuTypeElement.Sprite && m_dragInfos.DragSprite.IsMultiCells)
+        if (m_dragInfos is { TypeElement: enuTypeElement.Sprite } && m_dragInfos.DragSprite.IsMultiCells)
             coordonnee = m_dragInfos.DragSprite.OriginCenter(coordonnee);
         Address adresse = PixelsToAddress(coordonnee.X, coordonnee.Y);
 
@@ -4242,7 +4242,7 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
 
         if (dragOutside)
         {
-            if (m_dragInfos.DragSprite != null && m_dragInfos.DragSprite.AllowOutsideDrop && m_dragInfos.SourceGridName == this.Name && va_allowSelfDrop)
+            if (m_dragInfos.DragSprite is { AllowOutsideDrop: true } && m_dragInfos.SourceGridName == this.Name && va_allowSelfDrop)
             {
                 m_dragInfos.DragSprite.Visible = true;
                 SpriteOutsideDrop?.Invoke(this, new SpriteOutsideDropEventArgs(m_dragInfos.SourceGridName, m_dragInfos.DragSprite, m_dragInfos.SourceIndex, new Address(m_dragInfos.SourceRow, m_dragInfos.SourceColumn),coordonnee));
@@ -4374,7 +4374,7 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
         Point coordonnee = PointToClient(new Point(drgevent.X, drgevent.Y));
         Address adresse;
         // On va vérifier si le Drag implique un Sprite multi cellules
-        if (m_dragInfos != null && m_dragInfos.TypeElement == enuTypeElement.Sprite && m_dragInfos.DragSprite.IsMultiCells)
+        if (m_dragInfos is { TypeElement: enuTypeElement.Sprite } && m_dragInfos.DragSprite.IsMultiCells)
             coordonnee = m_dragInfos.DragSprite.OriginCenter(coordonnee);
         adresse = PixelsToAddress(coordonnee.X, coordonnee.Y);
 

@@ -352,7 +352,7 @@ public class DataObject : IDataObject, IDisposable
         public int Next(int celt, FORMATETC[] rgelt, int[] pceltFetched)
         {
             // Start with zero fetched, in case we return early
-            if (pceltFetched != null && pceltFetched.Length > 0)
+            if (pceltFetched is { Length: > 0 })
                 pceltFetched[0] = 0;
 
             // This will count down as we fetch elements
@@ -379,7 +379,7 @@ public class DataObject : IDataObject, IDisposable
                 rgelt[i] = formats[currentIndex];
 
             // Return the number of elements fetched
-            if (pceltFetched != null && pceltFetched.Length > 0)
+            if (pceltFetched is { Length: > 0 })
                 pceltFetched[0] = celt - cReturn;
 
             // cReturn has the number of elements requested but not fetched.

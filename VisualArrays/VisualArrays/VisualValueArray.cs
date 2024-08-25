@@ -566,7 +566,7 @@ public abstract partial class VisualValueArray<Type> : BaseGrid
     public override string ToString()
     {
         StringBuilder objChaine = new();
-        if (va_addressView == enuAddressView.Mode1D || va_addressView == enuAddressView.None)
+        if (va_addressView is enuAddressView.Mode1D or enuAddressView.None)
         {
             for (int index = 0; index < Length; index++)
                 objChaine.Append(" [" + index + "]=" + this[index] + " ,");

@@ -43,7 +43,7 @@ public class VisualBoolValueAppearance:IBackgroundAppearance
             if (value != m_shape)
             {
                 m_shape = value;
-                if (m_style == enuBkgStyle.FillShape || m_style == enuBkgStyle.Shape)
+                if (m_style is enuBkgStyle.FillShape or enuBkgStyle.Shape)
                     m_owner.UpdateVisualElement();
             }
 
@@ -178,7 +178,7 @@ public class VisualBoolValueAppearance:IBackgroundAppearance
             if (value != m_backgroundColor)
             {
                 m_backgroundColor = value;
-                if (m_style == enuBkgStyle.Border || m_style == enuBkgStyle.FillShape || m_style == enuBkgStyle.Shape)
+                if (m_style is enuBkgStyle.Border or enuBkgStyle.FillShape or enuBkgStyle.Shape)
                     m_owner.UpdateVisualElement();
             }
         }
@@ -202,7 +202,7 @@ public class VisualBoolValueAppearance:IBackgroundAppearance
             if (value != m_radius)
             {
                 m_radius = value;
-                if ((m_style == enuBkgStyle.FillShape || m_style == enuBkgStyle.Shape) && m_shape == enuShape.RoundRect)
+                if (m_style is enuBkgStyle.FillShape or enuBkgStyle.Shape && m_shape == enuShape.RoundRect)
                     m_owner.UpdateVisualElement();
             }
         }
