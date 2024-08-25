@@ -70,7 +70,6 @@ public static class VisualArraysTools
         if (!((pChar >= '0' && pChar <= '9') || pChar == '-'))
             return false;
 
-        int oldValue = pCurrentValue;
         pNewValue = Math.Abs(pCurrentValue);
         if (NbDigits(pNewValue) == NbDigits(pMaxValue))
             pNewValue = 0;
@@ -91,7 +90,7 @@ public static class VisualArraysTools
             pNewValue = m_negatif ? -pNewValue : pNewValue;
             m_currentKeyTime = DateTime.Now;
         }
-        return oldValue != pNewValue;
+        return pCurrentValue != pNewValue;
     }
 
     //============================================================================================
@@ -127,7 +126,6 @@ public static class VisualArraysTools
         if (!(pChar == '.' || pChar == ',' || (pChar >= '0' && pChar <= '9') || pChar == '-'))
             return false;
 
-        decimal oldValeur = pCurrentValue;
         pNewValue = Math.Abs(pCurrentValue);
         if (VisualArraysTools.NbDigits(pNewValue, pDecimalPlaces) == VisualArraysTools.NbDigits(pMaxValue, pDecimalPlaces))
             pNewValue = 0;
@@ -167,7 +165,7 @@ public static class VisualArraysTools
             pNewValue = m_negatif ? -pNewValue : pNewValue;
             m_currentKeyTime = DateTime.Now;
         }
-        return oldValeur != pNewValue;
+        return pCurrentValue != pNewValue;
     }
 
     #endregion

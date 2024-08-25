@@ -62,10 +62,9 @@ public class SpriteCollection : CollectionBase
         get => (Sprite)this.InnerList[pIndex];
         set
         {
-            Sprite newSprite = value;
-            newSprite.Owner = va_owner;
-            this.InnerList[pIndex] = newSprite;
-            va_owner.UpdateSprites(newSprite.Bounds);
+            value.Owner = va_owner;
+            this.InnerList[pIndex] = value;
+            va_owner.UpdateSprites(value.Bounds);
         }
     }
     /// <summary>
