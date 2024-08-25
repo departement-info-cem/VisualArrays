@@ -225,11 +225,9 @@ public class DataObject : IDataObject, IDisposable
                     // Found it, return S_OK;
                     return 0;
                 }
-                else
-                {
-                    // Found the medium type, but wrong format
-                    ret = DV_E_CLIPFORMAT;
-                }
+
+                // Found the medium type, but wrong format
+                ret = DV_E_CLIPFORMAT;
             }
             else
             {

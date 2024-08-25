@@ -123,8 +123,8 @@ public class SegmentSprite : Sprite
             {
                 return new Address(m_destinationIndex / m_owner.ColumnCount, m_destinationIndex % m_owner.ColumnCount);
             }
-            else
-                return new Address(0, 0);
+
+            return new Address(0, 0);
         }
         set
         {

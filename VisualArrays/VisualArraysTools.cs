@@ -48,8 +48,7 @@ public static class VisualArraysTools
             }
         if (pValeur < 0)
             return cpt + 1;
-        else
-            return cpt;
+        return cpt;
     }
     //================================================================================================================
     /// <summary>
@@ -113,8 +112,7 @@ public static class VisualArraysTools
             }
         if (pDecimalPlaces == 0)
             return cpt;
-        else
-            return cpt + pDecimalPlaces + 2;
+        return cpt + pDecimalPlaces + 2;
     }
     //================================================================================================================
     private static bool m_fraction = false;

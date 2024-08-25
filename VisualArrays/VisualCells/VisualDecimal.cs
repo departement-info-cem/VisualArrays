@@ -329,8 +329,7 @@ public partial class VisualDecimal : VisualGraph<decimal>
     {
         if (Keys.Up == key || Keys.Down == key || Keys.Right == key || Keys.Left == key)
             return true;
-        else
-            return base.IsInputKey(key);
+        return base.IsInputKey(key);
     }
     /// <summary>
     /// Accepte les touches "flèches"

@@ -476,14 +476,12 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
         {
             return pFuturAddress.Column >= 0 && pFuturAddress.Row >= 0 && pFuturAddress.Column < ColumnCount && pFuturAddress.Row < RowCount;
         }
-        else
+
+        foreach (Address adr in pSprite.m_tabCells)
         {
-            foreach (Address adr in pSprite.m_tabCells)
-            {
-                if (pFuturAddress.Row + adr.Row < 0 || pFuturAddress.Row + adr.Row >= RowCount ||
-                    pFuturAddress.Column + adr.Column < 0 || pFuturAddress.Column + adr.Column >= ColumnCount)
-                    return false;
-            }
+            if (pFuturAddress.Row + adr.Row < 0 || pFuturAddress.Row + adr.Row >= RowCount ||
+                pFuturAddress.Column + adr.Column < 0 || pFuturAddress.Column + adr.Column >= ColumnCount)
+                return false;
         }
         return true;
     }
@@ -1372,7 +1370,7 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
         {
             if (value < NB_RANGÉES_MINIMUM)
                 throw new VisualArrayException("Le nombre de rangées doit être supérieur ou égale à 1");
-            else if (value > NB_RANGÉES_MAXIMUM)
+            if (value > NB_RANGÉES_MAXIMUM)
                 throw new VisualArrayException("Le nombre de rangées ne doit pas dépasser " + NB_RANGÉES_MAXIMUM);
 
             if (va_rowCount == value) return;
@@ -1422,9 +1420,9 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
         {
             if (value < NB_COLONNES_MINIMUM)
                 throw new VisualArrayException("Le nombre de colonnes doit être supérieur ou égale à 1");
-            else if (value > NB_COLONNES_MAXIMUM)
+            if (value > NB_COLONNES_MAXIMUM)
                 throw new VisualArrayException("Le nombre de colonnes ne doit pas dépasser " + NB_COLONNES_MAXIMUM);
-                
+
             if (va_columnCount == value) return;
 
             if (SelectedAddress.Column >= value) 
@@ -2263,8 +2261,7 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
 
         if (x < 0 || y < 0)
             return new Address(-1, -1);
-        else
-            return new Address(y / hauteurCellule, x / largeurCellule);
+        return new Address(y / hauteurCellule, x / largeurCellule);
     }
     //===============================================================================
     /// <summary>
@@ -4944,8 +4941,7 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
         CellVisualElement.CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].Background;
         if (objVE is ImageElement)
             return ((ImageElement)objVE).Image;
-        else
-            throw new VisualArrayException("Impossible d'obtenir l'image de l'élément avec la valeur actuelle du CellsBkgStyle.");
+        throw new VisualArrayException("Impossible d'obtenir l'image de l'élément avec la valeur actuelle du CellsBkgStyle.");
     }
     /// <summary>
     /// Obtient (si possible) l'image de fond de la cellule
@@ -4959,8 +4955,7 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
         CellVisualElement.CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].Background;
         if (objVE is ImageElement)
             return ((ImageElement)objVE).Image;
-        else
-            throw new VisualArrayException("Impossible d'obtenir l'image de l'élément avec la valeur actuelle du CellsBkgStyle.");
+        throw new VisualArrayException("Impossible d'obtenir l'image de l'élément avec la valeur actuelle du CellsBkgStyle.");
     }
 
     /// <summary>
@@ -4974,8 +4969,7 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
         CellVisualElement.CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].Background;
         if (objVE is ShapeElement)
             return ((ShapeElement)objVE).PenWidth;
-        else
-            throw new VisualArrayException("Impossible d'obtenir la taille du crayon de l'élément avec la valeur actuelle du CellsBkgStyle.");
+        throw new VisualArrayException("Impossible d'obtenir la taille du crayon de l'élément avec la valeur actuelle du CellsBkgStyle.");
     }
     /// <summary>
     /// Obtient (si possible) la taille du crayon de l'élément
@@ -4989,8 +4983,7 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
         CellVisualElement.CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].Background;
         if (objVE is ShapeElement)
             return ((ShapeElement)objVE).PenWidth;
-        else
-            throw new VisualArrayException("Impossible d'obtenir la taille du crayon de l'élément avec la valeur actuelle du CellsBkgStyle.");
+        throw new VisualArrayException("Impossible d'obtenir la taille du crayon de l'élément avec la valeur actuelle du CellsBkgStyle.");
     }
     /// <summary>
     /// Obtient (si possible) les bordures de l'élément
@@ -5003,8 +4996,7 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
         CellVisualElement.CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].Background;
         if (objVE is BorderElement)
             return ((BorderElement)objVE).Border;
-        else
-            throw new VisualArrayException("Impossible d'obtenir les bordures de l'élément avec la valeur actuelle du CellsBkgStyle.");
+        throw new VisualArrayException("Impossible d'obtenir les bordures de l'élément avec la valeur actuelle du CellsBkgStyle.");
     }
     /// <summary>
     /// Obtient (si possible) les bordures de l'élément
@@ -5018,8 +5010,7 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
         CellVisualElement.CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].Background;
         if (objVE is BorderElement)
             return ((BorderElement)objVE).Border;
-        else
-            throw new VisualArrayException("Impossible d'obtenir les bordures de l'élément avec la valeur actuelle du CellsBkgStyle.");
+        throw new VisualArrayException("Impossible d'obtenir les bordures de l'élément avec la valeur actuelle du CellsBkgStyle.");
     }
     /// <summary>
     /// Obtient (si possible) la forme de l'élément
@@ -5032,10 +5023,9 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
         CellVisualElement.CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].Background;
         if (objVE is ShapeElement)
             return ((ShapeElement)objVE).Shape;
-        else if (objVE is FillShapeElement)
+        if (objVE is FillShapeElement)
             return ((FillShapeElement)objVE).Shape;
-        else
-            throw new VisualArrayException("Impossible d'obtenir la forme de l'élément avec la valeur actuelle du CellsBkgStyle.");
+        throw new VisualArrayException("Impossible d'obtenir la forme de l'élément avec la valeur actuelle du CellsBkgStyle.");
     }
     /// <summary>
     /// Obtient (si possible) la forme de l'élément
@@ -5049,10 +5039,9 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
         CellVisualElement.CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].Background;
         if (objVE is ShapeElement)
             return ((ShapeElement)objVE).Shape;
-        else if (objVE is FillShapeElement)
+        if (objVE is FillShapeElement)
             return ((FillShapeElement)objVE).Shape;
-        else
-            throw new VisualArrayException("Impossible d'obtenir la forme de l'élément avec la valeur actuelle du CellsBkgStyle.");
+        throw new VisualArrayException("Impossible d'obtenir la forme de l'élément avec la valeur actuelle du CellsBkgStyle.");
     }
     /// <summary>
     /// Obtient (si possible) la couleur de fond de l'élément
@@ -5065,10 +5054,9 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
         CellVisualElement.CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].Background;
         if (objVE is ShapeElement)
             return ((ShapeElement)objVE).Color;
-        else if (objVE is FillShapeElement)
+        if (objVE is FillShapeElement)
             return ((FillShapeElement)objVE).Color;
-        else
-            throw new VisualArrayException("Impossible d'obtenir la couleur de l'élément avec la valeur actuelle du CellsBkgStyle.");
+        throw new VisualArrayException("Impossible d'obtenir la couleur de l'élément avec la valeur actuelle du CellsBkgStyle.");
     }
     /// <summary>
     /// Obtient (si possible) la couleur de fond de l'élément
@@ -5082,10 +5070,9 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
         CellVisualElement.CellVisualElement objVE = va_tabCells[adresse.Row, adresse.Column].Background;
         if (objVE is ShapeElement)
             return ((ShapeElement)objVE).Color;
-        else if (objVE is FillShapeElement)
+        if (objVE is FillShapeElement)
             return ((FillShapeElement)objVE).Color;
-        else
-            throw new VisualArrayException("Impossible d'obtenir la couleur de l'élément avec la valeur actuelle du CellsBkgStyle.");
+        throw new VisualArrayException("Impossible d'obtenir la couleur de l'élément avec la valeur actuelle du CellsBkgStyle.");
     }
 
     /// <summary>
@@ -5350,30 +5337,28 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
 
         if (objVE == null || pLayerIndex < 0)
             throw new VisualArrayException("Impossible de supprimer le VisualElement à la couche indiquée, pLayerIndex = " + pLayerIndex);
-        else // Il y a au moins un VisualElement sur la cellule
+        // Il y a au moins un VisualElement sur la cellule
+        if (pLayerIndex == 0) // Il faut supprimer le premier élément
         {
-            if (pLayerIndex == 0) // Il faut supprimer le premier élément
+            va_tabCells[adresse.Row, adresse.Column].LayerOver = objVE.NextVisualElement;
+            UpdateCellAndSprites(pIndex);
+        }
+        else // ce n'est pas le premier à supprimer
+        {
+            CellVisualElement.CellVisualElement objPrecedent = null;
+            while (objVE.NextVisualElement != null && pLayerIndex > 0)
             {
-                va_tabCells[adresse.Row, adresse.Column].LayerOver = objVE.NextVisualElement;
+                objPrecedent = objVE;
+                objVE = objVE.NextVisualElement;
+                pLayerIndex--;
+            }
+            if (pLayerIndex == 0) // on peut le supprimer
+            {
+                objPrecedent.NextVisualElement = objVE.NextVisualElement;
                 UpdateCellAndSprites(pIndex);
             }
-            else // ce n'est pas le premier à supprimer
-            {
-                CellVisualElement.CellVisualElement objPrecedent = null;
-                while (objVE.NextVisualElement != null && pLayerIndex > 0)
-                {
-                    objPrecedent = objVE;
-                    objVE = objVE.NextVisualElement;
-                    pLayerIndex--;
-                }
-                if (pLayerIndex == 0) // on peut le supprimer
-                {
-                    objPrecedent.NextVisualElement = objVE.NextVisualElement;
-                    UpdateCellAndSprites(pIndex);
-                }
-                else
-                    throw new VisualArrayException("Impossible de supprimer le VisualElement à la couche indiquée, pLayerIndex = " + pLayerIndex);
-            }
+            else
+                throw new VisualArrayException("Impossible de supprimer le VisualElement à la couche indiquée, pLayerIndex = " + pLayerIndex);
         }
     }
     /// <summary>

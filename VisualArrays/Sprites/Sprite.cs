@@ -655,8 +655,8 @@ public abstract class Sprite : Component
             {
                 return new Address(m_displayIndex / m_owner.ColumnCount, m_displayIndex % m_owner.ColumnCount);
             }
-            else
-                return new Address(0, 0);
+
+            return new Address(0, 0);
         }
         set
         {
