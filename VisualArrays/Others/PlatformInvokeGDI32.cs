@@ -182,7 +182,7 @@ internal class CaptureScreen
         if (va_HBitmap != IntPtr.Zero)
         {
             //Here we select the compatible bitmap in memeory device context and keeps the refrence to Old bitmap.
-            IntPtr hOld = (IntPtr)PlatformInvokeGDI32.SelectObject(hMemDC, va_HBitmap);
+            IntPtr hOld = PlatformInvokeGDI32.SelectObject(hMemDC, va_HBitmap);
 
             //We copy the Bitmap to the memory device context.
             PlatformInvokeGDI32.BitBlt(hMemDC, 0, 0, size.cx, size.cy, hDC, 0, 0, PlatformInvokeGDI32.SRCCOPY);

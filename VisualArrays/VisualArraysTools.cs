@@ -283,20 +283,9 @@ public static class VisualArraysTools
         int r = ((couleur / 65536) & 255) / 3;
         return Color.FromArgb(255, r, v, b);
     }
+    
     //============================================================================================
-    /// <summary>
-    /// Recalcule la couleur afin d'éclaircir une couleur sombre.
-    /// </summary>
-    /// <param name="pCouleur">Couleur à atténuer.</param>
-    /// <returns></returns>
-    internal static Color CalculerCouleurAllumée(Color pCouleur)
-    {
-        int couleur = pCouleur.ToArgb() & (Convert.ToInt32(Math.Pow(2, 24)) - 1);
-        int b = (couleur & 255) * 3 & 255;
-        int v = ((couleur / 256) & 255) * 3 & 255;
-        int r = ((couleur / 65536) & 255) * 3 & 255;
-        return Color.FromArgb(255, r, v, b);
-    }
+
     //================================================================================================================
     /// <summary>
     /// Dessiner le contenu d'une cellule en mode view Digit
@@ -511,7 +500,7 @@ public static class VisualArraysTools
         }
 
         pGraphics.DrawString(pTexte, pPolice,
-            new SolidBrush(pCouleur), (RectangleF)pContentBounds, format);
+            new SolidBrush(pCouleur), pContentBounds, format);
     }
     #endregion
 
@@ -638,11 +627,11 @@ public static class VisualArraysTools
                 PointF pt;
                 if (orientation == Orientation.Horizontal)
                 {
-                    pt = new PointF(barBounds.Right, barBounds.Top + (int)(((float)barBounds.Height - taille.Height) / 2));
+                    pt = new PointF(barBounds.Right, barBounds.Top + (int)((barBounds.Height - taille.Height) / 2));
                 }
                 else // orientation Verticale
                 {
-                    pt = new PointF(barBounds.Left + (int)(((float)barBounds.Width - taille.Width) / 2), barBounds.Top - taille.Height);
+                    pt = new PointF(barBounds.Left + (int)((barBounds.Width - taille.Width) / 2), barBounds.Top - taille.Height);
                 }
 
                 pGraphics.DrawString(texte, pGraphApp.BarValueFont, new SolidBrush(pGraphApp.BarValueColor), pt);
@@ -806,11 +795,11 @@ public static class VisualArraysTools
                 PointF pt;
                 if (orientation == Orientation.Horizontal)
                 {
-                    pt = new PointF(barBounds.Right, barBounds.Top + (int)(((float)barBounds.Height - taille.Height) / 2));
+                    pt = new PointF(barBounds.Right, barBounds.Top + (int)((barBounds.Height - taille.Height) / 2));
                 }
                 else // orientation Verticale
                 {
-                    pt = new PointF(barBounds.Left + (int)(((float)barBounds.Width - taille.Width) / 2), barBounds.Top - taille.Height);
+                    pt = new PointF(barBounds.Left + (int)((barBounds.Width - taille.Width) / 2), barBounds.Top - taille.Height);
                 }
 
                 pGraphics.DrawString(texte, pGraphApp.BarValueFont, new SolidBrush(pGraphApp.BarValueColor), pt);

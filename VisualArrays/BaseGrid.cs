@@ -2066,7 +2066,7 @@ public partial class BaseGrid : Control, IVisualArray<CellMouseEventArgs>, ISpri
         format.LineAlignment = StringAlignment.Center;
         format.Alignment = StringAlignment.Center;
         pGraphics.DrawString(pTexte, pPolice,
-            new SolidBrush(pCouleur), (RectangleF)pContentBounds, format);
+            new SolidBrush(pCouleur), pContentBounds, format);
     }
     ///// <summary>
     ///// Dessine une chaîne dans la cellule spécifiée.

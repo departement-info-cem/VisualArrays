@@ -129,7 +129,7 @@ public class SpriteCollection : CollectionBase
     {
         InnerList.Remove(pSprite);
         InnerList.Add(pSprite);
-        va_owner.UpdateSprites(((Sprite)pSprite).Bounds);
+        va_owner.UpdateSprites(pSprite.Bounds);
     }
     //-------------------------------------------------------------------------
     /// <summary>
