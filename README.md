@@ -1,11 +1,9 @@
-![Logo Texte](Logo/LogoTexte.png)
+![Logo Texte](https://github.com/departement-info-cem/VisualArrays/blob/main/Logo/LogoTexte.png)
 
 # Visual Arrays
 
-<p>
-  <a href="https://www.nuget.org/packages/VisualArrays"><img src="https://img.shields.io/nuget/v/VisualArrays?style=flat&logo=nuget" alt="NuGet" /></a>
-  <a href="https://github.com/departement-info-cem/VisualArrays/blob/main/LICENSE"><img src="https://img.shields.io/github/license/departement-info-cem/VisualArrays" alt="GitHub License" /></a>
-</p>
+![NuGet](https://img.shields.io/nuget/v/VisualArrays?style=flat&logo=nuget)
+![GitHub License](https://img.shields.io/github/license/departement-info-cem/VisualArrays)
 
 Système de gestion de grille en .NET, sur Windows Forms.
 
