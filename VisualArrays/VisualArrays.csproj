@@ -6,7 +6,14 @@
         <UseWindowsForms>true</UseWindowsForms>
         <ImplicitUsings>enable</ImplicitUsings>
         <RepositoryUrl>https://github.com/departement-info-cem/VisualArrays</RepositoryUrl>
-        <PackageVersion>1.0.1</PackageVersion>
+        <PackageVersion>1.0.2</PackageVersion>
+        <Title>Visual Arrays</Title>
+        <Authors>Stéphane Desmeules, Pierre-Olivier Brillant</Authors>
+        <Description>Système de gestion de grille en .NET, sur Windows Forms</Description>
+        <PackageProjectUrl>https://github.com/departement-info-cem/VisualArrays</PackageProjectUrl>
+        <PackageLicenseUrl>https://github.com/departement-info-cem/VisualArrays/blob/main/LICENSE</PackageLicenseUrl>
+        <PackageIcon>Logo.png</PackageIcon>
+        <PackageTags>grid</PackageTags>
     </PropertyGroup>
 
     <ItemGroup>
@@ -14,6 +21,13 @@
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>BaseGrid.Designer.cs</LastGenOutput>
       </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="Logo.png">
+        <Pack>True</Pack>
+        <PackagePath></PackagePath>
+      </None>
     </ItemGroup>
 
 </Project>
