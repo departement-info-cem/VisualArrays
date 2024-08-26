@@ -1,4 +1,4 @@
-![Logo Texte](https://github.com/departement-info-cem/VisualArrays/blob/main/Logo/LogoTexte.png)
+![Logo Texte](https://raw.githubusercontent.com/departement-info-cem/VisualArrays/main/Logo/LogoTexte.png)
 
 # Visual Arrays
 
