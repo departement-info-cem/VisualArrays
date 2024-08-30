@@ -7,6 +7,10 @@
 
 Système de gestion de grille en .NET, sur Windows Forms.
 
+## Contexte
+
+Visual Arrays a été développé par Stéphane Desmeules de 2010 à 2012 pour être utilsé dans les premiers cours de programmations du CÉGEP Édouard-Montpetit.
+
 ## Contributeurs
 
 - Créé par Stéphane Desmeules
